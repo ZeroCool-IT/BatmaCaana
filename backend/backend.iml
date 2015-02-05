@@ -10,8 +10,8 @@
       <configuration>
         <option name="HTTP_ADDRESS" value="localhost" />
         <option name="HTTP_PORT" value="8080" />
-        <option name="WAR_DIR" value="D:\Android Sample\Pandora-Notification\backend\build\exploded-app" />
-        <option name="WEB_APP_DIR" value="D:\Android Sample\Pandora-Notification\backend\src\main\webapp" />
+        <option name="WAR_DIR" value="D:\AndroidStudioProjects\Pandora-Notification\backend\build\exploded-app" />
+        <option name="WEB_APP_DIR" value="D:\AndroidStudioProjects\Pandora-Notification\backend\src\main\webapp" />
         <option name="APPENGINE_SDKROOT" value="C:\Users\Marco\.gradle\appengine-sdk\appengine-java-sdk-1.9.14" />
       </configuration>
     </facet>
