@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright ZeroApp(c) 2015. All right reserved.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/search_first_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:ellipsize="end"
+        android:fontFamily="sans_serif"
+        android:maxLines="1"
+        android:paddingEnd="16dp"
+        android:paddingLeft="72dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:text="First Line"
+        android:textColor="@color/primary_text_color"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/search_second_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_first_line"
+        android:ellipsize="end"
+        android:fontFamily="sans_serif"
+        android:maxLines="1"
+        android:paddingEnd="16dp"
+        android:paddingLeft="72dp"
+        android:paddingRight="16dp"
+        android:text="Second Line"
+        android:textColor="@color/secondary_text_color"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/search_third_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_second_line"
+        android:ellipsize="end"
+        android:fontFamily="sans_serif"
+        android:maxLines="1"
+        android:paddingBottom="20dp"
+        android:paddingEnd="16dp"
+        android:paddingLeft="72dp"
+        android:paddingRight="16dp"
+        android:text="Third Line"
+        android:textColor="@color/accentColor"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/resultIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/search_first_line"
+        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+
+        android:src="@drawable/ic_map_grey600_48dp" />
+</RelativeLayout>
+

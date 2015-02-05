@@ -1,0 +1,11 @@
+<!--
+  ~ Copyright ZeroApp(c) 2015. All right reserved.
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/ripple_color" android:state_activated="true" />
+    <item android:drawable="@color/ripple_color" android:state_pressed="true" />
+    <item android:drawable="@color/ripple_color" android:state_checked="true" />
+    <item android:drawable="@color/ripple_color" android:state_focused="true" />
+    <item android:drawable="@color/transparent_bg" />
+</selector>

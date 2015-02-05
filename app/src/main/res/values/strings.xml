@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright ZeroApp(c) 2015. All right reserved.
+  -->
+<resources>
+
+    <string name="app_name">Batma Caana</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_drawer_open">Navigation Drawer Open</string>
+    <string name="nav_drawer_close">Navigation Drawer Close</string>
+    <string name="location_service_warning_title">Location services required!</string>
+    <string name="location_service_warning">Location services are required for greater accuracy. Do you want to activate them?</string>
+    <string name="yes">Yes</string>
+    <string name="bt_card_details">Details</string>
+    <string name="iv_card_imagery">Item imagery</string>
+    <string name="dialog_button_ok">OK</string>
+    <string name="dialog_button_cancel">Cancel</string>
+    <string name="dialog_button_ignore">Ignore</string>
+    <string name="dialog_button_settings">Settings…</string>
+    <string name="dialog_message_no_connection">No internet connection! Check your settings and try again!</string>
+    <string name="dialog_message_error">Something goes wrong retrieving data from server. Please try again later!</string>
+    <string name="dialog_message_db_error">Something goes wrong managing db!</string>
+    <string name="dialog_title_uhoh">Uh Oh!</string>
+    <string name="dialog_title_warning">Warning!</string>
+    <string name="no_results">No results!</string>
+    <string name="button_refresh">Refresh</string>
+    <string name="call">Call</string>
+    <string name="url">Url</string>
+    <string name="email">E-Mail</string>
+    <string name="map">Map</string>
+    <string name="no_phone_available">No phone number available!</string>
+    <string name="no_email_available">No email address available!</string>
+    <string name="no_url_available">No website available!</string>
+    <string name="title_activity_details">DetailsActivity</string>
+    <string name="closed">Closed:</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
+    <string name="no_mail_app">There is no email app on the device!</string>
+    <string name="no_map_app">There is no map app on the device!</string>
+    <string name="no_browser_app">There is no web browser app on the device!</string>
+    <string name="no_dial_app">There is no dialer app on the device!</string>
+    <string name="back">Back</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Place, event or news</string>
+    <string name="results">Results for: </string>
+    <string name="no_search_results">No results for </string>
+    <string name="no_image">No image available!</string>
+    <string name="favorite">Favorite</string>
+    <string name="share_place_message">I think you might like this place: </string>
+    <string name="share_news_message">I think you could be interested in this news: </string>
+    <string name="share_event_message">I think you could be interested in this event: </string>
+    <string name="share">Share</string>
+    <string name="favorite_added"> added to the favorites\' list!</string>
+    <string name="favorite_removed"> removed from the favorites\' list!</string>
+    <string name="no_favorite">You have no favorite place!</string>
+
+    <string-array name="drawer_list">
+        <item>To See</item>
+        <item>Event</item>
+        <item>Eat</item>
+        <item>Sleep</item>
+        <item>News</item>
+        <item>Shop</item>
+        <item>Services</item>
+        <item>About</item>
+        <item>Other</item>
+        <item>Favorite</item>
+        <item>Settings…</item>
+        <item>Offline</item>
+        <item>Update offline content</item>
+    </string-array>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_search_results">SearchResultsActivity</string>
+    <string name="title_activity_filter">FilterActivity</string>
+
+</resources>

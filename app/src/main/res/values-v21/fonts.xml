@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright ZeroApp(c) 2015. All right reserved.
+  -->
+
+<resources>
+    <string name="font_fontFamily_medium">sans-serif-medium</string>
+</resources>

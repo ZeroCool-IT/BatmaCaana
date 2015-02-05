@@ -1,0 +1,1 @@
+CREATE TABLE Favorite (ID integer NOT NULL PRIMARY KEY, TYPE  integer NOT NULL, JSON  text NOT NULL);

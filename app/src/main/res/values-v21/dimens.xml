@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright ZeroApp(c) 2015. All right reserved.
+  -->
+
+<resources>
+    <dimen name="app_bar_top_padding">0dp</dimen>
+    <dimen name="drawer_margin_top">48dp</dimen>
+    <dimen name="content_recycler_top_margin">@dimen/abc_action_bar_default_height_material</dimen>
+    <dimen name="fragment_details_top_margin">@dimen/abc_action_bar_default_height_material</dimen>
+
+</resources>

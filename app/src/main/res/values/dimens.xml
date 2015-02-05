@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright ZeroApp(c) 2015. All right reserved.
+  -->
+
+<resources>
+
+    <dimen name="nav_drawer_width">280dp</dimen>
+    <dimen name="app_bar_top_padding">0dp</dimen>
+    <dimen name="drawer_margin_top">24dp</dimen>
+    <dimen name="content_recycler_top_margin">@dimen/abc_action_bar_default_height_material</dimen>
+    <dimen name="fragment_details_top_margin">50dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="action_button_lr_padding">8dp</dimen>
+    <dimen name="action_button_td_padding">8dp</dimen>
+    <dimen name="button_bar_text_size">12sp</dimen>
+
+</resources>
