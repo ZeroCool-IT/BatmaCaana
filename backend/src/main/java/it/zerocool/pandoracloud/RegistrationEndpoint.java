@@ -32,7 +32,7 @@ import static it.zerocool.pandoracloud.OfyService.ofy;
  * authentication! If this app is deployed, anyone can access this endpoint! If
  * you'd like to add authentication, take a look at the documentation.
  */
-@Api(name = "registration", version = "v1", namespace = @ApiNamespace(ownerDomain = "pandoracloud.zerocool.it", ownerName = "pandoracloud.zerocool.it", packagePath = ""))
+@Api(name = "registration", version = "v2", namespace = @ApiNamespace(ownerDomain = "pandoracloud.zerocool.it", ownerName = "pandoracloud.zerocool.it", packagePath = ""))
 public class RegistrationEndpoint {
 
     private static final Logger log = Logger.getLogger(RegistrationEndpoint.class.getName());
@@ -41,15 +41,17 @@ public class RegistrationEndpoint {
      * Register a device to the backend
      *
      * @param regId The Google Cloud Messaging registration Id to add
+     * @param uID The application user ID
      */
     @ApiMethod(name = "register")
-    public void registerDevice(@Named("regId") String regId) {
+    public void registerDevice(@Named("regId") String regId, @Named("uID") int uID) {
         if (findRecord(regId) != null) {
             log.info("Device " + regId + " already registered, skipping register");
             return;
         }
         RegistrationRecord record = new RegistrationRecord();
         record.setRegId(regId);
+        record.setuID(uID);
         ofy().save().entity(record).now();
     }
 
@@ -79,6 +81,7 @@ public class RegistrationEndpoint {
         List<RegistrationRecord> records = ofy().load().type(RegistrationRecord.class).limit(count).list();
         return CollectionResponse.<RegistrationRecord>builder().setItems(records).build();
     }
+
 
     private RegistrationRecord findRecord(String regId) {
         return ofy().load().type(RegistrationRecord.class).filter("regId", regId).first().now();

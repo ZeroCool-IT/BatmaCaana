@@ -16,9 +16,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import it.zerocool.batmacaana.utilities.Constraints;
 import it.zerocool.pandoracloud.registration.Registration;
 
 /**
+ * Task for Google Cloud Service device registration
  * Created by Marco Battisti on 05/02/2015.
  */
 class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
@@ -26,6 +28,7 @@ class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
     private static Registration regService = null;
     private GoogleCloudMessaging gcm;
     private Context context;
+    private boolean test = true;
 
     public GcmRegistrationAsyncTask(Context context) {
         this.context = context;
@@ -34,7 +37,7 @@ class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... params) {
         if (regService == null) {
-            /*Registration.Builder builder = new Registration.Builder(AndroidHttp.newCompatibleTransport(),
+/*            Registration.Builder builder = new Registration.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
                     // Need setRootUrl and setGoogleClientRequestInitializer only for local testing,
                     // otherwise they can be skipped
@@ -46,10 +49,12 @@ class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
                             abstractGoogleClientRequest.setDisableGZipContent(true);
                         }
                     });
-            // end of optional local run code*/
+                // end of optional local run code*/
+            //Online registration
             Registration.Builder builder = new Registration.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
                     .setRootUrl("https://bravo-charlie-foxtrot-83.appspot.com/_ah/api/");
             regService = builder.build();
+
         }
 
         String msg = "";
@@ -64,7 +69,7 @@ class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
             // so it can use GCM/HTTP or CCS to send messages to your app.
             // The request to your server should be authenticated if your app
             // is using accounts.
-            regService.register(regId).execute();
+            regService.register(regId, Constraints.USER_ID).execute();
 
         } catch (IOException ex) {
             ex.printStackTrace();
