@@ -99,8 +99,10 @@ public class Constraints {
     public static final String FRAG_SECTION_ID = "frag_section_id";
     public static final String FALLBACK_TYPE_ARG = "fallback";
     public static final String FALLBACK_REFRESH_ARG = "refresh";
-    public static final String EXTRA_MESSAGE = "message";
     public static final String PROPERTY_REG_ID = "registration_id";
+    public static final String FLAG_FROM_NOTIFICATION = "notification";
+    public static final String ID_ARG = "id";
+    public static final String MESSAGE_ARG = "message";
 
     //Shared Preferences
     public static final String PREF_FILE_NAME = "preference";

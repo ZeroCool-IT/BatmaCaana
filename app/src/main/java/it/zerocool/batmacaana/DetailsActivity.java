@@ -42,10 +42,16 @@ public class DetailsActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         final String action = intent.getAction();
+        boolean fromNotification = intent.getBooleanExtra(Constraints.FLAG_FROM_NOTIFICATION, false);
 
         if (Intent.ACTION_VIEW.equals(action)) {
             final List<String> segments = intent.getData().getPathSegments();
             getData(segments.get(1));
+        } else if (fromNotification) {
+            Log.i("ZCLOG", "From notification = " + Boolean.valueOf(fromNotification).toString());
+            String id = intent.getStringExtra(Constraints.ID_ARG);
+            String type = intent.getStringExtra(Constraints.TYPE_ARG);
+            getData(id + "&" + type);
         } else {
             Fragment frag = chooseFragment(intent.getIntExtra(Constraints.TYPE_ARG, 0));
             Bundle args = new Bundle();

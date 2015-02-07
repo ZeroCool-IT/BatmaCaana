@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -30,9 +31,11 @@ public class GcmIntentService extends IntentService {
     private static final String TAG = "GCM INTENT";
     NotificationCompat.Builder builder;
     private NotificationManager mNotificationManager;
+    private int numMessages;
 
     public GcmIntentService() {
         super("GcmIntentService");
+        numMessages = 0;
     }
 
     @Override
@@ -73,6 +76,7 @@ public class GcmIntentService extends IntentService {
                 // Post notification of received message.
                 //sendNotification("Received: " + extras.toString());
                 sendNotification(parseMessage(extras));
+                numMessages++;
                 Log.i(TAG, "Received: " + extras.toString());
             }
         }
@@ -82,12 +86,12 @@ public class GcmIntentService extends IntentService {
 
     private Map<String, String> parseMessage(Bundle extras) {
         Map<String, String> result = new HashMap<>();
-        String id = extras.getString("id");
-        result.put("id", id);
-        String type = extras.getString("type");
-        result.put("type", type);
-        String message = extras.getString("message");
-        result.put("message", message);
+        String id = extras.getString(Constraints.ID_ARG);
+        result.put(Constraints.ID_ARG, id);
+        String type = extras.getString(Constraints.TYPE_ARG);
+        result.put(Constraints.TYPE_ARG, type);
+        String message = extras.getString(Constraints.MESSAGE_ARG);
+        result.put(Constraints.MESSAGE_ARG, message);
         return result;
     }
 
@@ -95,7 +99,7 @@ public class GcmIntentService extends IntentService {
     // This is just one simple example of what you might choose to do with
     // a GCM message.
     private void sendNotification(String msg) {
-        mNotificationManager = (NotificationManager)
+/*        mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
@@ -110,41 +114,55 @@ public class GcmIntentService extends IntentService {
                         .setContentText(msg);
 
         mBuilder.setContentIntent(contentIntent);
-        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());*/
+        Log.i("NOTIFICATION", msg);
     }
 
     private void sendNotification(Map<String, String> map) {
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, HomeActivity.class), 0);
+        Intent intent = new Intent(this, DetailsActivity.class);
+        intent.putExtra(Constraints.FLAG_FROM_NOTIFICATION, true);
+        intent.putExtra(Constraints.TYPE_ARG, map.get(Constraints.TYPE_ARG));
+        intent.putExtra(Constraints.ID_ARG, map.get(Constraints.ID_ARG));
 
-        String message = map.get("message");
-        int type = Integer.parseInt(map.get("type"));
-        int id = Integer.parseInt(map.get("id"));
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(DetailsActivity.class);
+        stackBuilder.addNextIntent(intent);
 
-        //TODO Clean and start right intent
+        PendingIntent detailsPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+//        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+//                intent, 0);
+
+        String message = map.get(Constraints.MESSAGE_ARG);
+        int type = Integer.parseInt(map.get(Constraints.TYPE_ARG));
+
         String title;
         switch (type) {
             case Constraints.TYPE_NEWS:
-                title = "Nuova notizia";
+                title = getString(R.string.notification_news_title) +
+                        getString(R.string.city_name);
                 break;
             case Constraints.TYPE_EVENT:
-                title = "Nuovo evento";
+                title = getString(R.string.notification_event_title) +
+                        getString(R.string.city_name);
                 break;
             default:
                 title = getApplicationContext().getResources().getString(R.string.app_name);
         }
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_about)
+        builder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.ic_notification)
                         .setContentTitle(title)
                         .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(message + "\n" + type + " " + id))
-                        .setContentText(message);
-        mBuilder.setContentIntent(contentIntent);
-        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+                                .bigText(message))
+                .setTicker(title)
+                .setContentText(message)
+                .setAutoCancel(true).setNumber(++numMessages);
+        builder.setContentIntent(detailsPendingIntent);
+        mNotificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 
 }

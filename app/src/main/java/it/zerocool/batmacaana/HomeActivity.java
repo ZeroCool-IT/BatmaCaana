@@ -28,16 +28,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import it.zerocool.batmacaana.dialog.LocationWarningDialog;
 import it.zerocool.batmacaana.utilities.Constraints;
-import it.zerocool.batmacaana.utilities.RequestUtilities;
 import it.zerocool.batmacaana.utilities.SharedPreferencesProvider;
 
 
@@ -60,6 +56,11 @@ public class HomeActivity extends ActionBarActivity {
     private Context context;
     private SharedPreferences prefs;
 
+    /**
+     * Return the version code of the app
+     * @param context is the application context
+     * @return the version code of the app
+     */
     private static int getAppVersion(Context context) {
         try {
             PackageInfo packageInfo = context.getPackageManager()
@@ -138,6 +139,9 @@ public class HomeActivity extends ActionBarActivity {
         return getSharedPreferences(HomeActivity.class.getSimpleName(), Context.MODE_PRIVATE);
     }
 
+    /**
+     * Start AsyncTask for device GCM registration
+     */
     private void registerInBackground() {
         GcmRegistrationAsyncTask task = new GcmRegistrationAsyncTask(this);
         task.execute();
@@ -159,38 +163,6 @@ public class HomeActivity extends ActionBarActivity {
         editor.putInt(PROPERTY_APP_VERSION, appVersion);
         editor.apply();
     }
-
-    /**
-     * Sends the registration ID to your server over HTTP, so it can use GCM/HTTP
-     * or CCS to send messages to your app. Not needed for this demo since the
-     * device sends upstream messages to a server that echoes back the message
-     * using the 'from' address in the message.
-     */
-    private void sendRegistrationIdToBackend(String regId) {
-        String serverUrl = SERVER_URL;
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("regId", regId);
-        long backoff = BACKOFF_MILLI_SECONDS + random.nextInt(1000);
-        for (int i = 1; i <= MAX_ATTEMPTS; i++) {
-            try {
-                RequestUtilities.post(serverUrl, params);
-//                GCMRegistrar.setRegisteredOnServer(context, true);
-                return;
-            } catch (IOException e) {
-                if (i == MAX_ATTEMPTS) {
-                    break;
-                }
-                try {
-                    Thread.sleep(backoff);
-                } catch (InterruptedException e1) {
-                    Thread.currentThread().interrupt();
-                    return;
-                }
-                backoff *= 2;
-            }
-        }
-    }
-
 
     /**
      * Dispatch onResume() to fragments.  Note that for better inter-operation
@@ -361,45 +333,4 @@ public class HomeActivity extends ActionBarActivity {
         }
         return true;
     }
-
-/*    private class PerformRegistrationTask extends AsyncTask<Void, Void, String> {
-        @Override
-        protected String doInBackground(Void... params) {
-            String msg = "";
-            try {
-                if (gcm == null) {
-                    gcm = GoogleCloudMessaging.getInstance(context);
-                }
-                regid = gcm.register(SENDER_ID);
-                msg = "Device registered, registration ID=" + regid;
-                sendRegistrationIdToBackend(regid);
-                storeRegistrationId(context, regid);
-
-            } catch (IOException ex) {
-                msg = "Error :" + ex.getMessage();
-                // If there is an error, don't just keep trying to register.
-                // Require the user to click a button again, or perform
-                // exponential back-off.
-            }
-
-            return msg;
-        }
-
-        *//**//**
-     * <p>Runs on the UI thread after {@link #doInBackground}. The
-     * specified result is the value returned by {@link #doInBackground}.</p>
-     * <p/>
-     * <p>This method won't be invoked if the task was cancelled.</p>
-     *
-     * @param o The result of the operation computed by {@link #doInBackground}.
-     * @see #onPreExecute
-     * @see #doInBackground
-     * @see #onCancelled(Object)
-     *//**//*
-        @Override
-        protected void onPostExecute(String o) {
-            //mDisplay.append(msg + "\n");
-        }
-    }*/
-
 }
