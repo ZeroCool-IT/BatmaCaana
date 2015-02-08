@@ -108,6 +108,8 @@ public class Constraints {
     public static final String PREF_FILE_NAME = "preference";
     public static final String KEY_USER_LEARNED_DRAWER = "user_learned_drawer";
     public static final String KEY_USER_DEFAULT_START_VIEW = "user_default_view";
+    public static final String KEY_NEWS_NOTIFICATION_NUMBER = "news_notification_number";
+    public static final String KEY_EVENT_NOTIFICATION_NUMBER = "event_notification_number";
 
     //Location Constraints
     public static final int LOCATION_UPDATE_TIME = 120000;

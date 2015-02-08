@@ -6,6 +6,7 @@ package it.zerocool.batmacaana;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,7 @@ import it.zerocool.batmacaana.dialog.WarningDialog;
 import it.zerocool.batmacaana.utilities.Constraints;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
 import it.zerocool.batmacaana.utilities.RequestUtilities;
+import it.zerocool.batmacaana.utilities.SharedPreferencesProvider;
 
 
 public class DetailsActivity extends ActionBarActivity {
@@ -52,6 +54,16 @@ public class DetailsActivity extends ActionBarActivity {
             String id = intent.getStringExtra(Constraints.ID_ARG);
             String type = intent.getStringExtra(Constraints.TYPE_ARG);
             getData(id + "&" + type);
+            int typeInt = Integer.parseInt(type);
+            switch (typeInt) {
+                case Constraints.TYPE_NEWS:
+                    SharedPreferencesProvider.saveToPreferences(this, Constraints.KEY_NEWS_NOTIFICATION_NUMBER, Integer.valueOf(0).toString());
+                    break;
+                case Constraints.TYPE_EVENT:
+                    SharedPreferencesProvider.saveToPreferences(this, Constraints.KEY_EVENT_NOTIFICATION_NUMBER, Integer.valueOf(0).toString());
+                    break;
+            }
+
         } else {
             Fragment frag = chooseFragment(intent.getIntExtra(Constraints.TYPE_ARG, 0));
             Bundle args = new Bundle();

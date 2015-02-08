@@ -5,10 +5,12 @@
 package it.zerocool.batmacaana;
 
 import android.app.IntentService;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.SharedPreferencesProvider;
 
 /**
  * Service listening for notification message.
@@ -29,15 +32,18 @@ import it.zerocool.batmacaana.utilities.Constraints;
  */
 public class GcmIntentService extends IntentService {
 
-    public static final int NOTIFICATION_ID = 1;
+    public static final int NOTIFICATION_ID_NEWS = 1;
+    public static final int NOTIFICATION_ID_EVENT = 2;
     private static final String TAG = "GCM INTENT";
+    private static final String NEWS_GROUP = "news";
+    private static final String EVENT_GROUP = "event";
     NotificationCompat.Builder builder;
     private NotificationManager mNotificationManager;
-    private int numMessages;
+    private SharedPreferences sharedPreferences;
 
     public GcmIntentService() {
         super("GcmIntentService");
-        numMessages = 0;
+        sharedPreferences = SharedPreferencesProvider.getSharedPreferences(this);
     }
 
     @Override
@@ -65,6 +71,19 @@ public class GcmIntentService extends IntentService {
                 // If it's a regular GCM message, do some work.
             } else if (GoogleCloudMessaging.
                     MESSAGE_TYPE_MESSAGE.equals(messageType)) {
+                Map<String, String> extrasMap = parseMessage(extras);
+                int type = Integer.parseInt(extrasMap.get(Constraints.TYPE_ARG));
+                switch (type) {
+                    case Constraints.TYPE_NEWS:
+                        sendNewsNotification(extrasMap);
+                        break;
+                    case Constraints.TYPE_EVENT:
+                        sendEventNotification(extrasMap);
+                        break;
+                    default:
+                        sendNotification(extras.toString());
+                        break;
+                }
                 // This loop represents the service doing some work.
 /*                for (int i = 0; i < 5; i++) {
                     Log.i(TAG, "Working... " + (i + 1)
@@ -77,8 +96,6 @@ public class GcmIntentService extends IntentService {
                 Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());*/
                 // Post notification of received message.
                 //sendNotification("Received: " + extras.toString());
-                sendNotification(parseMessage(extras));
-                numMessages++;
                 Log.i(TAG, "Received: " + extras.toString());
             }
         }
@@ -120,7 +137,8 @@ public class GcmIntentService extends IntentService {
         Log.i("NOTIFICATION", msg);
     }
 
-    private void sendNotification(Map<String, String> map) {
+    private void sendNewsNotification(Map<String, String> map) {
+        int number = sharedPreferences.getInt(Constraints.KEY_NEWS_NOTIFICATION_NUMBER, 0);
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -136,25 +154,12 @@ public class GcmIntentService extends IntentService {
         PendingIntent detailsPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
-//        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-//                intent, 0);
-
         String message = map.get(Constraints.MESSAGE_ARG);
         int type = Integer.parseInt(map.get(Constraints.TYPE_ARG));
 
-        String title;
-        switch (type) {
-            case Constraints.TYPE_NEWS:
-                title = getString(R.string.notification_news_title) +
+        String title = getString(R.string.notification_news_title) +
                         getString(R.string.city_name);
-                break;
-            case Constraints.TYPE_EVENT:
-                title = getString(R.string.notification_event_title) +
-                        getString(R.string.city_name);
-                break;
-            default:
-                title = getApplicationContext().getResources().getString(R.string.app_name);
-        }
+
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         builder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_notification)
@@ -165,9 +170,51 @@ public class GcmIntentService extends IntentService {
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(soundUri)
-                .setNumber(++numMessages);
+                .setNumber(++number)
+                .setGroup(NEWS_GROUP);
         builder.setContentIntent(detailsPendingIntent);
-        mNotificationManager.notify(NOTIFICATION_ID, builder.build());
+        mNotificationManager.notify(NOTIFICATION_ID_NEWS, builder.build());
+        SharedPreferencesProvider.saveToPreferences(this,Constraints.KEY_NEWS_NOTIFICATION_NUMBER, Integer.valueOf(number).toString());
+    }
+
+    private void sendEventNotification(Map<String, String> map) {
+        int number = sharedPreferences.getInt(Constraints.KEY_EVENT_NOTIFICATION_NUMBER, 0);
+        mNotificationManager = (NotificationManager)
+                this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Intent intent = new Intent(this, DetailsActivity.class);
+        intent.putExtra(Constraints.FLAG_FROM_NOTIFICATION, true);
+        intent.putExtra(Constraints.TYPE_ARG, map.get(Constraints.TYPE_ARG));
+        intent.putExtra(Constraints.ID_ARG, map.get(Constraints.ID_ARG));
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(DetailsActivity.class);
+        stackBuilder.addNextIntent(intent);
+
+        PendingIntent detailsPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        String message = map.get(Constraints.MESSAGE_ARG);
+        int type = Integer.parseInt(map.get(Constraints.TYPE_ARG));
+
+        String title = getString(R.string.notification_news_title) +
+                getString(R.string.city_name);
+
+        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        builder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.ic_notification)
+                .setContentTitle(title)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(message))
+                .setTicker(title)
+                .setContentText(message)
+                .setAutoCancel(true)
+                .setSound(soundUri)
+                .setNumber(++number)
+                .setGroup(EVENT_GROUP);
+        builder.setContentIntent(detailsPendingIntent);
+        mNotificationManager.notify(NOTIFICATION_ID_EVENT, builder.build());
+        SharedPreferencesProvider.saveToPreferences(this,Constraints.KEY_EVENT_NOTIFICATION_NUMBER, Integer.valueOf(number).toString());
     }
 
 }
