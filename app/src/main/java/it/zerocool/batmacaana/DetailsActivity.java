@@ -25,7 +25,6 @@ import it.zerocool.batmacaana.dialog.WarningDialog;
 import it.zerocool.batmacaana.utilities.Constraints;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
 import it.zerocool.batmacaana.utilities.RequestUtilities;
-import it.zerocool.batmacaana.utilities.SharedPreferencesProvider;
 
 
 public class DetailsActivity extends ActionBarActivity {
@@ -57,10 +56,10 @@ public class DetailsActivity extends ActionBarActivity {
             int typeInt = Integer.parseInt(type);
             switch (typeInt) {
                 case Constraints.TYPE_NEWS:
-                    SharedPreferencesProvider.saveToPreferences(this, Constraints.KEY_NEWS_NOTIFICATION_NUMBER, Integer.valueOf(0).toString());
+                    saveToPreferences(Constraints.KEY_NEWS_NOTIFICATION_NUMBER, Integer.valueOf(0).toString());
                     break;
                 case Constraints.TYPE_EVENT:
-                    SharedPreferencesProvider.saveToPreferences(this, Constraints.KEY_EVENT_NOTIFICATION_NUMBER, Integer.valueOf(0).toString());
+                    saveToPreferences(Constraints.KEY_EVENT_NOTIFICATION_NUMBER, Integer.valueOf(0).toString());
                     break;
             }
 
@@ -75,6 +74,13 @@ public class DetailsActivity extends ActionBarActivity {
                         .commit();
             }
         }
+    }
+
+    private void saveToPreferences(String key, String number) {
+        SharedPreferences sharedPreferences = getSharedPreferences(Constraints.NOTIFICATION_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, number);
+        editor.apply();
     }
 
     private Fragment chooseFragment(int type) {

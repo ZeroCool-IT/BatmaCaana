@@ -29,7 +29,7 @@ class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
     private static Registration regService = null;
     private GoogleCloudMessaging gcm;
     private Context context;
-    private boolean test = true;
+    private boolean test = false;
 
     public GcmRegistrationAsyncTask(Context context) {
         this.context = context;

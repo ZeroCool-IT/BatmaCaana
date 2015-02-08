@@ -5,7 +5,6 @@
 package it.zerocool.batmacaana;
 
 import android.app.IntentService;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -23,8 +22,8 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import java.util.HashMap;
 import java.util.Map;
 
+import it.zerocool.batmacaana.utilities.ApplicationContextProvider;
 import it.zerocool.batmacaana.utilities.Constraints;
-import it.zerocool.batmacaana.utilities.SharedPreferencesProvider;
 
 /**
  * Service listening for notification message.
@@ -43,7 +42,7 @@ public class GcmIntentService extends IntentService {
 
     public GcmIntentService() {
         super("GcmIntentService");
-        sharedPreferences = SharedPreferencesProvider.getSharedPreferences(this);
+        sharedPreferences = ApplicationContextProvider.getContext().getSharedPreferences(Constraints.NOTIFICATION_PREFS, MODE_PRIVATE);
     }
 
     @Override
@@ -138,7 +137,7 @@ public class GcmIntentService extends IntentService {
     }
 
     private void sendNewsNotification(Map<String, String> map) {
-        int number = sharedPreferences.getInt(Constraints.KEY_NEWS_NOTIFICATION_NUMBER, 0);
+        int number = Integer.parseInt(sharedPreferences.getString(Constraints.KEY_NEWS_NOTIFICATION_NUMBER, "0"));
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -174,11 +173,11 @@ public class GcmIntentService extends IntentService {
                 .setGroup(NEWS_GROUP);
         builder.setContentIntent(detailsPendingIntent);
         mNotificationManager.notify(NOTIFICATION_ID_NEWS, builder.build());
-        SharedPreferencesProvider.saveToPreferences(this,Constraints.KEY_NEWS_NOTIFICATION_NUMBER, Integer.valueOf(number).toString());
+        saveToPreferences(Constraints.KEY_NEWS_NOTIFICATION_NUMBER, Integer.valueOf(number).toString());
     }
 
     private void sendEventNotification(Map<String, String> map) {
-        int number = sharedPreferences.getInt(Constraints.KEY_EVENT_NOTIFICATION_NUMBER, 0);
+        int number = Integer.parseInt(sharedPreferences.getString(Constraints.KEY_EVENT_NOTIFICATION_NUMBER, "0"));
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -197,7 +196,7 @@ public class GcmIntentService extends IntentService {
         String message = map.get(Constraints.MESSAGE_ARG);
         int type = Integer.parseInt(map.get(Constraints.TYPE_ARG));
 
-        String title = getString(R.string.notification_news_title) +
+        String title = getString(R.string.notification_event_title) +
                 getString(R.string.city_name);
 
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -214,7 +213,13 @@ public class GcmIntentService extends IntentService {
                 .setGroup(EVENT_GROUP);
         builder.setContentIntent(detailsPendingIntent);
         mNotificationManager.notify(NOTIFICATION_ID_EVENT, builder.build());
-        SharedPreferencesProvider.saveToPreferences(this,Constraints.KEY_EVENT_NOTIFICATION_NUMBER, Integer.valueOf(number).toString());
+        saveToPreferences(Constraints.KEY_EVENT_NOTIFICATION_NUMBER, Integer.valueOf(number).toString());
+    }
+
+    private void saveToPreferences(String key, String number) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, number);
+        editor.apply();
     }
 
 }
