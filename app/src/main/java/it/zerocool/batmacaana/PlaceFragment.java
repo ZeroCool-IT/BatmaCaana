@@ -64,6 +64,10 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
     private Button urlActionButton;
     private Button mailActionButton;
     private Button favoriteButton;
+    private Button facebookButton;
+    private Button foursquareButton;
+    private Button tripAdvisorButton;
+    private Button googlePlusButton;
     private FloatingActionButton floatingActionButton;
     private LinearLayout timecardLayout;
     private LinearLayout addressLayout;
@@ -72,6 +76,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
     private LinearLayout linkLayout;
     private LinearLayout tagLayout;
     private LinearLayout descriptionLayout;
+    private LinearLayout socialLayout;
     private Target loadTarget;
     private Toolbar toolbar;
 //    private FavoriteDBHelper openHelper;
@@ -110,6 +115,10 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
         urlActionButton = (Button) layout.findViewById(R.id.urlButton);
         mailActionButton = (Button) layout.findViewById(R.id.mailButton);
         favoriteButton = (Button) layout.findViewById(R.id.favoriteButton);
+        facebookButton = (Button) layout.findViewById(R.id.facebook_button);
+        foursquareButton = (Button) layout.findViewById(R.id.foursquare_button);
+        tripAdvisorButton = (Button) layout.findViewById(R.id.tripadvisor_button);
+        googlePlusButton = (Button) layout.findViewById(R.id.googleplus_button);
         floatingActionButton = (FloatingActionButton) layout.findViewById(R.id.floatingButton);
         timecardLayout = (LinearLayout) layout.findViewById(R.id.timecard_layout);
         addressLayout = (LinearLayout) layout.findViewById(R.id.address_layout);
@@ -118,6 +127,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
         linkLayout = (LinearLayout) layout.findViewById(R.id.link_layout);
         tagLayout = (LinearLayout) layout.findViewById(R.id.tag_layout);
         descriptionLayout = (LinearLayout) layout.findViewById(R.id.description_layout);
+        socialLayout = (LinearLayout) layout.findViewById(R.id.social_layout);
         toolbar = (Toolbar) layout.findViewById(R.id.appbar);
 
         //Listener
@@ -126,6 +136,10 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
         mailActionButton.setOnClickListener(this);
         floatingActionButton.setOnClickListener(this);
         favoriteButton.setOnClickListener(this);
+        facebookButton.setOnClickListener(this);
+        foursquareButton.setOnClickListener(this);
+        tripAdvisorButton.setOnClickListener(this);
+        googlePlusButton.setOnClickListener(this);
 
         //Args read
         Place p = ParsingUtilities.parseSinglePlace(getArguments().getString(Constraints.JSON_ARG));
@@ -218,6 +232,22 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
             tagTv.setText(tags);
         } else
             tagLayout.setVisibility(View.GONE);
+        if (p.getContact().hasSocial()) {
+            if (p.getContact().getFbLink() == null) {
+                facebookButton.setVisibility(View.GONE);
+            }
+            if (p.getContact().getFsqrLink() == null) {
+                foursquareButton.setVisibility(View.GONE);
+            }
+            if (p.getContact().getTaLink() == null) {
+                tripAdvisorButton.setVisibility(View.GONE);
+            }
+            if (p.getContact().getGpLink() == null) {
+                googlePlusButton.setVisibility(View.GONE);
+            }
+        } else {
+            socialLayout.setVisibility(View.GONE);
+        }
     }
 
     public void setBitmap(Bitmap bitmap) {
@@ -341,8 +371,30 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
 
             } else
                 Toast.makeText(getActivity(), R.string.no_email_available, Toast.LENGTH_SHORT).show();
-        } else if (v.getId() == R.id.urlButton) {
-            String url = targetPlace.getContact().getUrl();
+        } else if (v.getId() == R.id.urlButton || v.getId() == R.id.facebook_button ||
+                v.getId() == R.id.foursquare_button || v.getId() == R.id.googleplus_button ||
+                v.getId() == R.id.tripadvisor_button) {
+            String url;
+            switch (v.getId()) {
+                case R.id.urlButton:
+                    url = targetPlace.getContact().getUrl();
+                    break;
+                case R.id.facebook_button:
+                    url = targetPlace.getContact().getFbLink();
+                    break;
+                case R.id.foursquare_button:
+                    url = targetPlace.getContact().getFsqrLink();
+                    break;
+                case R.id.tripadvisor_button:
+                    url = targetPlace.getContact().getTaLink();
+                    break;
+                case R.id.googleplus_button:
+                    url = targetPlace.getContact().getGpLink();
+                    break;
+                default:
+                    url = targetPlace.getContact().getUrl();
+            }
+
             if (url != null) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));

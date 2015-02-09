@@ -22,6 +22,10 @@ public class ContactCard {
     protected String telephone;
     protected String email;
     protected String url;
+    protected String fbLink;
+    protected String gpLink;
+    protected String taLink;
+    protected String fsqrLink;
 
     /**
      * Public constructor
@@ -96,6 +100,83 @@ public class ContactCard {
             this.url = toSet;
         } else
             this.url = null;
+    }
+
+    /**
+     * @return the link to 4square
+     */
+    public String getFsqrLink() {
+        return fsqrLink;
+    }
+
+    /**
+     * @param fsqrLink the 4square link to set
+     */
+    public void setFsqrLink(String fsqrLink) {
+        if (!fsqrLink.equals(Constraints.EMPTY_VALUE)) {
+            this.fsqrLink = fsqrLink;
+        } else
+            this.fsqrLink = null;
+    }
+
+    /**
+     * @return the link to Facebook page
+     */
+    public String getFbLink() {
+        return fbLink;
+    }
+
+    /**
+     * @param fbLink is the FB link to set
+     */
+    public void setFbLink(String fbLink) {
+        if (!fbLink.equals(Constraints.EMPTY_VALUE)) {
+            this.fbLink = fbLink;
+        } else
+            this.fbLink = null;
+    }
+
+    /**
+     * @return the link Google Plus page
+     */
+    public String getGpLink() {
+        return gpLink;
+    }
+
+    /**
+     * @param gpLink is the G+ link to set
+     */
+    public void setGpLink(String gpLink) {
+        if (!gpLink.equals(Constraints.EMPTY_VALUE)) {
+            this.gpLink = gpLink;
+        } else
+            this.gpLink = null;
+    }
+
+    /**
+     * @return the TripAdvisor link
+     */
+    public String getTaLink() {
+        return taLink;
+    }
+
+    /**
+     * @param taLink is the link to TripAdvisor page
+     */
+    public void setTaLink(String taLink) {
+        if (!taLink.equals(Constraints.EMPTY_VALUE)) {
+            this.taLink = taLink;
+        } else
+            this.taLink = null;
+    }
+
+    /**
+     * Check if the place has at least one social network link
+     *
+     * @return true if has at least one social network link, false otherwise
+     */
+    public boolean hasSocial() {
+        return getFbLink() != null || getFsqrLink() != null || getTaLink() != null || getGpLink() != null;
     }
 
 }

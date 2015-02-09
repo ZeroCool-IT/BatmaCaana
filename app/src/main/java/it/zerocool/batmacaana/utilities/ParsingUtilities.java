@@ -138,6 +138,10 @@ public class ParsingUtilities {
                     c.setEmail(toBuild.getString("EMAIL"));
                     c.setUrl(toBuild.getString("URL"));
                     c.setTelephone(toBuild.getString("TELEPHONENUMBER"));
+                    c.setFbLink(toBuild.getString("FACEBOOK"));
+                    c.setFsqrLink(toBuild.getString("FOURSQUARE"));
+                    c.setTaLink(toBuild.getString("TRIPADVISOR"));
+                    c.setGpLink(toBuild.getString("GOOGLEPLUS"));
                     p.setContact(c);
                     Location l = new Location("");
                     String latitude = toBuild.getString("LATITUDE");
@@ -155,8 +159,6 @@ public class ParsingUtilities {
                     p.setTimeCard(t);
                     LocationUtilities.setPlaceDistance(p, currentLocation);
                     result.add(p);
-
-
                 }
             }
 
@@ -210,6 +212,10 @@ public class ParsingUtilities {
             c.setEmail(toBuild.getString("EMAIL"));
             c.setUrl(toBuild.getString("URL"));
             c.setTelephone(toBuild.getString("TELEPHONENUMBER"));
+            c.setFbLink(toBuild.getString("FACEBOOK"));
+            c.setFsqrLink(toBuild.getString("FOURSQUARE"));
+            c.setTaLink(toBuild.getString("TRIPADVISOR"));
+            c.setGpLink(toBuild.getString("GOOGLEPLUS"));
             p.setContact(c);
             Location l = new Location("");
             String latitude = toBuild.getString("LATITUDE");

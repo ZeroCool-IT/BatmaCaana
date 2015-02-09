@@ -29,7 +29,6 @@ public class Place implements Cardable {
     protected int id;
     protected String name;
     protected String image;
-    protected String fsqrLink;
     protected int type;
     protected boolean favorite;
 
@@ -99,22 +98,6 @@ public class Place implements Cardable {
             this.image = null;
     }
 
-    /**
-     * @return the link to 4square
-     */
-    public String getFsqrLink() {
-        return fsqrLink;
-    }
-
-    /**
-     * @param fsqrLink the 4square link to set
-     */
-    public void setFsqrLink(String fsqrLink) {
-        if (!fsqrLink.equals(Constraints.EMPTY_VALUE)) {
-            this.fsqrLink = fsqrLink;
-        } else
-            this.fsqrLink = null;
-    }
 
     /**
      * @return true if the place is in the favorite list, false otherwise

@@ -11,8 +11,6 @@
     tools:context="it.zerocool.batmacaana.PlaceFragment">
 
 
-    <!-- sample xml -->
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -298,13 +296,77 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:text="Dummy tag" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/social_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tag_layout"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp">
+
+                    <Button
+                        android:id="@+id/facebook_button"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent_bg"
+                        android:drawableTop="@drawable/ic_facebook_grey600_24dp"
+                        android:paddingBottom="@dimen/action_button_td_padding"
+                        android:paddingTop="@dimen/action_button_td_padding"
+                        android:textColor="@color/secondary_text_color"
+                        android:textSize="@dimen/button_bar_text_size" />
+
+                    <Button
+                        android:id="@+id/googleplus_button"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent_bg"
+                        android:drawableTop="@drawable/ic_google_plus_grey600_18dp"
+                        android:paddingBottom="@dimen/action_button_td_padding"
+                        android:paddingTop="@dimen/action_button_td_padding"
+                        android:textColor="@color/secondary_text_color"
+                        android:textSize="@dimen/button_bar_text_size" />
+
+                    <Button
+                        android:id="@+id/foursquare_button"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent_bg"
+                        android:drawableTop="@drawable/ic_foursquare_grey600_24dp"
+                        android:paddingBottom="@dimen/action_button_td_padding"
+                        android:paddingTop="@dimen/action_button_td_padding"
+                        android:textColor="@color/secondary_text_color"
+                        android:textSize="@dimen/button_bar_text_size" />
+
+                    <Button
+                        android:id="@+id/tripadvisor_button"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent_bg"
+                        android:drawableTop="@drawable/ic_tripadvisor"
+                        android:paddingBottom="@dimen/action_button_td_padding"
+                        android:paddingTop="@dimen/action_button_td_padding"
+                        android:textColor="@color/secondary_text_color"
+                        android:textSize="@dimen/button_bar_text_size" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_below="@+id/social_layout"
+                    android:visibility="invisible">
 
 
                 </LinearLayout>
 
-
             </RelativeLayout>
-
         </LinearLayout>
 
 
