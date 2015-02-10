@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -33,6 +33,16 @@
 
                     android:src="@drawable/im_placeholder" />
 
+                <ImageButton
+                    android:id="@+id/fullscreenButton"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/imageView"
+                    android:layout_alignEnd="@id/imageView"
+                    android:layout_alignRight="@id/imageView"
+                    android:src="@drawable/ic_fullscreen_grey600_36dp" />
+
                 <LinearLayout
                     android:id="@+id/button_layout"
                     android:layout_width="match_parent"
@@ -46,6 +56,7 @@
                         style="?android:attr/borderlessButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:background="@color/transparent_bg"
                         android:drawableTop="@drawable/ic_call_grey600_track_36dp"
                         android:paddingBottom="@dimen/action_button_td_padding"
@@ -61,6 +72,7 @@
                         style="?android:attr/borderlessButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:background="@color/transparent_bg"
                         android:drawableTop="@drawable/ic_web_grey600_36dp"
                         android:paddingBottom="@dimen/action_button_td_padding"
@@ -76,6 +88,7 @@
                         style="?android:attr/borderlessButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:background="@color/transparent_bg"
                         android:drawableTop="@drawable/ic_email_grey600_track_36dp"
                         android:paddingBottom="@dimen/action_button_td_padding"
@@ -91,6 +104,7 @@
                         style="?android:attr/borderlessButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:background="@color/transparent_bg"
                         android:drawableTop="@drawable/ic_favorite_outline_grey600_36dp"
                         android:paddingBottom="@dimen/action_button_td_padding"
@@ -261,7 +275,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingRight="8dp"
-                        android:src="@drawable/ic_link_grey600_24dp" />
+                        android:src="@drawable/ic_web_grey600_24dp" />
 
                     <TextView
                         android:id="@+id/link_tv"
@@ -312,6 +326,7 @@
                         style="?android:attr/borderlessButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:background="@color/transparent_bg"
                         android:drawableTop="@drawable/ic_facebook_grey600_24dp"
                         android:paddingBottom="@dimen/action_button_td_padding"
@@ -324,6 +339,7 @@
                         style="?android:attr/borderlessButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:background="@color/transparent_bg"
                         android:drawableTop="@drawable/ic_google_plus_grey600_18dp"
                         android:paddingBottom="@dimen/action_button_td_padding"
@@ -336,6 +352,7 @@
                         style="?android:attr/borderlessButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:background="@color/transparent_bg"
                         android:drawableTop="@drawable/ic_foursquare_grey600_24dp"
                         android:paddingBottom="@dimen/action_button_td_padding"
@@ -348,6 +365,7 @@
                         style="?android:attr/borderlessButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:background="@color/transparent_bg"
                         android:drawableTop="@drawable/ic_tripadvisor"
                         android:paddingBottom="@dimen/action_button_td_padding"
@@ -359,7 +377,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="36dp"
+                    android:layout_height="48dp"
                     android:layout_below="@+id/social_layout"
                     android:visibility="invisible">
 

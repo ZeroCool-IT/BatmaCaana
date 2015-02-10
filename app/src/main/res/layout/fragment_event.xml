@@ -11,15 +11,13 @@
     tools:context="it.zerocool.batmacaana.">
 
 
-    <!-- sample xml -->
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -277,7 +275,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingRight="8dp"
-                        android:src="@drawable/ic_link_grey600_24dp" />
+                        android:src="@drawable/ic_web_grey600_24dp" />
 
                     <TextView
                         android:id="@+id/link_tv"
@@ -315,6 +313,12 @@
 
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/social_layout"
+                    android:visibility="invisible"></LinearLayout>
 
 
             </RelativeLayout>

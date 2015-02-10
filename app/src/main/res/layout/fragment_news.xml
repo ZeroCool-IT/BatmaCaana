@@ -131,7 +131,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingRight="8dp"
-                        android:src="@drawable/ic_link_grey600_24dp" />
+                        android:src="@drawable/ic_web_grey600_24dp" />
 
                     <TextView
                         android:id="@+id/link_tv"

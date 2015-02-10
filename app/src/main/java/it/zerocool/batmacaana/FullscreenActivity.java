@@ -7,6 +7,7 @@ package it.zerocool.batmacaana;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
@@ -77,7 +79,7 @@ public class FullscreenActivity extends Activity {
      */
     private SystemUiHider mSystemUiHider;
     private ImageView fullScreenIv;
-//    private FrameLayout layout;
+    private FrameLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,10 +93,14 @@ public class FullscreenActivity extends Activity {
         Intent intent = getIntent();
 
         fullScreenIv = (ImageView) findViewById(R.id.fullscreen_content);
+        String hexColor = intent.getStringExtra("COLOR");
+        int bg = Color.parseColor(hexColor);
+        layout = (FrameLayout) findViewById(R.id.fullscreen_layout);
+
 //        layout = (FrameLayout) findViewById(R.id.fullscreen_layout);
 //        ColorDrawable color = new ColorDrawable();
 //        color.setColor(intent.getIntExtra("COLOR", R.color.primaryColor));
-//        layout.setBackgroundColor(color.getColor());
+        layout.setBackgroundColor(bg);
         Picasso.with(this)
                 .load(Constraints.URI_IMAGE_BIG +
                         intent.getStringExtra(Constraints.IMAGE))

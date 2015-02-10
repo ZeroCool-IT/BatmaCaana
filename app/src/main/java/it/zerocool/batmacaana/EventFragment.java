@@ -353,7 +353,8 @@ public class EventFragment extends Fragment implements View.OnClickListener {
             if (targetEvent.getImage() != null) {
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
                 intent.putExtra(Constraints.IMAGE, targetEvent.getImage());
-                intent.putExtra("COLOR", palette.getLightVibrantColor(R.color.primaryColor));
+                String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(R.color.primaryColor)));
+                intent.putExtra("COLOR", hexColor);
                 startActivity(intent);
             } else
                 Toast.makeText(getActivity(), R.string.no_image, Toast.LENGTH_SHORT).show();

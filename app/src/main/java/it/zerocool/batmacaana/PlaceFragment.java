@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -68,6 +69,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
     private Button foursquareButton;
     private Button tripAdvisorButton;
     private Button googlePlusButton;
+    private ImageButton fullScreenButton;
     private FloatingActionButton floatingActionButton;
     private LinearLayout timecardLayout;
     private LinearLayout addressLayout;
@@ -79,6 +81,8 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
     private LinearLayout socialLayout;
     private Target loadTarget;
     private Toolbar toolbar;
+    private Palette palette;
+
 //    private FavoriteDBHelper openHelper;
 //    private SQLiteDatabase db;
 
@@ -115,6 +119,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
         urlActionButton = (Button) layout.findViewById(R.id.urlButton);
         mailActionButton = (Button) layout.findViewById(R.id.mailButton);
         favoriteButton = (Button) layout.findViewById(R.id.favoriteButton);
+        fullScreenButton = (ImageButton) layout.findViewById(R.id.fullscreenButton);
         facebookButton = (Button) layout.findViewById(R.id.facebook_button);
         foursquareButton = (Button) layout.findViewById(R.id.foursquare_button);
         tripAdvisorButton = (Button) layout.findViewById(R.id.tripadvisor_button);
@@ -140,6 +145,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
         foursquareButton.setOnClickListener(this);
         tripAdvisorButton.setOnClickListener(this);
         googlePlusButton.setOnClickListener(this);
+        fullScreenButton.setOnClickListener(this);
 
         //Args read
         Place p = ParsingUtilities.parseSinglePlace(getArguments().getString(Constraints.JSON_ARG));
@@ -261,7 +267,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
     }
 
     public void setPalette(Palette palette) {
-
+        this.palette = palette;
         ((ActionBarActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(R.color.primaryColor)));
         if (VERSION.SDK_INT >= 21) {
             getActivity().getWindow().setStatusBarColor(palette.getDarkVibrantColor(R.color.primaryColor));
@@ -433,6 +439,16 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
                 buttonLayout.invalidate();
 
             }
+        } else if (v.getId() == R.id.imageView || v.getId() == R.id.fullscreenButton) {
+            if (targetPlace.getImage() != null) {
+                Intent intent = new Intent(getActivity(), FullscreenActivity.class);
+                intent.putExtra(Constraints.IMAGE, targetPlace.getImage());
+                String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(R.color.primaryColor)));
+                intent.putExtra("COLOR", hexColor);
+                startActivity(intent);
+            } else
+                Toast.makeText(getActivity(), R.string.no_image, Toast.LENGTH_SHORT).show();
+
         }
     }
 

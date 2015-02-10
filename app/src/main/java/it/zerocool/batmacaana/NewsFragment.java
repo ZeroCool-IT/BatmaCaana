@@ -56,6 +56,8 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
     private ShareActionProvider shareActionProvider;
     private Target loadTarget;
 
+    private Palette palette;
+
 
     public NewsFragment() {
         // Required empty public constructor
@@ -169,6 +171,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
     }
 
     public void setPalette(Palette palette) {
+        this.palette = palette;
         ((ActionBarActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(R.color.primaryColor)));
         if (Build.VERSION.SDK_INT >= 21) {
             getActivity().getWindow().setStatusBarColor(palette.getDarkVibrantColor(R.color.primaryColor));
@@ -207,6 +210,8 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
             if (targetNews.getImage() != null) {
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
                 intent.putExtra(Constraints.IMAGE, targetNews.getImage());
+                String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(R.color.primaryColor)));
+                intent.putExtra("COLOR", hexColor);
                 startActivity(intent);
             } else
                 Toast.makeText(getActivity(), R.string.no_image, Toast.LENGTH_SHORT).show();
