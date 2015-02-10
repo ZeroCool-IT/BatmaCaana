@@ -14,8 +14,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
@@ -56,6 +59,15 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
             view = inflater.inflate(R.layout.drawer_row_last_main, parent, false);
         } else if (viewType == Constraints.OFFLINE) {
             view = inflater.inflate(R.layout.drawer_row_offline_toggle, parent, false);
+            Switch toggle = (Switch) view.findViewById(R.id.offline_switch);
+            toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
         } else {
             view = inflater.inflate(R.layout.drawer_row, parent, false);
         }
@@ -148,6 +160,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
 
             switch (position) {
                 case Constraints.ABOUT:
+                    Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
                     break;
                 case Constraints.SUBHEADER:
                     break;
@@ -160,10 +173,13 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                     drawerLayout.closeDrawers();
                     break;
                 case Constraints.SETTINGS:
+                    Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
                     break;
                 case Constraints.OFFLINE:
+                    Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
                     break;
                 case Constraints.UPDATE:
+                    Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
                     break;
                 default:
                     ContentFragment f = new ContentFragment();

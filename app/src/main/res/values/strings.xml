@@ -62,6 +62,7 @@
     <string name="foursquare">Foursquare</string>
     <string name="tripadvisor">TripAdvisor</string>
     <string name="googleplus">Google+</string>
+    <string name="feature_na">This feature is not yet available!</string>
 
     <string-array name="drawer_list">
         <item>To See</item>
