@@ -7,5 +7,7 @@
     <dimen name="drawer_margin_top">48dp</dimen>
     <dimen name="content_recycler_top_margin">80dp</dimen>
     <dimen name="fragment_details_top_margin">80dp</dimen>
+    <dimen name="action_button_lr_padding">8dp</dimen>
+    <dimen name="action_button_td_padding">8dp</dimen>
 
 </resources>

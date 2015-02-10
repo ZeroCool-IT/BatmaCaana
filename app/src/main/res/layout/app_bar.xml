@@ -11,4 +11,5 @@
     android:gravity="center"
     android:paddingTop="@dimen/app_bar_top_padding"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-    app:theme="@style/MyCustomToolBarTheme"></android.support.v7.widget.Toolbar>
+    app:subtitleTextAppearance="@style/ToolbarSubTitle"
+    app:titleTextAppearance="@style/ToolbarTitle" />
