@@ -103,6 +103,7 @@ public class Constraints {
     public static final String FLAG_FROM_NOTIFICATION = "notification";
     public static final String ID_ARG = "id";
     public static final String MESSAGE_ARG = "message";
+    public static final String LANDSCAPE_ORIENTATION = "orientation";
 
     //Shared Preferences
     public static final String PREF_FILE_NAME = "preference";
@@ -120,6 +121,7 @@ public class Constraints {
     //Others
     public static final int VIEW_STATE_SELECTED = 1;
     public static final int NAV_DRAWER_SUBHEADER = 8;
+    public static final long M_BACK_PRESS_THRESHOLD = 3500;
 
     /**
      * Private constructor

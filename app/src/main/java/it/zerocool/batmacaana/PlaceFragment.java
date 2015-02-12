@@ -443,6 +443,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
             if (targetPlace.getImage() != null) {
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
                 intent.putExtra(Constraints.IMAGE, targetPlace.getImage());
+                intent.putExtra(Constraints.LANDSCAPE_ORIENTATION, true);
                 String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(R.color.primaryColor)));
                 intent.putExtra("COLOR", hexColor);
                 startActivity(intent);

@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -42,6 +43,7 @@ public class HomeActivity extends ActionBarActivity {
     private static final int MAX_ATTEMPTS = 5;
     private static final int BACKOFF_MILLI_SECONDS = 2000;
     private static final Random random = new Random();
+    protected Toast pressBackToast;
     String SENDER_ID = "557298603924";
     GoogleCloudMessaging gcm;
     AtomicInteger msgId = new AtomicInteger();
@@ -52,6 +54,7 @@ public class HomeActivity extends ActionBarActivity {
     private LocationListener locationListener;
     private Context context;
     private SharedPreferences prefs;
+    private long mLastBackPress;
 
     /**
      * Return the version code of the app
@@ -74,7 +77,8 @@ public class HomeActivity extends ActionBarActivity {
         setContentView(R.layout.activity_home);
         requestLocationServices();
 
-
+        pressBackToast = Toast.makeText(this, R.string.tback,
+                Toast.LENGTH_SHORT);
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -211,6 +215,23 @@ public class HomeActivity extends ActionBarActivity {
     protected void onDestroy() {
         super.onDestroy();
         locationManager.removeUpdates(locationListener);
+    }
+
+    /**
+     * Listener for back button pressed
+     */
+    @Override
+    public void onBackPressed() {
+        long currentTime = System.currentTimeMillis();
+        if (Math.abs(currentTime - mLastBackPress) > Constraints.M_BACK_PRESS_THRESHOLD) {
+            pressBackToast.show();
+            mLastBackPress = currentTime;
+        } else {
+            pressBackToast.cancel();
+            super.onBackPressed(); // Exit the application if back pressed
+            // threshold is smaller than
+            // M_BACK_PRESSED_TRESHOLD
+        }
     }
 
     /**

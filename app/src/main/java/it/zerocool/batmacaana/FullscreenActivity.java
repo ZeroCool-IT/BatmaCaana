@@ -7,6 +7,7 @@ package it.zerocool.batmacaana;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -91,7 +92,12 @@ public class FullscreenActivity extends Activity {
         setupActionBar();
 
         Intent intent = getIntent();
-
+        boolean lanscape = intent.getBooleanExtra(Constraints.LANDSCAPE_ORIENTATION, false);
+        if (lanscape) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         fullScreenIv = (ImageView) findViewById(R.id.fullscreen_content);
         String hexColor = intent.getStringExtra("COLOR");
         int bg = Color.parseColor(hexColor);
