@@ -37,7 +37,6 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private View containerView;
     private RecyclerView recyclerView;
-    private View previousSelected;
     private LinearLayoutManager linearLayoutManager;
 
     private DrawerAdapter adapter;
