@@ -199,20 +199,16 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
 
             } else
                 Toast.makeText(getActivity(), R.string.no_url_available, Toast.LENGTH_SHORT).show();
-        } else if (v.getId() == R.id.imageView) {
-            if (targetNews.getImage() != null) {
-                Intent intent = new Intent(getActivity(), FullscreenActivity.class);
-                intent.putExtra(Constraints.IMAGE, targetNews.getImage());
-                startActivity(intent);
-            } else
-                Toast.makeText(getActivity(), R.string.no_image, Toast.LENGTH_SHORT).show();
-        } else if (v.getId() == R.id.fullscreenButton) {
+
+        } else if (v.getId() == R.id.fullscreenButton || v.getId() == R.id.imageView) {
             if (targetNews.getImage() != null) {
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
                 intent.putExtra(Constraints.IMAGE, targetNews.getImage());
                 intent.putExtra(Constraints.LANDSCAPE_ORIENTATION, false);
-                String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(R.color.primaryColor)));
-                intent.putExtra("COLOR", hexColor);
+                if (palette != null) {
+                    String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(R.color.primaryColor)));
+                    intent.putExtra("COLOR", hexColor);
+                }
                 startActivity(intent);
             } else
                 Toast.makeText(getActivity(), R.string.no_image, Toast.LENGTH_SHORT).show();

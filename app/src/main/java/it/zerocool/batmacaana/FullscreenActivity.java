@@ -100,7 +100,11 @@ public class FullscreenActivity extends Activity {
         }
         fullScreenIv = (ImageView) findViewById(R.id.fullscreen_content);
         String hexColor = intent.getStringExtra("COLOR");
-        int bg = Color.parseColor(hexColor);
+        int bg;
+        if (hexColor != null)
+            bg = Color.parseColor(hexColor);
+        else
+            bg = R.color.primaryColor;
         layout = (FrameLayout) findViewById(R.id.fullscreen_layout);
 
 //        layout = (FrameLayout) findViewById(R.id.fullscreen_layout);

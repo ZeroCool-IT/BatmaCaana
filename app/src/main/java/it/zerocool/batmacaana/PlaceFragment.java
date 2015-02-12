@@ -134,6 +134,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
         descriptionLayout = (LinearLayout) layout.findViewById(R.id.description_layout);
         socialLayout = (LinearLayout) layout.findViewById(R.id.social_layout);
         toolbar = (Toolbar) layout.findViewById(R.id.appbar);
+        ivPlace = (ImageView) layout.findViewById(R.id.imageView);
 
         //Listener
         phoneActionButton.setOnClickListener(this);
@@ -146,6 +147,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
         tripAdvisorButton.setOnClickListener(this);
         googlePlusButton.setOnClickListener(this);
         fullScreenButton.setOnClickListener(this);
+        ivPlace.setOnClickListener(this);
 
         //Args read
         Place p = ParsingUtilities.parseSinglePlace(getArguments().getString(Constraints.JSON_ARG));
@@ -444,8 +446,10 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
                 intent.putExtra(Constraints.IMAGE, targetPlace.getImage());
                 intent.putExtra(Constraints.LANDSCAPE_ORIENTATION, true);
-                String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(R.color.primaryColor)));
-                intent.putExtra("COLOR", hexColor);
+                if (palette != null) {
+                    String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(R.color.primaryColor)));
+                    intent.putExtra("COLOR", hexColor);
+                }
                 startActivity(intent);
             } else
                 Toast.makeText(getActivity(), R.string.no_image, Toast.LENGTH_SHORT).show();
