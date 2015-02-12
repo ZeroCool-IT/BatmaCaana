@@ -27,8 +27,6 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import it.zerocool.batmacaana.dialog.LocationWarningDialog;
 import it.zerocool.batmacaana.utilities.Constraints;
@@ -39,25 +37,19 @@ public class HomeActivity extends ActionBarActivity {
 
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String PROPERTY_APP_VERSION = "appVersion";
-    private static final String SERVER_URL = "http://www.ilmiositodemo.altervista.org/app/notifiche/register.php";
-    private static final int MAX_ATTEMPTS = 5;
-    private static final int BACKOFF_MILLI_SECONDS = 2000;
-    private static final Random random = new Random();
     protected Toast pressBackToast;
-    String SENDER_ID = "557298603924";
     GoogleCloudMessaging gcm;
-    AtomicInteger msgId = new AtomicInteger();
     String regid;
     private Toolbar toolbar;
     private LocationWarningDialog dialog;
     private LocationManager locationManager;
     private LocationListener locationListener;
     private Context context;
-    private SharedPreferences prefs;
     private long mLastBackPress;
 
     /**
      * Return the version code of the app
+     *
      * @param context is the application context
      * @return the version code of the app
      */
@@ -186,6 +178,8 @@ public class HomeActivity extends ActionBarActivity {
             }
             requestLocationServices();
         }
+//        NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+//        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
 
     }
 
@@ -251,12 +245,8 @@ public class HomeActivity extends ActionBarActivity {
         searchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(true);
-        //Get the ID for the search bar LinearLayout
-/*        int searchBarId = searchView.getContext().getResources().getIdentifier("android:id/search_bar", null, null);
-        //Get the search bar Linearlayout
-        LinearLayout searchBar = (LinearLayout) searchView.findViewById(searchBarId);
-        //Give the Linearlayout a transition animation.
-        searchBar.setLayoutTransition(new LayoutTransition());*/
+
+
         return true;
     }
 
@@ -277,6 +267,7 @@ public class HomeActivity extends ActionBarActivity {
 
     /**
      * Save current location on Shared Preferences
+     *
      * @param location is the location to save
      */
     private void saveLocationToPreferences(Location location) {
