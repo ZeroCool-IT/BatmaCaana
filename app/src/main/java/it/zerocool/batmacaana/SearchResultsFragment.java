@@ -26,7 +26,7 @@ import java.util.List;
 
 import it.zerocool.batmacaana.dialog.WarningDialog;
 import it.zerocool.batmacaana.model.SearchResult;
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
 import it.zerocool.batmacaana.utilities.RequestUtilities;
 
@@ -65,7 +65,7 @@ public class SearchResultsFragment extends Fragment {
         rvResults.setLayoutManager(layoutManager);
         rvResults.addItemDecoration(new DividerItemDecoration(getActivity(), null));
         progressBar = (ProgressBarCircularIndeterminate) layout.findViewById(R.id.search_result_progressbar);
-        query = getArguments().getString(Constraints.QUERY);
+        query = getArguments().getString(Constant.QUERY);
         getData(query);
 
         return layout;
@@ -77,9 +77,9 @@ public class SearchResultsFragment extends Fragment {
                 .setTitle(getResources()
                         .getString(R.string.results) + query);
 
-        String uri = Constraints.URI_SEARCH1
-                + Constraints.USER_ID
-                + Constraints.URI_SEARCH2
+        String uri = Constant.URI_SEARCH1
+                + Constant.USER_ID
+                + Constant.URI_SEARCH2
                 + Uri.encode(query);
         if (RequestUtilities.isOnline(getActivity())) {
             task = new SearchTask();

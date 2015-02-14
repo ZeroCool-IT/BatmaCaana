@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.pandoracloud.registration.Registration;
 
 /**
@@ -74,7 +74,7 @@ class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
             // so it can use GCM/HTTP or CCS to send messages to your app.
             // The request to your server should be authenticated if your app
             // is using accounts.
-            regService.register(regId, Constraints.USER_ID).execute();
+            regService.register(regId, Constant.USER_ID).execute();
 
         } catch (IOException ex) {
             ex.printStackTrace();

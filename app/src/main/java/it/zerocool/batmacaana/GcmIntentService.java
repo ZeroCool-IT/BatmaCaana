@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import it.zerocool.batmacaana.utilities.ApplicationContextProvider;
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 
 /**
  * Service listening for notification message.
@@ -42,7 +42,7 @@ public class GcmIntentService extends IntentService {
 
     public GcmIntentService() {
         super("GcmIntentService");
-        sharedPreferences = ApplicationContextProvider.getContext().getSharedPreferences(Constraints.NOTIFICATION_PREFS, MODE_PRIVATE);
+        sharedPreferences = ApplicationContextProvider.getContext().getSharedPreferences(Constant.NOTIFICATION_PREFS, MODE_PRIVATE);
     }
 
     @Override
@@ -71,12 +71,12 @@ public class GcmIntentService extends IntentService {
             } else if (GoogleCloudMessaging.
                     MESSAGE_TYPE_MESSAGE.equals(messageType)) {
                 Map<String, String> extrasMap = parseMessage(extras);
-                int type = Integer.parseInt(extrasMap.get(Constraints.TYPE_ARG));
+                int type = Integer.parseInt(extrasMap.get(Constant.TYPE_ARG));
                 switch (type) {
-                    case Constraints.TYPE_NEWS:
+                    case Constant.TYPE_NEWS:
                         sendNewsNotification(extrasMap);
                         break;
-                    case Constraints.TYPE_EVENT:
+                    case Constant.TYPE_EVENT:
                         sendEventNotification(extrasMap);
                         break;
                     default:
@@ -104,12 +104,12 @@ public class GcmIntentService extends IntentService {
 
     private Map<String, String> parseMessage(Bundle extras) {
         Map<String, String> result = new HashMap<>();
-        String id = extras.getString(Constraints.ID_ARG);
-        result.put(Constraints.ID_ARG, id);
-        String type = extras.getString(Constraints.TYPE_ARG);
-        result.put(Constraints.TYPE_ARG, type);
-        String message = extras.getString(Constraints.MESSAGE_ARG);
-        result.put(Constraints.MESSAGE_ARG, message);
+        String id = extras.getString(Constant.ID_ARG);
+        result.put(Constant.ID_ARG, id);
+        String type = extras.getString(Constant.TYPE_ARG);
+        result.put(Constant.TYPE_ARG, type);
+        String message = extras.getString(Constant.MESSAGE_ARG);
+        result.put(Constant.MESSAGE_ARG, message);
         return result;
     }
 
@@ -137,14 +137,14 @@ public class GcmIntentService extends IntentService {
     }
 
     private void sendNewsNotification(Map<String, String> map) {
-        int number = Integer.parseInt(sharedPreferences.getString(Constraints.KEY_NEWS_NOTIFICATION_NUMBER, "0"));
+        int number = Integer.parseInt(sharedPreferences.getString(Constant.KEY_NEWS_NOTIFICATION_NUMBER, "0"));
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
 
         Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra(Constraints.FLAG_FROM_NOTIFICATION, true);
-        intent.putExtra(Constraints.TYPE_ARG, map.get(Constraints.TYPE_ARG));
-        intent.putExtra(Constraints.ID_ARG, map.get(Constraints.ID_ARG));
+        intent.putExtra(Constant.FLAG_FROM_NOTIFICATION, true);
+        intent.putExtra(Constant.TYPE_ARG, map.get(Constant.TYPE_ARG));
+        intent.putExtra(Constant.ID_ARG, map.get(Constant.ID_ARG));
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addParentStack(DetailsActivity.class);
@@ -153,18 +153,18 @@ public class GcmIntentService extends IntentService {
         PendingIntent detailsPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
-        String message = map.get(Constraints.MESSAGE_ARG);
-        int type = Integer.parseInt(map.get(Constraints.TYPE_ARG));
+        String message = map.get(Constant.MESSAGE_ARG);
+        int type = Integer.parseInt(map.get(Constant.TYPE_ARG));
 
         String title = getString(R.string.notification_news_title) +
-                        getString(R.string.city_name);
+                getString(R.string.city_name);
 
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         builder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_notification)
-                        .setContentTitle(title)
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(message))
+                .setContentTitle(title)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(message))
                 .setTicker(title)
                 .setContentText(message)
                 .setAutoCancel(true)
@@ -173,18 +173,18 @@ public class GcmIntentService extends IntentService {
                 .setGroup(NEWS_GROUP);
         builder.setContentIntent(detailsPendingIntent);
         mNotificationManager.notify(NOTIFICATION_ID_NEWS, builder.build());
-        saveToPreferences(Constraints.KEY_NEWS_NOTIFICATION_NUMBER, Integer.valueOf(number).toString());
+        saveToPreferences(Constant.KEY_NEWS_NOTIFICATION_NUMBER, Integer.valueOf(number).toString());
     }
 
     private void sendEventNotification(Map<String, String> map) {
-        int number = Integer.parseInt(sharedPreferences.getString(Constraints.KEY_EVENT_NOTIFICATION_NUMBER, "0"));
+        int number = Integer.parseInt(sharedPreferences.getString(Constant.KEY_EVENT_NOTIFICATION_NUMBER, "0"));
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
 
         Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra(Constraints.FLAG_FROM_NOTIFICATION, true);
-        intent.putExtra(Constraints.TYPE_ARG, map.get(Constraints.TYPE_ARG));
-        intent.putExtra(Constraints.ID_ARG, map.get(Constraints.ID_ARG));
+        intent.putExtra(Constant.FLAG_FROM_NOTIFICATION, true);
+        intent.putExtra(Constant.TYPE_ARG, map.get(Constant.TYPE_ARG));
+        intent.putExtra(Constant.ID_ARG, map.get(Constant.ID_ARG));
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addParentStack(DetailsActivity.class);
@@ -193,8 +193,8 @@ public class GcmIntentService extends IntentService {
         PendingIntent detailsPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
-        String message = map.get(Constraints.MESSAGE_ARG);
-        int type = Integer.parseInt(map.get(Constraints.TYPE_ARG));
+        String message = map.get(Constant.MESSAGE_ARG);
+        int type = Integer.parseInt(map.get(Constant.TYPE_ARG));
 
         String title = getString(R.string.notification_event_title) +
                 getString(R.string.city_name);
@@ -213,7 +213,7 @@ public class GcmIntentService extends IntentService {
                 .setGroup(EVENT_GROUP);
         builder.setContentIntent(detailsPendingIntent);
         mNotificationManager.notify(NOTIFICATION_ID_EVENT, builder.build());
-        saveToPreferences(Constraints.KEY_EVENT_NOTIFICATION_NUMBER, Integer.valueOf(number).toString());
+        saveToPreferences(Constant.KEY_EVENT_NOTIFICATION_NUMBER, Integer.valueOf(number).toString());
     }
 
     private void saveToPreferences(String key, String number) {

@@ -5,37 +5,39 @@
 package it.zerocool.batmacaana;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
 import java.util.List;
 
-import it.zerocool.batmacaana.model.Cardable;
-import it.zerocool.batmacaana.utilities.Constant;
-
 /**
- * Adapter representing cardable object lists
- * Created by Marco on 11/01/2015.
+ * Adapter for thumbnail gallery RecyclerView
+ * Created by Marco Battisti on 14/02/2015.
  */
-public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentViewHolder> {
+public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder> {
 
+    private ImageView mainPicture;
     private Context context;
+    private List<Integer> imageItems = Collections.emptyList();
     private LayoutInflater inflater;
-    private List<Cardable> contentItems = Collections.emptyList();
 
-    public ContentAdapter(Context context, List<Cardable> data) {
+    public GalleryAdapter(Context context, ImageView mainPicture, List<Integer> data) {
         inflater = LayoutInflater.from(context);
         this.context = context;
-        this.contentItems = data;
+        this.mainPicture = mainPicture;
+        this.imageItems = data;
+        Picasso.with(context)
+                .load(imageItems.get(0))
+                .into(mainPicture);
+
     }
+
 
     /**
      * Called when RecyclerView needs a new {@link ViewHolder} of the given type to represent
@@ -58,9 +60,9 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
      * @see #onBindViewHolder(ViewHolder, int)
      */
     @Override
-    public ContentAdapter.ContentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.card_content, parent, false);
-        return new ContentViewHolder(view);
+    public GalleryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = inflater.inflate(R.layout.item_gallery, parent, false);
+        return new GalleryViewHolder(view);
     }
 
     /**
@@ -81,22 +83,9 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(ContentAdapter.ContentViewHolder holder, int position) {
-        Cardable current = contentItems.get(position);
-        holder.header.setText(current.getHeader());
-        holder.subHeader.setText(current.getSubheader());
-        String accent = current.getAccentInfo();
-        if (accent != null) {
-            holder.accent.setText(accent);
-        } else {
-            holder.accent.setVisibility(View.GONE);
-        }
-        String imgUri = Constant.URI_IMAGE_BIG + current.getImagery();
-        Picasso.with(context).
-                load(imgUri).
-                resize(1080, 608).
-                centerCrop().
-                into(holder.imagery);
+    public void onBindViewHolder(GalleryViewHolder holder, int position) {
+        holder.thumbnail.setImageResource(imageItems.get(position));
+
     }
 
     /**
@@ -106,40 +95,18 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
      */
     @Override
     public int getItemCount() {
-        if (contentItems != null)
-            return contentItems.size();
-        else
-            return 0;
+        return imageItems.size();
     }
 
-    class ContentViewHolder extends RecyclerView.ViewHolder {
+    class GalleryViewHolder extends RecyclerView.ViewHolder {
 
-        TextView header;
-        TextView subHeader;
-        TextView accent;
-        ImageView imagery;
+        ImageView thumbnail;
 
-        public ContentViewHolder(View itemView) {
+        public GalleryViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-//                    Toast.makeText(context, "Touched card " + (contentItems.get(getPosition())).getHeader(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context, DetailsActivity.class);
-                    int type = contentItems.get(getPosition()).getType();
-                    intent.putExtra(Constant.JSON_ARG, contentItems.get(getPosition()).getJson());
-                    intent.putExtra(Constant.TYPE_ARG, type);
-                    context.startActivity(intent);
+            thumbnail = (ImageView) itemView.findViewById(R.id.thumbnail);
 
-
-                }
-            });
-            header = (TextView) itemView.findViewById(R.id.content_header);
-            subHeader = (TextView) itemView.findViewById(R.id.content_subheader);
-            imagery = (ImageView) itemView.findViewById(R.id.content_imagery);
-            accent = (TextView) itemView.findViewById(R.id.content_accent);
         }
-
     }
 }

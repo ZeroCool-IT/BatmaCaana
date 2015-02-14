@@ -22,7 +22,7 @@ import java.util.StringTokenizer;
 
 import it.zerocool.batmacaana.R;
 import it.zerocool.batmacaana.utilities.ApplicationContextProvider;
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
 
 /**
@@ -83,7 +83,7 @@ public class Event implements Cardable {
      * @param name the name of the event to set
      */
     public void setName(String name) {
-        if (!name.equals(Constraints.EMPTY_VALUE)) {
+        if (!name.equals(Constant.EMPTY_VALUE)) {
             this.name = name;
         } else
             this.name = null;
@@ -94,6 +94,13 @@ public class Event implements Cardable {
      */
     public GregorianCalendar getStartDate() {
         return startDate;
+    }
+
+    /**
+     * @param date the start date of the event to set
+     */
+    public void setStartDate(GregorianCalendar date) {
+        this.startDate = date;
     }
 
     /**
@@ -108,17 +115,17 @@ public class Event implements Cardable {
     }
 
     /**
-     * @param date the start date of the event to set
-     */
-    public void setStartDate(GregorianCalendar date) {
-        this.startDate = date;
-    }
-
-    /**
      * @return the end date of the event
      */
     public GregorianCalendar getEndDate() {
         return endDate;
+    }
+
+    /**
+     * @param endDate is the end date of the event to set
+     */
+    public void setEndDate(GregorianCalendar endDate) {
+        this.endDate = endDate;
     }
 
     /**
@@ -133,17 +140,17 @@ public class Event implements Cardable {
     }
 
     /**
-     * @param endDate is the end date of the event to set
-     */
-    public void setEndDate(GregorianCalendar endDate) {
-        this.endDate = endDate;
-    }
-
-    /**
      * @return the start hour of the event
      */
     public GregorianCalendar getStartHour() {
         return startHour;
+    }
+
+    /**
+     * @param startHour the start hour of the event to set
+     */
+    public void setStartHour(GregorianCalendar startHour) {
+        this.startHour = startHour;
     }
 
     /**
@@ -157,17 +164,17 @@ public class Event implements Cardable {
     }
 
     /**
-     * @param startHour the start hour of the event to set
-     */
-    public void setStartHour(GregorianCalendar startHour) {
-        this.startHour = startHour;
-    }
-
-    /**
      * @return the start hour of the event
      */
     public GregorianCalendar getEndHour() {
         return endHour;
+    }
+
+    /**
+     * @param endHour the end hour of the event to set
+     */
+    public void setEndHour(GregorianCalendar endHour) {
+        this.endHour = endHour;
     }
 
     /**
@@ -178,13 +185,6 @@ public class Event implements Cardable {
     public void setEndHour(String endHour) {
         GregorianCalendar g = ParsingUtilities.parseHour(endHour);
         setEndHour(g);
-    }
-
-    /**
-     * @param endHour the end hour of the event to set
-     */
-    public void setEndHour(GregorianCalendar endHour) {
-        this.endHour = endHour;
     }
 
     /**
@@ -200,7 +200,7 @@ public class Event implements Cardable {
      * @param place is the place of the event to set
      */
     public void setPlace(String place) {
-        if (!place.equals(Constraints.EMPTY_VALUE)) {
+        if (!place.equals(Constant.EMPTY_VALUE)) {
             this.place = place;
         } else
             this.place = null;
@@ -217,7 +217,7 @@ public class Event implements Cardable {
      * @param image the image  of the event to set
      */
     public void setImage(String image) {
-        if (!image.equals(Constraints.EMPTY_VALUE)) {
+        if (!image.equals(Constant.EMPTY_VALUE)) {
             this.image = image;
         } else
             this.image = null;
@@ -268,7 +268,7 @@ public class Event implements Cardable {
      * @param description the description of the event to set
      */
     public void setDescription(String description) {
-        if (!description.equals(Constraints.EMPTY_VALUE)) {
+        if (!description.equals(Constant.EMPTY_VALUE)) {
             this.description = description;
         } else
             this.description = null;
@@ -317,7 +317,7 @@ public class Event implements Cardable {
     }
 
     public String getItemURI() {
-        return Constraints.PLACE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
+        return Constant.PLACE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
     }
 
     /**

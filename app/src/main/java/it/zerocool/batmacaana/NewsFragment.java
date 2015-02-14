@@ -35,7 +35,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import it.zerocool.batmacaana.model.News;
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
 
 
@@ -97,7 +97,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
 
 
         //Args read
-        News n = ParsingUtilities.parseSingleNews(getArguments().getString(Constraints.JSON_ARG));
+        News n = ParsingUtilities.parseSingleNews(getArguments().getString(Constant.JSON_ARG));
         targetNews = n;
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(n.getTitle());
         if (n.getDateToString() != null) {
@@ -105,7 +105,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         }
 
         //Load imagery and change colors
-        loadBitmap(Constraints.URI_IMAGE_BIG + targetNews.getImage());
+        loadBitmap(Constant.URI_IMAGE_BIG + targetNews.getImage());
 
 
         //Fill fields
@@ -163,7 +163,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
 
     public void setBitmap(Bitmap bitmap) {
         Picasso.with(getActivity()).
-                load(Constraints.URI_IMAGE_MEDIUM + targetNews.getImage()).
+                load(Constant.URI_IMAGE_MEDIUM + targetNews.getImage()).
                 error(R.drawable.im_noimage).
                 into(ivNews);
         Palette.generateAsync(bitmap, NewsPaletteListener.newInstance(this));
@@ -203,8 +203,8 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         } else if (v.getId() == R.id.fullscreenButton || v.getId() == R.id.imageView) {
             if (targetNews.getImage() != null) {
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
-                intent.putExtra(Constraints.IMAGE, targetNews.getImage());
-                intent.putExtra(Constraints.LANDSCAPE_ORIENTATION, false);
+                intent.putExtra(Constant.IMAGE, targetNews.getImage());
+                intent.putExtra(Constant.LANDSCAPE_ORIENTATION, false);
                 if (palette != null) {
                     String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(R.color.primaryColor)));
                     intent.putExtra("COLOR", hexColor);

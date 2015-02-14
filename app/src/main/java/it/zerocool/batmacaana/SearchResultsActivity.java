@@ -13,7 +13,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.SearchHistoryProvider;
 
 
@@ -41,7 +41,7 @@ public class SearchResultsActivity extends ActionBarActivity {
                     SearchHistoryProvider.AUTHORITY, SearchHistoryProvider.MODE);
             suggestions.saveRecentQuery(query, null);
             Bundle args = new Bundle();
-            args.putString(Constraints.QUERY, query);
+            args.putString(Constant.QUERY, query);
             SearchResultsFragment frag = new SearchResultsFragment();
             frag.setArguments(args);
             FragmentManager fm = getSupportFragmentManager();

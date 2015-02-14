@@ -317,8 +317,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_below="@+id/social_layout"
-                    android:visibility="invisible"></LinearLayout>
+                    android:layout_below="@+id/link_layout"
+                    android:visibility="invisible" />
 
 
             </RelativeLayout>

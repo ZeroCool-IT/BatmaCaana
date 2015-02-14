@@ -40,7 +40,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import it.zerocool.batmacaana.model.Event;
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
 
 
@@ -126,7 +126,7 @@ public class EventFragment extends Fragment implements View.OnClickListener {
         ivEvent.setOnClickListener(this);
 
         //Args read
-        Event e = ParsingUtilities.parseSingleEvent(getArguments().getString(Constraints.JSON_ARG));
+        Event e = ParsingUtilities.parseSingleEvent(getArguments().getString(Constant.JSON_ARG));
         targetEvent = e;
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(e.getName());
         if (!e.getTags().isEmpty()) {
@@ -135,7 +135,7 @@ public class EventFragment extends Fragment implements View.OnClickListener {
         }
 
         //Load imagery and change colors
-        loadBitmap(Constraints.URI_IMAGE_BIG + targetEvent.getImage());
+        loadBitmap(Constant.URI_IMAGE_BIG + targetEvent.getImage());
 
 
         //Fill fields
@@ -220,7 +220,7 @@ public class EventFragment extends Fragment implements View.OnClickListener {
 
     public void setBitmap(Bitmap bitmap) {
         Picasso.with(getActivity()).
-                load(Constraints.URI_IMAGE_MEDIUM + targetEvent.getImage()).
+                load(Constant.URI_IMAGE_MEDIUM + targetEvent.getImage()).
                 error(R.drawable.im_noimage).
                 into(ivEvent);
         Palette.generateAsync(bitmap, EventPaletteListener.newInstance(this));
@@ -352,8 +352,8 @@ public class EventFragment extends Fragment implements View.OnClickListener {
         } else if (v.getId() == R.id.imageView || v.getId() == R.id.fullscreenButton) {
             if (targetEvent.getImage() != null) {
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
-                intent.putExtra(Constraints.IMAGE, targetEvent.getImage());
-                intent.putExtra(Constraints.LANDSCAPE_ORIENTATION, false);
+                intent.putExtra(Constant.IMAGE, targetEvent.getImage());
+                intent.putExtra(Constant.LANDSCAPE_ORIENTATION, false);
                 if (palette != null) {
                     String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(R.color.primaryColor)));
                     intent.putExtra("COLOR", hexColor);

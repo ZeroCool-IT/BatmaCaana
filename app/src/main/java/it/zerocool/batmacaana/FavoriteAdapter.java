@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 import it.zerocool.batmacaana.model.Place;
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 
 /**
  * Created by Marco Battisti on 02/02/2015.
@@ -93,19 +93,19 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         holder.tags.setText(TextUtils.join(", ", current.getTags()));
         int iconResId = R.drawable.ic_map_grey600_48dp;
         switch (current.getType()) {
-            case Constraints.TYPE_TOSEE:
+            case Constant.TYPE_TOSEE:
                 iconResId = R.drawable.ic_beenhere_grey600_48dp;
                 break;
-            case Constraints.TYPE_EAT:
+            case Constant.TYPE_EAT:
                 iconResId = R.drawable.ic_local_restaurant_grey600_48dp;
                 break;
-            case Constraints.TYPE_SLEEP:
+            case Constant.TYPE_SLEEP:
                 iconResId = R.drawable.ic_local_hotel_grey600_48dp;
                 break;
-            case Constraints.TYPE_SERVICE:
+            case Constant.TYPE_SERVICE:
                 iconResId = R.drawable.ic_directions_train_grey600_48dp;
                 break;
-            case Constraints.TYPE_SHOP:
+            case Constant.TYPE_SHOP:
                 iconResId = R.drawable.ic_local_mall_grey600_48dp;
                 break;
         }
@@ -140,8 +140,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
                 public void onClick(View v) {
                     Place current = favoriteItems.get(getPosition());
                     Intent intent = new Intent(context, DetailsActivity.class);
-                    intent.putExtra(Constraints.JSON_ARG, current.getJson());
-                    intent.putExtra(Constraints.TYPE_ARG, current.getType());
+                    intent.putExtra(Constant.JSON_ARG, current.getJson());
+                    intent.putExtra(Constant.TYPE_ARG, current.getType());
                     context.startActivity(intent);
                 }
             });

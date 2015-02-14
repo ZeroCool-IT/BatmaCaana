@@ -9,7 +9,7 @@
  */
 package it.zerocool.batmacaana.model;
 
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 
 /**
  * Class representing places' contact info
@@ -44,7 +44,7 @@ public class ContactCard {
      * @param address the address to set
      */
     public void setAddress(String address) {
-        if (!address.equals(Constraints.EMPTY_VALUE)) {
+        if (!address.equals(Constant.EMPTY_VALUE)) {
             this.address = address;
         } else
             this.address = null;
@@ -61,7 +61,7 @@ public class ContactCard {
      * @param telephone the telephone to set
      */
     public void setTelephone(String telephone) {
-        if (!telephone.equals(Constraints.EMPTY_VALUE)) {
+        if (!telephone.equals(Constant.EMPTY_VALUE)) {
             this.telephone = telephone;
         } else
             this.telephone = null;
@@ -78,7 +78,7 @@ public class ContactCard {
      * @param email the email to set
      */
     public void setEmail(String email) {
-        if (!email.equals(Constraints.EMPTY_VALUE)) {
+        if (!email.equals(Constant.EMPTY_VALUE)) {
             this.email = email;
         } else
             this.email = null;
@@ -95,7 +95,7 @@ public class ContactCard {
      * @param url the url to set
      */
     public void setUrl(String url) {
-        if (!url.equals(Constraints.EMPTY_VALUE)) {
+        if (!url.equals(Constant.EMPTY_VALUE)) {
             String toSet = url.replace("\\/", "/");
             this.url = toSet;
         } else
@@ -113,7 +113,7 @@ public class ContactCard {
      * @param fsqrLink the 4square link to set
      */
     public void setFsqrLink(String fsqrLink) {
-        if (!fsqrLink.equals(Constraints.EMPTY_VALUE)) {
+        if (!fsqrLink.equals(Constant.EMPTY_VALUE)) {
             this.fsqrLink = fsqrLink;
         } else
             this.fsqrLink = null;
@@ -130,7 +130,7 @@ public class ContactCard {
      * @param fbLink is the FB link to set
      */
     public void setFbLink(String fbLink) {
-        if (!fbLink.equals(Constraints.EMPTY_VALUE)) {
+        if (!fbLink.equals(Constant.EMPTY_VALUE)) {
             this.fbLink = fbLink;
         } else
             this.fbLink = null;
@@ -147,7 +147,7 @@ public class ContactCard {
      * @param gpLink is the G+ link to set
      */
     public void setGpLink(String gpLink) {
-        if (!gpLink.equals(Constraints.EMPTY_VALUE)) {
+        if (!gpLink.equals(Constant.EMPTY_VALUE)) {
             this.gpLink = gpLink;
         } else
             this.gpLink = null;
@@ -164,7 +164,7 @@ public class ContactCard {
      * @param taLink is the link to TripAdvisor page
      */
     public void setTaLink(String taLink) {
-        if (!taLink.equals(Constraints.EMPTY_VALUE)) {
+        if (!taLink.equals(Constant.EMPTY_VALUE)) {
             this.taLink = taLink;
         } else
             this.taLink = null;

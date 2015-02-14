@@ -22,7 +22,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.SharedPreferencesProvider;
 
 
@@ -76,7 +76,7 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUserLearnedDrawer = Boolean.valueOf(SharedPreferencesProvider.readFromPreferences(getActivity(), Constraints.KEY_USER_LEARNED_DRAWER, "false"));
+        mUserLearnedDrawer = Boolean.valueOf(SharedPreferencesProvider.readFromPreferences(getActivity(), Constant.KEY_USER_LEARNED_DRAWER, "false"));
         if (savedInstanceState != null) {
             mFromSavedInstanceState = true;
         }
@@ -113,7 +113,7 @@ public class NavigationDrawerFragment extends Fragment {
                 super.onDrawerOpened(drawerView);
                 if (!mUserLearnedDrawer) {
                     mUserLearnedDrawer = true;
-                    SharedPreferencesProvider.saveToPreferences(getActivity(), Constraints.KEY_USER_LEARNED_DRAWER, mUserLearnedDrawer + "");
+                    SharedPreferencesProvider.saveToPreferences(getActivity(), Constant.KEY_USER_LEARNED_DRAWER, mUserLearnedDrawer + "");
                     getActivity().invalidateOptionsMenu();
 
                 }
@@ -131,7 +131,7 @@ public class NavigationDrawerFragment extends Fragment {
             mDrawerLayout.openDrawer(containerView);
         }
         SharedPreferences sp = SharedPreferencesProvider.getSharedPreferences(getActivity());
-        int defaultView = sp.getInt(Constraints.KEY_USER_DEFAULT_START_VIEW, 0);
+        int defaultView = sp.getInt(Constant.KEY_USER_DEFAULT_START_VIEW, 0);
         selectItem(defaultView);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerLayout.post(new Runnable() {
@@ -145,10 +145,10 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void selectItem(int position) {
-        if (position != Constraints.ABOUT) {
+        if (position != Constant.ABOUT) {
             ContentFragment f = new ContentFragment();
             Bundle bundle = new Bundle();
-            bundle.putInt(Constraints.FRAG_SECTION_ID, position);
+            bundle.putInt(Constant.FRAG_SECTION_ID, position);
             f.setArguments(bundle);
             FragmentManager fm = getFragmentManager();
             fm.beginTransaction()

@@ -23,7 +23,7 @@ import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 
 import it.zerocool.batmacaana.util.SystemUiHider;
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 
 
 /**
@@ -92,7 +92,7 @@ public class FullscreenActivity extends Activity {
         setupActionBar();
 
         Intent intent = getIntent();
-        boolean lanscape = intent.getBooleanExtra(Constraints.LANDSCAPE_ORIENTATION, false);
+        boolean lanscape = intent.getBooleanExtra(Constant.LANDSCAPE_ORIENTATION, false);
         if (lanscape) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         } else {
@@ -112,8 +112,8 @@ public class FullscreenActivity extends Activity {
 //        color.setColor(intent.getIntExtra("COLOR", R.color.primaryColor));
         layout.setBackgroundColor(bg);
         Picasso.with(this)
-                .load(Constraints.URI_IMAGE_BIG +
-                        intent.getStringExtra(Constraints.IMAGE))
+                .load(Constant.URI_IMAGE_BIG +
+                        intent.getStringExtra(Constant.IMAGE))
                 .error(R.drawable.im_noimage)
                 .into(fullScreenIv);
 
@@ -198,8 +198,8 @@ public class FullscreenActivity extends Activity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             // Show the Up button in the action bar.
             getActionBar().setDisplayHomeAsUpEnabled(false);
-            getActionBar().setTitle(getIntent().getStringExtra(Constraints.TITLE));
-            String sub = getIntent().getStringExtra(Constraints.SUBTITLE);
+            getActionBar().setTitle(getIntent().getStringExtra(Constant.TITLE));
+            String sub = getIntent().getStringExtra(Constant.SUBTITLE);
             if (sub != null) {
                 getActionBar().setSubtitle(sub);
             }

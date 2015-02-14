@@ -54,7 +54,7 @@ public class ParsingUtilities {
      * @return the date in GregorianCalendar format
      */
     public static GregorianCalendar parseDate(String d) {
-        if (d != null && !d.equals(Constraints.EMPTY_VALUE)) {
+        if (d != null && !d.equals(Constant.EMPTY_VALUE)) {
             GregorianCalendar result = new GregorianCalendar();
             StringTokenizer tokenizer = new StringTokenizer(d, "-");
             while (tokenizer.hasMoreTokens()) {
@@ -77,7 +77,7 @@ public class ParsingUtilities {
      * @return the hour in GregorianCalendar format
      */
     public static GregorianCalendar parseHour(String h) {
-        if (h != null && !h.equals(Constraints.EMPTY_VALUE)) {
+        if (h != null && !h.equals(Constant.EMPTY_VALUE)) {
             GregorianCalendar result = new GregorianCalendar();
             StringTokenizer tokenizer = new StringTokenizer(h, ":");
             while (tokenizer.hasMoreTokens()) {
@@ -109,19 +109,19 @@ public class ParsingUtilities {
                     int id = Integer.parseInt((toBuild.getString("LUOGO_ID")));
                     Place p = null;
                     switch (type) {
-                        case Constraints.TYPE_TOSEE:
+                        case Constant.TYPE_TOSEE:
                             p = new ToSee(id);
                             break;
-                        case Constraints.TYPE_EAT:
+                        case Constant.TYPE_EAT:
                             p = new Eat(id);
                             break;
-                        case Constraints.TYPE_SLEEP:
+                        case Constant.TYPE_SLEEP:
                             p = new Sleep(id);
                             break;
-                        case Constraints.TYPE_SERVICE:
+                        case Constant.TYPE_SERVICE:
                             p = new Service(id);
                             break;
-                        case Constraints.TYPE_SHOP:
+                        case Constant.TYPE_SHOP:
                             p = new Shop(id);
                             break;
                         default:
@@ -183,19 +183,19 @@ public class ParsingUtilities {
             int id = Integer.parseInt((toBuild.getString("LUOGO_ID")));
             Place p = null;
             switch (type) {
-                case Constraints.TYPE_TOSEE:
+                case Constant.TYPE_TOSEE:
                     p = new ToSee(id);
                     break;
-                case Constraints.TYPE_EAT:
+                case Constant.TYPE_EAT:
                     p = new Eat(id);
                     break;
-                case Constraints.TYPE_SLEEP:
+                case Constant.TYPE_SLEEP:
                     p = new Sleep(id);
                     break;
-                case Constraints.TYPE_SERVICE:
+                case Constant.TYPE_SERVICE:
                     p = new Service(id);
                     break;
-                case Constraints.TYPE_SHOP:
+                case Constant.TYPE_SHOP:
                     p = new Shop(id);
                     break;
                 default:

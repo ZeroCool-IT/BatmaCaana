@@ -20,7 +20,7 @@ public class SharedPreferencesProvider {
      * @param preferenceValue is the value to save
      */
     public static void saveToPreferences(Context context, String preferenceName, String preferenceValue) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(Constraints.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(preferenceName, preferenceValue);
         editor.apply();
@@ -35,7 +35,7 @@ public class SharedPreferencesProvider {
      * @return the String in the field preferenceName
      */
     public static String readFromPreferences(Context context, String preferenceName, String preferenceValue) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(Constraints.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(preferenceName, preferenceValue);
     }
 
@@ -46,6 +46,6 @@ public class SharedPreferencesProvider {
      * @return the SharedPreferences object
      */
     public static SharedPreferences getSharedPreferences(Context context) {
-        return context.getSharedPreferences(Constraints.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        return context.getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
     }
 }

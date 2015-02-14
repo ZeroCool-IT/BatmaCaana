@@ -16,7 +16,7 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
 
 /**
@@ -70,7 +70,7 @@ public class News implements Cardable {
      * @param title the title of the news to set
      */
     public void setTitle(String title) {
-        if (!title.equals(Constraints.EMPTY_VALUE)) {
+        if (!title.equals(Constant.EMPTY_VALUE)) {
             this.title = title;
         } else
             this.title = null;
@@ -87,7 +87,7 @@ public class News implements Cardable {
      * @param body the body to set
      */
     public void setBody(String body) {
-        if (!body.equals(Constraints.EMPTY_VALUE)) {
+        if (!body.equals(Constant.EMPTY_VALUE)) {
             this.body = body;
         } else
             this.body = null;
@@ -101,6 +101,13 @@ public class News implements Cardable {
     }
 
     /**
+     * @param date the date of the news to set
+     */
+    public void setDate(GregorianCalendar date) {
+        this.date = date;
+    }
+
+    /**
      * Set the news date parsing infos from String
      *
      * @param date it's the start date to set (YYYY-mm-DD format)
@@ -109,13 +116,6 @@ public class News implements Cardable {
         GregorianCalendar g = ParsingUtilities.parseDate(date);
         setDate(g);
 
-    }
-
-    /**
-     * @param date the date of the news to set
-     */
-    public void setDate(GregorianCalendar date) {
-        this.date = date;
     }
 
     public String getDateToString() {
@@ -146,7 +146,7 @@ public class News implements Cardable {
      * @param csv is the string in CSV format
      */
     public void setTagsFromCSV(String csv) {
-        if (csv != null && !csv.equals(Constraints.EMPTY_VALUE)) {
+        if (csv != null && !csv.equals(Constant.EMPTY_VALUE)) {
             StringTokenizer tokenizer = new StringTokenizer(csv, ",");
             while (tokenizer.hasMoreTokens()) {
                 String toAdd = tokenizer.nextToken();
@@ -170,7 +170,7 @@ public class News implements Cardable {
      * @param image the image of the news to set
      */
     public void setImage(String image) {
-        if (!image.equals(Constraints.EMPTY_VALUE)) {
+        if (!image.equals(Constant.EMPTY_VALUE)) {
             this.image = image;
         } else
             this.image = null;
@@ -187,7 +187,7 @@ public class News implements Cardable {
      * @param url the url of the news to set
      */
     public void setUrl(String url) {
-        if (!url.equals(Constraints.EMPTY_VALUE)) {
+        if (!url.equals(Constant.EMPTY_VALUE)) {
             String toSet = url.replace("\\/", "/");
             this.url = toSet;
         } else
@@ -209,7 +209,7 @@ public class News implements Cardable {
     }
 
     public String getItemURI() {
-        return Constraints.PLACE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
+        return Constant.PLACE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
     }
 
     /**

@@ -29,7 +29,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import java.util.List;
 
 import it.zerocool.batmacaana.dialog.LocationWarningDialog;
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.SharedPreferencesProvider;
 
 
@@ -91,7 +91,7 @@ public class HomeActivity extends ActionBarActivity {
             drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
             SharedPreferences sp = SharedPreferencesProvider.getSharedPreferences(this);
             SharedPreferences.Editor editor = sp.edit();
-            editor.putInt(Constraints.KEY_USER_DEFAULT_START_VIEW, 0);
+            editor.putInt(Constant.KEY_USER_DEFAULT_START_VIEW, 0);
             editor.apply();
         } else {
             Log.i("PLAY SERVICE ERROR", "No valid Google Play Services APK found.");
@@ -107,7 +107,7 @@ public class HomeActivity extends ActionBarActivity {
      */
     private String getRegistrationId(Context context) {
         final SharedPreferences prefs = getGCMPreferences(context);
-        String registrationId = prefs.getString(Constraints.PROPERTY_REG_ID, "");
+        String registrationId = prefs.getString(Constant.PROPERTY_REG_ID, "");
         if (registrationId.isEmpty()) {
             Log.i("GCM ERROR", "Registration not found.");
             return "";
@@ -152,7 +152,7 @@ public class HomeActivity extends ActionBarActivity {
         int appVersion = getAppVersion(context);
         Log.i("GCM", "Saving regId on app version " + appVersion);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(Constraints.PROPERTY_REG_ID, regId);
+        editor.putString(Constant.PROPERTY_REG_ID, regId);
         editor.putInt(PROPERTY_APP_VERSION, appVersion);
         editor.apply();
     }
@@ -217,7 +217,7 @@ public class HomeActivity extends ActionBarActivity {
     @Override
     public void onBackPressed() {
         long currentTime = System.currentTimeMillis();
-        if (Math.abs(currentTime - mLastBackPress) > Constraints.M_BACK_PRESS_THRESHOLD) {
+        if (Math.abs(currentTime - mLastBackPress) > Constant.M_BACK_PRESS_THRESHOLD) {
             pressBackToast.show();
             mLastBackPress = currentTime;
         } else {
@@ -271,13 +271,13 @@ public class HomeActivity extends ActionBarActivity {
      * @param location is the location to save
      */
     private void saveLocationToPreferences(Location location) {
-        SharedPreferences sharedPreferences = getSharedPreferences(Constraints.PREF_FILE_NAME,
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.PREF_FILE_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
-        editor.putString(Constraints.LATITUDE, Double.valueOf(latitude).toString());
-        editor.putString(Constraints.LONGITUDE, Double.valueOf(longitude).toString());
+        editor.putString(Constant.LATITUDE, Double.valueOf(latitude).toString());
+        editor.putString(Constant.LONGITUDE, Double.valueOf(longitude).toString());
         editor.apply();
     }
 
@@ -318,8 +318,8 @@ public class HomeActivity extends ActionBarActivity {
         };
         if (provider != null && locationManager.getAllProviders().contains(provider)) {
             Log.i("ZCLOG", "Using " + provider + " provider");
-            locationManager.requestLocationUpdates(provider, Constraints.LOCATION_UPDATE_TIME,
-                    Constraints.LOCATION_MIN_DISTANCE_UPDATE, locationListener);
+            locationManager.requestLocationUpdates(provider, Constant.LOCATION_UPDATE_TIME,
+                    Constant.LOCATION_MIN_DISTANCE_UPDATE, locationListener);
         } else
             Log.e("ZCLOG", "The provider " + provider + " is not available!");
     }

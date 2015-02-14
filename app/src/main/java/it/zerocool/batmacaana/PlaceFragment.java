@@ -41,7 +41,7 @@ import it.zerocool.batmacaana.database.FavoriteDBHelper;
 import it.zerocool.batmacaana.database.FavoriteDBMngr;
 import it.zerocool.batmacaana.dialog.WarningDialog;
 import it.zerocool.batmacaana.model.Place;
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
 
 import static android.os.Build.VERSION;
@@ -150,7 +150,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
         ivPlace.setOnClickListener(this);
 
         //Args read
-        Place p = ParsingUtilities.parseSinglePlace(getArguments().getString(Constraints.JSON_ARG));
+        Place p = ParsingUtilities.parseSinglePlace(getArguments().getString(Constant.JSON_ARG));
         targetPlace = p;
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(p.getName());
         if (!p.getTags().isEmpty()) {
@@ -166,7 +166,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
         //Load imagery and change colors
         ivPlace = (ImageView) layout.findViewById(R.id.imageView);
 
-        loadBitmap(Constraints.URI_IMAGE_BIG + p.getImage());
+        loadBitmap(Constant.URI_IMAGE_BIG + p.getImage());
 
         //Fill fields
         fillFields(p);
@@ -260,7 +260,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
 
     public void setBitmap(Bitmap bitmap) {
         Picasso.with(getActivity()).
-                load(Constraints.URI_IMAGE_BIG + targetPlace.getImage()).
+                load(Constant.URI_IMAGE_BIG + targetPlace.getImage()).
                 placeholder(R.drawable.im_placeholder).
                 error(R.drawable.im_noimage).
                 into(ivPlace);
@@ -444,8 +444,8 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
         } else if (v.getId() == R.id.imageView || v.getId() == R.id.fullscreenButton) {
             if (targetPlace.getImage() != null) {
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
-                intent.putExtra(Constraints.IMAGE, targetPlace.getImage());
-                intent.putExtra(Constraints.LANDSCAPE_ORIENTATION, true);
+                intent.putExtra(Constant.IMAGE, targetPlace.getImage());
+                intent.putExtra(Constant.LANDSCAPE_ORIENTATION, true);
                 if (palette != null) {
                     String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(R.color.primaryColor)));
                     intent.putExtra("COLOR", hexColor);

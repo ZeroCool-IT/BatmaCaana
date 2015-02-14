@@ -29,7 +29,7 @@ import java.util.List;
 import it.zerocool.batmacaana.dialog.WarningDialog;
 import it.zerocool.batmacaana.model.Cardable;
 import it.zerocool.batmacaana.model.Place;
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
 import it.zerocool.batmacaana.utilities.PlaceComparator;
 import it.zerocool.batmacaana.utilities.RequestUtilities;
@@ -70,7 +70,7 @@ public class ContentFragment extends Fragment {
         progressBar = (ProgressBarCircularIndeterminate) layout.findViewById(R.id.progressBar);
         rvContent = (RecyclerView) layout.findViewById(R.id.content_recycler_view);
         rvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
-        int id = getArguments().getInt(Constraints.FRAG_SECTION_ID);
+        int id = getArguments().getInt(Constant.FRAG_SECTION_ID);
         searchResults = getData(getActivity(), id);
 
         return layout;
@@ -80,9 +80,9 @@ public class ContentFragment extends Fragment {
 
 
     private void readCurrentLocationFromPreferences() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constraints.PREF_FILE_NAME, Context.MODE_PRIVATE);
-        String latitude = sharedPreferences.getString(Constraints.LATITUDE, "41.604742");
-        String longitude = sharedPreferences.getString(Constraints.LONGITUDE, "13.081480");
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        String latitude = sharedPreferences.getString(Constant.LATITUDE, "41.604742");
+        String longitude = sharedPreferences.getString(Constant.LONGITUDE, "13.081480");
         Location current = new Location("");
         current.setLatitude(Location.convert(latitude));
         current.setLongitude(Location.convert(longitude));
@@ -93,35 +93,35 @@ public class ContentFragment extends Fragment {
 
     private List<Cardable> getData(Context context, int typeID) {
         String uri = null;
-        int type = Constraints.PLACE;
+        int type = Constant.PLACE;
         switch (typeID) {
-            case Constraints.TOSEE:
-                uri = Constraints.URI_TOSEE;
+            case Constant.TOSEE:
+                uri = Constant.URI_TOSEE;
                 break;
-            case Constraints.EVENT:
-                uri = Constraints.URI_EVENT;
-                type = Constraints.EVENT;
+            case Constant.EVENT:
+                uri = Constant.URI_EVENT;
+                type = Constant.EVENT;
                 break;
-            case Constraints.EAT:
-                uri = Constraints.URI_EAT;
+            case Constant.EAT:
+                uri = Constant.URI_EAT;
                 break;
-            case Constraints.SLEEP:
-                uri = Constraints.URI_SLEEP;
+            case Constant.SLEEP:
+                uri = Constant.URI_SLEEP;
                 break;
-            case Constraints.SERVICES:
-                uri = Constraints.URI_SERVICES;
+            case Constant.SERVICES:
+                uri = Constant.URI_SERVICES;
                 break;
-            case Constraints.SHOP:
-                uri = Constraints.URI_SHOP;
+            case Constant.SHOP:
+                uri = Constant.URI_SHOP;
                 break;
-            case Constraints.NEWS:
-                uri = Constraints.URI_NEWS;
-                type = Constraints.NEWS;
+            case Constant.NEWS:
+                uri = Constant.URI_NEWS;
+                type = Constant.NEWS;
                 break;
             default:
                 break;
         }
-        uri += Integer.valueOf(Constraints.USER_ID).toString();
+        uri += Integer.valueOf(Constant.USER_ID).toString();
 
         if (RequestUtilities.isOnline(getActivity())) {
             task = new RetrieveDataAsyncTask();
@@ -139,8 +139,8 @@ public class ContentFragment extends Fragment {
             dialog.setArguments(arguments);
             dialog.show(getFragmentManager(), "No Connection warning");
             Bundle fallbackArgs = new Bundle();
-            fallbackArgs.putInt(Constraints.FALLBACK_TYPE_ARG, Constraints.CONNECTION_ERROR);
-            fallbackArgs.putInt(Constraints.FALLBACK_REFRESH_ARG, getArguments().getInt(Constraints.FRAG_SECTION_ID));
+            fallbackArgs.putInt(Constant.FALLBACK_TYPE_ARG, Constant.CONNECTION_ERROR);
+            fallbackArgs.putInt(Constant.FALLBACK_REFRESH_ARG, getArguments().getInt(Constant.FRAG_SECTION_ID));
             ContentFallbackFragment f = new ContentFallbackFragment();
             f.setArguments(fallbackArgs);
             FragmentManager fm = getFragmentManager();
@@ -237,17 +237,17 @@ public class ContentFragment extends Fragment {
                 if (isCancelled())
                     return null;
                 switch (type) {
-                    case Constraints.PLACE:
+                    case Constant.PLACE:
                         Log.i("ZCLOG", "Current position: " + currentLocation.toString());
                         res = ParsingUtilities.parsePlaceFromJSON(json, currentLocation);
                         ArrayList<Place> temp = (ArrayList) res;
                         Collections.sort(temp, new PlaceComparator());
                         res = (List) temp;
                         break;
-                    case Constraints.NEWS:
+                    case Constant.NEWS:
                         res = ParsingUtilities.parseNewsFromJSON(json);
                         break;
-                    case Constraints.EVENT:
+                    case Constant.EVENT:
                         res = ParsingUtilities.parseEventFromJSON(json);
                 }
                 if (isCancelled())
@@ -277,12 +277,12 @@ public class ContentFragment extends Fragment {
             progressBar.setVisibility(View.INVISIBLE);
             rvContent.setVisibility(View.VISIBLE);
             Bundle args = new Bundle();
-            args.putInt(Constraints.FALLBACK_REFRESH_ARG, getArguments().getInt(Constraints.FRAG_SECTION_ID));
+            args.putInt(Constant.FALLBACK_REFRESH_ARG, getArguments().getInt(Constant.FRAG_SECTION_ID));
             ContentFallbackFragment f = new ContentFallbackFragment();
             FragmentManager fm = getFragmentManager();
 
             if (cardables != null && cardables.isEmpty()) {
-                args.putInt(Constraints.FALLBACK_TYPE_ARG, Constraints.NO_RESULTS);
+                args.putInt(Constant.FALLBACK_TYPE_ARG, Constant.NO_RESULTS);
                 f.setArguments(args);
                 fm.beginTransaction()
                         .replace(R.id.content_frame, f)
@@ -298,7 +298,7 @@ public class ContentFragment extends Fragment {
                 arguments.putString(WarningDialog.MESSAGE, message);
                 dialog.setArguments(arguments);
                 dialog.show(getFragmentManager(), "Error retrieving data");
-                args.putInt(Constraints.FALLBACK_TYPE_ARG, Constraints.CONNECTION_ERROR);
+                args.putInt(Constant.FALLBACK_TYPE_ARG, Constant.CONNECTION_ERROR);
                 f.setArguments(args);
                 fm.beginTransaction()
                         .replace(R.id.content_frame, f)

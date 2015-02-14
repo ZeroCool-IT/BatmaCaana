@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 
 /**
  * Created by Marco on 27/01/2015.
@@ -60,7 +60,7 @@ public class SearchResult {
      * @param header is the header to set
      */
     public void setheader(String header) {
-        if (!header.equals(Constraints.EMPTY_VALUE))
+        if (!header.equals(Constant.EMPTY_VALUE))
             this.header = header;
         else
             this.header = null;
@@ -104,7 +104,7 @@ public class SearchResult {
      * @param csv is the string in CSV format
      */
     public void setTagsFromCSV(String csv) {
-        if (csv != null && !csv.equals(Constraints.EMPTY_VALUE)) {
+        if (csv != null && !csv.equals(Constant.EMPTY_VALUE)) {
             StringTokenizer tokenizer = new StringTokenizer(csv, ",");
             while (tokenizer.hasMoreTokens()) {
                 String toAdd = tokenizer.nextToken();
@@ -130,7 +130,7 @@ public class SearchResult {
      * @param description is the descriptio to set
      */
     public void setDescription(String description) {
-        if (!description.equals(Constraints.EMPTY_VALUE)) {
+        if (!description.equals(Constant.EMPTY_VALUE)) {
             this.description = description;
         } else {
             this.description = null;

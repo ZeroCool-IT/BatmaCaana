@@ -9,12 +9,14 @@
  */
 package it.zerocool.batmacaana.utilities;
 
+import it.zerocool.batmacaana.R;
+
 /**
  * Class containing constraint values
  *
  * @author Marco Battisti
  */
-public class Constraints {
+public class Constant {
 
 
     //USER ID
@@ -118,6 +120,13 @@ public class Constraints {
     public static final int LOCATION_UPDATE_TIME = 120000;
     public static final int LOCATION_MIN_DISTANCE_UPDATE = 100;
 
+    //Gallery image
+    public static final Integer[] GALLERY_IMAGE = {R.drawable.im_gallery_01, R.drawable.im_gallery_02,
+            R.drawable.im_gallery_03, R.drawable.im_gallery_04, R.drawable.im_gallery_05,
+            R.drawable.im_gallery_06, R.drawable.im_gallery_07, R.drawable.im_gallery_08,
+            R.drawable.im_gallery_09, R.drawable.im_gallery_10, R.drawable.im_gallery_11,
+            R.drawable.im_gallery_12, R.drawable.im_gallery_13, R.drawable.im_gallery_14};
+
     //Others
     public static final int VIEW_STATE_SELECTED = 1;
     public static final int NAV_DRAWER_SUBHEADER = 8;
@@ -126,7 +135,7 @@ public class Constraints {
     /**
      * Private constructor
      */
-    private Constraints() {
+    private Constant() {
     }
 
 }

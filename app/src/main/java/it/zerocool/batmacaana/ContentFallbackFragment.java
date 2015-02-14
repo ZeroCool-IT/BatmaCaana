@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 
 
 /**
@@ -42,9 +42,9 @@ public class ContentFallbackFragment extends Fragment {
                              Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_content_fallback, container, false);
 
-        int type = getArguments().getInt(Constraints.FALLBACK_TYPE_ARG);
+        int type = getArguments().getInt(Constant.FALLBACK_TYPE_ARG);
 
-        if (type == Constraints.CONNECTION_ERROR) {
+        if (type == Constant.CONNECTION_ERROR) {
             layout = inflater.inflate(R.layout.fragment_content_fallback_error, container, false);
             btRefresh = (ImageButton) layout.findViewById(R.id.bt_refresh);
             btRefresh.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +52,7 @@ public class ContentFallbackFragment extends Fragment {
                 public void onClick(View v) {
                     ContentFragment f = new ContentFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putInt(Constraints.FRAG_SECTION_ID, getArguments().getInt(Constraints.FALLBACK_REFRESH_ARG)
+                    bundle.putInt(Constant.FRAG_SECTION_ID, getArguments().getInt(Constant.FALLBACK_REFRESH_ARG)
                     );
                     f.setArguments(bundle);
                     FragmentManager fm = getFragmentManager();

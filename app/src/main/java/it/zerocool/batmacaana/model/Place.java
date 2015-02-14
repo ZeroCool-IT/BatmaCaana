@@ -17,7 +17,7 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 
 /**
  * Class representing city's places
@@ -92,7 +92,7 @@ public class Place implements Cardable {
      * @param image the image of the place to set
      */
     public void setImage(String image) {
-        if (!image.equals(Constraints.EMPTY_VALUE)) {
+        if (!image.equals(Constant.EMPTY_VALUE)) {
             this.image = image;
         } else
             this.image = null;
@@ -135,7 +135,7 @@ public class Place implements Cardable {
      * @param csv is the string in CSV format
      */
     public void setTagsFromCSV(String csv) {
-        if (csv != null && !csv.equals(Constraints.EMPTY_VALUE)) {
+        if (csv != null && !csv.equals(Constant.EMPTY_VALUE)) {
             StringTokenizer tokenizer = new StringTokenizer(csv, ",");
             while (tokenizer.hasMoreTokens()) {
                 String toAdd = tokenizer.nextToken();
@@ -159,7 +159,7 @@ public class Place implements Cardable {
      * @param description the description of the place to set
      */
     public void setDescription(String description) {
-        if (!description.equals(Constraints.EMPTY_VALUE)) {
+        if (!description.equals(Constant.EMPTY_VALUE)) {
             this.description = description;
         } else
             this.description = null;
@@ -238,7 +238,7 @@ public class Place implements Cardable {
     }
 
     public String getItemURI() {
-        return Constraints.PLACE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
+        return Constant.PLACE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
     }
 
     /**

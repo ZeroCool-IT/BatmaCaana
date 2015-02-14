@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright ZeroApp(c) 2015. All right reserved.
   -->
 
@@ -33,7 +32,7 @@
         android:textColor="@color/text87"
         android:textSize="14sp" />
 
-    <Switch
+    <android.support.v7.widget.SwitchCompat
         android:id="@+id/offline_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -27,7 +27,7 @@ import java.util.List;
 
 import it.zerocool.batmacaana.dialog.WarningDialog;
 import it.zerocool.batmacaana.model.SearchResult;
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
 import it.zerocool.batmacaana.utilities.RequestUtilities;
 
@@ -101,25 +101,25 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         holder.tags.setText(TextUtils.join(", ", current.getTags()));
         int iconResId = R.drawable.ic_map_grey600_48dp;
         switch (current.getType()) {
-            case Constraints.TYPE_TOSEE:
+            case Constant.TYPE_TOSEE:
                 iconResId = R.drawable.ic_beenhere_grey600_48dp;
                 break;
-            case Constraints.TYPE_EAT:
+            case Constant.TYPE_EAT:
                 iconResId = R.drawable.ic_local_restaurant_grey600_48dp;
                 break;
-            case Constraints.TYPE_SLEEP:
+            case Constant.TYPE_SLEEP:
                 iconResId = R.drawable.ic_local_hotel_grey600_48dp;
                 break;
-            case Constraints.TYPE_SERVICE:
+            case Constant.TYPE_SERVICE:
                 iconResId = R.drawable.ic_directions_train_grey600_48dp;
                 break;
-            case Constraints.TYPE_SHOP:
+            case Constant.TYPE_SHOP:
                 iconResId = R.drawable.ic_local_mall_grey600_48dp;
                 break;
-            case Constraints.TYPE_EVENT:
+            case Constant.TYPE_EVENT:
                 iconResId = R.drawable.ic_event_note_grey600_48dp;
                 break;
-            case Constraints.TYPE_NEWS:
+            case Constant.TYPE_NEWS:
                 iconResId = R.drawable.ic_newspaper_grey600_48dp;
         }
         Picasso.with(context)
@@ -154,11 +154,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
                     SearchResult current = searchItems.get(getPosition());
                     int id = current.getId();
                     int type = current.getType();
-                    String uri = Constraints.OBJECT_SEARCH1 +
-                            Constraints.USER_ID +
-                            Constraints.OBJECT_SEARCH2 +
+                    String uri = Constant.OBJECT_SEARCH1 +
+                            Constant.USER_ID +
+                            Constant.OBJECT_SEARCH2 +
                             Integer.valueOf(id).toString() +
-                            Constraints.OBJECT_SEARCH3 +
+                            Constant.OBJECT_SEARCH3 +
                             Integer.valueOf(type).toString();
                     RequestObjectTask task = new RequestObjectTask();
                     task.execute(uri, Integer.valueOf(type).toString());
@@ -219,10 +219,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
          */
         @Override
         protected void onPostExecute(String s) {
-            if (s != null && !s.equals(Constraints.EMPTY_VALUE)) {
+            if (s != null && !s.equals(Constant.EMPTY_VALUE)) {
                 Intent intent = new Intent(context, DetailsActivity.class);
-                intent.putExtra(Constraints.JSON_ARG, s);
-                intent.putExtra(Constraints.TYPE_ARG, type);
+                intent.putExtra(Constant.JSON_ARG, s);
+                intent.putExtra(Constant.TYPE_ARG, type);
                 context.startActivity(intent);
             } else {
                 String title, message;

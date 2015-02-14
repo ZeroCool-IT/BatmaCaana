@@ -21,7 +21,7 @@ import java.util.StringTokenizer;
 
 import it.zerocool.batmacaana.R;
 import it.zerocool.batmacaana.utilities.ApplicationContextProvider;
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
 
 /**
@@ -55,6 +55,15 @@ public class TimeCard {
     }
 
     /**
+     * Set the place AM opening
+     *
+     * @param amOpening the AM opening hour to set
+     */
+    public void setAmOpening(GregorianCalendar amOpening) {
+        this.amOpening = amOpening;
+    }
+
+    /**
      * Set the place AM opening from String
      *
      * @param amOpening the AM opening hour to set
@@ -65,19 +74,19 @@ public class TimeCard {
     }
 
     /**
-     * Set the place AM opening
-     *
-     * @param amOpening the AM opening hour to set
-     */
-    public void setAmOpening(GregorianCalendar amOpening) {
-        this.amOpening = amOpening;
-    }
-
-    /**
      * @return the AM closing hour
      */
     public GregorianCalendar getAmClosing() {
         return amClosing;
+    }
+
+    /**
+     * Set the place AM closing
+     *
+     * @param amClosing AM closing hour to set
+     */
+    public void setAmClosing(GregorianCalendar amClosing) {
+        this.amClosing = amClosing;
     }
 
     /**
@@ -91,19 +100,19 @@ public class TimeCard {
     }
 
     /**
-     * Set the place AM closing
-     *
-     * @param amClosing AM closing hour to set
-     */
-    public void setAmClosing(GregorianCalendar amClosing) {
-        this.amClosing = amClosing;
-    }
-
-    /**
      * @return the PM opening hour
      */
     public GregorianCalendar getPmOpening() {
         return pmOpening;
+    }
+
+    /**
+     * Set the place PM opening
+     *
+     * @param pmOpening the PM opening hour to set
+     */
+    public void setPmOpening(GregorianCalendar pmOpening) {
+        this.pmOpening = pmOpening;
     }
 
     /**
@@ -117,19 +126,19 @@ public class TimeCard {
     }
 
     /**
-     * Set the place PM opening
-     *
-     * @param pmOpening the PM opening hour to set
-     */
-    public void setPmOpening(GregorianCalendar pmOpening) {
-        this.pmOpening = pmOpening;
-    }
-
-    /**
      * @return the PM closing hour
      */
     public GregorianCalendar getPmClosing() {
         return pmClosing;
+    }
+
+    /**
+     * Set the place PM closing
+     *
+     * @param pmClosing the PM closing hour to set
+     */
+    public void setPmClosing(GregorianCalendar pmClosing) {
+        this.pmClosing = pmClosing;
     }
 
     /**
@@ -140,15 +149,6 @@ public class TimeCard {
     public void setPmClosing(String pmClosing) {
         GregorianCalendar g = ParsingUtilities.parseHour(pmClosing);
         setPmClosing(g);
-    }
-
-    /**
-     * Set the place PM closing
-     *
-     * @param pmClosing the PM closing hour to set
-     */
-    public void setPmClosing(GregorianCalendar pmClosing) {
-        this.pmClosing = pmClosing;
     }
 
     /**
@@ -172,7 +172,7 @@ public class TimeCard {
      * @param csv is the string in CSV format
      */
     public void setClosingDaysFromCSV(String csv) {
-        if (csv != null && !csv.equals(Constraints.EMPTY_VALUE)) {
+        if (csv != null && !csv.equals(Constant.EMPTY_VALUE)) {
             StringTokenizer tokenizer = new StringTokenizer(csv, ",");
             while (tokenizer.hasMoreTokens()) {
                 String toAdd = tokenizer.nextToken();
@@ -180,25 +180,25 @@ public class TimeCard {
                 GregorianCalendar g = new GregorianCalendar();
                 int day = Integer.parseInt(toAdd);
                 switch (day) {
-                    case Constraints.MONDAY:
+                    case Constant.MONDAY:
                         g.set(GregorianCalendar.DAY_OF_WEEK, GregorianCalendar.MONDAY);
                         break;
-                    case Constraints.TUESDAY:
+                    case Constant.TUESDAY:
                         g.set(GregorianCalendar.DAY_OF_WEEK, GregorianCalendar.TUESDAY);
                         break;
-                    case Constraints.WEDNESDAY:
+                    case Constant.WEDNESDAY:
                         g.set(GregorianCalendar.DAY_OF_WEEK, GregorianCalendar.WEDNESDAY);
                         break;
-                    case Constraints.THURSDAY:
+                    case Constant.THURSDAY:
                         g.set(GregorianCalendar.DAY_OF_WEEK, GregorianCalendar.THURSDAY);
                         break;
-                    case Constraints.FRIDAY:
+                    case Constant.FRIDAY:
                         g.set(GregorianCalendar.DAY_OF_WEEK, GregorianCalendar.FRIDAY);
                         break;
-                    case Constraints.SATURDAY:
+                    case Constant.SATURDAY:
                         g.set(GregorianCalendar.DAY_OF_WEEK, GregorianCalendar.SATURDAY);
                         break;
-                    case Constraints.SUNDAY:
+                    case Constant.SUNDAY:
                         g.set(GregorianCalendar.DAY_OF_WEEK, GregorianCalendar.SUNDAY);
                         break;
                     default:
@@ -297,7 +297,7 @@ public class TimeCard {
             if (getNotes() != null) {
                 res += getNotes();
             }
-            if (res != Constraints.EMPTY_VALUE) {
+            if (res != Constant.EMPTY_VALUE) {
                 return res;
             }
         }

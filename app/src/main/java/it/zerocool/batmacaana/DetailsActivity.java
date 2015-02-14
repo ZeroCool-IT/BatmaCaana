@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import it.zerocool.batmacaana.dialog.WarningDialog;
-import it.zerocool.batmacaana.utilities.Constraints;
+import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
 import it.zerocool.batmacaana.utilities.RequestUtilities;
 
@@ -43,30 +43,30 @@ public class DetailsActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         final String action = intent.getAction();
-        boolean fromNotification = intent.getBooleanExtra(Constraints.FLAG_FROM_NOTIFICATION, false);
+        boolean fromNotification = intent.getBooleanExtra(Constant.FLAG_FROM_NOTIFICATION, false);
 
         if (Intent.ACTION_VIEW.equals(action)) {
             final List<String> segments = intent.getData().getPathSegments();
             getData(segments.get(1));
         } else if (fromNotification) {
             Log.i("ZCLOG", "From notification = " + Boolean.valueOf(fromNotification).toString());
-            String id = intent.getStringExtra(Constraints.ID_ARG);
-            String type = intent.getStringExtra(Constraints.TYPE_ARG);
+            String id = intent.getStringExtra(Constant.ID_ARG);
+            String type = intent.getStringExtra(Constant.TYPE_ARG);
             getData(id + "&" + type);
             int typeInt = Integer.parseInt(type);
             switch (typeInt) {
-                case Constraints.TYPE_NEWS:
-                    saveToPreferences(Constraints.KEY_NEWS_NOTIFICATION_NUMBER, Integer.valueOf(0).toString());
+                case Constant.TYPE_NEWS:
+                    saveToPreferences(Constant.KEY_NEWS_NOTIFICATION_NUMBER, Integer.valueOf(0).toString());
                     break;
-                case Constraints.TYPE_EVENT:
-                    saveToPreferences(Constraints.KEY_EVENT_NOTIFICATION_NUMBER, Integer.valueOf(0).toString());
+                case Constant.TYPE_EVENT:
+                    saveToPreferences(Constant.KEY_EVENT_NOTIFICATION_NUMBER, Integer.valueOf(0).toString());
                     break;
             }
 
         } else {
-            Fragment frag = chooseFragment(intent.getIntExtra(Constraints.TYPE_ARG, 0));
+            Fragment frag = chooseFragment(intent.getIntExtra(Constant.TYPE_ARG, 0));
             Bundle args = new Bundle();
-            args.putString(Constraints.JSON_ARG, intent.getStringExtra(Constraints.JSON_ARG));
+            args.putString(Constant.JSON_ARG, intent.getStringExtra(Constant.JSON_ARG));
             frag.setArguments(args);
             if (savedInstanceState == null) {
                 getSupportFragmentManager().beginTransaction()
@@ -77,7 +77,7 @@ public class DetailsActivity extends ActionBarActivity {
     }
 
     private void saveToPreferences(String key, String number) {
-        SharedPreferences sharedPreferences = getSharedPreferences(Constraints.NOTIFICATION_PREFS, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.NOTIFICATION_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, number);
         editor.apply();
@@ -86,28 +86,28 @@ public class DetailsActivity extends ActionBarActivity {
     private Fragment chooseFragment(int type) {
         Fragment f = null;
         switch (type) {
-            case Constraints.TYPE_PLACE:
+            case Constant.TYPE_PLACE:
                 f = new PlaceFragment();
                 break;
-            case Constraints.TYPE_TOSEE:
+            case Constant.TYPE_TOSEE:
                 f = new PlaceFragment();
                 break;
-            case Constraints.TYPE_SLEEP:
+            case Constant.TYPE_SLEEP:
                 f = new PlaceFragment();
                 break;
-            case Constraints.TYPE_EAT:
+            case Constant.TYPE_EAT:
                 f = new PlaceFragment();
                 break;
-            case Constraints.TYPE_SERVICE:
+            case Constant.TYPE_SERVICE:
                 f = new PlaceFragment();
                 break;
-            case Constraints.TYPE_SHOP:
+            case Constant.TYPE_SHOP:
                 f = new PlaceFragment();
                 break;
-            case Constraints.TYPE_NEWS:
+            case Constant.TYPE_NEWS:
                 f = new NewsFragment();
                 break;
-            case Constraints.TYPE_EVENT:
+            case Constant.TYPE_EVENT:
                 f = new EventFragment();
         }
         return f;
@@ -122,11 +122,11 @@ public class DetailsActivity extends ActionBarActivity {
             args[cont] = token.nextToken();
             cont++;
         }
-        String query = Constraints.OBJECT_SEARCH1 +
-                Constraints.USER_ID +
-                Constraints.OBJECT_SEARCH2 +
+        String query = Constant.OBJECT_SEARCH1 +
+                Constant.USER_ID +
+                Constant.OBJECT_SEARCH2 +
                 args[0] +
-                Constraints.OBJECT_SEARCH3 +
+                Constant.OBJECT_SEARCH3 +
                 args[1];
 
         if (RequestUtilities.isOnline(this)) {
@@ -228,11 +228,11 @@ public class DetailsActivity extends ActionBarActivity {
          */
         @Override
         protected void onPostExecute(String s) {
-            if (s != null && !s.equals(Constraints.EMPTY_VALUE)) {
+            if (s != null && !s.equals(Constant.EMPTY_VALUE)) {
 
                 Fragment frag = chooseFragment(type);
                 Bundle args = new Bundle();
-                args.putString(Constraints.JSON_ARG, s);
+                args.putString(Constant.JSON_ARG, s);
                 frag.setArguments(args);
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.container, frag)
