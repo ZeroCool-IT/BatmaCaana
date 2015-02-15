@@ -121,6 +121,12 @@ public class Constant {
     public static final int LOCATION_MIN_DISTANCE_UPDATE = 100;
 
     //Gallery image
+    public static final Integer[] GALLERY_IMAGE_THUMB = {R.drawable.im_gallery_thumb_01, R.drawable.im_gallery_thumb_02,
+            R.drawable.im_gallery_thumb_03, R.drawable.im_gallery_thumb_04, R.drawable.im_gallery_thumb_05,
+            R.drawable.im_gallery_thumb_06, R.drawable.im_gallery_thumb_07, R.drawable.im_gallery_thumb_08,
+            R.drawable.im_gallery_thumb_09, R.drawable.im_gallery_thumb_10, R.drawable.im_gallery_thumb_11,
+            R.drawable.im_gallery_thumb_12, R.drawable.im_gallery_thumb_13, R.drawable.im_gallery_thumb_14};
+
     public static final Integer[] GALLERY_IMAGE = {R.drawable.im_gallery_01, R.drawable.im_gallery_02,
             R.drawable.im_gallery_03, R.drawable.im_gallery_04, R.drawable.im_gallery_05,
             R.drawable.im_gallery_06, R.drawable.im_gallery_07, R.drawable.im_gallery_08,

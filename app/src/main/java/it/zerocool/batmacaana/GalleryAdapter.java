@@ -16,6 +16,8 @@ import com.squareup.picasso.Picasso;
 import java.util.Collections;
 import java.util.List;
 
+import it.zerocool.batmacaana.utilities.Constant;
+
 /**
  * Adapter for thumbnail gallery RecyclerView
  * Created by Marco Battisti on 14/02/2015.
@@ -26,15 +28,17 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
     private Context context;
     private List<Integer> imageItems = Collections.emptyList();
     private LayoutInflater inflater;
+    private int previousMain;
 
     public GalleryAdapter(Context context, ImageView mainPicture, List<Integer> data) {
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.mainPicture = mainPicture;
         this.imageItems = data;
-        Picasso.with(context)
+        this.previousMain = Constant.GALLERY_IMAGE[0];
+        /*Picasso.with(context)
                 .load(imageItems.get(0))
-                .into(mainPicture);
+                .into(mainPicture);*/
 
     }
 
@@ -106,6 +110,16 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
             super(itemView);
 
             thumbnail = (ImageView) itemView.findViewById(R.id.thumbnail);
+            thumbnail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Picasso.with(context)
+                            .load(Constant.GALLERY_IMAGE[getPosition()])
+                            .placeholder(previousMain)
+                            .into(mainPicture);
+                    previousMain = Constant.GALLERY_IMAGE[getPosition()];
+                }
+            });
 
         }
     }

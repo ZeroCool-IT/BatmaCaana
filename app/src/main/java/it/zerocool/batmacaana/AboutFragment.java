@@ -59,7 +59,7 @@ public class AboutFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvGallery.setLayoutManager(layoutManager);
         ArrayList<Integer> imageItems = new ArrayList<>();
-        imageItems.addAll(Arrays.asList(Constant.GALLERY_IMAGE));
+        imageItems.addAll(Arrays.asList(Constant.GALLERY_IMAGE_THUMB));
         GalleryAdapter adapter = new GalleryAdapter(getActivity(), mainPicture, imageItems);
         rvGallery.setAdapter(adapter);
 
