@@ -29,6 +29,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
     private List<Integer> imageItems = Collections.emptyList();
     private LayoutInflater inflater;
     private int previousMain;
+    private int selected;
 
     public GalleryAdapter(Context context, ImageView mainPicture, List<Integer> data) {
         inflater = LayoutInflater.from(context);
@@ -36,6 +37,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
         this.mainPicture = mainPicture;
         this.imageItems = data;
         this.previousMain = Constant.GALLERY_IMAGE[0];
+        selected = 0;
         /*Picasso.with(context)
                 .load(imageItems.get(0))
                 .into(mainPicture);*/
@@ -92,6 +94,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
 
     }
 
+    public int getSelected() {
+        return selected;
+    }
+
     /**
      * Returns the total number of items in the data set hold by the adapter.
      *
@@ -118,6 +124,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
                             .placeholder(previousMain)
                             .into(mainPicture);
                     previousMain = Constant.GALLERY_IMAGE[getPosition()];
+                    selected = getPosition();
                 }
             });
 

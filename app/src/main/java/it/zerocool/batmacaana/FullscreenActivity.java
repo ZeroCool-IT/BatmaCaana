@@ -92,33 +92,45 @@ public class FullscreenActivity extends Activity {
         setupActionBar();
 
         Intent intent = getIntent();
-        boolean lanscape = intent.getBooleanExtra(Constant.LANDSCAPE_ORIENTATION, false);
-        if (lanscape) {
+        boolean landscape = intent.getBooleanExtra(Constant.LANDSCAPE_ORIENTATION, false);
+        if (landscape) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
+        boolean fromGallery = intent.getBooleanExtra(Constant.FROM_GALLERY, false);
         fullScreenIv = (ImageView) findViewById(R.id.fullscreen_content);
-        String hexColor = intent.getStringExtra("COLOR");
-        int bg;
-        if (hexColor != null)
-            bg = Color.parseColor(hexColor);
-        else
-            bg = R.color.primaryColor;
         layout = (FrameLayout) findViewById(R.id.fullscreen_layout);
+
+        if (fromGallery) {
+            layout.setBackgroundColor(getResources().getColor(R.color.light_primary_color));
+            int image = Constant.GALLERY_IMAGE[intent.getIntExtra(Constant.IMAGE, 0)];
+            Picasso.with(this)
+                    .load(image)
+                    .error(R.drawable.im_noimage)
+                    .into(fullScreenIv);
+        } else {
+            String hexColor = intent.getStringExtra("COLOR");
+            int bg;
+            if (hexColor != null)
+                bg = Color.parseColor(hexColor);
+            else
+                bg = R.color.primaryColor;
+
 
 //        layout = (FrameLayout) findViewById(R.id.fullscreen_layout);
 //        ColorDrawable color = new ColorDrawable();
 //        color.setColor(intent.getIntExtra("COLOR", R.color.primaryColor));
-        layout.setBackgroundColor(bg);
-        Picasso.with(this)
-                .load(Constant.URI_IMAGE_BIG +
-                        intent.getStringExtra(Constant.IMAGE))
-                .error(R.drawable.im_noimage)
-                .into(fullScreenIv);
+            layout.setBackgroundColor(bg);
+            Picasso.with(this)
+                    .load(Constant.URI_IMAGE_BIG +
+                            intent.getStringExtra(Constant.IMAGE))
+                    .error(R.drawable.im_noimage)
+                    .into(fullScreenIv);
+        }
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
-        final View contentView = findViewById(R.id.fullscreen_content);
+        final View contentView = fullScreenIv;
 
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.

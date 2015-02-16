@@ -3,6 +3,13 @@
   -->
 
 <resources>
+    <!--City's specific strings-->
+    <string name="city_name">Carpineto Romano</string>
+    <string name="info_mail">info@carpinetoromano.it</string>
+    <string name="phone_number">0697180029</string>
+    <string name="city_website">http://www.carpinetoromano.it</string>
+
+
     <string name="about">
         Paese di chiara origine medioevale, anche se non mancano numerosi resti di ville ascrivibili ai primi secoli dell’impero romano, rinvenute tra valle Cisterna e valle Casale. Con l’avvento dei De Ceccano (1157) il paese subisce una trasformazione urbanistica che lo divide in due nuclei ben precisi e spesso in lotta tra loro per motivi padronali: il rione “Dammonte“ con una fortificazione in via Castello (oggi conglobata nel Palazzo Pecci) e il rione “Dabballe“ con l’attuale Torre civica dell’orologio.
 I due nuclei che conferiscono al paese un disegno urbano ben definito sono collegati tra loro attraverso vie strette e selciate, case povere e modeste accanto ad abitazioni eleganti, angoli e scorci suggestivi, portali in pietra calcarea con epigrafi in latino, in italiano, in dialetto, che raccontano, spiegano e maledicano, portandoci indietro nel tempo, al medioevo, al rinascimento, al barocco, fino all’età moderna.&#xA;
@@ -16,4 +23,6 @@ Durante l’invasione napoleonica ed anche fino all’anno 1825 la comunità di 
 Durante il lungo pontificato Carpineto si abbellì di splendide chiese, fontane pubbliche, ospedali, scuole che dettero un nuovo volto alla ridente cittadina. I musei e le opere leoniane splendono ancor oggi di nuova vita e nuova arte.&#xA;
 
     </string>
+
+    <string name="info">Provincia di Roma (distanze: da Roma km 70; da Latina km 47)\nAbitanti: 4.884\nSuperficie: kmq 84,48\nAltitudine: m 606 s.l.m.\nDenominazione abitanti: Carpinetani\nFesta patronale: Sant’Agostino\nComuni limitrofi: Bassiano, Sezze, Roccagorga, Montelanico, Norma, Supino, Gorga.</string>
 </resources>

@@ -27,7 +27,7 @@
     <string name="no_results">No results!</string>
     <string name="button_refresh">Refresh</string>
     <string name="call">Call</string>
-    <string name="url">Url</string>
+    <string name="url">Website</string>
     <string name="email">E-Mail</string>
     <string name="map">Map</string>
     <string name="no_phone_available">No phone number available!</string>
@@ -57,7 +57,6 @@
     <string name="no_favorite">You have no favorite place!</string>
     <string name="notification_news_title">Latest news in&#160;</string>
     <string name="notification_event_title">New event in&#160;</string>
-    <string name="city_name">Carpineto Romano</string>
     <string name="facebook">Facebook</string>
     <string name="foursquare">Foursquare</string>
     <string name="tripadvisor">TripAdvisor</string>
@@ -65,6 +64,7 @@
     <string name="feature_na">This feature is not yet available!</string>
     <string name="tback">Press back again to quit application</string>
     <string name="detail_picture">Detail main picture</string>
+
 
     <string-array name="drawer_list">
         <item>To See</item>
