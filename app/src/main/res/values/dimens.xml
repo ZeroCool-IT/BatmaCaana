@@ -7,9 +7,10 @@
 
     <dimen name="nav_drawer_width">280dp</dimen>
     <dimen name="app_bar_top_padding">0dp</dimen>
+    <dimen name="app_bar_bottom_padding">0dp</dimen>
     <dimen name="drawer_margin_top">24dp</dimen>
     <dimen name="content_recycler_top_margin">@dimen/abc_action_bar_default_height_material</dimen>
-    <dimen name="fragment_details_top_margin">50dp</dimen>
+    <dimen name="fragment_details_top_margin">55dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="action_button_lr_padding">8dp</dimen>

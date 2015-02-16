@@ -11,18 +11,19 @@
     tools:context="it.zerocool.batmacaana.">
 
 
-    <ScrollView
+    <com.nirhart.parallaxscroll.views.ParallaxScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <RelativeLayout
+                android:id="@+id/image_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true">
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -42,84 +43,87 @@
                     android:layout_alignEnd="@id/imageView"
                     android:layout_alignRight="@id/imageView"
                     android:src="@drawable/ic_fullscreen_grey600_36dp" />
-
-                <LinearLayout
-                    android:id="@+id/button_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/imageView"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/phoneButton"
-                        style="?android:attr/borderlessButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/transparent_bg"
-                        android:drawableTop="@drawable/ic_call_grey600_track_36dp"
-                        android:paddingBottom="@dimen/action_button_td_padding"
-                        android:paddingLeft="@dimen/action_button_lr_padding"
-                        android:paddingRight="@dimen/action_button_lr_padding"
-                        android:paddingTop="@dimen/action_button_td_padding"
-                        android:text="@string/call"
-                        android:textColor="@color/action_button_text"
-                        android:textSize="@dimen/button_bar_text_size" />
-
-                    <Button
-                        android:id="@+id/urlButton"
-                        style="?android:attr/borderlessButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/transparent_bg"
-                        android:drawableTop="@drawable/ic_web_grey600_36dp"
-                        android:paddingBottom="@dimen/action_button_td_padding"
-                        android:paddingLeft="@dimen/action_button_lr_padding"
-                        android:paddingRight="@dimen/action_button_lr_padding"
-                        android:paddingTop="@dimen/action_button_td_padding"
-                        android:text="@string/url"
-                        android:textColor="@color/action_button_text"
-                        android:textSize="@dimen/button_bar_text_size" />
-
-                    <Button
-                        android:id="@+id/mailButton"
-                        style="?android:attr/borderlessButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/transparent_bg"
-                        android:drawableTop="@drawable/ic_email_grey600_track_36dp"
-                        android:paddingBottom="@dimen/action_button_td_padding"
-                        android:paddingLeft="@dimen/action_button_lr_padding"
-                        android:paddingRight="@dimen/action_button_lr_padding"
-                        android:paddingTop="@dimen/action_button_td_padding"
-                        android:text="@string/email"
-                        android:textColor="@color/action_button_text"
-                        android:textSize="@dimen/button_bar_text_size" />
-
-                    <Button
-                        android:id="@+id/mapButton"
-                        style="?android:attr/borderlessButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/transparent_bg"
-                        android:drawableTop="@drawable/ic_map_grey600_36dp"
-                        android:paddingBottom="@dimen/action_button_td_padding"
-                        android:paddingLeft="@dimen/action_button_lr_padding"
-                        android:paddingRight="@dimen/action_button_lr_padding"
-                        android:paddingTop="@dimen/action_button_td_padding"
-                        android:text="@string/map"
-                        android:textColor="@color/action_button_text"
-                        android:textSize="@dimen/button_bar_text_size" />
-                </LinearLayout>
             </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/button_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_layout"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/phoneButton"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/transparent_bg"
+                    android:drawableTop="@drawable/ic_call_grey600_track_36dp"
+                    android:paddingBottom="@dimen/action_button_td_padding"
+                    android:paddingLeft="@dimen/action_button_lr_padding"
+                    android:paddingRight="@dimen/action_button_lr_padding"
+                    android:paddingTop="@dimen/action_button_td_padding"
+                    android:text="@string/call"
+                    android:textColor="@color/action_button_text"
+                    android:textSize="@dimen/button_bar_text_size" />
+
+                <Button
+                    android:id="@+id/urlButton"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/transparent_bg"
+                    android:drawableTop="@drawable/ic_web_grey600_36dp"
+                    android:paddingBottom="@dimen/action_button_td_padding"
+                    android:paddingLeft="@dimen/action_button_lr_padding"
+                    android:paddingRight="@dimen/action_button_lr_padding"
+                    android:paddingTop="@dimen/action_button_td_padding"
+                    android:text="@string/url"
+                    android:textColor="@color/action_button_text"
+                    android:textSize="@dimen/button_bar_text_size" />
+
+                <Button
+                    android:id="@+id/mailButton"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/transparent_bg"
+                    android:drawableTop="@drawable/ic_email_grey600_track_36dp"
+                    android:paddingBottom="@dimen/action_button_td_padding"
+                    android:paddingLeft="@dimen/action_button_lr_padding"
+                    android:paddingRight="@dimen/action_button_lr_padding"
+                    android:paddingTop="@dimen/action_button_td_padding"
+                    android:text="@string/email"
+                    android:textColor="@color/action_button_text"
+                    android:textSize="@dimen/button_bar_text_size" />
+
+                <Button
+                    android:id="@+id/mapButton"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/transparent_bg"
+                    android:drawableTop="@drawable/ic_map_grey600_36dp"
+                    android:paddingBottom="@dimen/action_button_td_padding"
+                    android:paddingLeft="@dimen/action_button_lr_padding"
+                    android:paddingRight="@dimen/action_button_lr_padding"
+                    android:paddingTop="@dimen/action_button_td_padding"
+                    android:text="@string/map"
+                    android:textColor="@color/action_button_text"
+                    android:textSize="@dimen/button_bar_text_size" />
+            </LinearLayout>
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@id/button_layout"
+                android:background="@color/background_material_light"
                 android:padding="8dp">
 
                 <LinearLayout
@@ -323,10 +327,10 @@
 
             </RelativeLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
-    </ScrollView>
+    </com.nirhart.parallaxscroll.views.ParallaxScrollView>
 
     <com.shamanland.fab.FloatingActionButton
         android:id="@+id/floatingButton"

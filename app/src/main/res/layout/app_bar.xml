@@ -9,6 +9,7 @@
     android:layout_height="wrap_content"
     android:background="@color/primaryColor"
     android:gravity="center"
+    android:paddingBottom="@dimen/app_bar_bottom_padding"
     android:paddingTop="@dimen/app_bar_top_padding"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
     app:subtitleTextAppearance="@style/ToolbarSubTitle"
