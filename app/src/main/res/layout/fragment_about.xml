@@ -170,7 +170,7 @@
                     expandableTextView:animDuration="200"
                     expandableTextView:collapseDrawable="@drawable/ic_expand_less_grey600_36dp"
                     expandableTextView:expandDrawable="@drawable/ic_expand_more_grey600_36dp"
-                    expandableTextView:maxCollapsedLines="16">
+                    expandableTextView:maxCollapsedLines="8">
 
                 <TextView
                         android:id="@id/expandable_text"

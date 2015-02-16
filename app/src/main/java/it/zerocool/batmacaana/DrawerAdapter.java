@@ -5,6 +5,7 @@
 package it.zerocool.batmacaana;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -150,7 +151,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         public void onClick(View v) {
             int position = getPosition();
             selectItem(getPosition());
-            if (position != Constant.SETTINGS && position != Constant.UPDATE && position != Constant.SUBHEADER && position != Constant.OFFLINE) {
+            if (position != Constant.SETTINGS && position != Constant.UPDATE && position != Constant.SUBHEADER && position != Constant.OFFLINE && position != Constant.ABOUT) {
                 unselectView(previousSelected);
                 selectView(v);
             }
@@ -160,11 +161,8 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
 
             switch (position) {
                 case Constant.ABOUT:
-                    AboutFragment abFrag = new AboutFragment();
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.content_frame, abFrag)
-                            .commit();
-                    ((ActionBarActivity) context).setTitle(context.getResources().getStringArray(R.array.drawer_list)[position]);
+                    Intent intent = new Intent(context, AboutActivity.class);
+                    context.startActivity(intent);
                     drawerLayout.closeDrawers();
                     break;
                 case Constant.SUBHEADER:

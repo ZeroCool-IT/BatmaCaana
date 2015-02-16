@@ -28,8 +28,8 @@
         <receiver
             android:name=".GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
-        <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            <intent-filter>
+            <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
                 <category android:name="com.example.gcm" />
             </intent-filter>
@@ -51,7 +51,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -65,7 +65,7 @@
             android:label="@string/app_name"
             android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait">
-        <meta-data
+            <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.zerocool.batmacaana.HomeActivity" />
 
@@ -91,7 +91,7 @@
             android:label="@string/title_activity_fullscreen"
             android:parentActivityName=".DetailsActivity"
             android:theme="@style/FullscreenTheme">
-            <meta-data
+        <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.zerocool.batmacaana.DetailsActivity" />
         </activity>
@@ -100,7 +100,7 @@
             android:label="@string/title_activity_search_results"
             android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait">
-            <meta-data
+        <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.zerocool.batmacaana.HomeActivity" />
 
@@ -111,6 +111,14 @@
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/city_name"
+            android:parentActivityName=".HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.zerocool.batmacaana.HomeActivity" />
         </activity>
     </application>
 

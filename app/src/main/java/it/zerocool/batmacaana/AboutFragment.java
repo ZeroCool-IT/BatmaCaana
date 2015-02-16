@@ -161,7 +161,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
             case R.id.main_image:
                 intent = new Intent(getActivity(), FullscreenActivity.class);
                 intent.putExtra(Constant.FROM_GALLERY, true);
-                intent.putExtra(Constant.IMAGE, Constant.GALLERY_IMAGE[adapter.getSelected()]);
+                intent.putExtra(Constant.IMAGE, adapter.getSelected());
                 intent.putExtra(Constant.LANDSCAPE_ORIENTATION, true);
 //                hexColor = String.format("#%06X", (0xFFFFFF & R.color.light_primary_color));
 //                intent.putExtra("COLOR", hexColor);
