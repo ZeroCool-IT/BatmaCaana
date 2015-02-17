@@ -1,0 +1,23 @@
+<!--
+  ~ Copyright ZeroApp(c) 2015. All right reserved.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:key="first_preferencescreen">
+
+    <CheckBoxPreference
+        android:key="wifi enabled"
+        android:title="WiFi" />
+
+    <PreferenceScreen
+        android:key="second_preferencescreen"
+        android:title="WiFi settings">
+
+        <CheckBoxPreference
+            android:key="prefer wifi"
+            android:title="Prefer WiFi" />
+    </PreferenceScreen>
+
+</PreferenceScreen> 

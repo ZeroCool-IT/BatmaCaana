@@ -82,10 +82,9 @@
     </string-array>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_search_results">SearchResultsActivity</string>
-    <string name="title_activity_filter">FilterActivity</string>
-    <string name="title_activity_about">AboutActivity</string>
+
+    <!--Settings String -->
+    <string name="general_settings"></string>
 
 </resources>
