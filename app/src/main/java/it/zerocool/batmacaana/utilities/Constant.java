@@ -60,21 +60,21 @@ public class Constant {
     public static final int PLACE = 8;
 
     //Requests URI
-    public static final String URI_TOSEE = "http://www.ilmiositodemo.altervista.org/app/json/vedere.php?user=";
-    public static final String URI_EAT = "http://www.ilmiositodemo.altervista.org/app/json/mangiare.php?user=";
-    public static final String URI_SLEEP = "http://www.ilmiositodemo.altervista.org/app/json/dormire.php?user=";
-    public static final String URI_SERVICES = "http://www.ilmiositodemo.altervista.org/app/json/servizi.php?user=";
-    public static final String URI_SHOP = "http://www.ilmiositodemo.altervista.org/app/json/shop.php?user=";
-    public static final String URI_NEWS = "http://www.ilmiositodemo.altervista.org/app/json/news.php?user=";
-    public static final String URI_EVENT = "http://www.ilmiositodemo.altervista.org/app/json/eventi.php?user=";
-    public static final String URI_IMAGE_BIG = "http://www.ilmiositodemo.altervista.org/app/images/big/";
-    public static final String URI_IMAGE_MEDIUM = "http://www.ilmiositodemo.altervista.org/app/images/big/";
-    public static final String URI_SEARCH1 = "http://www.ilmiositodemo.altervista.org/app/json/cerca.php?user=";
+    public static final String URI_TOSEE = "http://www.exploracity.it/app/json/vedere.php?user=";
+    public static final String URI_EAT = "http://www.exploracity.it/app/json/mangiare.php?user=";
+    public static final String URI_SLEEP = "http://www.exploracity.it/app/json/dormire.php?user=";
+    public static final String URI_SERVICES = "http://www.exploracity.it/app/json/servizi.php?user=";
+    public static final String URI_SHOP = "http://www.exploracity.it/app/json/shop.php?user=";
+    public static final String URI_NEWS = "http://www.exploracity.it/app/json/news.php?user=";
+    public static final String URI_EVENT = "http://www.exploracity.it/app/json/eventi.php?user=";
+    public static final String URI_IMAGE_BIG = "http://www.exploracity.it/app/images/big/";
+    public static final String URI_IMAGE_MEDIUM = "http://www.exploracity.it/app/images/big/";
+    public static final String URI_SEARCH1 = "http://www.exploracity.it/app/json/cerca.php?user=";
     public static final String URI_SEARCH2 = "&stringa=";
-    public static final String OBJECT_SEARCH1 = "http://www.ilmiositodemo.altervista.org/app/json/cercadettaglio.php?user=";
+    public static final String OBJECT_SEARCH1 = "http://www.exploracity.it/app/json/cercadettaglio.php?user=";
     public static final String OBJECT_SEARCH2 = "&id=";
     public static final String OBJECT_SEARCH3 = "&type=";
-    public static final String PLACE_URI = "http://www.batmacaana.com/item/";
+    public static final String PLACE_URI = "http://exploracity.it/item/";
 
 
     //Week Days

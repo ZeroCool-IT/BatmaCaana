@@ -4,6 +4,8 @@
 
 
 
+
+
 apply plugin: 'com.android.application'
 
 android {
@@ -14,8 +16,8 @@ android {
         applicationId "it.zerocool.batmacaana"
         minSdkVersion 16
         targetSdkVersion 21
-        versionCode 23
-        versionName "0.23 B1"
+        versionCode 24
+        versionName "0.24 B1"
     }
     buildTypes {
         release {
@@ -26,6 +28,18 @@ android {
     sourceSets {
         main {
             manifest.srcFile 'src/main/AndroidManifest.xml'
+        }
+    }
+
+    productFlavors {
+        carpineto {
+            applicationId "it.exploracity.carpineto"
+        }
+        alpha {
+            applicationId "it.exploracity.alpha"
+        }
+        beta {
+            applicationId "it.exploracity.beta"
         }
     }
 }
