@@ -77,8 +77,8 @@
         <item>Other</item>
         <item>Favorite</item>
         <item>Settings…</item>
-        <item>Offline</item>
-        <item>Update offline content</item>
+        <!--<item>Offline</item>-->
+        <!--<item>Update offline content</item>-->
     </string-array>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>

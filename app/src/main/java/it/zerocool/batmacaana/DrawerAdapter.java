@@ -28,6 +28,7 @@ import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.SharedPreferencesProvider;
 
 /**
+ * Navigation Drawer RecyclerView adapter
  * Created by Marco on 05/01/2015.
  */
 public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerViewHolder> {
@@ -69,6 +70,12 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                     }
                 }
             });
+            view.setVisibility(View.GONE);
+        } else if (viewType == Constant.UPDATE) {
+            view = inflater.inflate(R.layout.drawer_row, parent, false);
+            view.setVisibility(View.GONE);
+        } else if (viewType == Constant.SHOP) {
+            view = inflater.inflate(R.layout.drawer_row, parent, false);
         } else {
             view = inflater.inflate(R.layout.drawer_row, parent, false);
         }
@@ -112,6 +119,10 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
             return Constant.ABOUT;
         else if (position == Constant.OFFLINE)
             return Constant.OFFLINE;
+        else if (position == Constant.SHOP)
+            return Constant.SHOP;
+        else if (position == Constant.UPDATE)
+            return Constant.UPDATE;
         return super.getItemViewType(position);
     }
 

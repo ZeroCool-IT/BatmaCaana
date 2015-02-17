@@ -60,8 +60,9 @@ public class NavigationDrawerFragment extends Fragment {
                 R.drawable.ic_subheader_ph_24dp,
                 R.drawable.ic_favorite_grey600_24dp,
                 R.drawable.ic_settings_grey600_24dp,
-                R.drawable.ic_cloud_download_grey600_24dp,
-                R.drawable.ic_refresh_grey600_24dp};
+//                R.drawable.ic_cloud_download_grey600_24dp,
+//                R.drawable.ic_refresh_grey600_24dp
+        };
         String[] titles = context.getResources().getStringArray(R.array.drawer_list);
         for (int i = 0; i < titles.length && i < icons.length; i++) {
             DrawerItem current = new DrawerItem();

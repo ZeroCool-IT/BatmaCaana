@@ -5,7 +5,6 @@
 
 
 
-
 apply plugin: 'com.android.application'
 
 android {
@@ -36,10 +35,12 @@ android {
             applicationId "it.exploracity.carpineto"
         }
         alpha {
-            applicationId "it.exploracity.alpha"
+            applicationId "it.exploracity.carpineto.alpha"
         }
         beta {
-            applicationId "it.exploracity.beta"
+            applicationId "it.exploracity.carpineto.beta"
+            versionCode 1
+            versionName "0.1B"
         }
     }
 }
