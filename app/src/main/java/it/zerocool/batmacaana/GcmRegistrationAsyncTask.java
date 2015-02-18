@@ -5,7 +5,9 @@
 package it.zerocool.batmacaana;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -75,6 +77,7 @@ class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
             // The request to your server should be authenticated if your app
             // is using accounts.
             regService.register(regId, Constant.USER_ID).execute();
+            storeRegistrationId(context, regId);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -87,5 +90,22 @@ class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String msg) {
         //Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
         Logger.getLogger("REGISTRATION").log(Level.INFO, msg);
+    }
+
+    /**
+     * Stores the registration ID and app versionCode in the application's
+     * {@code SharedPreferences}.
+     *
+     * @param context application's context.
+     * @param regId   registration ID
+     */
+    private void storeRegistrationId(Context context, String regId) {
+        SharedPreferences sp = context.getSharedPreferences(HomeActivity.class.getSimpleName(), Context.MODE_PRIVATE);
+        int appVersion = HomeActivity.getAppVersion(context);
+        Log.i("GCM", "Saving regId on app version " + appVersion);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(Constant.PROPERTY_REG_ID, regId);
+        editor.putInt(HomeActivity.PROPERTY_APP_VERSION, appVersion);
+        editor.apply();
     }
 }

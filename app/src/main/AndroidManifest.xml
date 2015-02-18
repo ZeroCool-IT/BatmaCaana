@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright ZeroApp(c) 2015. All right reserved.
   -->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="it.zerocool.batmacaana">
 
@@ -122,14 +123,6 @@
         </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="it.zerocool.batmacaana.HomeActivity" />
-        </activity>
-        <activity
-            android:name=".utilities.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".HomeActivity">
             <meta-data

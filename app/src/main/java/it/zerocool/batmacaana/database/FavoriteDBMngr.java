@@ -120,5 +120,14 @@ public class FavoriteDBMngr {
 
     }
 
+    /**
+     * Clear the favorite list
+     *
+     * @param db is the db
+     */
+    public static void clearFavorite(SQLiteDatabase db) {
+        db.delete(TABLE_FAVORITE, null, null);
+    }
+
 
 }

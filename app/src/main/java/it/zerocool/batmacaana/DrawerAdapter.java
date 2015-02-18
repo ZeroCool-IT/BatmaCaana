@@ -25,7 +25,6 @@ import java.util.Collections;
 import java.util.List;
 
 import it.zerocool.batmacaana.utilities.Constant;
-import it.zerocool.batmacaana.utilities.SettingsActivity;
 import it.zerocool.batmacaana.utilities.SharedPreferencesProvider;
 
 /**

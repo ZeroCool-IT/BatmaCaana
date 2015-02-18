@@ -2,15 +2,12 @@
  * Copyright ZeroApp(c) 2015. All right reserved.
  */
 
-package it.zerocool.batmacaana.utilities;
+package it.zerocool.batmacaana;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import it.zerocool.batmacaana.R;
-import it.zerocool.batmacaana.SettingsFragment;
 
 public class SettingsActivity extends ActionBarActivity {
 

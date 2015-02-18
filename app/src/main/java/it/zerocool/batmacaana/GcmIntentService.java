@@ -52,6 +52,9 @@ public class GcmIntentService extends IntentService {
         // The getMessageType() intent parameter must be the intent you received
         // in your BroadcastReceiver.
         String messageType = gcm.getMessageType(intent);
+        SharedPreferences sp = getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
+        boolean newsEnabled = sp.getBoolean("news_notification_enabled", true);
+        boolean eventEnabled = sp.getBoolean("event_notification_enabled", true);
 
         if (!extras.isEmpty()) {  // has effect of unparcelling Bundle
             /*
@@ -74,10 +77,14 @@ public class GcmIntentService extends IntentService {
                 int type = Integer.parseInt(extrasMap.get(Constant.TYPE_ARG));
                 switch (type) {
                     case Constant.TYPE_NEWS:
-                        sendNewsNotification(extrasMap);
+                        if (newsEnabled) {
+                            sendNewsNotification(extrasMap);
+                        }
                         break;
                     case Constant.TYPE_EVENT:
-                        sendEventNotification(extrasMap);
+                        if (eventEnabled) {
+                            sendEventNotification(extrasMap);
+                        }
                         break;
                     default:
                         sendNotification(extras.toString());
@@ -154,7 +161,6 @@ public class GcmIntentService extends IntentService {
 
 
         String message = map.get(Constant.MESSAGE_ARG);
-        int type = Integer.parseInt(map.get(Constant.TYPE_ARG));
 
         String title = getString(R.string.notification_news_title) +
                 getString(R.string.city_name);
@@ -194,7 +200,6 @@ public class GcmIntentService extends IntentService {
 
 
         String message = map.get(Constant.MESSAGE_ARG);
-        int type = Integer.parseInt(map.get(Constant.TYPE_ARG));
 
         String title = getString(R.string.notification_event_title) +
                 getString(R.string.city_name);

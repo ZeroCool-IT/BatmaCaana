@@ -34,8 +34,8 @@ import it.zerocool.batmacaana.utilities.Constant;
 
 public class HomeActivity extends ActionBarActivity {
 
+    public static final String PROPERTY_APP_VERSION = "appVersion";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    private static final String PROPERTY_APP_VERSION = "appVersion";
     protected Toast pressBackToast;
     GoogleCloudMessaging gcm;
     String regid;
@@ -52,7 +52,7 @@ public class HomeActivity extends ActionBarActivity {
      * @param context is the application context
      * @return the version code of the app
      */
-    private static int getAppVersion(Context context) {
+    public static int getAppVersion(Context context) {
         try {
             PackageInfo packageInfo = context.getPackageManager()
                     .getPackageInfo(context.getPackageName(), 0);
