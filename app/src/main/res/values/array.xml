@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright ZeroApp(c) 2015. All right reserved.
+  -->
+
+<resources>
+    <string-array name="drawer_default_view">
+        <item>To See</item>
+        <item>Event</item>
+        <item>Eat</item>
+        <item>Sleep</item>
+        <item>News</item>
+        <item>Typical Food Store</item>
+        <item>Services</item>
+    </string-array>
+
+    <string-array name="drawer_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+</resources>

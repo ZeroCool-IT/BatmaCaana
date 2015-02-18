@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright ZeroApp(c) 2015. All right reserved.
   -->
-
 <resources>
 
     <string name="app_name">@string/city_name</string>
@@ -77,14 +76,17 @@
         <item>Other</item>
         <item>Favorite</item>
         <item>Settings…</item>
-        <!--<item>Offline</item>-->
-        <!--<item>Update offline content</item>-->
+        <!-- <item>Offline</item> -->
+        <!-- <item>Update offline content</item> -->
     </string-array>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="title_activity_search_results">SearchResultsActivity</string>
 
-    <!--Settings String -->
-    <string name="general_settings"></string>
+    <!-- Settings String -->
+    <string name="notification_enabled">Enable notification</string>
+    <string name="drawer_default">Choose the default start view</string>
+    <string name="general_settings">General settings</string>
+
 
 </resources>

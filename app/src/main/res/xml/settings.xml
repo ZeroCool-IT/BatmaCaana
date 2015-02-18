@@ -7,17 +7,22 @@
     android:layout_height="match_parent"
     android:key="first_preferencescreen">
 
-    <CheckBoxPreference
-        android:key="wifi enabled"
-        android:title="WiFi" />
+    <PreferenceCategory
+        android:key="preference"
+        android:title="@string/general_settings">
+        <SwitchPreference
 
-    <PreferenceScreen
-        android:key="second_preferencescreen"
-        android:title="WiFi settings">
+            android:defaultValue="true"
+            android:key="notification_enabled"
+            android:title="@string/notification_enabled" />
 
-        <CheckBoxPreference
-            android:key="prefer wifi"
-            android:title="Prefer WiFi" />
-    </PreferenceScreen>
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/drawer_default_view"
+            android:entryValues="@array/drawer_values"
+            android:key="user_default_view"
+            android:title="@string/drawer_default" />
+    </PreferenceCategory>
+
 
 </PreferenceScreen> 

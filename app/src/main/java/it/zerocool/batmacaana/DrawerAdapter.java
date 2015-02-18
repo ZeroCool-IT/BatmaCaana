@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.List;
 
 import it.zerocool.batmacaana.utilities.Constant;
+import it.zerocool.batmacaana.utilities.SettingsActivity;
 import it.zerocool.batmacaana.utilities.SharedPreferencesProvider;
 
 /**
@@ -109,7 +110,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
     @Override
     public int getItemViewType(int position) {
         SharedPreferences sp = SharedPreferencesProvider.getSharedPreferences(context);
-        final int defaultView = sp.getInt(Constant.KEY_USER_DEFAULT_START_VIEW, 0);
+        final int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
 
         if (position == defaultView)
             return Constant.VIEW_STATE_SELECTED;
@@ -187,14 +188,17 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                     drawerLayout.closeDrawers();
                     break;
                 case Constant.SETTINGS:
-                    Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
+                    Intent settingsIntent = new Intent(context, SettingsActivity.class);
+                    context.startActivity(settingsIntent);
+                    drawerLayout.closeDrawers();
                     break;
-                case Constant.OFFLINE:
+               /* case Constant.OFFLINE:
                     Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
                     break;
                 case Constant.UPDATE:
                     Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
-                    break;
+                    break;*/
                 default:
                     ContentFragment f = new ContentFragment();
                     Bundle bundle = new Bundle();

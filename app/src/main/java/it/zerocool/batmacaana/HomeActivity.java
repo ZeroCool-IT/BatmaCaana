@@ -30,7 +30,6 @@ import java.util.List;
 
 import it.zerocool.batmacaana.dialog.LocationWarningDialog;
 import it.zerocool.batmacaana.utilities.Constant;
-import it.zerocool.batmacaana.utilities.SharedPreferencesProvider;
 
 
 public class HomeActivity extends ActionBarActivity {
@@ -89,10 +88,10 @@ public class HomeActivity extends ActionBarActivity {
             }
             NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
             drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
-            SharedPreferences sp = SharedPreferencesProvider.getSharedPreferences(this);
+            /*SharedPreferences sp = SharedPreferencesProvider.getSharedPreferences(this);
             SharedPreferences.Editor editor = sp.edit();
-            editor.putInt(Constant.KEY_USER_DEFAULT_START_VIEW, 0);
-            editor.apply();
+            editor.putString(Constant.KEY_USER_DEFAULT_START_VIEW, "0");
+            editor.apply();*/
         } else {
             Log.i("PLAY SERVICE ERROR", "No valid Google Play Services APK found.");
         }
