@@ -11,6 +11,7 @@
         <item>News</item>
         <item>Typical Food Store</item>
         <item>Services</item>
+        <item>@string/city_name</item>
     </string-array>
 
     <string-array name="drawer_values">
@@ -21,5 +22,6 @@
         <item>4</item>
         <item>5</item>
         <item>6</item>
+        <item>7</item>
     </string-array>
 </resources>

@@ -162,7 +162,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         public void onClick(View v) {
             int position = getPosition();
             selectItem(getPosition());
-            if (position != Constant.SETTINGS && position != Constant.UPDATE && position != Constant.SUBHEADER && position != Constant.OFFLINE && position != Constant.ABOUT) {
+            if (position != Constant.SETTINGS && position != Constant.UPDATE && position != Constant.SUBHEADER && position != Constant.OFFLINE) {
                 unselectView(previousSelected);
                 selectView(v);
             }
@@ -172,8 +172,13 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
 
             switch (position) {
                 case Constant.ABOUT:
-                    Intent intent = new Intent(context, AboutActivity.class);
-                    context.startActivity(intent);
+                    AboutFragment fragment = new AboutFragment();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.content_frame, fragment)
+                            .commit();
+                    /*Intent intent = new Intent(context, AboutActivity.class);
+                    context.startActivity(intent);*/
+                    ((ActionBarActivity) context).setTitle(context.getResources().getStringArray(R.array.drawer_list)[position]);
                     drawerLayout.closeDrawers();
                     break;
                 case Constant.SUBHEADER:

@@ -77,7 +77,7 @@ public class SearchResultsFragment extends Fragment {
                 .setTitle(getResources()
                         .getString(R.string.results) + query);
 
-        String trimmed = query.replaceAll("\\b\\w{1,3}\\b\\s?", "");
+        String trimmed = query.replaceAll("\\b\\w{1,2}\\b\\s?", "");
 
         if (!trimmed.isEmpty()) {
             String uri = Constant.URI_SEARCH1

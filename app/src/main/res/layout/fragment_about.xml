@@ -131,6 +131,22 @@
                     android:textColor="@color/action_button_text"
                     android:textSize="@dimen/button_bar_text_size" />
 
+                <Button
+                    android:id="@+id/mapButton"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/transparent_bg"
+                    android:drawableTop="@drawable/ic_map_grey600_36dp"
+                    android:paddingBottom="@dimen/action_button_td_padding"
+                    android:paddingLeft="@dimen/action_button_lr_padding"
+                    android:paddingRight="@dimen/action_button_lr_padding"
+                    android:paddingTop="@dimen/action_button_td_padding"
+                    android:text="@string/map"
+                    android:textColor="@color/action_button_text"
+                    android:textSize="@dimen/button_bar_text_size" />
+
 
             </LinearLayout>
 
@@ -164,7 +180,7 @@
                     expandableTextView:expandDrawable="@drawable/ic_expand_more_grey600_36dp"
                     expandableTextView:maxCollapsedLines="8">
 
-                <TextView
+                    <TextView
                         android:id="@id/expandable_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -11,8 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.gc.materialdesign.views.ProgressBarIndeterminate;
+
 
 public class AboutActivity extends ActionBarActivity {
+
+    private ProgressBarIndeterminate bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +25,7 @@ public class AboutActivity extends ActionBarActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
+
 
         AboutFragment frag = new AboutFragment();
         FragmentManager fm = getSupportFragmentManager();

@@ -9,6 +9,8 @@
  */
 package it.zerocool.batmacaana.model;
 
+import android.text.TextUtils;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
@@ -101,13 +103,6 @@ public class News implements Cardable {
     }
 
     /**
-     * @param date the date of the news to set
-     */
-    public void setDate(GregorianCalendar date) {
-        this.date = date;
-    }
-
-    /**
      * Set the news date parsing infos from String
      *
      * @param date it's the start date to set (YYYY-mm-DD format)
@@ -116,6 +111,13 @@ public class News implements Cardable {
         GregorianCalendar g = ParsingUtilities.parseDate(date);
         setDate(g);
 
+    }
+
+    /**
+     * @param date the date of the news to set
+     */
+    public void setDate(GregorianCalendar date) {
+        this.date = date;
     }
 
     public String getDateToString() {
@@ -239,7 +241,7 @@ public class News implements Cardable {
      */
     @Override
     public String getSubheader() {
-        return null;
+        return TextUtils.join(", ", getTags());
     }
 
     /**

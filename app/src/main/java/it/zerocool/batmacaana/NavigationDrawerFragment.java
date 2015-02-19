@@ -158,7 +158,11 @@ public class NavigationDrawerFragment extends Fragment {
             getActivity().setTitle(getResources().getStringArray(R.array.drawer_list)[position]);
             mDrawerLayout.closeDrawers();
         } else {
-            //TODO About fragment
+            AboutFragment fragment = new AboutFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
         }
     }
 }

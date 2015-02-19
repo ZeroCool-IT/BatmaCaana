@@ -11,6 +11,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
@@ -35,6 +37,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
 
     private ImageSwitcher mainPicture;
     private int current;
+    private ArrayList<Integer> imageItems;
 
     public AboutFragment() {
         // Required empty public constructor
@@ -63,6 +66,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         Button mailButton = (Button) layout.findViewById(R.id.mailButton);
         Button phoneButton = (Button) layout.findViewById(R.id.phoneButton);
         Button urlButton = (Button) layout.findViewById(R.id.urlButton);
+        Button mapButton = (Button) layout.findViewById(R.id.mapButton);
         ImageButton fullScreen = (ImageButton) layout.findViewById(R.id.fullscreenButton);
 
 
@@ -72,12 +76,18 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
 
 
         //Gallery image and iterator
-        ArrayList<Integer> imageItems = new ArrayList<>();
+        imageItems = new ArrayList<>();
         imageItems.addAll(Arrays.asList(Constant.GALLERY_IMAGE));
         mainPicture.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {
-                return new ImageView(getActivity());
+                ImageView imageView = new ImageView(getActivity());
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                ImageSwitcher.LayoutParams params = new ImageSwitcher.LayoutParams(
+                        ImageSwitcher.LayoutParams.MATCH_PARENT, ImageSwitcher.LayoutParams.MATCH_PARENT);
+
+                imageView.setLayoutParams(params);
+                return imageView;
             }
         });
         current = 0;
@@ -90,6 +100,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         urlButton.setOnClickListener(this);
         fullScreen.setOnClickListener(this);
         mainPicture.setOnClickListener(this);
+        mapButton.setOnClickListener(this);
 
         return layout;
     }
@@ -105,10 +116,10 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         int id = v.getId();
         switch (id) {
             case R.id.left_button:
-//                previous();
+                previous();
                 break;
             case R.id.right_button:
-//                next();
+                next();
                 break;
             case R.id.urlButton:
                 String url = getString(R.string.city_website);
@@ -168,37 +179,46 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
 //                intent.putExtra("COLOR", hexColor);
                 startActivity(intent);
                 break;
+            case R.id.mapButton:
+                String uri = "geo:0,0?q=41.604774, 13.084419?z=1";
+                intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(uri));
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(intent);
+                } else
+                    Toast.makeText(getActivity(), R.string.no_map_app, Toast.LENGTH_SHORT).show();
             default:
                 break;
         }
     }
 
-    /*private void next() {
-        if (imageIterator.hasNext()) {
+
+    private void next() {
+        if (current < imageItems.size() - 1) {
             Animation in = AnimationUtils.loadAnimation(getActivity(),
-                    android.R.anim.slide_in_left);
+                    android.R.anim.fade_in);
             Animation out = AnimationUtils.loadAnimation(getActivity(),
-                    android.R.anim.slide_out_right);
-            mainPicture.setInAnimation(out);
-            mainPicture.setOutAnimation(in);
-            current = imageIterator.next();
-            mainPicture.setImageResource(current);
+                    android.R.anim.fade_out);
+            mainPicture.setInAnimation(in);
+            mainPicture.setOutAnimation(out);
+            mainPicture.setImageResource(imageItems.get(++current));
 
         }
     }
 
     private void previous() {
-        if (imageIterator.hasPrevious()) {
+        if (current > 0) {
             Animation in = AnimationUtils.loadAnimation(getActivity(),
-                    android.R.anim.slide_in_left);
+                    android.R.anim.fade_out);
             Animation out = AnimationUtils.loadAnimation(getActivity(),
-                    android.R.anim.slide_out_right);
-            mainPicture.setInAnimation(in);
-            mainPicture.setOutAnimation(out);
-            current = imageIterator.previous();
-            mainPicture.setImageResource(current);
+                    android.R.anim.fade_in);
+            mainPicture.setInAnimation(out);
+            mainPicture.setOutAnimation(in);
+
+            mainPicture.setImageResource(imageItems.get(--current));
 
         }
-    }*/
+    }
+
 
 }
