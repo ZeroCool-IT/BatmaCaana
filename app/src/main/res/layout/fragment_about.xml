@@ -29,15 +29,14 @@
                 android:layout_alignParentTop="true"
                 android:background="@color/light_primary_color">
 
-                <ImageView
+                <ImageSwitcher
                     android:id="@+id/main_image"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_alignParentTop="true"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/detail_picture"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/im_gallery_01" />
+                    android:scaleType="centerCrop" />
 
                 <ImageButton
                     android:id="@+id/fullscreenButton"
@@ -49,37 +48,30 @@
                     android:layout_alignRight="@id/main_image"
                     android:src="@drawable/ic_fullscreen_grey600_36dp" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/gallery_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="61dp"
-                    android:layout_below="@+id/main_image"
-                    android:paddingBottom="2dp"
-                    android:paddingTop="2dp" />
 
                 <ImageButton
                     android:id="@+id/left_button"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="36dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/gallery_recycler"
-                    android:layout_alignLeft="@id/gallery_recycler"
-                    android:layout_alignStart="@id/gallery_recycler"
+                    android:layout_alignLeft="@id/main_image"
+                    android:layout_alignStart="@id/main_image"
+                    android:layout_centerInParent="true"
                     android:background="@color/transparent_bg"
                     android:paddingBottom="8dp"
-                    android:src="@drawable/ic_chevron_left_white_36dp" />
+                    android:src="@drawable/ic_chevron_left_grey600_48dp" />
 
                 <ImageButton
                     android:id="@+id/right_button"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="36dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/gallery_recycler"
-                    android:layout_alignEnd="@id/gallery_recycler"
-                    android:layout_alignRight="@id/gallery_recycler"
+                    android:layout_alignEnd="@id/main_image"
+                    android:layout_alignRight="@id/main_image"
+                    android:layout_centerInParent="true"
                     android:background="@color/transparent_bg"
                     android:paddingBottom="8dp"
-                    android:src="@drawable/ic_chevron_right_white_36dp" />
+                    android:src="@drawable/ic_chevron_right_grey600_48dp" />
             </RelativeLayout>
 
             <LinearLayout

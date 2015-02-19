@@ -8,15 +8,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 
@@ -32,10 +32,9 @@ import it.zerocool.batmacaana.utilities.Constant;
  */
 public class AboutFragment extends Fragment implements View.OnClickListener {
 
-    private RecyclerView rvGallery;
-    private LinearLayoutManager layoutManager;
-    private GalleryAdapter adapter;
 
+    private ImageSwitcher mainPicture;
+    private int current;
 
     public AboutFragment() {
         // Required empty public constructor
@@ -56,10 +55,9 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
 
 
         //Bind widget
-        ImageView mainPicture = (ImageView) layout.findViewById(R.id.main_image);
+        mainPicture = (ImageSwitcher) layout.findViewById(R.id.main_image);
         ExpandableTextView descriptionText = (ExpandableTextView) layout.findViewById(R.id.description_tv);
         ExpandableTextView infoText = (ExpandableTextView) layout.findViewById(R.id.info_tv);
-        rvGallery = (RecyclerView) layout.findViewById(R.id.gallery_recycler);
         ImageButton leftButton = (ImageButton) layout.findViewById(R.id.left_button);
         ImageButton rightButton = (ImageButton) layout.findViewById(R.id.right_button);
         Button mailButton = (Button) layout.findViewById(R.id.mailButton);
@@ -73,14 +71,17 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         infoText.setText(getString(R.string.info));
 
 
-        layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvGallery.setLayoutManager(layoutManager);
+        //Gallery image and iterator
         ArrayList<Integer> imageItems = new ArrayList<>();
-        imageItems.addAll(Arrays.asList(Constant.GALLERY_IMAGE_THUMB));
-        adapter = new GalleryAdapter(getActivity(), mainPicture, imageItems);
-        rvGallery.setAdapter(adapter);
-
+        imageItems.addAll(Arrays.asList(Constant.GALLERY_IMAGE));
+        mainPicture.setFactory(new ViewSwitcher.ViewFactory() {
+            @Override
+            public View makeView() {
+                return new ImageView(getActivity());
+            }
+        });
+        current = 0;
+        mainPicture.setImageResource(imageItems.get(current));
         //Listener
         leftButton.setOnClickListener(this);
         rightButton.setOnClickListener(this);
@@ -104,10 +105,10 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         int id = v.getId();
         switch (id) {
             case R.id.left_button:
-                layoutManager.smoothScrollToPosition(rvGallery, null, 0);
+//                previous();
                 break;
             case R.id.right_button:
-                layoutManager.smoothScrollToPosition(rvGallery, null, adapter.getItemCount() - 1);
+//                next();
                 break;
             case R.id.urlButton:
                 String url = getString(R.string.city_website);
@@ -152,8 +153,8 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
             case R.id.fullscreenButton:
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
                 intent.putExtra(Constant.FROM_GALLERY, true);
-                intent.putExtra(Constant.IMAGE, adapter.getSelected());
                 intent.putExtra(Constant.LANDSCAPE_ORIENTATION, true);
+                intent.putExtra(Constant.IMAGE, current);
 //                String hexColor = String.format("#%06X", (0xFFFFFF & R.color.light_primary_color));
 //                intent.putExtra("COLOR", hexColor);
                 startActivity(intent);
@@ -161,8 +162,8 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
             case R.id.main_image:
                 intent = new Intent(getActivity(), FullscreenActivity.class);
                 intent.putExtra(Constant.FROM_GALLERY, true);
-                intent.putExtra(Constant.IMAGE, adapter.getSelected());
                 intent.putExtra(Constant.LANDSCAPE_ORIENTATION, true);
+                intent.putExtra(Constant.IMAGE, current);
 //                hexColor = String.format("#%06X", (0xFFFFFF & R.color.light_primary_color));
 //                intent.putExtra("COLOR", hexColor);
                 startActivity(intent);
@@ -171,4 +172,33 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
+    /*private void next() {
+        if (imageIterator.hasNext()) {
+            Animation in = AnimationUtils.loadAnimation(getActivity(),
+                    android.R.anim.slide_in_left);
+            Animation out = AnimationUtils.loadAnimation(getActivity(),
+                    android.R.anim.slide_out_right);
+            mainPicture.setInAnimation(out);
+            mainPicture.setOutAnimation(in);
+            current = imageIterator.next();
+            mainPicture.setImageResource(current);
+
+        }
+    }
+
+    private void previous() {
+        if (imageIterator.hasPrevious()) {
+            Animation in = AnimationUtils.loadAnimation(getActivity(),
+                    android.R.anim.slide_in_left);
+            Animation out = AnimationUtils.loadAnimation(getActivity(),
+                    android.R.anim.slide_out_right);
+            mainPicture.setInAnimation(in);
+            mainPicture.setOutAnimation(out);
+            current = imageIterator.previous();
+            mainPicture.setImageResource(current);
+
+        }
+    }*/
+
 }

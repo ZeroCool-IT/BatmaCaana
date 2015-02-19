@@ -64,6 +64,7 @@
     <string name="feature_na">This feature is not yet available!</string>
     <string name="tback">Press back again to quit application</string>
     <string name="detail_picture">Detail main picture</string>
+    <string name="too_short">Search query is too short!</string>
 
     <string-array name="drawer_list">
         <item>To See</item>

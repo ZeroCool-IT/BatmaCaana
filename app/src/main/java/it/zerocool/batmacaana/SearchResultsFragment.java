@@ -77,16 +77,34 @@ public class SearchResultsFragment extends Fragment {
                 .setTitle(getResources()
                         .getString(R.string.results) + query);
 
-        String uri = Constant.URI_SEARCH1
-                + Constant.USER_ID
-                + Constant.URI_SEARCH2
-                + Uri.encode(query);
-        if (RequestUtilities.isOnline(getActivity())) {
-            task = new SearchTask();
-            task.execute(uri);
+        String trimmed = query.replaceAll("\\b\\w{1,3}\\b\\s?", "");
+
+        if (!trimmed.isEmpty()) {
+            String uri = Constant.URI_SEARCH1
+                    + Constant.USER_ID
+                    + Constant.URI_SEARCH2
+                    + Uri.encode(trimmed);
+            if (RequestUtilities.isOnline(getActivity())) {
+                task = new SearchTask();
+                task.execute(uri);
+            } else {
+                String message = getResources().getString(
+                        R.string.dialog_message_no_connection);
+                String title = getResources().getString(
+                        R.string.dialog_title_warning);
+
+                WarningDialog dialog = new WarningDialog();
+                Bundle arguments = new Bundle();
+                arguments.putString(WarningDialog.TITLE, title);
+                arguments.putString(WarningDialog.MESSAGE, message);
+                arguments.putBoolean(WarningDialog.KILL, true);
+                dialog.setArguments(arguments);
+                dialog.show(getFragmentManager(), "No Connection warning");
+                Log.i("TASK ERROR", "No connection");
+            }
         } else {
             String message = getResources().getString(
-                    R.string.dialog_message_no_connection);
+                    R.string.too_short);
             String title = getResources().getString(
                     R.string.dialog_title_warning);
 
@@ -96,9 +114,10 @@ public class SearchResultsFragment extends Fragment {
             arguments.putString(WarningDialog.MESSAGE, message);
             arguments.putBoolean(WarningDialog.KILL, true);
             dialog.setArguments(arguments);
-            dialog.show(getFragmentManager(), "No Connection warning");
-            Log.i("TASK ERROR", "No connection");
+            dialog.show(getFragmentManager(), "Query too short");
+            Log.i("TASK ERROR", "Query too short");
         }
+
     }
 
     private class SearchTask extends AsyncTask<String, Void, List<SearchResult>> {
