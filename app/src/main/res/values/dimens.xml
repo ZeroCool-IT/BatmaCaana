@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright ZeroApp(c) 2015. All right reserved.
   -->
 
@@ -16,5 +15,6 @@
     <dimen name="action_button_lr_padding">8dp</dimen>
     <dimen name="action_button_td_padding">8dp</dimen>
     <dimen name="button_bar_text_size">12sp</dimen>
+    <dimen name="settings_frag_padding">8dp</dimen>
 
 </resources>

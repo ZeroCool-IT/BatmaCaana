@@ -8,5 +8,7 @@
     <dimen name="drawer_margin_top">48dp</dimen>
     <dimen name="content_recycler_top_margin">@dimen/abc_action_bar_default_height_material</dimen>
     <dimen name="fragment_details_top_margin">@dimen/abc_action_bar_default_height_material</dimen>
+    <dimen name="settings_frag_padding">0dp</dimen>
+
 
 </resources>

@@ -2,7 +2,7 @@
  * Copyright ZeroApp(c) 2015. All right reserved.
  */
 
-package it.zerocool.batmacaana;
+package it.zerocool.batmacaana.dialog;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,11 +20,10 @@ import it.zerocool.batmacaana.utilities.ApplicationContextProvider;
  * Clear favorite dialog
  * Created by Marco Battisti on 18/02/2015.
  */
-public class CustomDialogPreference extends DialogPreference {
+public class EraseFavoriteDialogPreference extends DialogPreference {
 
-    public CustomDialogPreference(Context context, AttributeSet attrs) {
+    public EraseFavoriteDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        // TODO Auto-generated constructor stub
     }
 
     /**
