@@ -11,6 +11,7 @@
     <dimen name="action_button_td_padding">8dp</dimen>
     <dimen name="app_bar_bottom_padding">0dp</dimen>
     <dimen name="settings_frag_padding">8dp</dimen>
+    <dimen name="card_corner_radius">0dp</dimen>
 
 
 </resources>

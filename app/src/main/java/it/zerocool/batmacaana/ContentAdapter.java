@@ -59,7 +59,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
      */
     @Override
     public ContentAdapter.ContentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.card_content, parent, false);
+        View view = inflater.inflate(R.layout.card_content_alt, parent, false);
         return new ContentViewHolder(view);
     }
 
