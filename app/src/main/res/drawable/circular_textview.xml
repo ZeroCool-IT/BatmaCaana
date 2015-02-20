@@ -4,7 +4,7 @@
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <solid android:color="@color/transparent_primary_dark" />
+    <solid android:color="@color/transparent_accent" />
 
     <stroke
         android:width="0dp"

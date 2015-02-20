@@ -176,8 +176,6 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                     fragmentManager.beginTransaction()
                             .replace(R.id.content_frame, fragment)
                             .commit();
-                    /*Intent intent = new Intent(context, AboutActivity.class);
-                    context.startActivity(intent);*/
                     ((ActionBarActivity) context).setTitle(context.getResources().getStringArray(R.array.drawer_list)[position]);
                     drawerLayout.closeDrawers();
                     break;
