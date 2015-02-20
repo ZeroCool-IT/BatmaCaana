@@ -27,6 +27,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import it.zerocool.batmacaana.model.Place;
 
 /**
+ * Location utilities class
  * Created by Marco on 19/01/2015.
  */
 public class LocationUtilities {

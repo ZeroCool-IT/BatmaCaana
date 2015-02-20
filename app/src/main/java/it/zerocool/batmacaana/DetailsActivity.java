@@ -101,8 +101,8 @@ public class DetailsActivity extends ActionBarActivity {
             case Constant.TYPE_SERVICE:
                 f = new PlaceFragment();
                 break;
-            case Constant.TYPE_SHOP:
-                f = new PlaceFragment();
+            case Constant.TYPE_CITY:
+                f = new CityFragment();
                 break;
             case Constant.TYPE_NEWS:
                 f = new NewsFragment();

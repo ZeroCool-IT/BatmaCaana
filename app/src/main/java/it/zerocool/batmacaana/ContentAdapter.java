@@ -84,9 +84,14 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
     public void onBindViewHolder(ContentAdapter.ContentViewHolder holder, int position) {
         Cardable current = contentItems.get(position);
         holder.header.setText(current.getHeader());
-        holder.subHeader.setText(current.getSubheader());
+        String subHeader = current.getSubheader();
+        if (subHeader != null && !subHeader.isEmpty()) {
+            holder.subHeader.setText(current.getSubheader());
+        } else {
+            holder.subHeader.setVisibility(View.GONE);
+        }
         String accent = current.getAccentInfo();
-        if (accent != null) {
+        if (accent != null && !accent.isEmpty()) {
             holder.accent.setText(accent);
         } else {
             holder.accent.setVisibility(View.GONE);

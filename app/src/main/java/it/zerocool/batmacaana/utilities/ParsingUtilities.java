@@ -21,6 +21,7 @@ import java.util.GregorianCalendar;
 import java.util.StringTokenizer;
 
 import it.zerocool.batmacaana.model.Cardable;
+import it.zerocool.batmacaana.model.City;
 import it.zerocool.batmacaana.model.ContactCard;
 import it.zerocool.batmacaana.model.Eat;
 import it.zerocool.batmacaana.model.Event;
@@ -121,7 +122,7 @@ public class ParsingUtilities {
                         case Constant.TYPE_SERVICE:
                             p = new Service(id);
                             break;
-                        case Constant.TYPE_SHOP:
+                        case Constant.TYPE_CITY:
                             p = new Shop(id);
                             break;
                         default:
@@ -165,7 +166,7 @@ public class ParsingUtilities {
         } catch (JSONException e) {
             Log.e("JSON Exception", e.getMessage());
         } catch (IllegalArgumentException e) {
-            Log.e("Coordinate conversion exception", e.getMessage());
+            Log.e("Coordinate exception", e.getMessage());
         }
         return result;
     }
@@ -195,7 +196,7 @@ public class ParsingUtilities {
                 case Constant.TYPE_SERVICE:
                     p = new Service(id);
                     break;
-                case Constant.TYPE_SHOP:
+                case Constant.TYPE_CITY:
                     p = new Shop(id);
                     break;
                 default:
@@ -271,7 +272,12 @@ public class ParsingUtilities {
                     e.setEndDate(toBuild.getString("UNTILDATE"));
                     e.setStartHour(toBuild.getString("FROMHOUR"));
                     e.setEndHour(toBuild.getString("UNTILHOUR"));
-                    //TODO Location
+                    Location l = new Location("");
+                    String latitude = toBuild.getString("LATITUDE");
+                    String longitude = toBuild.getString("LONGITUDE");
+                    l.setLatitude(Location.convert(latitude));
+                    l.setLongitude(Location.convert(longitude));
+                    e.setLocation(l);
                     result.add(e);
                 }
             }
@@ -310,7 +316,12 @@ public class ParsingUtilities {
             e.setEndDate(toBuild.getString("UNTILDATE"));
             e.setStartHour(toBuild.getString("FROMHOUR"));
             e.setEndHour(toBuild.getString("UNTILHOUR"));
-            //TODO Location
+            Location l = new Location("");
+            String latitude = toBuild.getString("LATITUDE");
+            String longitude = toBuild.getString("LONGITUDE");
+            l.setLatitude(Location.convert(latitude));
+            l.setLongitude(Location.convert(longitude));
+            e.setLocation(l);
             return e;
         } catch (JSONException e) {
             Log.e("JSON Exception", e.getMessage());
@@ -371,9 +382,77 @@ public class ParsingUtilities {
             n.setTagsFromCSV(toBuild.optString("TAGS", ""));
             return n;
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e("JSON Exception", e.getMessage());
         }
         return null;
+    }
+
+    public static ArrayList<Cardable> parseCitiesFromJSON(String json) {
+        ArrayList<Cardable> result = new ArrayList<>();
+        try {
+            JSONObject reader = new JSONObject(json);
+            JSONArray data = reader.getJSONArray("Comuni");
+            if (data != null) {
+                for (int i = 0; i < data.length(); i++) {
+                    JSONObject toBuild = data.getJSONObject(i);
+                    int id = Integer.parseInt(toBuild.getString("COMUNE_ID"));
+                    City c = new City(id);
+                    c.setName(toBuild.getString("NAME"));
+                    c.setDescription(toBuild.getString("DESCRIPTION"));
+                    c.setImage(toBuild.getString("IMAGE"));
+                    ContactCard con = new ContactCard();
+                    con.setTelephone(toBuild.getString("TELEPHONENUMBER"));
+                    con.setEmail(toBuild.getString("EMAIL"));
+                    con.setUrl(toBuild.getString("URL"));
+                    c.setContact(con);
+                    Location l = new Location("");
+                    String latitude = toBuild.getString("LATITUDE");
+                    String longitude = toBuild.getString("LONGITUDE");
+                    l.setLatitude(Location.convert(latitude));
+                    l.setLongitude(Location.convert(longitude));
+                    c.setLocation(l);
+                    c.setLink(toBuild.optString("LINK", ""));
+                    c.setJson(toBuild.toString());
+                    c.setDistanceFromCurrentPosition(Float.parseFloat(toBuild.getString("DISTANZA")));
+                    //LocationUtilities.setPlaceDistance(c, currentLocation);
+                    result.add(c);
+                }
+            }
+        } catch (JSONException e) {
+            Log.e("JSON Exception", e.getMessage());
+        }
+        return result;
+    }
+
+    public static City parseSingleCity(String json) {
+        JSONObject toBuild = null;
+        try {
+            toBuild = new JSONObject(json);
+
+            int id = Integer.parseInt(toBuild.getString("COMUNE_ID"));
+            City c = new City(id);
+            c.setName(toBuild.getString("NAME"));
+            c.setDescription(toBuild.getString("DESCRIPTION"));
+            c.setImage(toBuild.getString("IMAGE"));
+            ContactCard con = new ContactCard();
+            con.setTelephone(toBuild.getString("TELEPHONENUMBER"));
+            con.setEmail(toBuild.getString("EMAIL"));
+            con.setUrl(toBuild.getString("URL"));
+            c.setContact(con);
+            Location l = new Location("");
+            String latitude = toBuild.getString("LATITUDE");
+            String longitude = toBuild.getString("LONGITUDE");
+            l.setLatitude(Location.convert(latitude));
+            l.setLongitude(Location.convert(longitude));
+            c.setLocation(l);
+            c.setLink(toBuild.optString("LINK", ""));
+            c.setJson(toBuild.toString());
+            return c;
+        } catch (JSONException e) {
+            Log.e("JSON Exception", e.getMessage());
+        }
+        return null;
+
     }
 
     public static ArrayList<SearchResult> parseSearchResultsFromJSON(String json) {

@@ -113,7 +113,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             case Constant.TYPE_SERVICE:
                 iconResId = R.drawable.ic_directions_train_grey600_48dp;
                 break;
-            case Constant.TYPE_SHOP:
+            case Constant.TYPE_CITY:
                 iconResId = R.drawable.ic_local_mall_grey600_48dp;
                 break;
             case Constant.TYPE_EVENT:

@@ -54,7 +54,7 @@ public class NavigationDrawerFragment extends Fragment {
                 R.drawable.ic_local_restaurant_grey600_24dp,
                 R.drawable.ic_local_hotel_grey600_24dp,
                 R.drawable.ic_newspaper_grey600_24dp,
-                R.drawable.ic_local_mall_grey600_24dp,
+                R.drawable.ic_location_city_grey600_24dp,
                 R.drawable.ic_directions_train_grey600_24dp,
                 R.drawable.ic_local_library_grey600_24dp,
                 R.drawable.ic_subheader_ph_24dp,
@@ -132,7 +132,7 @@ public class NavigationDrawerFragment extends Fragment {
             mDrawerLayout.openDrawer(containerView);
         }
         SharedPreferences sp = SharedPreferencesProvider.getSharedPreferences(getActivity());
-        int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
+        int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "7"));
         selectItem(defaultView);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerLayout.post(new Runnable() {

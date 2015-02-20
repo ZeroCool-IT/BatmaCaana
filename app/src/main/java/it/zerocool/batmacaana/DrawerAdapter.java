@@ -74,7 +74,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         } else if (viewType == Constant.UPDATE) {
             view = inflater.inflate(R.layout.drawer_row, parent, false);
             view.setVisibility(View.GONE);
-        } else if (viewType == Constant.SHOP) {
+        } else if (viewType == Constant.CITY) {
             view = inflater.inflate(R.layout.drawer_row, parent, false);
         } else {
             view = inflater.inflate(R.layout.drawer_row, parent, false);
@@ -109,7 +109,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
     @Override
     public int getItemViewType(int position) {
         SharedPreferences sp = SharedPreferencesProvider.getSharedPreferences(context);
-        final int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
+        final int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "7"));
 
         if (position == defaultView)
             return Constant.VIEW_STATE_SELECTED;
@@ -119,8 +119,8 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
             return Constant.ABOUT;
         else if (position == Constant.OFFLINE)
             return Constant.OFFLINE;
-        else if (position == Constant.SHOP)
-            return Constant.SHOP;
+        else if (position == Constant.CITY)
+            return Constant.CITY;
         else if (position == Constant.UPDATE)
             return Constant.UPDATE;
         return super.getItemViewType(position);

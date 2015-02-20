@@ -111,8 +111,9 @@ public class ContentFragment extends Fragment {
             case Constant.SERVICES:
                 uri = Constant.URI_SERVICES;
                 break;
-            case Constant.SHOP:
-                uri = Constant.URI_SHOP;
+            case Constant.CITY:
+                uri = Constant.URI_CITY;
+                type = Constant.CITY;
                 break;
             case Constant.NEWS:
                 uri = Constant.URI_NEWS;
@@ -154,7 +155,7 @@ public class ContentFragment extends Fragment {
 
     /**
      * Called when the Fragment is no longer resumed.  This is generally
-     * tied to {@link Activity#onPause() Activity.onPause} of the containing
+     * tied to {@link android.app.Activity#onPause() Activity.onPause} of the containing
      * Activity's lifecycle.
      */
     @Override
@@ -185,7 +186,7 @@ public class ContentFragment extends Fragment {
 
     /**
      * Called when the Fragment is no longer started.  This is generally
-     * tied to {@link Activity#onStop() Activity.onStop} of the containing
+     * tied to {@link android.app.Activity#onStop() Activity.onStop} of the containing
      * Activity's lifecycle.
      */
     @Override
@@ -249,6 +250,12 @@ public class ContentFragment extends Fragment {
                         break;
                     case Constant.EVENT:
                         res = ParsingUtilities.parseEventFromJSON(json);
+                        break;
+                    case Constant.CITY:
+                        res = ParsingUtilities.parseCitiesFromJSON(json);
+                        temp = (ArrayList) res;
+                        Collections.sort(temp, new PlaceComparator());
+                        res = (List) temp;
                 }
                 if (isCancelled())
                     return null;

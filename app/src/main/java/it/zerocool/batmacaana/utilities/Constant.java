@@ -36,7 +36,7 @@ public class Constant {
     public static final int TYPE_EAT = 2;
     public static final int TYPE_SLEEP = 3;
     public static final int TYPE_SERVICE = 4;
-    public static final int TYPE_SHOP = 5;
+    public static final int TYPE_CITY = 5;
     public static final int TYPE_EVENT = 6;
     public static final int TYPE_NEWS = 7;
 
@@ -47,7 +47,7 @@ public class Constant {
     public static final int EAT = 2;
     public static final int SLEEP = 3;
     public static final int NEWS = 4;
-    public static final int SHOP = 5;
+    public static final int CITY = 5;
     public static final int SERVICES = 6;
     public static final int ABOUT = 7;
     public static final int SUBHEADER = 8;
@@ -64,7 +64,7 @@ public class Constant {
     public static final String URI_EAT = "http://www.exploracity.it/app/json/mangiare.php?user=";
     public static final String URI_SLEEP = "http://www.exploracity.it/app/json/dormire.php?user=";
     public static final String URI_SERVICES = "http://www.exploracity.it/app/json/servizi.php?user=";
-    public static final String URI_SHOP = "http://www.exploracity.it/app/json/shop.php?user=";
+    public static final String URI_CITY = "http://www.exploracity.it/app/json/comuni.php?user=";
     public static final String URI_NEWS = "http://www.exploracity.it/app/json/news.php?user=";
     public static final String URI_EVENT = "http://www.exploracity.it/app/json/eventi.php?user=";
     public static final String URI_IMAGE_BIG = "http://www.exploracity.it/app/images/big/";
