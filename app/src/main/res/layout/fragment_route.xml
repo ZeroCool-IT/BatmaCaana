@@ -1,0 +1,230 @@
+<!--
+  ~ Copyright ZeroApp(c) 2015. All right reserved.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/fragment_details_top_margin"
+    tools:context="it.zerocool.batmacaana.PlaceFragment">
+
+
+    <com.nirhart.parallaxscroll.views.ParallaxScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/image_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:adjustViewBounds="true"
+
+                    android:src="@drawable/im_placeholder" />
+
+                <ImageButton
+                    android:id="@+id/fullscreenButton"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/imageView"
+                    android:layout_alignEnd="@id/imageView"
+                    android:layout_alignRight="@id/imageView"
+                    android:src="@drawable/ic_fullscreen_grey600_36dp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/button_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_layout"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/earthButton"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/transparent_bg"
+                    android:drawableTop="@drawable/ic_earth_grey600_36dp"
+                    android:paddingBottom="@dimen/action_button_td_padding"
+                    android:paddingLeft="@dimen/action_button_lr_padding"
+                    android:paddingRight="@dimen/action_button_lr_padding"
+                    android:paddingTop="@dimen/action_button_td_padding"
+                    android:text="@string/earth"
+                    android:textColor="@color/action_button_text"
+                    android:textSize="@dimen/button_bar_text_size" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/button_layout"
+                android:background="@color/background_material_light"
+                android:padding="8dp">
+
+                <LinearLayout
+                    android:id="@+id/description_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="8dp"
+                        android:src="@drawable/ic_local_library_grey600_24dp" />
+
+                    <com.ms.square.android.expandabletextview.ExpandableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/description_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        expandableTextView:animDuration="200"
+                        expandableTextView:collapseDrawable="@drawable/ic_expand_less_grey600_36dp"
+                        expandableTextView:expandDrawable="@drawable/ic_expand_more_grey600_36dp"
+                        expandableTextView:maxCollapsedLines="6">
+
+                        <TextView
+                            android:id="@id/expandable_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|bottom"
+                            android:layout_margin="8dp"
+                            android:background="@android:color/transparent" />
+                    </com.ms.square.android.expandabletextview.ExpandableTextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/duration_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/description_layout"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="8dp"
+                        android:src="@drawable/ic_access_time_grey600_24dp" />
+
+                    <TextView
+                        android:id="@+id/duration_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="Dummy duration" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/length_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/duration_layout"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="8dp"
+                        android:src="@drawable/ic_ruler" />
+
+                    <TextView
+                        android:id="@+id/length_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="Dummy length" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/level_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/length_layout"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="8dp"
+                        android:src="@drawable/ic_level" />
+
+                    <TextView
+                        android:id="@+id/level_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="Dummy level" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/tag_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/level_layout"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/ic_local_offer_grey600_24dp" />
+
+                    <TextView
+                        android:id="@+id/tag_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="Dummy tag" />
+                </LinearLayout>
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+    </com.nirhart.parallaxscroll.views.ParallaxScrollView>
+
+
+</RelativeLayout>

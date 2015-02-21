@@ -27,6 +27,7 @@ import it.zerocool.batmacaana.model.Eat;
 import it.zerocool.batmacaana.model.Event;
 import it.zerocool.batmacaana.model.News;
 import it.zerocool.batmacaana.model.Place;
+import it.zerocool.batmacaana.model.Route;
 import it.zerocool.batmacaana.model.SearchResult;
 import it.zerocool.batmacaana.model.Service;
 import it.zerocool.batmacaana.model.Shop;
@@ -424,6 +425,7 @@ public class ParsingUtilities {
         return result;
     }
 
+
     public static City parseSingleCity(String json) {
         JSONObject toBuild = null;
         try {
@@ -453,6 +455,57 @@ public class ParsingUtilities {
         }
         return null;
 
+    }
+
+    public static ArrayList<Cardable> parseRoutesFromJSON(String json) {
+        ArrayList<Cardable> result = new ArrayList<>();
+        try {
+            JSONObject reader = new JSONObject(json);
+            JSONArray data = reader.getJSONArray("Percorsi");
+            if (data != null) {
+                for (int i = 0; i < data.length(); i++) {
+                    JSONObject toBuild = data.getJSONObject(i);
+                    int id = Integer.parseInt(toBuild.getString("PERCORSO_ID"));
+                    Route r = new Route(id);
+                    r.setName(toBuild.getString("NAME"));
+                    r.setTagsFromCSV(toBuild.getString("TAGS"));
+                    r.setLength(Float.parseFloat(toBuild.getString("DISTANZA")));
+                    r.setDuration(toBuild.getString("TEMPO"));
+                    r.setLevel(toBuild.getString("DIFFICOLTA"));
+                    r.setImage(toBuild.getString("IMAGE"));
+                    r.setKml(toBuild.getString("KML"));
+                    r.setDescription(toBuild.getString("DESCRIPTION"));
+                    r.setJson(toBuild.toString());
+                    result.add(r);
+                }
+            }
+        } catch (JSONException e) {
+            Log.e("JSON Exception", e.getMessage());
+        }
+        return result;
+    }
+
+    public static Route parseSingleRoute(String json) {
+        JSONObject toBuild = null;
+        try {
+            toBuild = new JSONObject(json);
+            int id = Integer.parseInt(toBuild.getString("PERCORSO_ID"));
+            Route r = new Route(id);
+            r.setName(toBuild.getString("NAME"));
+            r.setTagsFromCSV(toBuild.getString("TAGS"));
+            r.setLength(Float.parseFloat(toBuild.getString("DISTANZA")));
+            r.setDuration(toBuild.getString("TEMPO"));
+            r.setLevel(toBuild.getString("DIFFICOLTA"));
+            r.setImage(toBuild.getString("IMAGE"));
+            r.setKml(toBuild.getString("KML"));
+            r.setDescription(toBuild.getString("DESCRIPTION"));
+            r.setJson(toBuild.toString());
+            return r;
+
+        } catch (JSONException e) {
+            Log.e("JSON Exception", e.getMessage());
+        }
+        return null;
     }
 
     public static ArrayList<SearchResult> parseSearchResultsFromJSON(String json) {

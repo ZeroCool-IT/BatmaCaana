@@ -39,6 +39,7 @@ public class Constant {
     public static final int TYPE_CITY = 5;
     public static final int TYPE_EVENT = 6;
     public static final int TYPE_NEWS = 7;
+    public static final int TYPE_ROUTE = 8;
 
 
     //Navigation Drawer Fragments
@@ -76,6 +77,7 @@ public class Constant {
     public static final String OBJECT_SEARCH2 = "&id=";
     public static final String OBJECT_SEARCH3 = "&type=";
     public static final String PLACE_URI = "http://exploracity.it/item/";
+    public static final String URI_ROUTES = "http://www.exploracity.it/app/json/percorsi.php?user=";
 
 
     //Week Days

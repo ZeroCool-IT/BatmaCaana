@@ -6,13 +6,13 @@ package it.zerocool.batmacaana.utilities;
 
 import java.util.Comparator;
 
-import it.zerocool.batmacaana.model.Place;
+import it.zerocool.batmacaana.model.Route;
 
 /**
- * Compare two places by distance from current position
- * Created by Marco on 20/01/2015.
+ * Compare two routes by length
+ * Created by Marco Battisti on 21/02/2015.
  */
-public class PlaceComparator implements Comparator<Place> {
+public class RouteComparator implements Comparator<Route> {
 
     /**
      * Compares the two specified objects to determine their relative ordering. The ordering
@@ -35,8 +35,7 @@ public class PlaceComparator implements Comparator<Place> {
      * @throws ClassCastException if objects are not of the correct type.
      */
     @Override
-    public int compare(Place lhs, Place rhs) {
-        return Float.compare(lhs.getDistanceFromCurrentPosition(), rhs.getDistanceFromCurrentPosition());
+    public int compare(Route lhs, Route rhs) {
+        return Float.compare(lhs.getLength(), rhs.getLength());
     }
-
 }

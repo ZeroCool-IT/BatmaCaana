@@ -109,6 +109,7 @@ public class DetailsActivity extends ActionBarActivity {
                 break;
             case Constant.TYPE_EVENT:
                 f = new EventFragment();
+                break;
         }
         return f;
     }

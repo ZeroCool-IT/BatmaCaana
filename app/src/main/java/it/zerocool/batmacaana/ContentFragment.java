@@ -29,10 +29,12 @@ import java.util.List;
 import it.zerocool.batmacaana.dialog.WarningDialog;
 import it.zerocool.batmacaana.model.Cardable;
 import it.zerocool.batmacaana.model.Place;
+import it.zerocool.batmacaana.model.Route;
 import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
 import it.zerocool.batmacaana.utilities.PlaceComparator;
 import it.zerocool.batmacaana.utilities.RequestUtilities;
+import it.zerocool.batmacaana.utilities.RouteComparator;
 
 
 public class ContentFragment extends Fragment {
@@ -119,6 +121,9 @@ public class ContentFragment extends Fragment {
                 uri = Constant.URI_NEWS;
                 type = Constant.NEWS;
                 break;
+            case Constant.ROUTES:
+                uri = Constant.URI_ROUTES;
+                type = Constant.ROUTES;
             default:
                 break;
         }
@@ -253,9 +258,17 @@ public class ContentFragment extends Fragment {
                         break;
                     case Constant.CITY:
                         res = ParsingUtilities.parseCitiesFromJSON(json);
+                        res = ParsingUtilities.parseCitiesFromJSON(json);
                         temp = (ArrayList) res;
                         Collections.sort(temp, new PlaceComparator());
                         res = (List) temp;
+                        break;
+                    case Constant.ROUTES:
+                        res = ParsingUtilities.parseRoutesFromJSON(json);
+                        ArrayList<Route> t = (ArrayList) res;
+                        Collections.sort(t, new RouteComparator());
+                        res = (List) t;
+
                 }
                 if (isCancelled())
                     return null;

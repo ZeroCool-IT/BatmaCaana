@@ -195,9 +195,10 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                     context.startActivity(settingsIntent);
                     drawerLayout.closeDrawers();
                     break;
-                case Constant.ROUTES:
-                    Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
-                    break;
+//                case Constant.ROUTES:
+//
+////                    Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
+//                    break;
                 /*case Constant.UPDATE:
                     Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
                     break;*/

@@ -4,8 +4,9 @@
 
 package it.zerocool.batmacaana;
 
-
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -32,37 +33,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ms.square.android.expandabletextview.ExpandableTextView;
-import com.shamanland.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
-import it.zerocool.batmacaana.model.City;
+import it.zerocool.batmacaana.model.Route;
 import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class CityFragment extends Fragment implements View.OnClickListener {
 
+public class RouteFragment extends Fragment implements View.OnClickListener {
 
     private ShareActionProvider shareActionProvider;
     private ExpandableTextView tvDescription;
-    private City targetCity;
-    private ImageView ivCity;
+    private Route targetRoute;
+    private ImageView ivRoute;
     private LinearLayout buttonLayout;
-    private TextView phoneTv;
-    private TextView mailTv;
-    private TextView linkTv;
+    private TextView durationTv;
+    private TextView levelTv;
+    private TextView lengthTv;
     private TextView tagTv;
-    private Button phoneActionButton;
-    private Button urlActionButton;
-    private Button mailActionButton;
+    private Button earthButton;
     private ImageButton fullScreenButton;
-    private FloatingActionButton floatingActionButton;
-    private LinearLayout phoneLayout;
-    private LinearLayout mailLayout;
-    private LinearLayout linkLayout;
+    private LinearLayout durationLayout;
+    private LinearLayout levelLayout;
+    private LinearLayout lengthLayout;
     private LinearLayout descriptionLayout;
     private Target loadTarget;
     private Toolbar toolbar;
@@ -72,7 +66,7 @@ public class CityFragment extends Fragment implements View.OnClickListener {
 //    private SQLiteDatabase db;
 
 
-    public CityFragment() {
+    public RouteFragment() {
         // Required empty public constructor
     }
 
@@ -93,35 +87,28 @@ public class CityFragment extends Fragment implements View.OnClickListener {
         //Bind widget
         buttonLayout = (LinearLayout) layout.findViewById(R.id.button_layout);
         tvDescription = (ExpandableTextView) layout.findViewById(R.id.description_tv);
-        phoneTv = (TextView) layout.findViewById(R.id.phone_tv);
-        mailTv = (TextView) layout.findViewById(R.id.mail_tv);
-        linkTv = (TextView) layout.findViewById(R.id.link_tv);
+        durationTv = (TextView) layout.findViewById(R.id.phone_tv);
+        levelTv = (TextView) layout.findViewById(R.id.level_tv);
+        lengthTv = (TextView) layout.findViewById(R.id.length_tv);
         tagTv = (TextView) layout.findViewById(R.id.tag_tv);
-        phoneActionButton = (Button) layout.findViewById(R.id.phoneButton);
-        urlActionButton = (Button) layout.findViewById(R.id.urlButton);
-        mailActionButton = (Button) layout.findViewById(R.id.mailButton);
         fullScreenButton = (ImageButton) layout.findViewById(R.id.fullscreenButton);
 
-        floatingActionButton = (FloatingActionButton) layout.findViewById(R.id.floatingButton);
-
-        phoneLayout = (LinearLayout) layout.findViewById(R.id.level_layout);
-        mailLayout = (LinearLayout) layout.findViewById(R.id.mail_layout);
-        linkLayout = (LinearLayout) layout.findViewById(R.id.link_layout);
+        durationLayout = (LinearLayout) layout.findViewById(R.id.duration_layout);
+        levelLayout = (LinearLayout) layout.findViewById(R.id.level_layout);
+        lengthLayout = (LinearLayout) layout.findViewById(R.id.length_layout);
         descriptionLayout = (LinearLayout) layout.findViewById(R.id.description_layout);
         toolbar = (Toolbar) layout.findViewById(R.id.appbar);
-        ivCity = (ImageView) layout.findViewById(R.id.imageView);
+        ivRoute = (ImageView) layout.findViewById(R.id.imageView);
+        earthButton = (Button) layout.findViewById(R.id.earthButton);
 
         //Listener
-        phoneActionButton.setOnClickListener(this);
-        urlActionButton.setOnClickListener(this);
-        mailActionButton.setOnClickListener(this);
-        floatingActionButton.setOnClickListener(this);
         fullScreenButton.setOnClickListener(this);
-        ivCity.setOnClickListener(this);
+        ivRoute.setOnClickListener(this);
+        earthButton.setOnClickListener(this);
 
         //Args read
-        City p = ParsingUtilities.parseSingleCity(getArguments().getString(Constant.JSON_ARG));
-        targetCity = p;
+        Route p = ParsingUtilities.parseSingleRoute(getArguments().getString(Constant.JSON_ARG));
+        targetRoute = p;
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(p.getName());
         if (!p.getTags().isEmpty()) {
             String tags = TextUtils.join(", ", p.getTags());
@@ -129,7 +116,7 @@ public class CityFragment extends Fragment implements View.OnClickListener {
         }
 
         //Load imagery and change colors
-        ivCity = (ImageView) layout.findViewById(R.id.imageView);
+        ivRoute = (ImageView) layout.findViewById(R.id.imageView);
 
         loadBitmap(Constant.URI_IMAGE_BIG + p.getImage());
 
@@ -166,41 +153,43 @@ public class CityFragment extends Fragment implements View.OnClickListener {
         Picasso.with(getActivity()).load(url).into(loadTarget);
     }
 
-    private void fillFields(City p) {
-        if (p.getDescription() != null)
-            tvDescription.setText(p.getDescription());
+    private void fillFields(Route r) {
+        if (r.getDescription() != null)
+            tvDescription.setText(r.getDescription());
         else
             descriptionLayout.setVisibility(View.GONE);
 
 
-        if (p.getContact().getTelephone() != null) {
-            phoneTv.setText(p.getContact().getTelephone());
+        if (r.getDuration() != null) {
+            durationTv.setText(r.getDuration());
         } else {
-            phoneLayout.setVisibility(View.GONE);
-            phoneTv.setText("N/A");
+            durationLayout.setVisibility(View.GONE);
+            durationTv.setText("N/A");
         }
-        if (p.getContact().getEmail() != null) {
-            mailTv.setText(p.getContact().getEmail());
+        if (r.getLevel() != null) {
+            levelTv.setText(r.getLevel());
         } else {
-            mailLayout.setVisibility(View.GONE);
-            mailTv.setText("N/A");
+            levelLayout.setVisibility(View.GONE);
+            levelTv.setText("N/A");
         }
-        if (p.getContact().getUrl() != null) {
-            linkTv.setText(p.getContact().getUrl());
+        if (r.getLength() != 0) {
+            lengthTv.setText(Float.valueOf(r.getLength()).toString());
         } else {
-            linkLayout.setVisibility(View.GONE);
-            linkTv.setText("N/A");
+            lengthLayout.setVisibility(View.GONE);
+            lengthTv.setText("N/A");
         }
 
     }
 
     public void setBitmap(Bitmap bitmap) {
         Picasso.with(getActivity()).
-                load(Constant.URI_IMAGE_BIG + targetCity.getImage()).
+                load(Constant.URI_IMAGE_BIG + targetRoute.getImage()).
                 placeholder(R.drawable.im_placeholder).
                 error(R.drawable.im_noimage).
-                into(ivCity);
-        Palette.generateAsync(bitmap, CityPaletteListener.newInstance(this));
+                into(ivRoute);
+        Palette.generateAsync(bitmap, RoutePaletteListener.newInstance(this));
+        earthButton.setTextColor(palette.getVibrantColor(R.color.white));
+
     }
 
     public void setPalette(Palette palette) {
@@ -211,9 +200,6 @@ public class CityFragment extends Fragment implements View.OnClickListener {
         }
 
         buttonLayout.setBackgroundColor(palette.getLightMutedColor(R.color.primaryColor));
-        phoneActionButton.setTextColor(palette.getVibrantColor(R.color.white));
-        mailActionButton.setTextColor(palette.getVibrantColor(R.color.white));
-        urlActionButton.setTextColor(palette.getVibrantColor(R.color.white));
 
     }
 
@@ -270,8 +256,8 @@ public class CityFragment extends Fragment implements View.OnClickListener {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_SEND);
             String message = getResources().getString(R.string.share_place_message) +
-                    targetCity.getName() + "\n" +
-                    targetCity.getItemURI();
+                    targetRoute.getName() + "\n" +
+                    targetRoute.getItemURI();
             intent.putExtra(Intent.EXTRA_TEXT, message);
             intent.setType("text/plain");
             setShareIntent(intent);
@@ -288,43 +274,13 @@ public class CityFragment extends Fragment implements View.OnClickListener {
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.phoneButton) {
-            String phone = targetCity.getContact().getTelephone();
-            if (phone != null) {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                String uri = "tel: " + phone.trim();
-                intent.setData(Uri.parse(uri));
-                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivity(intent);
-                } else
-                    Toast.makeText(getActivity(), R.string.no_dial_app, Toast.LENGTH_SHORT).show();
-
-            } else
-                Toast.makeText(getActivity(), R.string.no_phone_available, Toast.LENGTH_SHORT).show();
-
-
-        } else if (v.getId() == R.id.mailButton) {
-            String mail = targetCity.getContact().getEmail();
-            if (mail != null) {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-                intent.setType("*/*");
-                String[] addresses = new String[1];
-                addresses[0] = targetCity.getContact().getEmail();
-                intent.putExtra(Intent.EXTRA_EMAIL, addresses);
-                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivity(intent);
-                } else
-                    Toast.makeText(getActivity(), R.string.no_mail_app, Toast.LENGTH_SHORT).show();
-
-            } else
-                Toast.makeText(getActivity(), R.string.no_email_available, Toast.LENGTH_SHORT).show();
-        } else if (v.getId() == R.id.urlButton) {
-            String url = targetCity.getContact().getUrl();
+        if (v.getId() == R.id.urlButton) {
+            String url = targetRoute.getKml();
             if (url != null) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));
-                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                //TODO COMPLETE THIS!!
+                if (earthInstalled("com.google.earth")) {
                     startActivity(intent);
                 } else
                     Toast.makeText(getActivity(), R.string.no_browser_app, Toast.LENGTH_SHORT).show();
@@ -333,22 +289,10 @@ public class CityFragment extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity(), R.string.no_url_available, Toast.LENGTH_SHORT).show();
 
 
-        } else if (v.getId() == R.id.floatingButton) {
-            if (targetCity.getLocation() != null) {
-                String lat = Double.valueOf(targetCity.getLocation().getLatitude()).toString();
-                String lon = Double.valueOf(targetCity.getLocation().getLongitude()).toString();
-                String uri = "geo:0,0?q=" + lat + "," + lon + "(" + targetCity.getName() + ")";
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(uri));
-                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivity(intent);
-                } else
-                    Toast.makeText(getActivity(), R.string.no_map_app, Toast.LENGTH_SHORT).show();
-            }
         } else if (v.getId() == R.id.imageView || v.getId() == R.id.fullscreenButton) {
-            if (targetCity.getImage() != null) {
+            if (targetRoute.getImage() != null) {
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
-                intent.putExtra(Constant.IMAGE, targetCity.getImage());
+                intent.putExtra(Constant.IMAGE, targetRoute.getImage());
                 intent.putExtra(Constant.LANDSCAPE_ORIENTATION, true);
                 if (palette != null) {
                     String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(R.color.primaryColor)));
@@ -360,4 +304,17 @@ public class CityFragment extends Fragment implements View.OnClickListener {
 
         }
     }
+
+    private boolean earthInstalled(String uri) {
+        PackageManager pm = getActivity().getPackageManager();
+        boolean app_installed = false;
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            app_installed = true;
+        } catch (PackageManager.NameNotFoundException e) {
+            app_installed = false;
+        }
+        return app_installed;
+    }
+
 }
