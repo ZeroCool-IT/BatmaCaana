@@ -67,15 +67,16 @@
     <string name="too_short">Search query is too short!</string>
 
     <string-array name="drawer_list">
+        <item>@string/city_name</item>
         <item>To See</item>
         <item>Event</item>
         <item>Eat</item>
         <item>Sleep</item>
         <item>News</item>
-        <item>Nearby Cities</item>
         <item>Services</item>
-        <item>@string/city_name</item>
+        <item>Routes</item>
         <item>Other</item>
+        <item>Nearby Cities</item>
         <item>Favorite</item>
         <item>Settings…</item>
         <!-- <item>Offline</item> -->

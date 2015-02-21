@@ -57,7 +57,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
             previousSelected = view;
         } else if (viewType == Constant.NAV_DRAWER_SUBHEADER) {
             view = inflater.inflate(R.layout.drawer_row_subheader, parent, false);
-        } else if (viewType == Constant.ABOUT) {
+        } else if (viewType == Constant.ROUTES) {
             view = inflater.inflate(R.layout.drawer_row_last_main, parent, false);
         } else if (viewType == Constant.OFFLINE) {
             view = inflater.inflate(R.layout.drawer_row_offline_toggle, parent, false);
@@ -109,14 +109,14 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
     @Override
     public int getItemViewType(int position) {
         SharedPreferences sp = SharedPreferencesProvider.getSharedPreferences(context);
-        final int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "7"));
+        final int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
 
         if (position == defaultView)
             return Constant.VIEW_STATE_SELECTED;
         else if (position == Constant.NAV_DRAWER_SUBHEADER)
             return Constant.NAV_DRAWER_SUBHEADER;
-        else if (position == Constant.ABOUT)
-            return Constant.ABOUT;
+        else if (position == Constant.ROUTES)
+            return Constant.ROUTES;
         else if (position == Constant.OFFLINE)
             return Constant.OFFLINE;
         else if (position == Constant.CITY)
@@ -195,10 +195,10 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                     context.startActivity(settingsIntent);
                     drawerLayout.closeDrawers();
                     break;
-               /* case Constant.OFFLINE:
+                case Constant.ROUTES:
                     Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
                     break;
-                case Constant.UPDATE:
+                /*case Constant.UPDATE:
                     Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
                     break;*/
                 default:

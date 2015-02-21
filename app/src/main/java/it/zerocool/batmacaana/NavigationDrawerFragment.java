@@ -49,15 +49,16 @@ public class NavigationDrawerFragment extends Fragment {
 
     public static List<DrawerItem> getData(Context context) {
         List<DrawerItem> data = new ArrayList<DrawerItem>();
-        int[] icons = {R.drawable.ic_beenhere_grey600_24dp,
+        int[] icons = {R.drawable.ic_local_library_grey600_24dp,
+                R.drawable.ic_beenhere_grey600_24dp,
                 R.drawable.ic_event_note_grey600_24dp,
                 R.drawable.ic_local_restaurant_grey600_24dp,
                 R.drawable.ic_local_hotel_grey600_24dp,
                 R.drawable.ic_newspaper_grey600_24dp,
-                R.drawable.ic_location_city_grey600_24dp,
                 R.drawable.ic_directions_train_grey600_24dp,
-                R.drawable.ic_local_library_grey600_24dp,
+                R.drawable.ic_routes_grey600_24dp,
                 R.drawable.ic_subheader_ph_24dp,
+                R.drawable.ic_location_city_grey600_24dp,
                 R.drawable.ic_favorite_grey600_24dp,
                 R.drawable.ic_settings_grey600_24dp,
 //                R.drawable.ic_cloud_download_grey600_24dp,
@@ -132,7 +133,7 @@ public class NavigationDrawerFragment extends Fragment {
             mDrawerLayout.openDrawer(containerView);
         }
         SharedPreferences sp = SharedPreferencesProvider.getSharedPreferences(getActivity());
-        int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "7"));
+        int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
         selectItem(defaultView);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerLayout.post(new Runnable() {

@@ -42,19 +42,20 @@ public class Constant {
 
 
     //Navigation Drawer Fragments
-    public static final int TOSEE = 0;
-    public static final int EVENT = 1;
-    public static final int EAT = 2;
-    public static final int SLEEP = 3;
-    public static final int NEWS = 4;
-    public static final int CITY = 5;
+    public static final int ABOUT = 0;
+    public static final int TOSEE = 1;
+    public static final int EVENT = 2;
+    public static final int EAT = 3;
+    public static final int SLEEP = 4;
+    public static final int NEWS = 5;
     public static final int SERVICES = 6;
-    public static final int ABOUT = 7;
+    public static final int ROUTES = 7;
     public static final int SUBHEADER = 8;
-    public static final int FAVORITE = 9;
-    public static final int SETTINGS = 10;
-    public static final int OFFLINE = 11;
-    public static final int UPDATE = 12;
+    public static final int CITY = 9;
+    public static final int FAVORITE = 10;
+    public static final int SETTINGS = 11;
+    public static final int OFFLINE = 12;
+    public static final int UPDATE = 13;
 
     //Place
     public static final int PLACE = 8;
