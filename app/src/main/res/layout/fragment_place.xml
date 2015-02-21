@@ -331,7 +331,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@color/transparent_bg"
-                        android:drawableTop="@drawable/ic_facebook_grey600_24dp"
+                        android:drawableTop="@drawable/facebook_36dp"
                         android:paddingBottom="@dimen/action_button_td_padding"
                         android:paddingTop="@dimen/action_button_td_padding"
                         android:textColor="@color/secondary_text_color"

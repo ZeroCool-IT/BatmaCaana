@@ -276,6 +276,10 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
         }
 
         buttonLayout.setBackgroundColor(palette.getLightMutedColor(R.color.primaryColor));
+        phoneActionButton.setTextColor(palette.getVibrantColor(R.color.white));
+        mailActionButton.setTextColor(palette.getVibrantColor(R.color.white));
+        urlActionButton.setTextColor(palette.getVibrantColor(R.color.white));
+        favoriteButton.setTextColor(palette.getVibrantColor(R.color.white));
 
     }
 
@@ -283,7 +287,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
      * Initialize the contents of the Activity's standard options menu.  You
      * should place your menu items in to <var>menu</var>.  For this method
      * to be called, you must have first called {@link #setHasOptionsMenu}.  See
-     * {@link Activity#onCreateOptionsMenu(android.view.Menu) Activity.onCreateOptionsMenu}
+     * {@link android.app.Activity#onCreateOptionsMenu(android.view.Menu) Activity.onCreateOptionsMenu}
      * for more information.
      *
      * @param menu     The options menu in which you place your items.
