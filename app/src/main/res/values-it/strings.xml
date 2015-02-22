@@ -40,7 +40,7 @@
     <string name="favorite_removed">&#160;rimosso dalla tua lista preferiti!</string>
     <string name="feature_na">Questa funzionalità non è disponibile!</string>
     <string name="from">Dalle:&#160;</string>
-    <string name="general_settings" translatable="false">Preferenze generali</string>
+    <string name="general_settings">Preferenze generali</string>
     <string name="iv_card_imagery">Immagine della card</string>
     <string name="location_service_warning">I servizi di localizzazione sono richiesti per una maggiore accuratezza. Vuoi attivarli?</string>
     <string name="location_service_warning_title">Servizi di localizzazione richiesti!</string>
@@ -112,7 +112,4 @@
         <item>Molto difficile</item>
         <item>Per esperti</item>
     </string-array>
-    <string name="foursquare" translatable="false">Foursquare</string>
-    <string name="googleplus" translatable="false">Google+</string>
-    <string name="tripadvisor" translatable="false">TripAdvisor</string>
 </resources>
