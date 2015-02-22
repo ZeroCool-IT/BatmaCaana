@@ -76,8 +76,9 @@ public class Constant {
     public static final String OBJECT_SEARCH1 = "http://www.exploracity.it/app/json/cercadettaglio.php?user=";
     public static final String OBJECT_SEARCH2 = "&id=";
     public static final String OBJECT_SEARCH3 = "&type=";
-    public static final String PLACE_URI = "http://exploracity.it/item/";
+    public static final String SHARE_URI = "http://exploracity.it/item/";
     public static final String URI_ROUTES = "http://www.exploracity.it/app/json/percorsi.php?user=";
+    public static final String URI_KML = "http://www.exploracity.it/app/kml/";
 
 
     //Week Days
@@ -118,6 +119,7 @@ public class Constant {
     public static final String KEY_NEWS_NOTIFICATION_NUMBER = "news_notification_number";
     public static final String KEY_EVENT_NOTIFICATION_NUMBER = "event_notification_number";
     public static final String NOTIFICATION_PREFS = "notification";
+    public static final String EARTH_NOT_NEEDED = "earth";
 
 
     //Location Constraints

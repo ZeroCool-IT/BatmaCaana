@@ -24,7 +24,7 @@ public class Route implements Cardable {
     protected LinkedList<String> tags;
     protected float length;
     protected String duration;
-    protected String level;
+    protected int level;
     protected String image;
     protected String kml;
     protected String description;
@@ -110,16 +110,12 @@ public class Route implements Cardable {
         }
     }
 
-    public String getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
-        if (level != null && !level.isEmpty()) {
-            this.level = level;
-        } else {
-            this.level = null;
-        }
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public String getImage() {
@@ -155,6 +151,14 @@ public class Route implements Cardable {
         } else {
             this.description = null;
         }
+    }
+
+    public String getItemURI() {
+        return Constant.SHARE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
+    }
+
+    public String getDistanceToString() {
+        return getAccentInfo();
     }
 
     /**

@@ -68,5 +68,19 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="restore_alerts"
+        android:title="@string/alerts_title">
+
+        <it.zerocool.batmacaana.dialog.RestoreAlertsDialogPreference
+            android:dialogMessage="@string/restore_alerts_message"
+            android:dialogTitle="@string/restore_alerts"
+            android:key="reset_alerts_dialog"
+            android:negativeButtonText="@string/no"
+            android:positiveButtonText="@string/yes"
+            android:title="@string/restore_alerts" />
+
+    </PreferenceCategory>
+
 
 </PreferenceScreen> 

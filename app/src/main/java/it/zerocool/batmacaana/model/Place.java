@@ -238,7 +238,7 @@ public class Place implements Cardable {
     }
 
     public String getItemURI() {
-        return Constant.PLACE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
+        return Constant.SHARE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
     }
 
     /**

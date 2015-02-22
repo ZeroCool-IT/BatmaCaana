@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright ZeroApp(c) 2015. All right reserved.
+  -->
+
+<resources>
+    <string name="app_name">@string/city_name</string>
+    <string name="action_settings">Preferenze…</string>
+    <string name="alerts_title">Avvisi</string>
+    <string name="back">Indietro</string>
+    <string name="bt_card_details">Dettagli</string>
+    <string name="button_refresh">Aggiorna</string>
+    <string name="call">Chiama</string>
+    <string name="clear_favorite">Cancella preferiti</string>
+    <string name="clear_history">Cancella cronologia ricerche</string>
+    <string name="closed">Chiuso</string>
+    <string name="detail_picture">Immagine principale dettaglio</string>
+    <string name="dialog_button_cancel">Annulla</string>
+    <string name="dialog_button_ignore">Ignora</string>
+    <string name="dialog_button_ok">OK</string>
+    <string name="dialog_button_settings">Preferenze…</string>
+    <string name="dialog_message_db_error">Qualcosa è andato storto col DB!</string>
+    <string name="dialog_message_error">Qualcosa è andato storto recuperando i dati dal server. Riprova più tardi!</string>
+    <string name="dialog_message_no_connection">Nessuna connessione a Internet! Controlla le tue impostazioni e prova ancora!</string>
+    <string name="dialog_title_uhoh">Oh Oh!</string>
+    <string name="dialog_title_warning">Attenzione!</string>
+    <string name="do_not_negative">Non farlo!</string>
+    <string name="drawer_default">Scegli la pagina da aprire all\'avvio…</string>
+    <string name="earth">Vedi sulla mappa</string>
+    <string name="earth_warning_message">Sembra che Google Earth non sia installato sul tuo smartphone. Per vedere questo percorso hai bisogno di un\'applicazione in grado di aprire i file .kml.</string>
+    <string name="earth_warning_negative">Cancella</string>
+    <string name="earth_warning_neutral">Apri</string>
+    <string name="earth_warning_positive">Scarica Earth!</string>
+    <string name="earth_warning_title">App necessaria</string>
+    <string name="email">E-Mail</string>
+    <string name="erase_favorite_message">Questo cancellerà i tuoi preferiti!</string>
+    <string name="event_notification_enabled">Eventi</string>
+    <string name="facebook">Facebook</string>
+    <string name="favorite">Preferiti</string>
+    <string name="favorite_added">&#160;aggiunto alla tua lista preferiti!</string>
+    <string name="favorite_removed">&#160;rimosso dalla tua lista preferiti!</string>
+    <string name="feature_na">Questa funzionalità non è disponibile!</string>
+    <string name="from">Dalle:&#160;</string>
+    <string name="general_settings" translatable="false">Preferenze generali</string>
+    <string name="iv_card_imagery">Immagine della card</string>
+    <string name="location_service_warning">I servizi di localizzazione sono richiesti per una maggiore accuratezza. Vuoi attivarli?</string>
+    <string name="location_service_warning_title">Servizi di localizzazione richiesti!</string>
+    <string name="map">Mappa</string>
+    <string name="nav_drawer_close">Menu di navigazione chiuso</string>
+    <string name="nav_drawer_open">Menu di navigazione aperto</string>
+    <string name="news_notification_enabled">Notizie</string>
+    <string name="no">No</string>
+    <string name="no_browser_app">Non è installato alcun browser web sul dispositivo!</string>
+    <string name="no_dial_app">Non è installata alcuna applicazione per chiamare sul dispositivo!</string>
+    <string name="no_email_available">Nessun indirizzo email disponibile!</string>
+    <string name="no_favorite">Nessun luogo preferito!</string>
+    <string name="no_image">Nessuna immagine disponibile!</string>
+    <string name="no_kml">Nessuna mappa disponibile per il percorso!</string>
+    <string name="no_mail_app">Non è installata alcuna applicazione email sul dispositivo!</string>
+    <string name="no_map_app">Non è installata alcuna applicazione mappe sul dispositivo!</string>
+    <string name="no_phone_available">Numero di telefono non disponibile!</string>
+    <string name="no_results">Nessun risultato!</string>
+    <string name="no_search_results">Nessun risultato per&#160;</string>
+    <string name="no_url_available">Nessun sito web disponibile!</string>
+    <string name="notification_event_title">Nuovo evento a &#160;</string>
+    <string name="notification_news_title">Ultima notizia a&#160;</string>
+    <string name="notification_title">Abilita notifiche</string>
+    <string name="play_store_na">Play Store non disponibile!</string>
+    <string name="r_u_sure_title">Sei sicuro?</string>
+    <string name="remember_choose">Ricordare questa scelta?</string>
+    <string name="restore_alerts">Rirpistina avvisi applicazione</string>
+    <string name="restore_alerts_message">Vuoi ripristinare tutti gli avvisi dell\'applicazione?</string>
+    <string name="results">Risultati per:&#160;</string>
+    <string name="search">Cerca</string>
+    <string name="search_hint">Luoghi, eventi o notizie</string>
+    <string name="search_message">Questo cancellerà la tua cronologia ricerche!</string>
+    <string name="search_title">Ricerca</string>
+    <string name="share">Condividi</string>
+    <string name="share_event_message">Penso che ti possa interessare questo evento:&#160;</string>
+    <string name="share_news_message">Penso che ti possa interessare questa notizia:&#160;</string>
+    <string name="share_place_message">Penso che ti possa interessare questo luogo:&#160;</string>
+    <string name="share_route_message">Penso che ti possa interessare questo percorso:&#160;</string>
+    <string name="sure_positive">Sono sicuro!</string>
+    <string name="tback">Premi di nuovo indietro per uscire</string>
+    <string name="title_activity_settings">Preferenze</string>
+    <string name="to">Alle:&#160;</string>
+    <string name="too_short">La chiave di ricerca è troppo corta!</string>
+    <string name="url">Sito web</string>
+    <string name="yes">Si</string>
+
+    <string-array name="drawer_list">
+        <item>@string/city_name</item>
+        <item>Da vedere</item>
+        <item>Eventi</item>
+        <item>Mangiare</item>
+        <item>Dormire</item>
+        <item>Notizie</item>
+        <item>Servizi</item>
+        <item>Percorsi Trekking</item>
+        <item>Altro</item>
+        <item>Città nelle vicinanze</item>
+        <item>Preferiti</item>
+        <item>Preferenze…</item>
+        <!-- <item>Offline</item> -->
+        <!-- <item>Update offline content</item> -->
+    </string-array>
+
+    <string-array name="route_level">
+        <item>-</item>
+        <item>Facile</item>
+        <item>Intermedio</item>
+        <item>Difficile</item>
+        <item>Molto difficile</item>
+        <item>Per esperti</item>
+    </string-array>
+    <string name="foursquare" translatable="false">Foursquare</string>
+    <string name="googleplus" translatable="false">Google+</string>
+    <string name="tripadvisor" translatable="false">TripAdvisor</string>
+</resources>

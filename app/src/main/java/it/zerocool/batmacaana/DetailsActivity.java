@@ -110,6 +110,8 @@ public class DetailsActivity extends ActionBarActivity {
             case Constant.TYPE_EVENT:
                 f = new EventFragment();
                 break;
+            case Constant.TYPE_ROUTE:
+                f = new RouteFragment();
         }
         return f;
     }

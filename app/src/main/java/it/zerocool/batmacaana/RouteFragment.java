@@ -5,7 +5,9 @@
 package it.zerocool.batmacaana;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
@@ -14,6 +16,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.ShareActionProvider;
@@ -36,6 +39,7 @@ import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import it.zerocool.batmacaana.dialog.EarthInstalledDialog;
 import it.zerocool.batmacaana.model.Route;
 import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
@@ -58,6 +62,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener {
     private LinearLayout levelLayout;
     private LinearLayout lengthLayout;
     private LinearLayout descriptionLayout;
+    private LinearLayout tagLayout;
     private Target loadTarget;
     private Toolbar toolbar;
     private Palette palette;
@@ -73,21 +78,19 @@ public class RouteFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        DatabaseOpenerAsyncTask task = new DatabaseOpenerAsyncTask();
-//        task.execute();
-
+        setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Inflate layout
-        View layout = inflater.inflate(R.layout.fragment_city, container, false);
+        View layout = inflater.inflate(R.layout.fragment_route, container, false);
 
         //Bind widget
         buttonLayout = (LinearLayout) layout.findViewById(R.id.button_layout);
         tvDescription = (ExpandableTextView) layout.findViewById(R.id.description_tv);
-        durationTv = (TextView) layout.findViewById(R.id.phone_tv);
+        durationTv = (TextView) layout.findViewById(R.id.duration_tv);
         levelTv = (TextView) layout.findViewById(R.id.level_tv);
         lengthTv = (TextView) layout.findViewById(R.id.length_tv);
         tagTv = (TextView) layout.findViewById(R.id.tag_tv);
@@ -97,6 +100,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener {
         levelLayout = (LinearLayout) layout.findViewById(R.id.level_layout);
         lengthLayout = (LinearLayout) layout.findViewById(R.id.length_layout);
         descriptionLayout = (LinearLayout) layout.findViewById(R.id.description_layout);
+        tagLayout = (LinearLayout) layout.findViewById(R.id.tag_layout);
         toolbar = (Toolbar) layout.findViewById(R.id.appbar);
         ivRoute = (ImageView) layout.findViewById(R.id.imageView);
         earthButton = (Button) layout.findViewById(R.id.earthButton);
@@ -161,23 +165,28 @@ public class RouteFragment extends Fragment implements View.OnClickListener {
 
 
         if (r.getDuration() != null) {
-            durationTv.setText(r.getDuration());
+            durationTv.setText(r.getDuration() + " h");
         } else {
             durationLayout.setVisibility(View.GONE);
             durationTv.setText("N/A");
         }
-        if (r.getLevel() != null) {
-            levelTv.setText(r.getLevel());
+        if (r.getLevel() != 0) {
+            levelTv.setText(getResources().getStringArray(R.array.route_level)[r.getLevel()]);
         } else {
             levelLayout.setVisibility(View.GONE);
             levelTv.setText("N/A");
         }
         if (r.getLength() != 0) {
-            lengthTv.setText(Float.valueOf(r.getLength()).toString());
+            lengthTv.setText(r.getDistanceToString());
         } else {
             lengthLayout.setVisibility(View.GONE);
             lengthTv.setText("N/A");
         }
+        if (!r.getTags().isEmpty()) {
+            String tags = TextUtils.join(", ", r.getTags());
+            tagTv.setText(tags);
+        } else
+            tagLayout.setVisibility(View.GONE);
 
     }
 
@@ -188,7 +197,6 @@ public class RouteFragment extends Fragment implements View.OnClickListener {
                 error(R.drawable.im_noimage).
                 into(ivRoute);
         Palette.generateAsync(bitmap, RoutePaletteListener.newInstance(this));
-        earthButton.setTextColor(palette.getVibrantColor(R.color.white));
 
     }
 
@@ -200,6 +208,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener {
         }
 
         buttonLayout.setBackgroundColor(palette.getLightMutedColor(R.color.primaryColor));
+        earthButton.setTextColor(palette.getVibrantColor(R.color.white));
 
     }
 
@@ -220,18 +229,18 @@ public class RouteFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
-        /*inflater.inflate(R.menu.menu_details, menu);
+        inflater.inflate(R.menu.menu_details, menu);
         MenuItem item = menu.findItem(R.id.menu_item_share);
-        shareActionProvider = (android.support.v7.widget.ShareActionProvider) MenuItemCompat.getActionProvider(item);*/
-//        super.onCreateOptionsMenu(menu, inflater);
+        shareActionProvider = (android.support.v7.widget.ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        super.onCreateOptionsMenu(menu, inflater);
         return;
     }
 
-    /*private void setShareIntent(Intent shareIntent) {
+    private void setShareIntent(Intent shareIntent) {
         if (shareActionProvider != null) {
             shareActionProvider.setShareIntent(shareIntent);
         }
-    }*/
+    }
 
     /**
      * This hook is called whenever an item in your options menu is selected.
@@ -251,11 +260,11 @@ public class RouteFragment extends Fragment implements View.OnClickListener {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-/*        int id = item.getItemId();
+        int id = item.getItemId();
         if (id == R.id.menu_item_share) {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_SEND);
-            String message = getResources().getString(R.string.share_place_message) +
+            String message = getResources().getString(R.string.share_route_message) +
                     targetRoute.getName() + "\n" +
                     targetRoute.getItemURI();
             intent.putExtra(Intent.EXTRA_TEXT, message);
@@ -263,7 +272,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener {
             setShareIntent(intent);
             startActivity(Intent.createChooser(intent, getString(R.string.share)));
             return true;
-        }*/
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -274,19 +283,32 @@ public class RouteFragment extends Fragment implements View.OnClickListener {
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.urlButton) {
-            String url = targetRoute.getKml();
-            if (url != null) {
+        if (v.getId() == R.id.earthButton) {
+            String url = Constant.URI_KML + targetRoute.getKml();
+            if (targetRoute.getKml() != null) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));
-                //TODO COMPLETE THIS!!
-                if (earthInstalled("com.google.earth")) {
-                    startActivity(intent);
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    if (earthInstalled("com.google.earth")) {
+                        startActivity(intent);
+                    } else {
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                        boolean notNeeded = sharedPreferences.getBoolean(Constant.EARTH_NOT_NEEDED, false);
+                        if (notNeeded) {
+                            startActivity(intent);
+                        } else {
+                            Bundle bundle = new Bundle();
+                            bundle.putString(EarthInstalledDialog.URL, url);
+                            EarthInstalledDialog wDialog = new EarthInstalledDialog();
+                            wDialog.setArguments(bundle);
+                            wDialog.show(getFragmentManager(), "Get Google Earth");
+                        }
+
+                    }
                 } else
                     Toast.makeText(getActivity(), R.string.no_browser_app, Toast.LENGTH_SHORT).show();
-
             } else
-                Toast.makeText(getActivity(), R.string.no_url_available, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.no_kml, Toast.LENGTH_SHORT).show();
 
 
         } else if (v.getId() == R.id.imageView || v.getId() == R.id.fullscreenButton) {

@@ -32,6 +32,7 @@ import it.zerocool.batmacaana.utilities.ParsingUtilities;
 import it.zerocool.batmacaana.utilities.RequestUtilities;
 
 /**
+ * Adapter for the search results
  * Created by Marco on 27/01/2015.
  */
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {

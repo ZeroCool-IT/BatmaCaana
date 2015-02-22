@@ -21,7 +21,7 @@
 
             <RelativeLayout
                 android:id="@+id/image_layout"
-                    android:layout_width="match_parent"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentTop="true">
 
@@ -36,9 +36,9 @@
 
                 <ImageButton
                     android:id="@+id/fullscreenButton"
-                        style="?android:attr/borderlessButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/imageView"
                     android:layout_alignEnd="@id/imageView"
                     android:layout_alignRight="@id/imageView"
@@ -331,7 +331,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@color/transparent_bg"
-                        android:drawableTop="@drawable/facebook_36dp"
+                        android:drawableTop="@drawable/ic_facebook"
                         android:paddingBottom="@dimen/action_button_td_padding"
                         android:paddingTop="@dimen/action_button_td_padding"
                         android:textColor="@color/secondary_text_color"
@@ -344,7 +344,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@color/transparent_bg"
-                        android:drawableTop="@drawable/ic_google_plus_grey600_18dp"
+                        android:drawableTop="@drawable/ic_google"
                         android:paddingBottom="@dimen/action_button_td_padding"
                         android:paddingTop="@dimen/action_button_td_padding"
                         android:textColor="@color/secondary_text_color"
@@ -357,7 +357,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@color/transparent_bg"
-                        android:drawableTop="@drawable/ic_foursquare_grey600_24dp"
+                        android:drawableTop="@drawable/ic_foursquare"
                         android:paddingBottom="@dimen/action_button_td_padding"
                         android:paddingTop="@dimen/action_button_td_padding"
                         android:textColor="@color/secondary_text_color"

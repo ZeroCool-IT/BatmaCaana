@@ -471,7 +471,7 @@ public class ParsingUtilities {
                     r.setTagsFromCSV(toBuild.getString("TAGS"));
                     r.setLength(Float.parseFloat(toBuild.getString("DISTANZA")));
                     r.setDuration(toBuild.getString("TEMPO"));
-                    r.setLevel(toBuild.getString("DIFFICOLTA"));
+                    r.setLevel(toBuild.getInt("DIFFICOLTA"));
                     r.setImage(toBuild.getString("IMAGE"));
                     r.setKml(toBuild.getString("KML"));
                     r.setDescription(toBuild.getString("DESCRIPTION"));
@@ -495,7 +495,7 @@ public class ParsingUtilities {
             r.setTagsFromCSV(toBuild.getString("TAGS"));
             r.setLength(Float.parseFloat(toBuild.getString("DISTANZA")));
             r.setDuration(toBuild.getString("TEMPO"));
-            r.setLevel(toBuild.getString("DIFFICOLTA"));
+            r.setLevel(toBuild.getInt("DIFFICOLTA"));
             r.setImage(toBuild.getString("IMAGE"));
             r.setKml(toBuild.getString("KML"));
             r.setDescription(toBuild.getString("DESCRIPTION"));

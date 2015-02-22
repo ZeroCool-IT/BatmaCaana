@@ -97,13 +97,6 @@ public class Event implements Cardable {
     }
 
     /**
-     * @param date the start date of the event to set
-     */
-    public void setStartDate(GregorianCalendar date) {
-        this.startDate = date;
-    }
-
-    /**
      * Set the event's start date parsing infos from String
      *
      * @param date it's the start date to set (YYYY-mm-DD format)
@@ -115,17 +108,17 @@ public class Event implements Cardable {
     }
 
     /**
+     * @param date the start date of the event to set
+     */
+    public void setStartDate(GregorianCalendar date) {
+        this.startDate = date;
+    }
+
+    /**
      * @return the end date of the event
      */
     public GregorianCalendar getEndDate() {
         return endDate;
-    }
-
-    /**
-     * @param endDate is the end date of the event to set
-     */
-    public void setEndDate(GregorianCalendar endDate) {
-        this.endDate = endDate;
     }
 
     /**
@@ -140,17 +133,17 @@ public class Event implements Cardable {
     }
 
     /**
+     * @param endDate is the end date of the event to set
+     */
+    public void setEndDate(GregorianCalendar endDate) {
+        this.endDate = endDate;
+    }
+
+    /**
      * @return the start hour of the event
      */
     public GregorianCalendar getStartHour() {
         return startHour;
-    }
-
-    /**
-     * @param startHour the start hour of the event to set
-     */
-    public void setStartHour(GregorianCalendar startHour) {
-        this.startHour = startHour;
     }
 
     /**
@@ -164,17 +157,17 @@ public class Event implements Cardable {
     }
 
     /**
+     * @param startHour the start hour of the event to set
+     */
+    public void setStartHour(GregorianCalendar startHour) {
+        this.startHour = startHour;
+    }
+
+    /**
      * @return the start hour of the event
      */
     public GregorianCalendar getEndHour() {
         return endHour;
-    }
-
-    /**
-     * @param endHour the end hour of the event to set
-     */
-    public void setEndHour(GregorianCalendar endHour) {
-        this.endHour = endHour;
     }
 
     /**
@@ -185,6 +178,13 @@ public class Event implements Cardable {
     public void setEndHour(String endHour) {
         GregorianCalendar g = ParsingUtilities.parseHour(endHour);
         setEndHour(g);
+    }
+
+    /**
+     * @param endHour the end hour of the event to set
+     */
+    public void setEndHour(GregorianCalendar endHour) {
+        this.endHour = endHour;
     }
 
     /**
@@ -317,7 +317,7 @@ public class Event implements Cardable {
     }
 
     public String getItemURI() {
-        return Constant.PLACE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
+        return Constant.SHARE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
     }
 
     /**

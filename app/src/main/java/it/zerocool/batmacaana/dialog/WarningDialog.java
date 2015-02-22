@@ -13,18 +13,18 @@ import android.support.v4.app.DialogFragment;
 import it.zerocool.batmacaana.R;
 
 /**
+ * Generic Warning Dialog
  * Created by Marco on 14/01/2015.
  */
 public class WarningDialog extends DialogFragment {
 
+    public static final String TITLE = "title";
+    public static final String MESSAGE = "message";
+    public static final String KILL = "kill";
     private String title;
     private String message;
     private AlertDialog.Builder builder;
     private boolean killActivity;
-
-    public static final String TITLE = "title";
-    public static final String MESSAGE = "message";
-    public static final String KILL = "kill";
 
 
     public WarningDialog() {

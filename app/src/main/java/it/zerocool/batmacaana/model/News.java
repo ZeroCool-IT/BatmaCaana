@@ -103,6 +103,13 @@ public class News implements Cardable {
     }
 
     /**
+     * @param date the date of the news to set
+     */
+    public void setDate(GregorianCalendar date) {
+        this.date = date;
+    }
+
+    /**
      * Set the news date parsing infos from String
      *
      * @param date it's the start date to set (YYYY-mm-DD format)
@@ -111,13 +118,6 @@ public class News implements Cardable {
         GregorianCalendar g = ParsingUtilities.parseDate(date);
         setDate(g);
 
-    }
-
-    /**
-     * @param date the date of the news to set
-     */
-    public void setDate(GregorianCalendar date) {
-        this.date = date;
     }
 
     public String getDateToString() {
@@ -211,7 +211,7 @@ public class News implements Cardable {
     }
 
     public String getItemURI() {
-        return Constant.PLACE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
+        return Constant.SHARE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
     }
 
     /**

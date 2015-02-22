@@ -4,15 +4,16 @@
 
 <resources>
 
-    <string name="app_name">@string/city_name</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name" translatable="false">@string/city_name</string>
+    <string name="hello_world" translatable="false">Hello world!</string>
     <string name="action_settings">Settings…</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="nav_drawer_open">Navigation Drawer Open</string>
     <string name="nav_drawer_close">Navigation Drawer Close</string>
     <string name="location_service_warning_title">Location services required!</string>
     <string name="location_service_warning">Location services are required for greater accuracy. Do you want to activate them?</string>
     <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string name="bt_card_details">Details</string>
     <string name="iv_card_imagery">Item imagery</string>
     <string name="dialog_button_ok">OK</string>
@@ -30,11 +31,12 @@
     <string name="url">Website</string>
     <string name="email">E-Mail</string>
     <string name="map">Map</string>
-    <string name="earth">View on Google Earth</string>
+    <string name="earth">View on the map</string>
     <string name="no_phone_available">No phone number available!</string>
     <string name="no_email_available">No email address available!</string>
     <string name="no_url_available">No website available!</string>
-    <string name="title_activity_details">DetailsActivity</string>
+    <string name="no_kml">No route on map available!</string>
+    <string name="title_activity_details" translatable="false">DetailsActivity</string>
     <string name="closed">Closed:</string>
     <string name="from">From:</string>
     <string name="to">To:</string>
@@ -52,6 +54,7 @@
     <string name="share_place_message">I think you might like this place: </string>
     <string name="share_news_message">I think you could be interested in this news: </string>
     <string name="share_event_message">I think you could be interested in this event: </string>
+    <string name="share_route_message">I think you might like this route:&#160;</string>
     <string name="share">Share</string>
     <string name="favorite_added"> added to the favorites\' list!</string>
     <string name="favorite_removed"> removed from the favorites\' list!</string>
@@ -66,6 +69,14 @@
     <string name="tback">Press back again to quit application</string>
     <string name="detail_picture">Detail main picture</string>
     <string name="too_short">Search query is too short!</string>
+    <string name="earth_warning_title">App needed!</string>
+    <string name="earth_warning_message">It seems that Google Earth is not installed in your device. To view this route on the map, you need an application that can read .kml route file.</string>
+    <string name="earth_warning_positive">Get Earth!</string>
+    <string name="earth_warning_neutral">Open it</string>
+    <string name="earth_warning_negative">Cancel</string>
+    <string name="play_store_na">Play Store not available!</string>
+    <string name="remember_choose">Remember this choose?</string>
+
 
     <string-array name="drawer_list">
         <item>@string/city_name</item>
@@ -75,7 +86,7 @@
         <item>Sleep</item>
         <item>News</item>
         <item>Services</item>
-        <item>Routes</item>
+        <item>Trekking Routes</item>
         <item>Other</item>
         <item>Nearby Cities</item>
         <item>Favorite</item>
@@ -84,8 +95,17 @@
         <!-- <item>Update offline content</item> -->
     </string-array>
 
-    <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="title_activity_search_results">SearchResultsActivity</string>
+    <string-array name="route_level">
+        <item>-</item>
+        <item>Easy</item>
+        <item>Intermediate</item>
+        <item>Hard</item>
+        <item>Very Hard</item>
+        <item>Experts only</item>
+    </string-array>
+
+    <string name="title_activity_fullscreen" translatable="false">FullscreenActivity</string>
+    <string name="title_activity_search_results" translatable="false">SearchResultsActivity</string>
 
     <!-- Settings String -->
     <string name="notification_title">Enable Notification</string>
@@ -102,6 +122,9 @@
     <string name="search_title">Search</string>
     <string name="search_message">This will delete your search history!</string>
     <string name="clear_history">Clear search history</string>
+    <string name="alerts_title">Alerts</string>
+    <string name="restore_alerts">Restore application alerts</string>
+    <string name="restore_alerts_message">Do you want to restore all application alerts? </string>
 
 
 </resources>
