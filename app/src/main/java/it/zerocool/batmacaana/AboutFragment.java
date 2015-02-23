@@ -180,7 +180,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.mapButton:
-                String uri = "geo:0,0?q=41.604774, 13.084419?z=1";
+                String uri = "geo:0,0?q=41.604451, 13.085299?z=1";
                 intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(uri));
                 if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
