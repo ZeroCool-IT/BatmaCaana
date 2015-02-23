@@ -68,8 +68,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
      * @param viewType The view type of the new View.
      * @return A new ViewHolder that holds a View of the given view type.
      * @see #getItemViewType(int)
-     * @see #onBindViewHolder(ViewHolder, int)
+     * @see #onBindViewHolder(android.support.v7.widget.RecyclerView.ViewHolder, int)
      */
+    @SuppressWarnings("JavadocReference")
     @Override
     public SearchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.result_row, parent, false);
@@ -94,6 +95,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
      *                 item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
+    @SuppressWarnings("JavadocReference")
     @Override
     public void onBindViewHolder(SearchViewHolder holder, int position) {
         SearchResult current = searchItems.get(position);
@@ -122,6 +124,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
                 break;
             case Constant.TYPE_NEWS:
                 iconResId = R.drawable.ic_newspaper_grey600_48dp;
+                break;
+            case Constant.TYPE_ROUTE:
+                iconResId = R.drawable.ic_routes_grey600_48dp;
+                break;
         }
         Picasso.with(context)
                 .load(iconResId)

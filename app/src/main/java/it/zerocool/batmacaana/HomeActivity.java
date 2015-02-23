@@ -46,6 +46,7 @@ public class HomeActivity extends ActionBarActivity {
     private LocationListener locationListener;
     private Context context;
     private long mLastBackPress;
+    private boolean exit;
 
     /**
      * Return the version code of the app
@@ -207,6 +208,10 @@ public class HomeActivity extends ActionBarActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(Constant.SPLASH, false);
+        editor.apply();
         locationManager.removeUpdates(locationListener);
     }
 
@@ -216,6 +221,10 @@ public class HomeActivity extends ActionBarActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(Constant.SPLASH, true);
+        editor.apply();
         locationManager.removeUpdates(locationListener);
     }
 
@@ -225,6 +234,10 @@ public class HomeActivity extends ActionBarActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        SharedPreferences sharedPreferences = getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(Constant.SPLASH, true);
+        editor.apply();
         locationManager.removeUpdates(locationListener);
     }
 
@@ -233,12 +246,31 @@ public class HomeActivity extends ActionBarActivity {
      */
     @Override
     public void onBackPressed() {
+/*        if (exit) {
+            finish(); // finish activity
+        } else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }*/
         long currentTime = System.currentTimeMillis();
         if (Math.abs(currentTime - mLastBackPress) > Constant.M_BACK_PRESS_THRESHOLD) {
             pressBackToast.show();
             mLastBackPress = currentTime;
         } else {
             pressBackToast.cancel();
+            finish();
+            SharedPreferences sharedPreferences = getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(Constant.SPLASH, true);
+            editor.apply();
             super.onBackPressed(); // Exit the application if back pressed
             // threshold is smaller than
             // M_BACK_PRESSED_TRESHOLD

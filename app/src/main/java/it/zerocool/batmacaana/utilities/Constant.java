@@ -120,6 +120,7 @@ public class Constant {
     public static final String KEY_EVENT_NOTIFICATION_NUMBER = "event_notification_number";
     public static final String NOTIFICATION_PREFS = "notification";
     public static final String EARTH_NOT_NEEDED = "earth";
+    public static final String SPLASH = "splash";
 
 
     //Location Constraints

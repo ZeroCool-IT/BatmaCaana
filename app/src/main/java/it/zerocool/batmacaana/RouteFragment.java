@@ -307,7 +307,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener {
 
                     }
                 } else
-                    Toast.makeText(getActivity(), R.string.no_browser_app, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.no_app, Toast.LENGTH_SHORT).show();
             } else
                 Toast.makeText(getActivity(), R.string.no_kml, Toast.LENGTH_SHORT).show();
 

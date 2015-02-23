@@ -5,6 +5,7 @@
 package it.zerocool.batmacaana;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -15,12 +16,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import it.zerocool.batmacaana.utilities.Constant;
+
 public class SplashActivity extends ActionBarActivity {
 
     /**
      * Duration of wait *
      */
-    private final int SPLASH_DISPLAY_LENGTH = 4500;
+    private final int SPLASH_DISPLAY_LENGTH = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,42 +34,35 @@ public class SplashActivity extends ActionBarActivity {
                     .add(R.id.splash_container, new PlaceholderFragment())
                     .commit();
         }
-        /* New Handler to start the Menu-Activity
-         * and close this Splash-Screen after some seconds.*/
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                /* Create an Intent that will start the Menu-Activity. */
-                Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
-                SplashActivity.this.startActivity(mainIntent);
-                SplashActivity.this.finish();
-            }
-        }, SPLASH_DISPLAY_LENGTH);
-    }
 
-    /**
-     * Dispatch onResume() to fragments.  Note that for better inter-operation
-     * with older versions of the platform, at the point of this call the
-     * fragments attached to the activity are <em>not</em> resumed.  This means
-     * that in some cases the previous state may still be saved, not allowing
-     * fragment transactions that modify the state.  To correctly interact
-     * with fragments in their proper state, you should instead override
-     * {@link #onResumeFragments()}.
-     */
-    @Override
-    protected void onResume() {
-        /* New Handler to start the Menu-Activity
+        SharedPreferences sharedPreferences = this.getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
+        boolean splash = sharedPreferences.getBoolean(Constant.SPLASH, true);
+
+        if (splash) {
+                /* New Handler to start the Menu-Activity
          * and close this Splash-Screen after some seconds.*/
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
-                Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
-                SplashActivity.this.startActivity(mainIntent);
-                SplashActivity.this.finish();
-            }
-        }, SPLASH_DISPLAY_LENGTH);
-        super.onResume();
+                    Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
+                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    SplashActivity.this.startActivity(mainIntent);
+                    SplashActivity.this.finish();
+                }
+            }, SPLASH_DISPLAY_LENGTH);
+        } else {
+            Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            SplashActivity.this.startActivity(mainIntent);
+            SplashActivity.this.finish();
+        }
+
+
     }
 
     @Override

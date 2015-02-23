@@ -112,4 +112,5 @@
         <item>Molto impegnativo</item>
         <item>Per esperti</item>
     </string-array>
+    <string name="no_app">Non c\'è nessuna applicazione adeguata sul tuo dispositivo!</string>
 </resources>

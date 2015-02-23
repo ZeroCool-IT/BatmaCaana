@@ -74,6 +74,7 @@
     <string name="earth_warning_positive">Get Earth!</string>
     <string name="earth_warning_neutral">Open it</string>
     <string name="earth_warning_negative">Cancel</string>
+    <string name="no_app">There is no appropriate application on your device!</string>
     <string name="play_store_na">Play Store not available!</string>
     <string name="remember_choose">Remember this choose?</string>
 

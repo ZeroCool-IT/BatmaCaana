@@ -20,10 +20,4 @@
         android:layout_centerVertical="true"
         android:src="@drawable/im_logo" />
 
-    <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_below="@+id/splash_image"
-        android:layout_centerHorizontal="true"
-        android:background="@color/white" />
 </RelativeLayout>
