@@ -4,6 +4,7 @@
 
 package it.zerocool.batmacaana;
 
+import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -62,11 +63,22 @@ public class HomeActivity extends ActionBarActivity {
         }
     }
 
+    @SuppressLint("ShowToast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         requestLocationServices();
+
+        String provider = getLocationProvider();
+        if (provider != null && locationManager != null) {
+            if (locationManager.getAllProviders().contains(provider)) {
+                Location l = locationManager.getLastKnownLocation(provider);
+                if (l != null) {
+                    saveLocationToPreferences(l);
+                }
+            }
+        }
 
         pressBackToast = Toast.makeText(this, R.string.tback,
                 Toast.LENGTH_SHORT);
@@ -88,10 +100,7 @@ public class HomeActivity extends ActionBarActivity {
             }
             NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
             drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
-            /*SharedPreferences sp = SharedPreferencesProvider.getSharedPreferences(this);
-            SharedPreferences.Editor editor = sp.edit();
-            editor.putString(Constant.KEY_USER_DEFAULT_START_VIEW, "0");
-            editor.apply();*/
+
         } else {
             Log.i("PLAY SERVICE ERROR", "No valid Google Play Services APK found.");
         }
@@ -176,6 +185,15 @@ public class HomeActivity extends ActionBarActivity {
                 locationManager.removeUpdates(locationListener);
             }
             requestLocationServices();
+            String provider = getLocationProvider();
+            if (provider != null && locationManager != null) {
+                if (locationManager.getAllProviders().contains(provider)) {
+                    Location l = locationManager.getLastKnownLocation(provider);
+                    if (l != null) {
+                        saveLocationToPreferences(l);
+                    }
+                }
+            }
         }
 //        NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
 //        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
@@ -340,5 +358,12 @@ public class HomeActivity extends ActionBarActivity {
             return false;
         }
         return true;
+    }
+
+    private String getLocationProvider() {
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+        return locationManager.getBestProvider(criteria, true);
     }
 }

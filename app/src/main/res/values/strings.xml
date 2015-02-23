@@ -125,6 +125,7 @@
     <string name="alerts_title">Alerts</string>
     <string name="restore_alerts">Restore application alerts</string>
     <string name="restore_alerts_message">Do you want to restore all application alerts? </string>
+    <string name="title_activity_splash" translatable="false">SplashActivity</string>
 
 
 </resources>

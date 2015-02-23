@@ -1,0 +1,12 @@
+<!--
+  ~ Copyright ZeroApp(c) 2015. All right reserved.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/splash_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryColor"
+    tools:context="it.zerocool.batmacaana.SplashActivity"
+    tools:ignore="MergeRootFrame" />

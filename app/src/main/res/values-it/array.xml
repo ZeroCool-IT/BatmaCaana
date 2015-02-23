@@ -11,8 +11,7 @@
         <item>Dormire</item>
         <item>Notizie</item>
         <item>Servizi</item>
-        <item>Percorsi Trekking</item>
-        <item>Nearby Cities</item>
+        <item>Itinerari</item>
     </string-array>
 
     <string-array name="drawer_values">
@@ -24,6 +23,5 @@
         <item>5</item>
         <item>6</item>
         <item>7</item>
-        <item>9</item>
     </string-array>
 </resources>

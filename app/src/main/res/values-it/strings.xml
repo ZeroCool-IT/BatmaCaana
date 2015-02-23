@@ -25,7 +25,7 @@
     <string name="dialog_title_warning">Attenzione!</string>
     <string name="do_not_negative">Non farlo!</string>
     <string name="drawer_default">Scegli la pagina da aprire all\'avvio…</string>
-    <string name="earth">Vedi sulla mappa</string>
+    <string name="earth">Vedi itinerario</string>
     <string name="earth_warning_message">Sembra che Google Earth non sia installato sul tuo dispositivo. Per vedere questo percorso hai bisogno di un\'applicazione in grado di aprire i file .kml.</string>
     <string name="earth_warning_negative">Annulla</string>
     <string name="earth_warning_neutral">Apri</string>
@@ -78,7 +78,7 @@
     <string name="share_event_message">Penso che ti possa interessare questo evento:&#160;</string>
     <string name="share_news_message">Penso che ti possa interessare questa notizia:&#160;</string>
     <string name="share_place_message">Penso che ti possa interessare questo luogo:&#160;</string>
-    <string name="share_route_message">Penso che ti possa interessare questo percorso:&#160;</string>
+    <string name="share_route_message">Penso che ti possa interessare questo itinerario:&#160;</string>
     <string name="sure_positive">Sono sicuro!</string>
     <string name="tback">Premi di nuovo indietro per uscire</string>
     <string name="title_activity_settings">Preferenze</string>
@@ -95,7 +95,7 @@
         <item>Dormire</item>
         <item>Notizie</item>
         <item>Servizi</item>
-        <item>Percorsi Trekking</item>
+        <item>Itinerari</item>
         <item>Altro</item>
         <item>Città nelle vicinanze</item>
         <item>Preferiti</item>
@@ -108,8 +108,8 @@
         <item>-</item>
         <item>Facile</item>
         <item>Intermedio</item>
-        <item>Difficile</item>
-        <item>Molto difficile</item>
+        <item>Impegnativo</item>
+        <item>Molto impegnativo</item>
         <item>Per esperti</item>
     </string-array>
 </resources>

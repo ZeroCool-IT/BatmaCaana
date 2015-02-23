@@ -12,7 +12,6 @@
         <item>News</item>
         <item>Services</item>
         <item>Trekking Routes</item>
-        <item>Nearby Cities</item>
     </string-array>
 
     <string-array name="drawer_values">
@@ -24,6 +23,5 @@
         <item>5</item>
         <item>6</item>
         <item>7</item>
-        <item>9</item>
     </string-array>
 </resources>

@@ -276,9 +276,11 @@ public class ParsingUtilities {
                     Location l = new Location("");
                     String latitude = toBuild.getString("LATITUDE");
                     String longitude = toBuild.getString("LONGITUDE");
-                    l.setLatitude(Location.convert(latitude));
-                    l.setLongitude(Location.convert(longitude));
-                    e.setLocation(l);
+                    if (latitude != null && !latitude.isEmpty() && longitude != null && !longitude.isEmpty()) {
+                        l.setLatitude(Location.convert(latitude));
+                        l.setLongitude(Location.convert(longitude));
+                        e.setLocation(l);
+                    }
                     result.add(e);
                 }
             }
@@ -320,9 +322,11 @@ public class ParsingUtilities {
             Location l = new Location("");
             String latitude = toBuild.getString("LATITUDE");
             String longitude = toBuild.getString("LONGITUDE");
-            l.setLatitude(Location.convert(latitude));
-            l.setLongitude(Location.convert(longitude));
-            e.setLocation(l);
+            if (latitude != null && !latitude.isEmpty() && longitude != null && !longitude.isEmpty()) {
+                l.setLatitude(Location.convert(latitude));
+                l.setLongitude(Location.convert(longitude));
+                e.setLocation(l);
+            }
             return e;
         } catch (JSONException e) {
             Log.e("JSON Exception", e.getMessage());
