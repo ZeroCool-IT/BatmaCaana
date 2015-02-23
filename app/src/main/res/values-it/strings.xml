@@ -26,8 +26,8 @@
     <string name="do_not_negative">Non farlo!</string>
     <string name="drawer_default">Scegli la pagina da aprire all\'avvio…</string>
     <string name="earth">Vedi sulla mappa</string>
-    <string name="earth_warning_message">Sembra che Google Earth non sia installato sul tuo smartphone. Per vedere questo percorso hai bisogno di un\'applicazione in grado di aprire i file .kml.</string>
-    <string name="earth_warning_negative">Cancella</string>
+    <string name="earth_warning_message">Sembra che Google Earth non sia installato sul tuo dispositivo. Per vedere questo percorso hai bisogno di un\'applicazione in grado di aprire i file .kml.</string>
+    <string name="earth_warning_negative">Annulla</string>
     <string name="earth_warning_neutral">Apri</string>
     <string name="earth_warning_positive">Scarica Earth!</string>
     <string name="earth_warning_title">App necessaria</string>
@@ -62,7 +62,7 @@
     <string name="no_search_results">Nessun risultato per&#160;</string>
     <string name="no_url_available">Nessun sito web disponibile!</string>
     <string name="notification_event_title">Nuovo evento a &#160;</string>
-    <string name="notification_news_title">Ultima notizia a&#160;</string>
+    <string name="notification_news_title">Ultime notizie a&#160;</string>
     <string name="notification_title">Abilita notifiche</string>
     <string name="play_store_na">Play Store non disponibile!</string>
     <string name="r_u_sure_title">Sei sicuro?</string>
