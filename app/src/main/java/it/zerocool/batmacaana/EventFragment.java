@@ -39,6 +39,7 @@ import com.squareup.picasso.Target;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import it.zerocool.batmacaana.listener.EventPaletteListener;
 import it.zerocool.batmacaana.model.Event;
 import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;

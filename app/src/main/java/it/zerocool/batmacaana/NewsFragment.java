@@ -34,6 +34,7 @@ import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import it.zerocool.batmacaana.listener.NewsPaletteListener;
 import it.zerocool.batmacaana.model.News;
 import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;

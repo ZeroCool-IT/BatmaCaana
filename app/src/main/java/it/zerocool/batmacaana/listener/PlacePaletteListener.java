@@ -2,13 +2,18 @@
  * Copyright ZeroApp(c) 2015. All right reserved.
  */
 
-package it.zerocool.batmacaana;
+package it.zerocool.batmacaana.listener;
 
 import android.support.v7.graphics.Palette;
 
 import java.lang.ref.WeakReference;
 
-class PlacePaletteListener implements Palette.PaletteAsyncListener {
+import it.zerocool.batmacaana.PlaceFragment;
+
+/**
+ * Color Palette Async Listener
+ */
+public class PlacePaletteListener implements Palette.PaletteAsyncListener {
     private final WeakReference<PlaceFragment> activityWeakReference;
 
     PlacePaletteListener(WeakReference<PlaceFragment> activityWeakReference) {

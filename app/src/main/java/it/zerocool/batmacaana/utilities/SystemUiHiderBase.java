@@ -2,7 +2,7 @@
  * Copyright ZeroApp(c) 2015. All right reserved.
  */
 
-package it.zerocool.batmacaana.util;
+package it.zerocool.batmacaana.utilities;
 
 import android.app.Activity;
 import android.view.View;

@@ -2,13 +2,16 @@
  * Copyright ZeroApp(c) 2015. All right reserved.
  */
 
-package it.zerocool.batmacaana;
+package it.zerocool.batmacaana.listener;
 
 import android.support.v7.graphics.Palette;
 
 import java.lang.ref.WeakReference;
 
+import it.zerocool.batmacaana.RouteFragment;
+
 /**
+ * Color Palette Async Listener
  * Created by Marco Battisti on 21/02/2015.
  */
 public class RoutePaletteListener implements Palette.PaletteAsyncListener {

@@ -22,8 +22,8 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-import it.zerocool.batmacaana.util.SystemUiHider;
 import it.zerocool.batmacaana.utilities.Constant;
+import it.zerocool.batmacaana.utilities.SystemUiHider;
 
 
 /**

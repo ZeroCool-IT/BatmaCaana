@@ -40,6 +40,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import it.zerocool.batmacaana.dialog.EarthInstalledDialog;
+import it.zerocool.batmacaana.listener.RoutePaletteListener;
 import it.zerocool.batmacaana.model.Route;
 import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;

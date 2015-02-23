@@ -40,6 +40,7 @@ import com.squareup.picasso.Target;
 import it.zerocool.batmacaana.database.FavoriteDBHelper;
 import it.zerocool.batmacaana.database.FavoriteDBMngr;
 import it.zerocool.batmacaana.dialog.WarningDialog;
+import it.zerocool.batmacaana.listener.PlacePaletteListener;
 import it.zerocool.batmacaana.model.Place;
 import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
