@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
@@ -41,6 +42,7 @@ public class FavoriteFragment extends Fragment {
     private Context context;
     private RetrieveFavoriteTask task;
     private TextView noResult;
+    private ImageView frowny;
 
     public FavoriteFragment() {
         // Required empty public constructor
@@ -73,6 +75,7 @@ public class FavoriteFragment extends Fragment {
         context = getActivity();
         rvResults = (RecyclerView) layout.findViewById(R.id.favorite_recycler_view);
         noResult = (TextView) layout.findViewById(R.id.no_result_tv);
+        frowny = (ImageView) layout.findViewById(R.id.frowny);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvResults.setLayoutManager(layoutManager);
@@ -131,6 +134,7 @@ public class FavoriteFragment extends Fragment {
                 args.putBoolean(WarningDialog.KILL, false);
                 if (favoriteList != null && favoriteList.isEmpty()) {
                     noResult.setVisibility(View.VISIBLE);
+                    frowny.setVisibility(View.VISIBLE);
                     rvResults.setVisibility(View.GONE);
                     rvResults.invalidate();
                 } else {

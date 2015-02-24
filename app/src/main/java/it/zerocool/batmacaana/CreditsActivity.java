@@ -4,6 +4,8 @@
 
 package it.zerocool.batmacaana;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -13,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class CreditsActivity extends ActionBarActivity {
 
@@ -62,6 +66,8 @@ public class CreditsActivity extends ActionBarActivity {
         private ImageView androidBL;
         private ImageView androidTL;
         private ImageView androidTR;
+        private TextView email;
+        private TextView website;
 
         public CreditsFragment() {
         }
@@ -72,15 +78,18 @@ public class CreditsActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_credits, container, false);
             androidBR = (ImageView) rootView.findViewById(R.id.android_logo_br);
             androidTR = (ImageView) rootView.findViewById(R.id.android_logo_tr);
-
             androidBL = (ImageView) rootView.findViewById(R.id.android_logo_bl);
-
             androidTL = (ImageView) rootView.findViewById(R.id.android_logo_tl);
+
+            email = (TextView) rootView.findViewById(R.id.mail_tv);
+            website = (TextView) rootView.findViewById(R.id.web_tv);
 
             androidBL.setOnClickListener(this);
             androidBR.setOnClickListener(this);
             androidTL.setOnClickListener(this);
             androidTR.setOnClickListener(this);
+            email.setOnClickListener(this);
+            website.setOnClickListener(this);
             return rootView;
         }
 
@@ -108,6 +117,37 @@ public class CreditsActivity extends ActionBarActivity {
                 case R.id.android_logo_tr:
                     androidTR.setVisibility(View.INVISIBLE);
                     androidBR.setVisibility(View.VISIBLE);
+                    break;
+                case R.id.mail_tv:
+                    String mail = getString(R.string.explora_mail);
+                    if (mail != null) {
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+                        intent.setType("*/*");
+                        String[] addresses = new String[1];
+                        addresses[0] = mail;
+                        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+                        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                            startActivity(intent);
+                        } else
+                            Toast.makeText(getActivity(), R.string.no_mail_app, Toast.LENGTH_SHORT).show();
+
+                    } else
+                        Toast.makeText(getActivity(), R.string.no_email_available, Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.web_tv:
+                    String url = "http://" + getString(R.string.explora_web);
+                    if (url != null) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse(url));
+                        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                            startActivity(intent);
+                        } else
+                            Toast.makeText(getActivity(), R.string.no_browser_app, Toast.LENGTH_SHORT).show();
+
+                    } else
+                        Toast.makeText(getActivity(), R.string.no_url_available, Toast.LENGTH_SHORT).show();
+                    break;
             }
         }
     }
