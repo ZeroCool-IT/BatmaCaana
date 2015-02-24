@@ -28,7 +28,7 @@
         <receiver
             android:name=".GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
                 <category android:name="com.example.gcm" />
@@ -50,11 +50,13 @@
             android:name=".HomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
 
             <meta-data
                 android:name="android.app.default_searchable"
@@ -65,7 +67,7 @@
             android:label="@string/app_name"
             android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait">
-            <meta-data
+        <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.zerocool.batmacaana.HomeActivity" />
 
@@ -91,7 +93,7 @@
             android:label="@string/title_activity_fullscreen"
             android:parentActivityName=".DetailsActivity"
             android:theme="@style/FullscreenTheme">
-            <meta-data
+        <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.zerocool.batmacaana.DetailsActivity" />
         </activity>
@@ -100,7 +102,7 @@
             android:label="@string/title_activity_search_results"
             android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait">
-            <meta-data
+        <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.zerocool.batmacaana.HomeActivity" />
 
@@ -117,18 +119,28 @@
             android:label="@string/title_activity_settings"
             android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait">
-            <meta-data
+        <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.zerocool.batmacaana.HomeActivity" />
         </activity>
         <activity
             android:name=".SplashActivity"
-            android:label="@string/app_name">
-            <intent-filter>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".CreditsActivity"
+            android:label="@string/title_activity_credits"
+            android:parentActivityName=".HomeActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.zerocool.batmacaana.HomeActivity" />
         </activity>
     </application>
 

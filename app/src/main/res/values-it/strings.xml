@@ -100,6 +100,7 @@
         <item>Città nelle vicinanze</item>
         <item>Preferiti</item>
         <item>Preferenze…</item>
+        <item>Credits</item>
         <!-- <item>Offline</item> -->
         <!-- <item>Update offline content</item> -->
     </string-array>
@@ -113,4 +114,9 @@
         <item>Per esperti</item>
     </string-array>
     <string name="no_app">Non c\'è nessuna applicazione adeguata sul tuo dispositivo!</string>
+    <string name="copyright">&#169; 2015. Tutti i diritti riservati.</string>
+    <string name="by">di</string>
+    <string name="dexter_credits">Progetto, design server e web, consulente creativo</string>
+    <string name="papetta_credits">Management applicazione e contenuti, consulente creativo</string>
+    <string name="zero_credits">Progetto, sviluppo e design Android, consulente IT</string>
 </resources>

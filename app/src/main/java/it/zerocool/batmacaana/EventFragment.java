@@ -235,10 +235,10 @@ public class EventFragment extends Fragment implements View.OnClickListener {
             getActivity().getWindow().setStatusBarColor(palette.getDarkVibrantColor(R.color.primaryColor));
         }
         buttonLayout.setBackgroundColor(palette.getLightMutedColor(R.color.primaryColor));
-        phoneActionButton.setTextColor(palette.getVibrantColor(R.color.white));
-        mailActionButton.setTextColor(palette.getVibrantColor(R.color.white));
-        urlActionButton.setTextColor(palette.getVibrantColor(R.color.white));
-        mapActionButton.setTextColor(palette.getVibrantColor(R.color.white));
+        phoneActionButton.setTextColor(palette.getDarkVibrantColor(R.color.white));
+        mailActionButton.setTextColor(palette.getDarkVibrantColor(R.color.white));
+        urlActionButton.setTextColor(palette.getDarkVibrantColor(R.color.white));
+        mapActionButton.setTextColor(palette.getDarkVibrantColor(R.color.white));
 
     }
 

@@ -1,0 +1,220 @@
+<!--
+  ~ Copyright ZeroApp(c) 2015. All right reserved.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="it.zerocool.batmacaana.CreditsActivity.CreditsFragment">
+
+
+    <com.nirhart.parallaxscroll.views.ParallaxScrollView
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/app_logo"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/primaryColor"
+                android:paddingBottom="8dp"
+                android:src="@drawable/im_logo" />
+
+
+            <TextView
+                android:id="@+id/zerotitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/app_logo"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif"
+                android:gravity="left"
+                android:padding="8dp"
+                android:text="@string/zeroapp"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/credit_zero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/zerotitle"
+                android:fontFamily="sans-serif"
+                android:gravity="left"
+                android:padding="8dp"
+                android:text="@string/zero_credits"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/dextertitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/credit_zero"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif"
+                android:gravity="left"
+                android:padding="8dp"
+                android:text="@string/dexterweb"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/credit_dexter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dextertitle"
+                android:fontFamily="sans-serif"
+                android:gravity="left"
+                android:padding="8dp"
+                android:text="@string/dexter_credits"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/papetta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/credit_dexter"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif"
+                android:gravity="left"
+                android:padding="8dp"
+                android:text="@string/papetta"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/credit_papetta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/papetta"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="sans-serif"
+                android:gravity="left"
+                android:padding="8dp"
+                android:text="@string/papetta_credits"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:id="@+id/mail_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/credit_papetta"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingTop="8dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="4dp"
+                    android:src="@drawable/ic_email_grey600_24dp" />
+
+                <TextView
+                    android:id="@+id/mail_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/explora_mail" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/web_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/credit_papetta"
+                android:layout_toEndOf="@+id/mail_layout"
+                android:layout_toRightOf="@+id/mail_layout"
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingTop="8dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="4dp"
+                    android:src="@drawable/ic_web_grey600_24dp" />
+
+                <TextView
+                    android:id="@+id/web_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/explora_web" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/copyright"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/web_layout"
+                android:layout_marginTop="48dp"
+                android:padding="8dp"
+                android:text="@string/copyright"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@id/copyright"
+                android:visibility="invisible" />
+
+
+        </RelativeLayout>
+
+    </com.nirhart.parallaxscroll.views.ParallaxScrollView>
+
+    <ImageView
+        android:id="@+id/android_logo_br"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/im_android_logo_br" />
+
+    <ImageView
+        android:id="@+id/android_logo_bl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/android_logo_br"
+        android:src="@drawable/im_android_logo_bl"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/android_logo_tl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/im_android_logo_tl"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/android_logo_tr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/im_android_logo_tr"
+        android:visibility="invisible" />
+
+</RelativeLayout>

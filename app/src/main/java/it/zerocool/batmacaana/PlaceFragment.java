@@ -277,10 +277,10 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
         }
 
         buttonLayout.setBackgroundColor(palette.getLightMutedColor(R.color.primaryColor));
-        phoneActionButton.setTextColor(palette.getVibrantColor(R.color.white));
-        mailActionButton.setTextColor(palette.getVibrantColor(R.color.white));
-        urlActionButton.setTextColor(palette.getVibrantColor(R.color.white));
-        favoriteButton.setTextColor(palette.getVibrantColor(R.color.white));
+        phoneActionButton.setTextColor(palette.getDarkVibrantColor(R.color.white));
+        mailActionButton.setTextColor(palette.getDarkVibrantColor(R.color.white));
+        urlActionButton.setTextColor(palette.getDarkVibrantColor(R.color.white));
+        favoriteButton.setTextColor(palette.getDarkVibrantColor(R.color.white));
 
     }
 

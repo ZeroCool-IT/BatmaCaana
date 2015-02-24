@@ -162,7 +162,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         public void onClick(View v) {
             int position = getPosition();
             selectItem(getPosition());
-            if (position != Constant.SETTINGS && position != Constant.UPDATE && position != Constant.SUBHEADER && position != Constant.OFFLINE) {
+            if (position != Constant.SETTINGS && position != Constant.UPDATE && position != Constant.SUBHEADER && position != Constant.OFFLINE && position != Constant.CREDITS) {
                 unselectView(previousSelected);
                 selectView(v);
             }
@@ -193,6 +193,11 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
 //                    Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
                     Intent settingsIntent = new Intent(context, SettingsActivity.class);
                     context.startActivity(settingsIntent);
+                    drawerLayout.closeDrawers();
+                    break;
+                case Constant.CREDITS:
+                    Intent creditsIntent = new Intent(context, CreditsActivity.class);
+                    context.startActivity(creditsIntent);
                     drawerLayout.closeDrawers();
                     break;
 //                case Constant.ROUTES:

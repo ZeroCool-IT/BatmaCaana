@@ -61,6 +61,7 @@ public class NavigationDrawerFragment extends Fragment {
                 R.drawable.ic_location_city_grey600_24dp,
                 R.drawable.ic_favorite_grey600_24dp,
                 R.drawable.ic_settings_grey600_24dp,
+                R.drawable.im_android_logo
 //                R.drawable.ic_cloud_download_grey600_24dp,
 //                R.drawable.ic_refresh_grey600_24dp
         };

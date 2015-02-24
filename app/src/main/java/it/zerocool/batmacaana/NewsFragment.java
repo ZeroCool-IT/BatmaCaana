@@ -178,7 +178,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
             getActivity().getWindow().setStatusBarColor(palette.getDarkVibrantColor(R.color.primaryColor));
         }
         buttonLayout.setBackgroundColor(palette.getLightMutedColor(R.color.primaryColor));
-        urlActionButton.setTextColor(palette.getVibrantColor(R.color.white));
+        urlActionButton.setTextColor(palette.getDarkVibrantColor(R.color.white));
 
     }
 

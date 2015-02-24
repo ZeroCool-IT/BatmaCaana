@@ -77,6 +77,16 @@
     <string name="no_app">There is no appropriate application on your device!</string>
     <string name="play_store_na">Play Store not available!</string>
     <string name="remember_choose">Remember this choose?</string>
+    <string name="by">by</string>
+    <string name="zeroapp" translatable="false">ZeroApp</string>
+    <string name="dexterweb" translatable="false">Dexter</string>
+    <string name="papetta" translatable="false">Alessio Campagna</string>
+    <string name="zero_credits">Project, Android development and design, IT consultant</string>
+    <string name="dexter_credits">Project, server and web design, creative consultant</string>
+    <string name="papetta_credits">Application and content management, creative consultant</string>
+    <string name="explora_mail" translatable="false">info@exploracity.it</string>
+    <string name="explora_web" translatable="false">www.exploracity.it</string>
+    <string name="copyright">&#169; 2015. All rights reserved</string>
 
 
     <string-array name="drawer_list">
@@ -92,6 +102,7 @@
         <item>Nearby Cities</item>
         <item>Favorite</item>
         <item>Settings…</item>
+        <item>Credits</item>
         <!-- <item>Offline</item> -->
         <!-- <item>Update offline content</item> -->
     </string-array>
@@ -127,6 +138,7 @@
     <string name="restore_alerts">Restore application alerts</string>
     <string name="restore_alerts_message">Do you want to restore all application alerts? </string>
     <string name="title_activity_splash" translatable="false">SplashActivity</string>
+    <string name="title_activity_credits" translatable="false">CreditsActivity</string>
 
 
 </resources>

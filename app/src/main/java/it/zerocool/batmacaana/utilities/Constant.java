@@ -55,8 +55,9 @@ public class Constant {
     public static final int CITY = 9;
     public static final int FAVORITE = 10;
     public static final int SETTINGS = 11;
-    public static final int OFFLINE = 12;
-    public static final int UPDATE = 13;
+    public static final int CREDITS = 12;
+    public static final int OFFLINE = 14;
+    public static final int UPDATE = 15;
 
     //Place
     public static final int PLACE = 8;
