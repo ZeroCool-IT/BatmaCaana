@@ -62,6 +62,23 @@ public class ContentFragment extends Fragment {
 
     }
 
+    /**
+     * Called when the fragment is visible to the user and actively running.
+     * This is generally
+     * tied to {@link android.app.Activity#onResume() Activity.onResume} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onResume() {
+
+        SharedPreferences prefs = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        int refresh = prefs.getInt(Constant.REFRESH, Integer.parseInt(prefs.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0")));
+        searchResults = getData(refresh);
+        Log.i("ZCLOG", "Resuming.. " + Integer.valueOf(refresh).toString());
+
+        super.onResume();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,7 +90,7 @@ public class ContentFragment extends Fragment {
         rvContent = (RecyclerView) layout.findViewById(R.id.content_recycler_view);
         rvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         int id = getArguments().getInt(Constant.FRAG_SECTION_ID);
-        searchResults = getData(getActivity(), id);
+        searchResults = getData(id);
 
         return layout;
 
@@ -93,40 +110,55 @@ public class ContentFragment extends Fragment {
     }
 
 
-    private List<Cardable> getData(Context context, int typeID) {
+    private List<Cardable> getData(int typeID) {
         String uri = null;
         int type = Constant.PLACE;
+        SharedPreferences prefs = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        int refresh;
         switch (typeID) {
             case Constant.TOSEE:
                 uri = Constant.URI_TOSEE;
+                refresh = Constant.TOSEE;
                 break;
             case Constant.EVENT:
                 uri = Constant.URI_EVENT;
                 type = Constant.EVENT;
+                refresh = Constant.EVENT;
                 break;
             case Constant.EAT:
                 uri = Constant.URI_EAT;
+                refresh = Constant.EAT;
                 break;
             case Constant.SLEEP:
                 uri = Constant.URI_SLEEP;
+                refresh = Constant.SLEEP;
                 break;
             case Constant.SERVICES:
                 uri = Constant.URI_SERVICES;
+                refresh = Constant.SERVICES;
                 break;
             case Constant.CITY:
                 uri = Constant.URI_CITY;
                 type = Constant.CITY;
+                refresh = Constant.CITY;
                 break;
             case Constant.NEWS:
                 uri = Constant.URI_NEWS;
                 type = Constant.NEWS;
+                refresh = Constant.NEWS;
                 break;
             case Constant.ROUTES:
                 uri = Constant.URI_ROUTES;
                 type = Constant.ROUTES;
+                refresh = Constant.ROUTES;
+                break;
             default:
+                refresh = Integer.parseInt(prefs.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
                 break;
         }
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(Constant.REFRESH, refresh);
+        editor.apply();
         uri += Integer.valueOf(Constant.USER_ID).toString();
 
         if (RequestUtilities.isOnline(getActivity())) {
@@ -275,7 +307,7 @@ public class ContentFragment extends Fragment {
                 return res;
 
             } catch (IOException e) {
-                Log.e("ZCLOG TASK", e.getMessage());
+                Log.e("ZCLOG TASK ERROR", e.getMessage());
                 e.printStackTrace();
             }
             return res;

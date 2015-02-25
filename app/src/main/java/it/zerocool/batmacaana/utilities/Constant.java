@@ -122,6 +122,7 @@ public class Constant {
     public static final String NOTIFICATION_PREFS = "notification";
     public static final String EARTH_NOT_NEEDED = "earth";
     public static final String SPLASH = "splash";
+    public static final String REFRESH = "refresh";
 
 
     //Location Constraints
