@@ -82,9 +82,10 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
             @Override
             public View makeView() {
                 ImageView imageView = new ImageView(getActivity());
-                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+//                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                imageView.setAdjustViewBounds(true);
                 ImageSwitcher.LayoutParams params = new ImageSwitcher.LayoutParams(
-                        ImageSwitcher.LayoutParams.MATCH_PARENT, ImageSwitcher.LayoutParams.MATCH_PARENT);
+                        ImageSwitcher.LayoutParams.MATCH_PARENT, ImageSwitcher.LayoutParams.WRAP_CONTENT);
 
                 imageView.setLayoutParams(params);
                 return imageView;

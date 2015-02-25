@@ -32,7 +32,7 @@
                 <ImageSwitcher
                     android:id="@+id/main_image"
                     android:layout_width="match_parent"
-                    android:layout_height="203dp"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/detail_picture"

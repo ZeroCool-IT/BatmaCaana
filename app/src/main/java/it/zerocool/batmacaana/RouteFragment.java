@@ -234,7 +234,6 @@ public class RouteFragment extends Fragment implements View.OnClickListener {
         MenuItem item = menu.findItem(R.id.menu_item_share);
         shareActionProvider = (android.support.v7.widget.ShareActionProvider) MenuItemCompat.getActionProvider(item);
         super.onCreateOptionsMenu(menu, inflater);
-        return;
     }
 
     private void setShareIntent(Intent shareIntent) {

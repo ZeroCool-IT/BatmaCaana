@@ -17,5 +17,6 @@
     <dimen name="button_bar_text_size">12sp</dimen>
     <dimen name="settings_frag_padding">8dp</dimen>
     <dimen name="card_corner_radius">0dp</dimen>
+    <dimen name="card_height">203dp</dimen>
 
 </resources>
