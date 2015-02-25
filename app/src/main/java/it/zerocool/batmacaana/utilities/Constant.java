@@ -139,7 +139,7 @@ public class Constant {
             R.drawable.im_gallery_14};
 
     //Others
-    public static final int VIEW_STATE_SELECTED = 1;
+    public static final int VIEW_STATE_SELECTED = 100;
     public static final int NAV_DRAWER_SUBHEADER = 8;
     public static final long M_BACK_PRESS_THRESHOLD = 3500;
 

@@ -6,7 +6,6 @@ package it.zerocool.batmacaana;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -33,6 +32,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
     private Context context;
     private LayoutInflater inflater;
     private View previousSelected;
+    private int currentSelected;
     private FragmentManager fragmentManager;
     private DrawerLayout drawerLayout;
 
@@ -55,23 +55,6 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
             view = inflater.inflate(R.layout.drawer_row_subheader, parent, false);
         } else if (viewType == Constant.ROUTES) {
             view = inflater.inflate(R.layout.drawer_row_last_main, parent, false);
-        /*} else if (viewType == Constant.OFFLINE) {
-            view = inflater.inflate(R.layout.drawer_row_offline_toggle, parent, false);
-            SwitchCompat toggle = (SwitchCompat) view.findViewById(R.id.offline_switch);
-            toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked) {
-                        Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
-            view.setVisibility(View.GONE);
-        } else if (viewType == Constant.UPDATE) {
-            view = inflater.inflate(R.layout.drawer_row, parent, false);
-            view.setVisibility(View.GONE);*/
-        } else if (viewType == Constant.CITY) {
-            view = inflater.inflate(R.layout.drawer_row, parent, false);
         } else {
             view = inflater.inflate(R.layout.drawer_row, parent, false);
         }
@@ -104,28 +87,16 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
      */
     @Override
     public int getItemViewType(int position) {
-        SharedPreferences sp = context.getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
-        final int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
+//        SharedPreferences sp = context.getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+//        final int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
 
-        if (position == defaultView)
+        if (position == currentSelected)
             return Constant.VIEW_STATE_SELECTED;
         else if (position == Constant.NAV_DRAWER_SUBHEADER)
             return Constant.NAV_DRAWER_SUBHEADER;
         else if (position == Constant.ROUTES)
             return Constant.ROUTES;
-        /*else if (position == Constant.OFFLINE)
-            return Constant.OFFLINE;*/
-        else if (position == Constant.CITY)
-            return Constant.CITY;
-        /*else if (position == Constant.UPDATE)
-            return Constant.UPDATE;*/
-        else if (position == Constant.CREDITS)
-            return Constant.CREDITS;
-        else if (position == Constant.SETTINGS)
-            return Constant.SETTINGS;
-        else if (position == Constant.FAVORITE)
-            return Constant.FAVORITE;
-        return super.getItemViewType(position);
+        return position;
     }
 
     private void selectView(View v) {
@@ -141,6 +112,10 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
             title.setTextColor(context.getResources().getColor(R.color.primary_text_color));
             v.setBackgroundColor(context.getResources().getColor(R.color.transparent_bg));
         }
+    }
+
+    public void setCurrentSelected(int currentSelected) {
+        this.currentSelected = currentSelected;
     }
 
     public void setDrawerLayout(DrawerLayout dl) {
@@ -167,6 +142,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
             if (position != Constant.SETTINGS && position != Constant.UPDATE && position != Constant.SUBHEADER && position != Constant.OFFLINE && position != Constant.CREDITS) {
                 unselectView(previousSelected);
                 selectView(v);
+//                setCurrentSelected(position);
             }
         }
 
@@ -192,7 +168,6 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                     drawerLayout.closeDrawers();
                     break;
                 case Constant.SETTINGS:
-//                    Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
                     Intent settingsIntent = new Intent(context, SettingsActivity.class);
                     context.startActivity(settingsIntent);
                     drawerLayout.closeDrawers();
@@ -202,13 +177,6 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                     context.startActivity(creditsIntent);
                     drawerLayout.closeDrawers();
                     break;
-//                case Constant.ROUTES:
-//
-////                    Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
-//                    break;
-                /*case Constant.UPDATE:
-                    Toast.makeText(context, R.string.feature_na, Toast.LENGTH_LONG).show();
-                    break;*/
                 default:
                     ContentFragment f = new ContentFragment();
                     Bundle bundle = new Bundle();
