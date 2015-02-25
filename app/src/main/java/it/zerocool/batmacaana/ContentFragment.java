@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 
@@ -48,6 +49,7 @@ public class ContentFragment extends Fragment {
     private ViewGroup container;
     private ProgressBarCircularIndeterminate progressBar;
     private Location currentLocation;
+    private ImageButton referesh;
 
 
 //    private ImageView ivContent;
@@ -68,7 +70,7 @@ public class ContentFragment extends Fragment {
      * tied to {@link android.app.Activity#onResume() Activity.onResume} of the containing
      * Activity's lifecycle.
      */
-    @Override
+/*    @Override
     public void onResume() {
 
         SharedPreferences prefs = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
@@ -77,7 +79,7 @@ public class ContentFragment extends Fragment {
         Log.i("ZCLOG", "Resuming.. " + Integer.valueOf(refresh).toString());
 
         super.onResume();
-    }
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,6 +89,7 @@ public class ContentFragment extends Fragment {
         readCurrentLocationFromPreferences();
         layout = inflater.inflate(R.layout.fragment_content, container, false);
         progressBar = (ProgressBarCircularIndeterminate) layout.findViewById(R.id.progressBar);
+        referesh = (ImageButton) layout.findViewById(R.id.bt_refresh);
         rvContent = (RecyclerView) layout.findViewById(R.id.content_recycler_view);
         rvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         int id = getArguments().getInt(Constant.FRAG_SECTION_ID);
@@ -113,52 +116,52 @@ public class ContentFragment extends Fragment {
     private List<Cardable> getData(int typeID) {
         String uri = null;
         int type = Constant.PLACE;
-        SharedPreferences prefs = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
-        int refresh;
+        /*SharedPreferences prefs = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        int refresh;*/
         switch (typeID) {
             case Constant.TOSEE:
                 uri = Constant.URI_TOSEE;
-                refresh = Constant.TOSEE;
+//                refresh = Constant.TOSEE;
                 break;
             case Constant.EVENT:
                 uri = Constant.URI_EVENT;
                 type = Constant.EVENT;
-                refresh = Constant.EVENT;
+//                refresh = Constant.EVENT;
                 break;
             case Constant.EAT:
                 uri = Constant.URI_EAT;
-                refresh = Constant.EAT;
+//                refresh = Constant.EAT;
                 break;
             case Constant.SLEEP:
                 uri = Constant.URI_SLEEP;
-                refresh = Constant.SLEEP;
+//                refresh = Constant.SLEEP;
                 break;
             case Constant.SERVICES:
                 uri = Constant.URI_SERVICES;
-                refresh = Constant.SERVICES;
+//                refresh = Constant.SERVICES;
                 break;
             case Constant.CITY:
                 uri = Constant.URI_CITY;
                 type = Constant.CITY;
-                refresh = Constant.CITY;
+//                refresh = Constant.CITY;
                 break;
             case Constant.NEWS:
                 uri = Constant.URI_NEWS;
                 type = Constant.NEWS;
-                refresh = Constant.NEWS;
+//                refresh = Constant.NEWS;
                 break;
             case Constant.ROUTES:
                 uri = Constant.URI_ROUTES;
                 type = Constant.ROUTES;
-                refresh = Constant.ROUTES;
+//                refresh = Constant.ROUTES;
                 break;
             default:
-                refresh = Integer.parseInt(prefs.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
+//                refresh = Integer.parseInt(prefs.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
                 break;
         }
-        SharedPreferences.Editor editor = prefs.edit();
+        /*SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(Constant.REFRESH, refresh);
-        editor.apply();
+        editor.apply();*/
         uri += Integer.valueOf(Constant.USER_ID).toString();
 
         if (RequestUtilities.isOnline(getActivity())) {
@@ -195,14 +198,14 @@ public class ContentFragment extends Fragment {
      * tied to {@link android.app.Activity#onPause() Activity.onPause} of the containing
      * Activity's lifecycle.
      */
-    @Override
+/*    @Override
     public void onPause() {
         super.onPause();
         if (task != null) {
             task.cancel(true);
         }
 
-    }
+    }*/
 
     /**
      * Called when the view previously created by {@link #onCreateView} has
@@ -377,6 +380,16 @@ public class ContentFragment extends Fragment {
         @Override
         protected void onCancelled() {
             super.onCancelled();
+            progressBar.setVisibility(View.GONE);
+            referesh.setVisibility(View.VISIBLE);
+            referesh.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (v.getId() == R.id.bt_refresh) {
+                        getData(getArguments().getInt(Constant.FRAG_SECTION_ID));
+                    }
+                }
+            });
             Log.i("ZCLOG", "onCancelled() called");
         }
 
@@ -390,6 +403,7 @@ public class ContentFragment extends Fragment {
         protected void onPreExecute() {
             progressBar.setVisibility(View.VISIBLE);
             rvContent.setVisibility(View.INVISIBLE);
+            referesh.setVisibility(View.GONE);
         }
     }
 

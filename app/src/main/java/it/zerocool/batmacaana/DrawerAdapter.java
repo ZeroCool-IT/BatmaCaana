@@ -12,20 +12,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
 
 import it.zerocool.batmacaana.utilities.Constant;
-import it.zerocool.batmacaana.utilities.SharedPreferencesProvider;
 
 /**
  * Navigation Drawer RecyclerView adapter
@@ -59,7 +55,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
             view = inflater.inflate(R.layout.drawer_row_subheader, parent, false);
         } else if (viewType == Constant.ROUTES) {
             view = inflater.inflate(R.layout.drawer_row_last_main, parent, false);
-        } else if (viewType == Constant.OFFLINE) {
+        /*} else if (viewType == Constant.OFFLINE) {
             view = inflater.inflate(R.layout.drawer_row_offline_toggle, parent, false);
             SwitchCompat toggle = (SwitchCompat) view.findViewById(R.id.offline_switch);
             toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -73,7 +69,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
             view.setVisibility(View.GONE);
         } else if (viewType == Constant.UPDATE) {
             view = inflater.inflate(R.layout.drawer_row, parent, false);
-            view.setVisibility(View.GONE);
+            view.setVisibility(View.GONE);*/
         } else if (viewType == Constant.CITY) {
             view = inflater.inflate(R.layout.drawer_row, parent, false);
         } else {
@@ -108,7 +104,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
      */
     @Override
     public int getItemViewType(int position) {
-        SharedPreferences sp = SharedPreferencesProvider.getSharedPreferences(context);
+        SharedPreferences sp = context.getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
         final int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
 
         if (position == defaultView)
@@ -117,12 +113,18 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
             return Constant.NAV_DRAWER_SUBHEADER;
         else if (position == Constant.ROUTES)
             return Constant.ROUTES;
-        else if (position == Constant.OFFLINE)
-            return Constant.OFFLINE;
+        /*else if (position == Constant.OFFLINE)
+            return Constant.OFFLINE;*/
         else if (position == Constant.CITY)
             return Constant.CITY;
-        else if (position == Constant.UPDATE)
-            return Constant.UPDATE;
+        /*else if (position == Constant.UPDATE)
+            return Constant.UPDATE;*/
+        else if (position == Constant.CREDITS)
+            return Constant.CREDITS;
+        else if (position == Constant.SETTINGS)
+            return Constant.SETTINGS;
+        else if (position == Constant.FAVORITE)
+            return Constant.FAVORITE;
         return super.getItemViewType(position);
     }
 

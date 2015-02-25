@@ -65,7 +65,8 @@
                 android:padding="8dp"
                 android:text="@string/dexterweb"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/credit_dexter"
@@ -76,7 +77,8 @@
                 android:gravity="left"
                 android:padding="8dp"
                 android:text="@string/dexter_credits"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/papetta"

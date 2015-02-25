@@ -133,7 +133,7 @@ public class NavigationDrawerFragment extends Fragment {
         if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
             mDrawerLayout.openDrawer(containerView);
         }
-        SharedPreferences sp = SharedPreferencesProvider.getSharedPreferences(getActivity());
+        SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
         int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
         selectItem(defaultView);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
