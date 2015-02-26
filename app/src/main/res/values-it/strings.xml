@@ -19,7 +19,7 @@
     <string name="dialog_button_ok">OK</string>
     <string name="dialog_button_settings">Preferenze…</string>
     <string name="dialog_message_db_error">Qualcosa è andato storto col DB!</string>
-    <string name="dialog_message_error">Qualcosa è andato storto recuperando i dati dal server. Riprova più tardi!</string>
+    <string name="dialog_message_error">Qualcosa è andato storto recuperando i dati dal server a causa di problemi di connessione. Riprova più tardi!</string>
     <string name="dialog_message_no_connection">Nessuna connessione a Internet! Controlla le tue impostazioni e prova ancora!</string>
     <string name="dialog_title_uhoh">Oh Oh!</string>
     <string name="dialog_title_warning">Attenzione!</string>

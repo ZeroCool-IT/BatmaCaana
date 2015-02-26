@@ -246,20 +246,7 @@ public class HomeActivity extends ActionBarActivity {
      */
     @Override
     public void onBackPressed() {
-/*        if (exit) {
-            finish(); // finish activity
-        } else {
-            Toast.makeText(this, "Press Back again to Exit.",
-                    Toast.LENGTH_SHORT).show();
-            exit = true;
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    exit = false;
-                }
-            }, 3 * 1000);
 
-        }*/
         long currentTime = System.currentTimeMillis();
         if (Math.abs(currentTime - mLastBackPress) > Constant.M_BACK_PRESS_THRESHOLD) {
             pressBackToast.show();

@@ -126,8 +126,8 @@ public class Constant {
 
 
     //Location Constraints
-    public static final int LOCATION_UPDATE_TIME = 120000;
-    public static final int LOCATION_MIN_DISTANCE_UPDATE = 100;
+    public static final int LOCATION_UPDATE_TIME = 30000;
+    public static final int LOCATION_MIN_DISTANCE_UPDATE = 50;
 
     //Gallery image
 

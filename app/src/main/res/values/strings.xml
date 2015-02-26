@@ -21,7 +21,7 @@
     <string name="dialog_button_ignore">Ignore</string>
     <string name="dialog_button_settings">Settings…</string>
     <string name="dialog_message_no_connection">No internet connection! Check your settings and try again!</string>
-    <string name="dialog_message_error">Something goes wrong retrieving data from server. Please try again later!</string>
+    <string name="dialog_message_error">Something goes wrong retrieving data from server due to connection problems. Please try again later!</string>
     <string name="dialog_message_db_error">Something goes wrong managing db!</string>
     <string name="dialog_title_uhoh">Uh Oh!</string>
     <string name="dialog_title_warning">Warning!</string>
