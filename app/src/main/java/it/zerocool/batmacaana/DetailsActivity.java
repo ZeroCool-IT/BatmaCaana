@@ -15,6 +15,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -187,6 +190,20 @@ public class DetailsActivity extends ActionBarActivity {
     private class RequestObjectTask extends AsyncTask<String, Void, String> {
 
         private int type;
+        private ProgressBarCircularIndeterminate bar;
+
+        /**
+         * Runs on the UI thread before {@link #doInBackground}.
+         *
+         * @see #onPostExecute
+         * @see #doInBackground
+         */
+        @Override
+        protected void onPreExecute() {
+            bar = (ProgressBarCircularIndeterminate) findViewById(R.id.details_progressbar);
+            bar.setVisibility(View.VISIBLE);
+            super.onPreExecute();
+        }
 
         /**
          * Override this method to perform a computation on a background thread. The
@@ -231,6 +248,7 @@ public class DetailsActivity extends ActionBarActivity {
          */
         @Override
         protected void onPostExecute(String s) {
+            bar.setVisibility(View.GONE);
             if (s != null && !s.equals(Constant.EMPTY_VALUE)) {
 
                 Fragment frag = chooseFragment(type);

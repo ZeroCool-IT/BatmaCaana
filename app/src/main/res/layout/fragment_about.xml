@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:background="@color/light_primary_color">
+                android:background="@color/transparent_bg">
 
                 <ImageSwitcher
                     android:id="@+id/main_image"
@@ -180,7 +180,7 @@
                     expandableTextView:expandDrawable="@drawable/ic_expand_more_grey600_36dp"
                     expandableTextView:maxCollapsedLines="6">
 
-                <TextView
+                    <TextView
                         android:id="@id/expandable_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -228,7 +228,7 @@
                     expandableTextView:expandDrawable="@drawable/ic_expand_more_grey600_36dp"
                     expandableTextView:maxCollapsedLines="6">
 
-                <TextView
+                    <TextView
                         android:id="@id/expandable_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
