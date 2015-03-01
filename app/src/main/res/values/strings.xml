@@ -139,6 +139,8 @@
     <string name="restore_alerts_message">Do you want to restore all application alerts? </string>
     <string name="title_activity_splash" translatable="false">SplashActivity</string>
     <string name="title_activity_credits" translatable="false">CreditsActivity</string>
+    <string name="report"><u>Suggest a change</u></string>
+    <string name="accessible">Accessible</string>
 
 
 </resources>

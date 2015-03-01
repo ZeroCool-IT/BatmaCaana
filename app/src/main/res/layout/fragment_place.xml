@@ -219,10 +219,34 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/phone_layout"
+                    android:id="@+id/accesibility"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/address_layout"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="8dp"
+                        android:src="@drawable/ic_wheelchair_accessibility_grey600_24dp" />
+
+                    <TextView
+                        android:id="@+id/accessibility_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="@string/accessible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/phone_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/accesibility"
                     android:orientation="horizontal"
                     android:paddingTop="8dp">
 
@@ -378,14 +402,29 @@
 
                 </LinearLayout>
 
+
+                <TextView
+                    android:id="@+id/report_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/social_layout"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="14dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="28dp"
+                    android:text="@string/report"
+                    android:textColor="@color/accentColor" />
+
                 <LinearLayout
+                    android:id="@+id/spacing_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="36dp"
                     android:layout_below="@+id/social_layout"
-                    android:visibility="invisible">
+                    android:orientation="horizontal"
+                    android:visibility="invisible"></LinearLayout>
 
-
-                </LinearLayout>
 
             </RelativeLayout>
         </RelativeLayout>

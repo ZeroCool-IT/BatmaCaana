@@ -40,6 +40,7 @@ public class Place implements Cardable {
     protected Location location;
     protected float distanceFromCurrentPosition;
     protected String json;
+    protected boolean accessible;
 
 
     /**
@@ -205,6 +206,33 @@ public class Place implements Cardable {
      */
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    /**
+     *
+     * @return true if the place is accessible for disabled false otherwise
+     */
+    public boolean isAccessible() {
+        return accessible;
+    }
+
+    /**
+     *
+     */
+    public void setAccessible(String accessible) {
+        if (accessible != null && !accessible.isEmpty()) {
+            this.accessible = true;
+        } else
+            this.accessible = false;
+    }
+
+    /**
+     * Set place accessibility
+     *
+     * @param accessible true if place is accessible for disabled, false otherwise
+     */
+    public void setAccessible(boolean accessible) {
+        this.accessible = accessible;
     }
 
     /**

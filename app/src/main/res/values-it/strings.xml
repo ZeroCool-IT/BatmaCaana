@@ -119,4 +119,6 @@
     <string name="dexter_credits">Progetto, design server e web, consulente creativo</string>
     <string name="papetta_credits">Management applicazione e contenuti, consulente creativo</string>
     <string name="zero_credits">Progetto, sviluppo e design Android, consulente IT</string>
+    <string name="report"><u>Suggerisci una modifica</u></string>
+    <string name="accessible">Accessibile</string>
 </resources>

@@ -62,6 +62,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
     private TextView mailTv;
     private TextView linkTv;
     private TextView tagTv;
+    private TextView reportTv;
     private Button phoneActionButton;
     private Button urlActionButton;
     private Button mailActionButton;
@@ -80,6 +81,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
     private LinearLayout tagLayout;
     private LinearLayout descriptionLayout;
     private LinearLayout socialLayout;
+    private LinearLayout accessibilityLayout;
     private Target loadTarget;
     private Toolbar toolbar;
     private Palette palette;
@@ -116,6 +118,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
         mailTv = (TextView) layout.findViewById(R.id.mail_tv);
         linkTv = (TextView) layout.findViewById(R.id.link_tv);
         tagTv = (TextView) layout.findViewById(R.id.tag_tv);
+        reportTv = (TextView) layout.findViewById(R.id.report_tv);
         phoneActionButton = (Button) layout.findViewById(R.id.phoneButton);
         urlActionButton = (Button) layout.findViewById(R.id.urlButton);
         mailActionButton = (Button) layout.findViewById(R.id.mailButton);
@@ -134,6 +137,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
         tagLayout = (LinearLayout) layout.findViewById(R.id.tag_layout);
         descriptionLayout = (LinearLayout) layout.findViewById(R.id.description_layout);
         socialLayout = (LinearLayout) layout.findViewById(R.id.social_layout);
+        accessibilityLayout = (LinearLayout) layout.findViewById((R.id.accesibility));
         toolbar = (Toolbar) layout.findViewById(R.id.appbar);
         ivPlace = (ImageView) layout.findViewById(R.id.imageView);
 
@@ -149,6 +153,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
         googlePlusButton.setOnClickListener(this);
         fullScreenButton.setOnClickListener(this);
         ivPlace.setOnClickListener(this);
+        reportTv.setOnClickListener(this);
 
         //Args read
         Place p = ParsingUtilities.parseSinglePlace(getArguments().getString(Constant.JSON_ARG));
@@ -257,6 +262,10 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
         } else {
             socialLayout.setVisibility(View.GONE);
         }
+        if (!p.isAccessible()) {
+            accessibilityLayout.setVisibility(View.GONE);
+        }
+
     }
 
     public void setBitmap(Bitmap bitmap) {
@@ -459,6 +468,27 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
             } else
                 Toast.makeText(getActivity(), R.string.no_image, Toast.LENGTH_SHORT).show();
 
+        } else if (v.getId() == R.id.report_tv) {
+            String mail = "report@exploracity.it";
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+            intent.setType("*/*");
+            String[] addresses = new String[1];
+            addresses[0] = mail;
+            String subject = "[REPORT] " +
+                    "["
+                    + Integer.valueOf(Constant.USER_ID).toString()
+                    + "/"
+                    + targetPlace.getId()
+                    + "] "
+                    + targetPlace.getName();
+            intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+            intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+            if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                startActivity(intent);
+            } else
+                Toast.makeText(getActivity(), R.string.no_mail_app, Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -508,7 +538,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener {
          * <p/>
          * <p>This method won't be invoked if the task was cancelled.</p>
          *
-         * @param aVoid The result of the operation computed by {@link #doInBackground}.
+         * @param done The result of the operation computed by {@link #doInBackground}.
          * @see #onPreExecute
          * @see #doInBackground
          * @see #onCancelled(Object)
