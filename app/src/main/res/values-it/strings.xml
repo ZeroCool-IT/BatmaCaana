@@ -114,11 +114,16 @@
         <item>Per esperti</item>
     </string-array>
     <string name="no_app">Non c\'è nessuna applicazione adeguata sul tuo dispositivo!</string>
-    <string name="copyright">&#169; 2015. Tutti i diritti riservati.</string>
+    <string name="copyright">&#169; MAG Technologies 2015. Tutti i diritti riservati.</string>
     <string name="by">di</string>
     <string name="dexter_credits">Progetto, design server e web, consulente creativo</string>
     <string name="papetta_credits">Management applicazione e contenuti, consulente creativo</string>
     <string name="zero_credits">Progetto, sviluppo e design Android, consulente IT</string>
     <string name="report"><u>Suggerisci una modifica</u></string>
     <string name="accessible">Accessibile</string>
+    <string name="developed">Progettata e sviluppata da</string>
+    <string name="android_logo_attribution">Il robot Android è riprodotto o modificato dal lavoro creato e condiviso da Google, e utilizzato conformemente ai termini della licenza Creative Commons Attribution License 3.0</string>
+    <string name="mag_tagline">Web Design &amp; Sviluppo Android</string>
+    <string name="texts_attribution">Attribuzione fonti:\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nisl dui, accumsan nec aliquet vel, tincidunt vitae ipsum. Vivamus eu mauris in augue tincidunt cursus vitae vel ligula. Suspendisse eget porttitor quam. Maecenas est neque, vestibulum eget felis eget, iaculis luctus enim. Duis ligula lorem, pulvinar eu pharetra et, tempus ac magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed metus ligula, venenatis a massa vel, congue ornare nunc. Suspendisse consectetur laoreet pharetra. Proin vestibulum ipsum tellus, egestas fermentum felis iaculis in. Cras efficitur semper maximus.</string>
+    <string name="disclaimer">Disclaimer:\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nisl dui, accumsan nec aliquet vel, tincidunt vitae ipsum. Vivamus eu mauris in augue tincidunt cursus vitae vel ligula. Suspendisse eget porttitor quam. Maecenas est neque, vestibulum eget felis eget, iaculis luctus enim. Duis ligula lorem, pulvinar eu pharetra et, tempus ac magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed metus ligula, venenatis a massa vel, congue ornare nunc. Suspendisse consectetur laoreet pharetra. Proin vestibulum ipsum tellus, egestas fermentum felis iaculis in. Cras efficitur semper maximus.</string>
 </resources>

@@ -25,91 +25,53 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:background="@color/primaryColor"
+                android:background="@color/splash_color"
                 android:paddingBottom="8dp"
-                android:src="@drawable/im_logo" />
+                android:src="@drawable/im_splash" />
 
 
             <TextView
-                android:id="@+id/zerotitle"
+                android:id="@+id/by"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/app_logo"
                 android:layout_marginTop="16dp"
+                android:background="@color/background_material_light"
                 android:fontFamily="sans-serif"
-                android:gravity="left"
+                android:gravity="center"
                 android:padding="8dp"
-                android:text="@string/zeroapp"
+                android:text="@string/developed"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/credit_zero"
+            <ImageView
+                android:id="@+id/mag_logo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/zerotitle"
-                android:fontFamily="sans-serif"
-                android:gravity="left"
-                android:padding="8dp"
-                android:text="@string/zero_credits"
-                android:textSize="12sp" />
+                android:layout_height="200dp"
+                android:layout_below="@id/by"
+                android:background="@color/background_material_light"
+                android:src="@drawable/im_mag_logo" />
 
             <TextView
-                android:id="@+id/dextertitle"
+                android:id="@+id/mag_tagline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/credit_zero"
+                android:layout_below="@id/mag_logo"
                 android:layout_marginTop="16dp"
+                android:background="@color/background_material_light"
                 android:fontFamily="sans-serif"
-                android:gravity="left"
+                android:gravity="center"
                 android:padding="8dp"
-                android:text="@string/dexterweb"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/credit_dexter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/dextertitle"
-                android:fontFamily="sans-serif"
-                android:gravity="left"
-                android:padding="8dp"
-                android:text="@string/dexter_credits"
-                android:textSize="12sp"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/papetta"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/credit_dexter"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif"
-                android:gravity="left"
-                android:padding="8dp"
-                android:text="@string/papetta"
-                android:textSize="14sp"
+                android:text="@string/mag_tagline"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/credit_papetta"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/papetta"
-                android:layout_marginBottom="12dp"
-                android:fontFamily="sans-serif"
-                android:gravity="left"
-                android:padding="8dp"
-                android:text="@string/papetta_credits"
-                android:textSize="12sp" />
 
             <LinearLayout
                 android:id="@+id/mail_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/credit_papetta"
+                android:layout_below="@id/mag_tagline"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingLeft="8dp"
@@ -128,14 +90,16 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:text="@string/explora_mail" />
+                    android:background="@color/background_material_light"
+                    android:text="@string/explora_mail"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/web_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/credit_papetta"
+                android:layout_below="@id/mag_tagline"
                 android:layout_toEndOf="@+id/mail_layout"
                 android:layout_toRightOf="@+id/mail_layout"
                 android:orientation="horizontal"
@@ -155,16 +119,86 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:text="@string/explora_web" />
+                    android:background="@color/background_material_light"
+                    android:text="@string/explora_web"
+                    android:textSize="14sp" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/android_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/web_layout"
+                android:layout_marginTop="24dp"
+                android:background="@color/background_material_light"
+                android:padding="8dp"
+                android:text="@string/android_logo_attribution"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/texts_attribution"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/android_logo"
+                android:background="@color/background_material_light"
+                android:padding="8dp"
+                android:text="@string/texts_attribution"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/disclaimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/texts_attribution"
+                android:background="@color/background_material_light"
+                android:padding="8dp"
+                android:text="@string/disclaimer"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/disclaimer"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/dmca"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@color/background_material_light"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/dmca"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/privacy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@color/background_material_light"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/privacy"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/copyright"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/web_layout"
+                android:layout_below="@id/disclaimer"
+                android:layout_centerInParent="true"
                 android:layout_marginTop="48dp"
+                android:background="@color/background_material_light"
                 android:padding="8dp"
                 android:text="@string/copyright"
                 android:textSize="12sp" />
@@ -187,7 +221,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/im_android_logo_br" />
+        android:src="@drawable/im_android_logo_br"
+        android:visibility="invisible" />
 
     <ImageView
         android:id="@+id/android_logo_bl"
@@ -196,8 +231,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/android_logo_br"
-        android:src="@drawable/im_android_logo_bl"
-        android:visibility="invisible" />
+        android:src="@drawable/im_android_logo_bl" />
 
     <ImageView
         android:id="@+id/android_logo_tl"

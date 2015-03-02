@@ -35,6 +35,10 @@ public class SplashActivity extends ActionBarActivity {
                     .commit();
         }
 
+/*        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.splash_color_dark));
+        }*/
+
         SharedPreferences sharedPreferences = this.getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
         boolean splash = sharedPreferences.getBoolean(Constant.SPLASH, true);
 

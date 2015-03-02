@@ -6,6 +6,7 @@ package it.zerocool.batmacaana;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -30,6 +31,9 @@ public class CreditsActivity extends ActionBarActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new CreditsFragment())
                     .commit();
+        }
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.splash_color_dark));
         }
     }
 
@@ -68,6 +72,8 @@ public class CreditsActivity extends ActionBarActivity {
         private ImageView androidTR;
         private TextView email;
         private TextView website;
+        private TextView privacy;
+        private TextView dmca;
 
         public CreditsFragment() {
         }
@@ -83,6 +89,8 @@ public class CreditsActivity extends ActionBarActivity {
 
             email = (TextView) rootView.findViewById(R.id.mail_tv);
             website = (TextView) rootView.findViewById(R.id.web_tv);
+            dmca = (TextView) rootView.findViewById(R.id.dmca);
+            privacy = (TextView) rootView.findViewById(R.id.privacy);
 
             androidBL.setOnClickListener(this);
             androidBR.setOnClickListener(this);
@@ -90,6 +98,8 @@ public class CreditsActivity extends ActionBarActivity {
             androidTR.setOnClickListener(this);
             email.setOnClickListener(this);
             website.setOnClickListener(this);
+            dmca.setOnClickListener(this);
+            privacy.setOnClickListener(this);
             return rootView;
         }
 
@@ -140,6 +150,38 @@ public class CreditsActivity extends ActionBarActivity {
                     if (url != null) {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setData(Uri.parse(url));
+                        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                            startActivity(intent);
+                        } else
+                            Toast.makeText(getActivity(), R.string.no_browser_app, Toast.LENGTH_SHORT).show();
+
+                    } else
+                        Toast.makeText(getActivity(), R.string.no_url_available, Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.dmca:
+                    String dmcaMail = getString(R.string.dmca_mail);
+                    if (dmcaMail != null) {
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+                        intent.setType("*/*");
+                        String[] addresses = new String[1];
+                        addresses[0] = dmcaMail;
+                        String subject = "[DMCA] ";
+                        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+                        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+                        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                            startActivity(intent);
+                        } else
+                            Toast.makeText(getActivity(), R.string.no_mail_app, Toast.LENGTH_SHORT).show();
+
+                    } else
+                        Toast.makeText(getActivity(), R.string.no_email_available, Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.privacy:
+                    String privacyUri = getString(R.string.explora_privacy);
+                    if (privacyUri != null) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse(privacyUri));
                         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
                             startActivity(intent);
                         } else

@@ -78,7 +78,7 @@
     <string name="play_store_na">Play Store not available!</string>
     <string name="remember_choose">Remember this choose?</string>
     <string name="by">by</string>
-    <string name="zeroapp" translatable="false">ZeroApp</string>
+    <string name="developed">Designed and developed by</string>
     <string name="dexterweb" translatable="false">Dexter</string>
     <string name="papetta" translatable="false">Alessio Campagna</string>
     <string name="zero_credits">Project, Android development and design, IT consultant</string>
@@ -86,7 +86,8 @@
     <string name="papetta_credits">Application and content management, creative consultant</string>
     <string name="explora_mail" translatable="false">info@exploracity.it</string>
     <string name="explora_web" translatable="false">www.exploracity.it</string>
-    <string name="copyright">&#169; 2015. All rights reserved</string>
+    <string name="copyright">&#169; MAG Technologies 2015. All rights reserved.</string>
+    <string name="android_logo_attribution">The Android robot is reproduced or modified from work created and shared by Google and used according to terms described in the Creative Commons 3.0 Attribution License.</string>
 
 
     <string-array name="drawer_list">
@@ -141,6 +142,13 @@
     <string name="title_activity_credits" translatable="false">CreditsActivity</string>
     <string name="report"><u>Suggest a change</u></string>
     <string name="accessible">Accessible</string>
+    <string name="mag_tagline">Web Design &amp; Android development</string>
+    <string name="texts_attribution">Texts attributions:\n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nisl dui, accumsan nec aliquet vel, tincidunt vitae ipsum. Vivamus eu mauris in augue tincidunt cursus vitae vel ligula. Suspendisse eget porttitor quam. Maecenas est neque, vestibulum eget felis eget, iaculis luctus enim. Duis ligula lorem, pulvinar eu pharetra et, tempus ac magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed metus ligula, venenatis a massa vel, congue ornare nunc. Suspendisse consectetur laoreet pharetra. Proin vestibulum ipsum tellus, egestas fermentum felis iaculis in. Cras efficitur semper maximus.</string>
+    <string name="disclaimer">Disclaimer:\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nisl dui, accumsan nec aliquet vel, tincidunt vitae ipsum. Vivamus eu mauris in augue tincidunt cursus vitae vel ligula. Suspendisse eget porttitor quam. Maecenas est neque, vestibulum eget felis eget, iaculis luctus enim. Duis ligula lorem, pulvinar eu pharetra et, tempus ac magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed metus ligula, venenatis a massa vel, congue ornare nunc. Suspendisse consectetur laoreet pharetra. Proin vestibulum ipsum tellus, egestas fermentum felis iaculis in. Cras efficitur semper maximus.</string>
+    <string name="dmca" translatable="false"><u>DMCA</u></string>
+    <string name="privacy" translatable="false"><u>Privacy</u></string>
+    <string name="dmca_mail" translatable="false">report@exploracity.it</string>
+    <string name="explora_privacy" translatable="false">http://www.exploracity.it/privacy</string>
 
 
 </resources>

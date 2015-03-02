@@ -18,6 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/im_logo" />
+        android:src="@drawable/im_splash" />
 
 </RelativeLayout>
