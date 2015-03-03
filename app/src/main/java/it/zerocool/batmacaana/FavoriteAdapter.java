@@ -24,6 +24,7 @@ import it.zerocool.batmacaana.model.Place;
 import it.zerocool.batmacaana.utilities.Constant;
 
 /**
+ * Adapter to manage favorite list
  * Created by Marco Battisti on 02/02/2015.
  */
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> {

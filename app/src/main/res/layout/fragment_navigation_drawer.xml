@@ -21,7 +21,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginTop="@dimen/drawer_margin_top"
             android:scaleType="fitCenter"
-            android:src="@drawable/im_logo" />
+            android:src="@drawable/im_drawer_logo" />
 
     </LinearLayout>
 

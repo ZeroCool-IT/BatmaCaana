@@ -4,7 +4,7 @@
 
 <resources>
 
-    <string name="app_name">@string/city_name</string>
+    <string name="app_name">Explora</string>
     <string name="hello_world" translatable="false">Hello world!</string>
     <string name="action_settings">Settings…</string>
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>

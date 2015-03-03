@@ -6,7 +6,6 @@ package it.zerocool.batmacaana;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -32,9 +31,9 @@ public class CreditsActivity extends ActionBarActivity {
                     .add(R.id.container, new CreditsFragment())
                     .commit();
         }
-        if (Build.VERSION.SDK_INT >= 21) {
+/*        if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.splash_color_dark));
-        }
+        }*/
     }
 
 

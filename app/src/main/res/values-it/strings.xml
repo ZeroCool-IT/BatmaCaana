@@ -3,7 +3,7 @@
   -->
 
 <resources>
-    <string name="app_name">@string/city_name</string>
+    <string name="app_name">Explora</string>
     <string name="action_settings">Preferenze…</string>
     <string name="alerts_title">Avvisi</string>
     <string name="back">Indietro</string>

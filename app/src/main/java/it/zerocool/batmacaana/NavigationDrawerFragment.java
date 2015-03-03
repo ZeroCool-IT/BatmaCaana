@@ -136,6 +136,7 @@ public class NavigationDrawerFragment extends Fragment {
         SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
         int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
         selectItem(defaultView);
+        getActivity().setTitle(getActivity().getResources().getStringArray(R.array.drawer_list)[defaultView]);
         adapter.setCurrentSelected(defaultView);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerLayout.post(new Runnable() {

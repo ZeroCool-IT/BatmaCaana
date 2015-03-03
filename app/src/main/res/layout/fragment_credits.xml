@@ -25,9 +25,9 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:background="@color/splash_color"
+                android:background="@color/primaryColor"
                 android:paddingBottom="8dp"
-                android:src="@drawable/im_splash" />
+                android:src="@drawable/im_splash_logo" />
 
 
             <TextView

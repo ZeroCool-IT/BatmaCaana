@@ -33,7 +33,7 @@ import it.zerocool.batmacaana.model.Place;
  * Activities that contain this fragment must implement the
  * {@link FavoriteFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link FavoriteFragment#newInstance} factory method to
+ * Use the  factory method to
  * create an instance of this fragment.
  */
 public class FavoriteFragment extends Fragment {
@@ -57,7 +57,7 @@ public class FavoriteFragment extends Fragment {
     /**
      * Called when the fragment is visible to the user and actively running.
      * This is generally
-     * tied to {@link Activity#onResume() Activity.onResume} of the containing
+     * tied to {@link android.app.Activity#onResume() Activity.onResume} of the containing
      * Activity's lifecycle.
      */
     @Override
