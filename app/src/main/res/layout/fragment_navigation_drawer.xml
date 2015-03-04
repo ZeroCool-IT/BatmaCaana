@@ -19,7 +19,7 @@
             android:layout_width="280dp"
             android:layout_height="197dp"
             android:layout_marginBottom="16dp"
-            android:layout_marginTop="@dimen/drawer_margin_top"
+            android:layout_marginTop="24dp"
             android:padding="8dp"
             android:scaleType="fitCenter"
             android:src="@drawable/im_drawer_logo" />

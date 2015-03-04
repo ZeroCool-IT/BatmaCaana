@@ -11,12 +11,14 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.ShareActionProvider;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,16 +36,20 @@ import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.util.Locale;
+
 import it.zerocool.batmacaana.listener.NewsPaletteListener;
 import it.zerocool.batmacaana.model.News;
 import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
 
 
-public class NewsFragment extends Fragment implements View.OnClickListener {
+public class NewsFragment extends Fragment implements View.OnClickListener, TextToSpeech.OnInitListener {
 
+    private static final String DESCRIPTION_TTS = "description";
     private ExpandableTextView tvBody;
     private News targetNews;
+    private ImageView playTTSButton;
     private ImageView ivNews;
     private LinearLayout buttonLayout;
     private TextView linkTv;
@@ -53,11 +59,10 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
     private LinearLayout linkLayout;
     private LinearLayout tagLayout;
     private LinearLayout bodyLayout;
-
     private ShareActionProvider shareActionProvider;
     private Target loadTarget;
-
     private Palette palette;
+    private TextToSpeech ttsService;
 
 
     public NewsFragment() {
@@ -69,6 +74,29 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
+    }
+
+    /**
+     * Called when the Fragment is no longer started.  This is generally
+     * tied to {@link Activity#onStop() Activity.onStop} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onStop() {
+        if (ttsService.isSpeaking()) {
+            ttsService.stop();
+        }
+        super.onStop();
+    }
+
+    /**
+     * Called when the fragment is no longer in use.  This is called
+     * after {@link #onStop()} and before {@link #onDetach()}.
+     */
+    @Override
+    public void onDestroy() {
+        ttsService.shutdown();
+        super.onDestroy();
     }
 
 
@@ -88,6 +116,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         tagLayout = (LinearLayout) layout.findViewById(R.id.tag_layout);
         bodyLayout = (LinearLayout) layout.findViewById(R.id.description_layout);
         ivNews = (ImageView) layout.findViewById(R.id.imageView);
+        playTTSButton = (ImageView) layout.findViewById(R.id.tts_icon);
         fullScreenButton = (ImageButton) layout.findViewById(R.id.fullscreenButton);
 
 
@@ -95,6 +124,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         urlActionButton.setOnClickListener(this);
         ivNews.setOnClickListener(this);
         fullScreenButton.setOnClickListener(this);
+        playTTSButton.setOnClickListener(this);
 
 
         //Args read
@@ -113,7 +143,24 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
         fillFields(n);
 
 
+        ttsService = new TextToSpeech(getActivity(), this);
         return layout;
+    }
+
+    /**
+     * Called to signal the completion of the TextToSpeech engine initialization.
+     *
+     * @param status {@link android.speech.tts.TextToSpeech#SUCCESS} or {@link android.speech.tts.TextToSpeech#ERROR}.
+     */
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            Locale language = Locale.ITALIAN;
+            ttsService.setLanguage(language);
+            Log.i("UTTERANCE", "service started");
+            playTTSButton.setEnabled(true);
+        } else
+            Toast.makeText(getActivity(), R.string.tts_na, Toast.LENGTH_SHORT).show();
     }
 
     public void loadBitmap(String url) {
@@ -214,6 +261,22 @@ public class NewsFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
             } else
                 Toast.makeText(getActivity(), R.string.no_image, Toast.LENGTH_SHORT).show();
+        } else if (v.getId() == R.id.tts_icon) {
+            if (ttsService != null) {
+                if (!ttsService.isSpeaking()) {
+                    String description = targetNews.getBody();
+                    if (description != null && !description.isEmpty()) {
+                        if (Build.VERSION.SDK_INT >= 21) {
+                            ttsService.speak(description, TextToSpeech.QUEUE_FLUSH, null, DESCRIPTION_TTS);
+                        } else {
+                            ttsService.speak(description, TextToSpeech.QUEUE_FLUSH, null);
+                        }
+                        Toast.makeText(getActivity(), R.string.tts_press_again, Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    ttsService.stop();
+                }
+            }
         }
     }
 

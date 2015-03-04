@@ -8,6 +8,8 @@
 
 
 
+
+
 apply plugin: 'com.android.application'
 
 android {
@@ -18,8 +20,8 @@ android {
         applicationId "it.zerocool.batmacaana"
         minSdkVersion 16
         targetSdkVersion 21
-        versionCode 37
-        versionName "0.37a"
+        versionCode 38
+        versionName "0.38a"
     }
     buildTypes {
         release {
@@ -44,8 +46,8 @@ android {
         }
         beta {
             applicationId "it.exploracity.carpineto.beta"
-            versionCode 9
-            versionName "0.09B RC2"
+            versionCode 10
+            versionName "0.10B RC3"
         }
     }
 }

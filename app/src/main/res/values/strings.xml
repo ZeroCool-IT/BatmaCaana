@@ -149,6 +149,9 @@
     <string name="privacy" translatable="false"><u>Privacy</u></string>
     <string name="dmca_mail" translatable="false">report@exploracity.it</string>
     <string name="explora_privacy" translatable="false">http://www.exploracity.it/privacy</string>
+    <string name="tts_button">Read it!</string>
+    <string name="tts_na">Reading service not available!</string>
+    <string name="tts_press_again">Press again to stop</string>
 
 
 </resources>

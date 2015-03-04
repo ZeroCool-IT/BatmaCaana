@@ -6,8 +6,11 @@ package it.zerocool.batmacaana;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +27,7 @@ import com.ms.square.android.expandabletextview.ExpandableTextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 
 import it.zerocool.batmacaana.utilities.Constant;
 
@@ -32,12 +36,15 @@ import it.zerocool.batmacaana.utilities.Constant;
  * Fragment with city general information
  * Created by Marco Battisti on 14/02/2014
  */
-public class AboutFragment extends Fragment implements View.OnClickListener {
+public class AboutFragment extends Fragment implements View.OnClickListener, TextToSpeech.OnInitListener {
 
 
+    private static final String DESCRIPTION_TTS = "description";
     private ImageSwitcher mainPicture;
     private int current;
     private ArrayList<Integer> imageItems;
+    private TextToSpeech ttsService;
+    private ImageView playTTSButton;
 
     public AboutFragment() {
         // Required empty public constructor
@@ -48,6 +55,29 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
 
+    }
+
+    /**
+     * Called when the Fragment is no longer started.  This is generally
+     * tied to {@link Activity#onStop() Activity.onStop} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onStop() {
+        if (ttsService.isSpeaking()) {
+            ttsService.stop();
+        }
+        super.onStop();
+    }
+
+    /**
+     * Called when the fragment is no longer in use.  This is called
+     * after {@link #onStop()} and before {@link #onDetach()}.
+     */
+    @Override
+    public void onDestroy() {
+        ttsService.shutdown();
+        super.onDestroy();
     }
 
     @Override
@@ -68,6 +98,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         Button urlButton = (Button) layout.findViewById(R.id.urlButton);
         Button mapButton = (Button) layout.findViewById(R.id.mapButton);
         ImageButton fullScreen = (ImageButton) layout.findViewById(R.id.fullscreenButton);
+        playTTSButton = (ImageView) layout.findViewById(R.id.tts_icon);
 
 
         //Set fixed text
@@ -102,10 +133,28 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         fullScreen.setOnClickListener(this);
         mainPicture.setOnClickListener(this);
         mapButton.setOnClickListener(this);
+        playTTSButton.setOnClickListener(this);
+
+        ttsService = new TextToSpeech(getActivity(), this);
 
         return layout;
     }
 
+    /**
+     * Called to signal the completion of the TextToSpeech engine initialization.
+     *
+     * @param status {@link android.speech.tts.TextToSpeech#SUCCESS} or {@link android.speech.tts.TextToSpeech#ERROR}.
+     */
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            Locale language = Locale.ITALIAN;
+            ttsService.setLanguage(language);
+            Log.i("UTTERANCE", "service started");
+            playTTSButton.setEnabled(true);
+        } else
+            Toast.makeText(getActivity(), R.string.tts_na, Toast.LENGTH_SHORT).show();
+    }
 
     /**
      * Called when a view has been clicked.
@@ -188,6 +237,24 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
                     startActivity(intent);
                 } else
                     Toast.makeText(getActivity(), R.string.no_map_app, Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.tts_icon:
+                if (ttsService != null) {
+                    if (!ttsService.isSpeaking()) {
+                        String description = getString(R.string.about);
+                        if (description != null && !description.isEmpty()) {
+                            if (Build.VERSION.SDK_INT >= 21) {
+                                ttsService.speak(description, TextToSpeech.QUEUE_FLUSH, null, DESCRIPTION_TTS);
+                            } else {
+                                ttsService.speak(description, TextToSpeech.QUEUE_FLUSH, null);
+                            }
+                            Toast.makeText(getActivity(), R.string.tts_press_again, Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        ttsService.stop();
+                    }
+                }
+
             default:
                 break;
         }
