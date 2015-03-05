@@ -16,7 +16,7 @@ import it.zerocool.batmacaana.utilities.SearchHistoryProvider;
  * Dialog to clear recent search queries
  * Created by Marco Battisti on 19/02/2015.
  */
-public class ClearSearchDialogPreference extends DialogPreference {
+class ClearSearchDialogPreference extends DialogPreference {
 
     public ClearSearchDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);

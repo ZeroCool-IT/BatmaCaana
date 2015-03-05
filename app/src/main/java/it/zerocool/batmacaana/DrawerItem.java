@@ -5,9 +5,10 @@
 package it.zerocool.batmacaana;
 
 /**
+ * Represent drawer item
  * Created by Marco on 05/01/2015.
  */
-public class DrawerItem {
+class DrawerItem {
 
     int iconID;
     String title;

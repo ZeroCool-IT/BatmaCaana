@@ -26,6 +26,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:background="@color/primaryColor"
+                android:contentDescription="@string/app_logo"
                 android:paddingBottom="8dp"
                 android:src="@drawable/im_splash_logo" />
 
@@ -50,6 +51,7 @@
                 android:layout_height="200dp"
                 android:layout_below="@id/by"
                 android:background="@color/background_material_light"
+                android:contentDescription="@string/mag_logo"
                 android:src="@drawable/im_mag_logo" />
 
             <TextView
@@ -75,11 +77,13 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingLeft="8dp"
-                android:paddingTop="8dp">
+                android:paddingTop="8dp"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/mail_icon"
                     android:paddingRight="4dp"
                     android:src="@drawable/ic_email_grey600_24dp" />
 
@@ -104,11 +108,13 @@
                 android:layout_toRightOf="@+id/mail_layout"
                 android:orientation="horizontal"
                 android:paddingLeft="8dp"
-                android:paddingTop="8dp">
+                android:paddingTop="8dp"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/url_icon"
                     android:paddingRight="4dp"
                     android:src="@drawable/ic_web_grey600_24dp" />
 
@@ -207,7 +213,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_below="@id/copyright"
-                android:visibility="invisible" />
+                android:visibility="invisible"
+                tools:ignore="UselessLeaf" />
 
 
         </RelativeLayout>
@@ -221,6 +228,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:contentDescription="@string/android_logo"
         android:src="@drawable/im_android_logo_br"
         android:visibility="invisible" />
 
@@ -231,6 +239,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/android_logo_br"
+        android:contentDescription="@string/android_logo"
         android:src="@drawable/im_android_logo_bl" />
 
     <ImageView
@@ -240,6 +249,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:contentDescription="@string/android_logo"
         android:src="@drawable/im_android_logo_tl"
         android:visibility="invisible" />
 
@@ -250,6 +260,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:contentDescription="@string/android_logo"
         android:src="@drawable/im_android_logo_tr"
         android:visibility="invisible" />
 

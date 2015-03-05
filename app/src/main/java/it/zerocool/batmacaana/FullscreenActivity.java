@@ -49,7 +49,7 @@ public class FullscreenActivity extends Activity {
      * system UI. This is to prevent the jarring behavior of controls going away
      * while interacting with activity UI.
      */
-    View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
+    private final View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if (AUTO_HIDE) {
@@ -68,8 +68,8 @@ public class FullscreenActivity extends Activity {
      */
 //    private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
     private static final int HIDER_FLAGS = 0;
-    Handler mHideHandler = new Handler();
-    Runnable mHideRunnable = new Runnable() {
+    private final Handler mHideHandler = new Handler();
+    private final Runnable mHideRunnable = new Runnable() {
         @Override
         public void run() {
             mSystemUiHider.hide();
@@ -79,8 +79,6 @@ public class FullscreenActivity extends Activity {
      * The instance of the {@link SystemUiHider} for this activity.
      */
     private SystemUiHider mSystemUiHider;
-    private ImageView fullScreenIv;
-    private FrameLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,8 +97,8 @@ public class FullscreenActivity extends Activity {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
         boolean fromGallery = intent.getBooleanExtra(Constant.FROM_GALLERY, false);
-        fullScreenIv = (ImageView) findViewById(R.id.fullscreen_content);
-        layout = (FrameLayout) findViewById(R.id.fullscreen_layout);
+        ImageView fullScreenIv = (ImageView) findViewById(R.id.fullscreen_content);
+        FrameLayout layout = (FrameLayout) findViewById(R.id.fullscreen_layout);
 
         if (fromGallery) {
             layout.setBackgroundColor(getResources().getColor(R.color.light_primary_color));
@@ -118,9 +116,6 @@ public class FullscreenActivity extends Activity {
                 bg = R.color.primaryColor;
 
 
-//        layout = (FrameLayout) findViewById(R.id.fullscreen_layout);
-//        ColorDrawable color = new ColorDrawable();
-//        color.setColor(intent.getIntExtra("COLOR", R.color.primaryColor));
             layout.setBackgroundColor(bg);
             Picasso.with(this)
                     .load(Constant.URI_IMAGE_BIG +
@@ -130,11 +125,10 @@ public class FullscreenActivity extends Activity {
         }
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
-        final View contentView = fullScreenIv;
 
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.
-        mSystemUiHider = SystemUiHider.getInstance(this, contentView, HIDER_FLAGS);
+        mSystemUiHider = SystemUiHider.getInstance(this, fullScreenIv, HIDER_FLAGS);
         mSystemUiHider.setup();
         mSystemUiHider
                 .setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
@@ -175,7 +169,7 @@ public class FullscreenActivity extends Activity {
                 });
 
         // Set up the user interaction to manually show or hide the system UI.
-        contentView.setOnClickListener(new View.OnClickListener() {
+        fullScreenIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (TOGGLE_ON_CLICK) {

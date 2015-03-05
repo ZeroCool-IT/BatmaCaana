@@ -17,7 +17,7 @@ import it.zerocool.batmacaana.utilities.Constant;
  * Dialog to restore alerts
  * Created by Marco Battisti on 19/02/2015.
  */
-public class RestoreAlertsDialogPreference extends DialogPreference {
+class RestoreAlertsDialogPreference extends DialogPreference {
 
     public RestoreAlertsDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);

@@ -16,12 +16,12 @@ import it.zerocool.batmacaana.NewsFragment;
 public class NewsPaletteListener implements Palette.PaletteAsyncListener {
     private final WeakReference<NewsFragment> activityWeakReference;
 
-    NewsPaletteListener(WeakReference<NewsFragment> activityWeakReference) {
+    private NewsPaletteListener(WeakReference<NewsFragment> activityWeakReference) {
         this.activityWeakReference = activityWeakReference;
     }
 
     public static NewsPaletteListener newInstance(NewsFragment activity) {
-        WeakReference<NewsFragment> activityWeakReference = new WeakReference<NewsFragment>(activity);
+        WeakReference<NewsFragment> activityWeakReference = new WeakReference<>(activity);
         return new NewsPaletteListener(activityWeakReference);
     }
 

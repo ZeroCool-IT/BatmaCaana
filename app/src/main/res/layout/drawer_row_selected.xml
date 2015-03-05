@@ -8,6 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="48dp"
     android:background="@color/selected_item"
+    app:ignore="Overdraw"
     app:rv_alpha="90"
     app:rv_color="@color/ripple_color"
     ripple:rv_centered="false">
@@ -21,6 +22,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:alpha="54"
+        android:contentDescription="@string/drawer_menu_icon"
         android:padding="8dp"
         android:src="@drawable/ic_about" />
 
@@ -34,7 +36,7 @@
         android:layout_marginStart="72dp"
         android:fontFamily="sans-serif-medium"
         android:padding="8dp"
-        android:text="Dummy Text"
+        android:text="@string/dummy_text"
         android:textColor="@color/primaryColor"
         android:textSize="14sp" />
 

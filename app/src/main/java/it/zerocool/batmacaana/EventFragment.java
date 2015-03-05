@@ -64,8 +64,6 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
     private Button urlActionButton;
     private Button mailActionButton;
     private Button mapActionButton;
-    private ImageButton fullScreenButton;
-    private FloatingActionButton floatingActionButton;
     private LinearLayout timecardLayout;
     private LinearLayout addressLayout;
     private LinearLayout phoneLayout;
@@ -134,8 +132,8 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
         urlActionButton = (Button) layout.findViewById(R.id.urlButton);
         mailActionButton = (Button) layout.findViewById(R.id.mailButton);
         mapActionButton = (Button) layout.findViewById(R.id.mapButton);
-        fullScreenButton = (ImageButton) layout.findViewById(R.id.fullscreenButton);
-        floatingActionButton = (FloatingActionButton) layout.findViewById(R.id.floatingButton);
+        ImageButton fullScreenButton = (ImageButton) layout.findViewById(R.id.fullscreenButton);
+        FloatingActionButton floatingActionButton = (FloatingActionButton) layout.findViewById(R.id.floatingButton);
         timecardLayout = (LinearLayout) layout.findViewById(R.id.timecard_layout);
         addressLayout = (LinearLayout) layout.findViewById(R.id.address_layout);
         phoneLayout = (LinearLayout) layout.findViewById(R.id.phone_layout);
@@ -195,7 +193,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
             Toast.makeText(getActivity(), R.string.tts_na, Toast.LENGTH_SHORT).show();
     }
 
-    public void loadBitmap(String url) {
+    void loadBitmap(String url) {
 
         if (loadTarget == null)
             loadTarget = new Target() {
@@ -268,7 +266,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
 
     }
 
-    public void setBitmap(Bitmap bitmap) {
+    void setBitmap(Bitmap bitmap) {
         Picasso.with(getActivity()).
                 load(Constant.URI_IMAGE_MEDIUM + targetEvent.getImage()).
                 error(R.drawable.im_noimage).
@@ -296,6 +294,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
      *
      * @param v The view that was clicked.
      */
+    @SuppressWarnings("deprecation")
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.phoneButton) {
@@ -390,7 +389,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
                     String lat = Double.valueOf(targetEvent.getLocation().getLatitude()).toString();
                     String lon = Double.valueOf(targetEvent.getLocation().getLongitude()).toString();
                     uri += lat + "," + lon;
-                } else if (targetEvent.getContact().getAddress() != null) {
+                } else {
                     String res = targetEvent.getContact().getAddress() + ", 00032 Carpineto Romano";
                     res = Uri.encode(res);
                     uri += res;
@@ -448,6 +447,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
      * @see #onPrepareOptionsMenu
      * @see #onOptionsItemSelected
      */
+    @SuppressWarnings("JavaDoc")
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 

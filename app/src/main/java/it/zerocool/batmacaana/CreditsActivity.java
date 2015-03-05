@@ -146,21 +146,18 @@ public class CreditsActivity extends ActionBarActivity {
                     break;
                 case R.id.web_tv:
                     String url = "http://" + getString(R.string.explora_web);
-                    if (url != null) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse(url));
-                        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                            startActivity(intent);
-                        } else
-                            Toast.makeText(getActivity(), R.string.no_browser_app, Toast.LENGTH_SHORT).show();
-
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(url));
+                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivity(intent);
                     } else
-                        Toast.makeText(getActivity(), R.string.no_url_available, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.no_browser_app, Toast.LENGTH_SHORT).show();
+
                     break;
                 case R.id.dmca:
                     String dmcaMail = getString(R.string.dmca_mail);
                     if (dmcaMail != null) {
-                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent = new Intent(Intent.ACTION_SEND);
                         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
                         intent.setType("*/*");
                         String[] addresses = new String[1];
@@ -179,7 +176,7 @@ public class CreditsActivity extends ActionBarActivity {
                 case R.id.privacy:
                     String privacyUri = getString(R.string.explora_privacy);
                     if (privacyUri != null) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent = new Intent(Intent.ACTION_VIEW);
                         intent.setData(Uri.parse(privacyUri));
                         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
                             startActivity(intent);

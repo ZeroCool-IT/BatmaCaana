@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Class representing app main cities
  * Created by Marco Battisti on 27/02/2015.
  */
-public class MainCity {
+class MainCity {
 
     private int id;
     private int userID;
@@ -25,11 +25,13 @@ public class MainCity {
     private String json;
 
 
-    public MainCity(int id, int userID) {
-        this.id = id;
-        this.userID = userID;
-        this.images = new ArrayList<>();
-    }
+// --Commented out by Inspection START (05/03/2015 16:35):
+//    public MainCity(int id, int userID) {
+//        this.id = id;
+//        this.userID = userID;
+//        this.images = new ArrayList<>();
+//    }
+// --Commented out by Inspection STOP (05/03/2015 16:35)
 
     public int getId() {
         return id;
@@ -72,7 +74,7 @@ public class MainCity {
         if (history != null && !history.isEmpty()) {
             this.history = history;
         } else {
-            history = null;
+            this.history = null;
         }
     }
 

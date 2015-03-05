@@ -16,12 +16,12 @@ import it.zerocool.batmacaana.PlaceFragment;
 public class PlacePaletteListener implements Palette.PaletteAsyncListener {
     private final WeakReference<PlaceFragment> activityWeakReference;
 
-    PlacePaletteListener(WeakReference<PlaceFragment> activityWeakReference) {
+    private PlacePaletteListener(WeakReference<PlaceFragment> activityWeakReference) {
         this.activityWeakReference = activityWeakReference;
     }
 
     public static PlacePaletteListener newInstance(PlaceFragment activity) {
-        WeakReference<PlaceFragment> activityWeakReference = new WeakReference<PlaceFragment>(activity);
+        WeakReference<PlaceFragment> activityWeakReference = new WeakReference<>(activity);
         return new PlacePaletteListener(activityWeakReference);
     }
 

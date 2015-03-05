@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.widget.Toast;
 
@@ -24,8 +25,6 @@ import it.zerocool.batmacaana.utilities.Constant;
  */
 public class ConfirmationDialog extends DialogFragment implements DialogInterface.OnClickListener {
 
-    private AlertDialog.Builder builder;
-
 
     public ConfirmationDialog() {
     }
@@ -34,8 +33,9 @@ public class ConfirmationDialog extends DialogFragment implements DialogInterfac
     /**
      * Action performed on creation of dialog
      */
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        builder = new AlertDialog.Builder(getActivity(),
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),
                 AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         String message = getString(R.string.remember_choose);
 

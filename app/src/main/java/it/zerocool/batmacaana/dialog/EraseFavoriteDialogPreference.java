@@ -20,7 +20,7 @@ import it.zerocool.batmacaana.utilities.ApplicationContextProvider;
  * Clear favorite dialog
  * Created by Marco Battisti on 18/02/2015.
  */
-public class EraseFavoriteDialogPreference extends DialogPreference {
+class EraseFavoriteDialogPreference extends DialogPreference {
 
     public EraseFavoriteDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);

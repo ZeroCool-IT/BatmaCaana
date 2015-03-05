@@ -6,7 +6,6 @@ package it.zerocool.batmacaana.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -27,21 +26,8 @@ public class FavoriteDBHelper extends SQLiteOpenHelper {
 
     private static FavoriteDBHelper singleton;
     private static SQLiteDatabase writabelDB;
-    private Context context;
-    private InputStream inputStream;
-    private BufferedReader bufferedReader;
+    private final Context context;
 
-    /**
-     * Helper private constructor
-     *
-     * @param context
-     * @param name
-     * @param factory
-     * @param version
-     */
-    private FavoriteDBHelper(Context context, String name, CursorFactory factory, int version) {
-        super(context, name, factory, version);
-    }
 
     /**
      * Helper private constructor
@@ -75,8 +61,8 @@ public class FavoriteDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {
-            inputStream = context.getResources().openRawResource(R.raw.build_favorite_db);
-            bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "ISO-8859-1"));
+            InputStream inputStream = context.getResources().openRawResource(R.raw.build_favorite_db);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "ISO-8859-1"));
             db.beginTransaction();
             String data = bufferedReader.readLine();
             while (data != null) {

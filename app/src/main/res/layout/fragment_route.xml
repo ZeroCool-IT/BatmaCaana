@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:adjustViewBounds="true"
-
+                    android:contentDescription="@string/route_image"
                     android:src="@drawable/im_placeholder" />
 
                 <ImageButton
@@ -41,6 +41,7 @@
                     android:layout_alignBottom="@id/imageView"
                     android:layout_alignEnd="@id/imageView"
                     android:layout_alignRight="@id/imageView"
+                    android:contentDescription="@string/go_fullscreen"
                     android:src="@drawable/ic_fullscreen_grey600_36dp" />
             </RelativeLayout>
 
@@ -56,7 +57,7 @@
                 <Button
                     android:id="@+id/earthButton"
                     style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@color/transparent_bg"
@@ -94,6 +95,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:contentDescription="@string/description_icon"
                             android:paddingRight="8dp"
                             android:src="@drawable/ic_local_library_grey600_24dp" />
 
@@ -103,6 +105,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_weight="1"
+                            android:contentDescription="@string/tts_icon"
                             android:paddingRight="8dp"
                             android:src="@drawable/ic_tts_accent_24dp" />
                     </LinearLayout>
@@ -132,7 +135,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|bottom"
                             android:layout_margin="8dp"
-                            android:background="@android:color/transparent" />
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/expand_description" />
                     </com.ms.square.android.expandabletextview.ExpandableTextView>
                 </LinearLayout>
 
@@ -142,11 +146,13 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/description_layout"
                     android:orientation="horizontal"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/duration_icon"
                         android:paddingRight="8dp"
                         android:src="@drawable/ic_access_time_grey600_24dp" />
 
@@ -157,7 +163,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="Dummy duration" />
+                        android:text="@string/dummy_text" />
 
                 </LinearLayout>
 
@@ -167,11 +173,13 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/duration_layout"
                     android:orientation="horizontal"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/length_icon"
                         android:paddingRight="8dp"
                         android:src="@drawable/ic_straighten_grey600_24dp" />
 
@@ -182,7 +190,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="Dummy length" />
+                        android:text="@string/dummy_text" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -191,11 +199,13 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/length_layout"
                     android:orientation="horizontal"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/level_icon"
                         android:paddingRight="8dp"
                         android:src="@drawable/ic_level" />
 
@@ -206,7 +216,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="Dummy level" />
+                        android:text="@string/dummy_text" />
                 </LinearLayout>
 
 
@@ -216,13 +226,15 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/level_layout"
                     android:orientation="horizontal"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
+                        android:contentDescription="@string/tag_icon"
                         android:src="@drawable/ic_local_offer_grey600_24dp" />
 
                     <TextView
@@ -232,7 +244,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="Dummy tag" />
+                        android:text="@string/dummy_text" />
                 </LinearLayout>
 
 

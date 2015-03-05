@@ -18,12 +18,12 @@ public class RoutePaletteListener implements Palette.PaletteAsyncListener {
 
     private final WeakReference<RouteFragment> activityWeakReference;
 
-    RoutePaletteListener(WeakReference<RouteFragment> activityWeakReference) {
+    private RoutePaletteListener(WeakReference<RouteFragment> activityWeakReference) {
         this.activityWeakReference = activityWeakReference;
     }
 
     public static RoutePaletteListener newInstance(RouteFragment activity) {
-        WeakReference<RouteFragment> activityWeakReference = new WeakReference<RouteFragment>(activity);
+        WeakReference<RouteFragment> activityWeakReference = new WeakReference<>(activity);
         return new RoutePaletteListener(activityWeakReference);
     }
 

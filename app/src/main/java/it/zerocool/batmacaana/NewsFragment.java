@@ -55,7 +55,6 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
     private TextView linkTv;
     private TextView tagTv;
     private Button urlActionButton;
-    private ImageButton fullScreenButton;
     private LinearLayout linkLayout;
     private LinearLayout tagLayout;
     private LinearLayout bodyLayout;
@@ -117,7 +116,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
         bodyLayout = (LinearLayout) layout.findViewById(R.id.description_layout);
         ivNews = (ImageView) layout.findViewById(R.id.imageView);
         playTTSButton = (ImageView) layout.findViewById(R.id.tts_icon);
-        fullScreenButton = (ImageButton) layout.findViewById(R.id.fullscreenButton);
+        ImageButton fullScreenButton = (ImageButton) layout.findViewById(R.id.fullscreenButton);
 
 
         //Listener
@@ -163,7 +162,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
             Toast.makeText(getActivity(), R.string.tts_na, Toast.LENGTH_SHORT).show();
     }
 
-    public void loadBitmap(String url) {
+    void loadBitmap(String url) {
 
         if (loadTarget == null)
             loadTarget = new Target() {
@@ -209,7 +208,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
 
     }
 
-    public void setBitmap(Bitmap bitmap) {
+    void setBitmap(Bitmap bitmap) {
         Picasso.with(getActivity()).
                 load(Constant.URI_IMAGE_MEDIUM + targetNews.getImage()).
                 error(R.drawable.im_noimage).
@@ -234,6 +233,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
      *
      * @param v The view that was clicked.
      */
+    @SuppressWarnings("deprecation")
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.urlButton) {
@@ -293,6 +293,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
      * @see #onPrepareOptionsMenu
      * @see #onOptionsItemSelected
      */
+    @SuppressWarnings("JavaDoc")
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 

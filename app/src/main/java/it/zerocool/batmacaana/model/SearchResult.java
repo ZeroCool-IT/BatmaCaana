@@ -12,15 +12,16 @@ import java.util.StringTokenizer;
 import it.zerocool.batmacaana.utilities.Constant;
 
 /**
+ * Model class representing search results
  * Created by Marco on 27/01/2015.
  */
 public class SearchResult {
 
-    protected int id;
-    protected String header;
-    protected int type;
-    protected List<String> tags;
-    protected String description;
+    private final List<String> tags;
+    private int id;
+    private String header;
+    private int type;
+    private String description;
 
     /**
      * Public constructor
@@ -76,7 +77,7 @@ public class SearchResult {
     /**
      * Set the type of the object result
      *
-     * @param type
+     * @param type is the type to set
      */
     public void setType(int type) {
         this.type = type;
@@ -89,14 +90,16 @@ public class SearchResult {
         return tags;
     }
 
-    /**
-     * Set the tags list of the object result
-     *
-     * @param tags is the list to set
-     */
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
+// --Commented out by Inspection START (05/03/2015 16:38):
+//    /**
+//     * Set the tags list of the object result
+//     *
+//     * @param tags is the list to set
+//     */
+//    public void setTags(List<String> tags) {
+//        this.tags = tags;
+//    }
+// --Commented out by Inspection STOP (05/03/2015 16:38)
 
     /**
      * Add the tags to tags' list from a string in CSV format

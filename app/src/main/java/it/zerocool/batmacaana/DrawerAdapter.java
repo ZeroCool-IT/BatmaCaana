@@ -28,12 +28,12 @@ import it.zerocool.batmacaana.utilities.Constant;
  */
 public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerViewHolder> {
 
-    List<DrawerItem> drawerItems = Collections.emptyList();
-    private Context context;
-    private LayoutInflater inflater;
+    private final Context context;
+    private final LayoutInflater inflater;
+    private final FragmentManager fragmentManager;
+    private List<DrawerItem> drawerItems = Collections.emptyList();
     private View previousSelected;
     private int currentSelected;
-    private FragmentManager fragmentManager;
     private DrawerLayout drawerLayout;
 
 
@@ -125,8 +125,8 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
 
     class DrawerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView title;
-        ImageView icon;
+        final TextView title;
+        final ImageView icon;
 
         public DrawerViewHolder(View itemView) {
             super(itemView);

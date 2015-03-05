@@ -14,7 +14,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
@@ -32,7 +31,6 @@ import it.zerocool.batmacaana.utilities.RequestUtilities;
 
 public class DetailsActivity extends ActionBarActivity {
 
-    private Toolbar toolbar;
     private Context context;
 
     @Override
@@ -42,7 +40,7 @@ public class DetailsActivity extends ActionBarActivity {
 
         context = this;
         Intent intent = getIntent();
-        toolbar = (Toolbar) findViewById(R.id.appbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         final String action = intent.getAction();
@@ -52,7 +50,6 @@ public class DetailsActivity extends ActionBarActivity {
             final List<String> segments = intent.getData().getPathSegments();
             getData(segments.get(1));
         } else if (fromNotification) {
-            Log.i("ZCLOG", "From notification = " + Boolean.valueOf(fromNotification).toString());
             String id = intent.getStringExtra(Constant.ID_ARG);
             String type = intent.getStringExtra(Constant.TYPE_ARG);
             getData(id + "&" + type);
@@ -167,25 +164,6 @@ public class DetailsActivity extends ActionBarActivity {
         return true;
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.menu_item_share) {
-//            Intent intent = new Intent();
-//            intent.setAction(Intent.ACTION_SEND);
-//            String message = getResources().getString(R.string.share_message) +
-//
-//            return true;
-//        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     private class RequestObjectTask extends AsyncTask<String, Void, String> {
 

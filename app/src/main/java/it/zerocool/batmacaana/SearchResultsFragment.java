@@ -36,26 +36,18 @@ public class SearchResultsFragment extends Fragment {
 
     private RecyclerView rvResults;
     private ProgressBarCircularIndeterminate progressBar;
-    private Toolbar toolbar;
     private String query;
     private Context context;
-    private SearchTask task;
 
     public SearchResultsFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_search_results, container, false);
-        toolbar = (Toolbar) layout.findViewById(R.id.appbar);
+        Toolbar toolbar = (Toolbar) layout.findViewById(R.id.appbar);
         ((ActionBarActivity) getActivity()).setSupportActionBar(toolbar);
         ((ActionBarActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         context = getActivity();
@@ -85,7 +77,7 @@ public class SearchResultsFragment extends Fragment {
                     + Constant.URI_SEARCH2
                     + Uri.encode(trimmed);
             if (RequestUtilities.isOnline(getActivity())) {
-                task = new SearchTask();
+                SearchTask task = new SearchTask();
                 task.execute(uri);
             } else {
                 String message = getResources().getString(
@@ -158,8 +150,7 @@ public class SearchResultsFragment extends Fragment {
                 String title, message;
                 Bundle args = new Bundle();
                 WarningDialog dialog = new WarningDialog();
-                boolean kill = true;
-                args.putBoolean(WarningDialog.KILL, kill);
+                args.putBoolean(WarningDialog.KILL, true);
                 if (searchResults != null && searchResults.isEmpty()) {
                     title = getResources().getString(R.string.no_results);
                     message = getResources().getString(R.string.no_search_results) + query;
@@ -212,7 +203,7 @@ public class SearchResultsFragment extends Fragment {
         @Override
         protected List<SearchResult> doInBackground(String... params) {
             String uri = params[0];
-            List<SearchResult> res = null;
+            List<SearchResult> res;
             if (isCancelled())
                 return null;
             try {
@@ -226,7 +217,7 @@ public class SearchResultsFragment extends Fragment {
                 Log.e("ZCLOG TASK", e.getMessage());
                 e.printStackTrace();
             }
-            return res;
+            return null;
         }
     }
 

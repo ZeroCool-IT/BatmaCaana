@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:adjustViewBounds="true"
-
+                    android:contentDescription="@string/place_image"
                     android:src="@drawable/im_placeholder" />
 
                 <ImageButton
@@ -42,6 +42,7 @@
                     android:layout_alignBottom="@id/imageView"
                     android:layout_alignEnd="@id/imageView"
                     android:layout_alignRight="@id/imageView"
+                    android:contentDescription="@string/go_fullscreen"
                     android:src="@drawable/ic_fullscreen_grey600_36dp" />
             </RelativeLayout>
 
@@ -144,6 +145,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:contentDescription="@string/description_icon"
                             android:paddingRight="8dp"
                             android:src="@drawable/ic_local_library_grey600_24dp" />
 
@@ -153,6 +155,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:layout_weight="1"
+                            android:contentDescription="@string/tts_icon"
                             android:paddingRight="8dp"
                             android:src="@drawable/ic_tts_accent_24dp" />
                     </LinearLayout>
@@ -183,7 +186,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="right|bottom"
                             android:layout_margin="8dp"
-                            android:background="@android:color/transparent" />
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/expand_description" />
                     </com.ms.square.android.expandabletextview.ExpandableTextView>
                 </LinearLayout>
 
@@ -194,11 +198,13 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/description_layout"
                     android:orientation="horizontal"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/opening_time_icon"
                         android:paddingRight="8dp"
                         android:src="@drawable/ic_access_time_grey600_24dp" />
 
@@ -209,7 +215,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="Dummy timecard" />
+                        android:text="@string/dummy_text" />
 
                 </LinearLayout>
 
@@ -219,11 +225,13 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/timecard_layout"
                     android:orientation="horizontal"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/address_icon"
                         android:paddingRight="8dp"
                         android:src="@drawable/ic_place_grey600_24dp" />
 
@@ -234,7 +242,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="Dummy address" />
+                        android:text="@string/dummy_text" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -243,11 +251,13 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/address_layout"
                     android:orientation="horizontal"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/accessibility_icon"
                         android:paddingRight="8dp"
                         android:src="@drawable/ic_wheelchair_accessibility_grey600_24dp" />
 
@@ -267,11 +277,13 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/accesibility"
                     android:orientation="horizontal"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/phone_icon"
                         android:paddingRight="8dp"
                         android:src="@drawable/ic_call_grey600_24dp" />
 
@@ -282,7 +294,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="Dummy phone number" />
+                        android:text="@string/dummy_text" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -291,11 +303,13 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/phone_layout"
                     android:orientation="horizontal"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/mail_icon"
                         android:paddingRight="8dp"
                         android:src="@drawable/ic_email_grey600_24dp" />
 
@@ -306,7 +320,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="Dummy mail" />
+                        android:text="@string/dummy_text" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -315,11 +329,13 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/mail_layout"
                     android:orientation="horizontal"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/url_icon"
                         android:paddingRight="8dp"
                         android:src="@drawable/ic_web_grey600_24dp" />
 
@@ -330,7 +346,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="Dummy url" />
+                        android:text="@string/dummy_text" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -339,13 +355,15 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/link_layout"
                     android:orientation="horizontal"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_marginRight="8dp"
+                        android:contentDescription="@string/tag_icon"
                         android:src="@drawable/ic_local_offer_grey600_24dp" />
 
                     <TextView
@@ -355,7 +373,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:text="Dummy tag" />
+                        android:text="@string/dummy_text" />
                 </LinearLayout>
 
                 <LinearLayout

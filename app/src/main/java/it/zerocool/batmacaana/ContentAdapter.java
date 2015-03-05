@@ -27,8 +27,8 @@ import it.zerocool.batmacaana.utilities.Constant;
  */
 public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentViewHolder> {
 
-    private Context context;
-    private LayoutInflater inflater;
+    private final Context context;
+    private final LayoutInflater inflater;
     private List<Cardable> contentItems = Collections.emptyList();
 
     public ContentAdapter(Context context, List<Cardable> data) {
@@ -119,10 +119,10 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
 
     class ContentViewHolder extends RecyclerView.ViewHolder {
 
-        TextView header;
-        TextView subHeader;
-        TextView accent;
-        ImageView imagery;
+        final TextView header;
+        final TextView subHeader;
+        final TextView accent;
+        final ImageView imagery;
 
         public ContentViewHolder(View itemView) {
             super(itemView);

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright ZeroApp(c) 2015. All right reserved.
   -->
 
@@ -17,7 +16,7 @@
         android:layout_marginStart="16dp"
         android:fontFamily="sans-serif-medium"
         android:padding="8dp"
-        android:text="Dummy Text"
+        android:text="@string/dummy_text"
         android:textColor="@color/secondary_text_color"
         android:textSize="14sp" />
 
@@ -30,6 +29,7 @@
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
         android:alpha="54"
+        android:contentDescription="@string/drawer_menu_icon"
         android:padding="8dp"
         android:src="@drawable/ic_subheader_ph_24dp" />
 

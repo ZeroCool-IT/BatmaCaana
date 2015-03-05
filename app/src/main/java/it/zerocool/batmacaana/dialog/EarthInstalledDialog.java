@@ -10,18 +10,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.widget.Toast;
 
 import it.zerocool.batmacaana.R;
 
 /**
+ * Warn the user if Google Earth is not installed
  * Created by Marco on 14/01/2015.
  */
 public class EarthInstalledDialog extends DialogFragment implements DialogInterface.OnClickListener {
 
     public static final String URL = "url";
-    private AlertDialog.Builder builder;
 
 
     public EarthInstalledDialog() {
@@ -31,8 +32,9 @@ public class EarthInstalledDialog extends DialogFragment implements DialogInterf
     /**
      * Action performed on creation of dialog
      */
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        builder = new AlertDialog.Builder(getActivity(),
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),
                 AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         String title = getString(R.string.earth_warning_title);
         String message = getString(R.string.earth_warning_message);

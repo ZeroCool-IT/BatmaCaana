@@ -16,14 +16,11 @@ import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.graphics.Palette;
-import android.support.v7.widget.ShareActionProvider;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -51,7 +48,6 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
 
 
     private static final String DESCRIPTION_TTS = "description";
-    private ShareActionProvider shareActionProvider;
     private ExpandableTextView tvDescription;
     private City targetCity;
     private ImageView ivCity;
@@ -59,18 +55,14 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
     private TextView phoneTv;
     private TextView mailTv;
     private TextView linkTv;
-    private TextView tagTv;
     private Button phoneActionButton;
     private Button urlActionButton;
     private Button mailActionButton;
-    private ImageButton fullScreenButton;
-    private FloatingActionButton floatingActionButton;
     private LinearLayout phoneLayout;
     private LinearLayout mailLayout;
     private LinearLayout linkLayout;
     private LinearLayout descriptionLayout;
     private Target loadTarget;
-    private Toolbar toolbar;
     private Palette palette;
     private TextToSpeech ttsService;
     private ImageView playTTSButton;
@@ -81,14 +73,6 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
 
     public CityFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        DatabaseOpenerAsyncTask task = new DatabaseOpenerAsyncTask();
-//        task.execute();
-
     }
 
     /**
@@ -126,21 +110,19 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
         phoneTv = (TextView) layout.findViewById(R.id.phone_tv);
         mailTv = (TextView) layout.findViewById(R.id.mail_tv);
         linkTv = (TextView) layout.findViewById(R.id.link_tv);
-        tagTv = (TextView) layout.findViewById(R.id.tag_tv);
         phoneActionButton = (Button) layout.findViewById(R.id.phoneButton);
         urlActionButton = (Button) layout.findViewById(R.id.urlButton);
         mailActionButton = (Button) layout.findViewById(R.id.mailButton);
-        fullScreenButton = (ImageButton) layout.findViewById(R.id.fullscreenButton);
+        ImageButton fullScreenButton = (ImageButton) layout.findViewById(R.id.fullscreenButton);
         playTTSButton = (ImageView) layout.findViewById(R.id.tts_icon);
 
 
-        floatingActionButton = (FloatingActionButton) layout.findViewById(R.id.floatingButton);
+        FloatingActionButton floatingActionButton = (FloatingActionButton) layout.findViewById(R.id.floatingButton);
 
         phoneLayout = (LinearLayout) layout.findViewById(R.id.level_layout);
         mailLayout = (LinearLayout) layout.findViewById(R.id.mail_layout);
         linkLayout = (LinearLayout) layout.findViewById(R.id.link_layout);
         descriptionLayout = (LinearLayout) layout.findViewById(R.id.description_layout);
-        toolbar = (Toolbar) layout.findViewById(R.id.appbar);
         ivCity = (ImageView) layout.findViewById(R.id.imageView);
 
         //Listener
@@ -191,7 +173,7 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
             Toast.makeText(getActivity(), R.string.tts_na, Toast.LENGTH_SHORT).show();
     }
 
-    public void loadBitmap(String url) {
+    void loadBitmap(String url) {
 
         if (loadTarget == null)
             loadTarget = new Target() {
@@ -245,7 +227,7 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
 
     }
 
-    public void setBitmap(Bitmap bitmap) {
+    private void setBitmap(Bitmap bitmap) {
         Picasso.with(getActivity()).
                 load(Constant.URI_IMAGE_BIG + targetCity.getImage()).
                 placeholder(R.drawable.im_placeholder).
@@ -281,54 +263,10 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
      * @see #onPrepareOptionsMenu
      * @see #onOptionsItemSelected
      */
-    @SuppressWarnings("JavadocReference")
+    @SuppressWarnings({"JavadocReference", "JavaDoc"})
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
-        /*inflater.inflate(R.menu.menu_details, menu);
-        MenuItem item = menu.findItem(R.id.menu_item_share);
-        shareActionProvider = (android.support.v7.widget.ShareActionProvider) MenuItemCompat.getActionProvider(item);*/
-//        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    /*private void setShareIntent(Intent shareIntent) {
-        if (shareActionProvider != null) {
-            shareActionProvider.setShareIntent(shareIntent);
-        }
-    }*/
-
-    /**
-     * This hook is called whenever an item in your options menu is selected.
-     * The default implementation simply returns false to have the normal
-     * processing happen (calling the item's Runnable or sending a message to
-     * its Handler as appropriate).  You can use this method for any items
-     * for which you would like to do processing without those other
-     * facilities.
-     * <p/>
-     * <p>Derived classes should call through to the base class for it to
-     * perform the default menu handling.
-     *
-     * @param item The menu item that was selected.
-     * @return boolean Return false to allow normal menu processing to
-     * proceed, true to consume it here.
-     * @see #onCreateOptionsMenu
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-/*        int id = item.getItemId();
-        if (id == R.id.menu_item_share) {
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_SEND);
-            String message = getResources().getString(R.string.share_place_message) +
-                    targetCity.getName() + "\n" +
-                    targetCity.getItemURI();
-            intent.putExtra(Intent.EXTRA_TEXT, message);
-            intent.setType("text/plain");
-            setShareIntent(intent);
-            startActivity(Intent.createChooser(intent, getString(R.string.share)));
-            return true;
-        }*/
-        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -336,6 +274,7 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
      *
      * @param v The view that was clicked.
      */
+    @SuppressWarnings("deprecation")
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.phoneButton) {

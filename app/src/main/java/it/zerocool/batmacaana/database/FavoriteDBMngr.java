@@ -23,17 +23,14 @@ public class FavoriteDBMngr {
     public static final int REMOVE = 1;
     public static final int CHECK = 2;
     //DB utility variable
-    protected static final String DB_NAME = "FavoriteDB";
-    protected static final int DB_VERSION = 1;
-    protected static final String AUTHORITY = "it.zerocool.batmacaana";
+    static final String DB_NAME = "FavoriteDB";
+    static final int DB_VERSION = 1;
     //Tables and columns
-    protected static final String TABLE_FAVORITE = "Favorite";
-    protected static final String ID_COLUMN = "ID";
-    protected static final String TYPE_COLUMN = "TYPE";
-    protected static final String JSON_COLUMN = "JSON";
-    protected static final int TYPE_COLUMN_INDEX = 1;
-    protected static final int ID_COLUMN_INDEX = 0;
-    protected static final int JSON_COLUMN_INDEX = 2;
+    private static final String TABLE_FAVORITE = "Favorite";
+    private static final String ID_COLUMN = "ID";
+    private static final String TYPE_COLUMN = "TYPE";
+    private static final String JSON_COLUMN = "JSON";
+    private static final int JSON_COLUMN_INDEX = 2;
 
     /**
      * Add a place to favorite's list
@@ -49,10 +46,7 @@ public class FavoriteDBMngr {
             values.put(JSON_COLUMN, place.getJson());
 
             long done = db.insert(TABLE_FAVORITE, null, values);
-            if (done >= 0)
-                return true;
-            else
-                return false;
+            return done >= 0;
         }
         return false;
     }
@@ -91,6 +85,7 @@ public class FavoriteDBMngr {
             }
 
         }
+        c.close();
         return result;
     }
 
@@ -116,6 +111,7 @@ public class FavoriteDBMngr {
             }
             c.moveToNext();
         }
+        c.close();
         return result != null;
 
     }

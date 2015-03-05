@@ -31,36 +31,27 @@ import it.zerocool.batmacaana.utilities.ParsingUtilities;
  */
 public class TimeCard {
 
-    protected GregorianCalendar amOpening;
-    protected GregorianCalendar amClosing;
-    protected GregorianCalendar pmOpening;
-    protected GregorianCalendar pmClosing;
-    protected String notes;
-    protected ArrayList<GregorianCalendar> closingDays;
+    private final ArrayList<GregorianCalendar> closingDays;
+    private GregorianCalendar amOpening;
+    private GregorianCalendar amClosing;
+    private GregorianCalendar pmOpening;
+    private GregorianCalendar pmClosing;
+    private String notes;
 
 
     /**
      * Public constructor
      */
     public TimeCard() {
-        this.closingDays = new ArrayList<GregorianCalendar>();
+        this.closingDays = new ArrayList<>();
     }
 
 
     /**
      * @return the AM opening hour
      */
-    public GregorianCalendar getAmOpening() {
+    GregorianCalendar getAmOpening() {
         return amOpening;
-    }
-
-    /**
-     * Set the place AM opening
-     *
-     * @param amOpening the AM opening hour to set
-     */
-    public void setAmOpening(GregorianCalendar amOpening) {
-        this.amOpening = amOpening;
     }
 
     /**
@@ -74,19 +65,19 @@ public class TimeCard {
     }
 
     /**
-     * @return the AM closing hour
+     * Set the place AM opening
+     *
+     * @param amOpening the AM opening hour to set
      */
-    public GregorianCalendar getAmClosing() {
-        return amClosing;
+    void setAmOpening(GregorianCalendar amOpening) {
+        this.amOpening = amOpening;
     }
 
     /**
-     * Set the place AM closing
-     *
-     * @param amClosing AM closing hour to set
+     * @return the AM closing hour
      */
-    public void setAmClosing(GregorianCalendar amClosing) {
-        this.amClosing = amClosing;
+    GregorianCalendar getAmClosing() {
+        return amClosing;
     }
 
     /**
@@ -100,19 +91,19 @@ public class TimeCard {
     }
 
     /**
-     * @return the PM opening hour
+     * Set the place AM closing
+     *
+     * @param amClosing AM closing hour to set
      */
-    public GregorianCalendar getPmOpening() {
-        return pmOpening;
+    void setAmClosing(GregorianCalendar amClosing) {
+        this.amClosing = amClosing;
     }
 
     /**
-     * Set the place PM opening
-     *
-     * @param pmOpening the PM opening hour to set
+     * @return the PM opening hour
      */
-    public void setPmOpening(GregorianCalendar pmOpening) {
-        this.pmOpening = pmOpening;
+    GregorianCalendar getPmOpening() {
+        return pmOpening;
     }
 
     /**
@@ -126,19 +117,19 @@ public class TimeCard {
     }
 
     /**
-     * @return the PM closing hour
+     * Set the place PM opening
+     *
+     * @param pmOpening the PM opening hour to set
      */
-    public GregorianCalendar getPmClosing() {
-        return pmClosing;
+    void setPmOpening(GregorianCalendar pmOpening) {
+        this.pmOpening = pmOpening;
     }
 
     /**
-     * Set the place PM closing
-     *
-     * @param pmClosing the PM closing hour to set
+     * @return the PM closing hour
      */
-    public void setPmClosing(GregorianCalendar pmClosing) {
-        this.pmClosing = pmClosing;
+    GregorianCalendar getPmClosing() {
+        return pmClosing;
     }
 
     /**
@@ -152,19 +143,30 @@ public class TimeCard {
     }
 
     /**
+     * Set the place PM closing
+     *
+     * @param pmClosing the PM closing hour to set
+     */
+    void setPmClosing(GregorianCalendar pmClosing) {
+        this.pmClosing = pmClosing;
+    }
+
+    /**
      * @return the closing days list
      */
-    public ArrayList<GregorianCalendar> getClosingDays() {
+    ArrayList<GregorianCalendar> getClosingDays() {
         return closingDays;
     }
 
 
-    /**
-     * @param closingDays the closing days list to set
-     */
-    public void setClosingDays(ArrayList<GregorianCalendar> closingDays) {
-        this.closingDays = closingDays;
-    }
+// --Commented out by Inspection START (05/03/2015 16:38):
+//    /**
+//     * @param closingDays the closing days list to set
+//     */
+//    public void setClosingDays(ArrayList<GregorianCalendar> closingDays) {
+//        this.closingDays = closingDays;
+//    }
+// --Commented out by Inspection STOP (05/03/2015 16:38)
 
     /**
      * Add the closing days to list from a string in CSV format
@@ -213,7 +215,7 @@ public class TimeCard {
     /**
      * @return the notes
      */
-    public String getNotes() {
+    String getNotes() {
         return notes;
     }
 
@@ -229,7 +231,7 @@ public class TimeCard {
     /**
      * @return a String representing AM opening hours
      */
-    public String openAMtoString() {
+    String openAMtoString() {
         String amOp, amCl, res = null;
         if (getAmClosing() != null && getAmOpening() != null) {
 //            DecimalFormat format = new DecimalFormat("00");
@@ -247,7 +249,7 @@ public class TimeCard {
     /**
      * @return a String representing PM opening hours
      */
-    public String openPMtoString() {
+    String openPMtoString() {
         String pmOp, pmCl, res = null;
         if (getPmClosing() != null && getPmOpening() != null) {
 //            DecimalFormat format = new DecimalFormat("00");
@@ -264,7 +266,7 @@ public class TimeCard {
     /**
      * @return a String representing place closing days
      */
-    public String closingDayToString() {
+    String closingDayToString() {
         String res = null;
         if (!getClosingDays().isEmpty()) {
             Iterator<GregorianCalendar> it = getClosingDays().iterator();
@@ -297,7 +299,7 @@ public class TimeCard {
             if (getNotes() != null) {
                 res += getNotes();
             }
-            if (res != Constant.EMPTY_VALUE) {
+            if (!res.isEmpty()) {
                 return res;
             }
         }

@@ -19,17 +19,17 @@ import it.zerocool.batmacaana.utilities.Constant;
  */
 public class Route implements Cardable {
 
-    protected int id;
-    protected String name;
-    protected LinkedList<String> tags;
-    protected float length;
-    protected String duration;
-    protected int level;
-    protected String image;
-    protected String kml;
-    protected String description;
-    protected int type;
-    protected String json;
+    private final int id;
+    private final LinkedList<String> tags;
+    private final int type;
+    private String name;
+    private float length;
+    private String duration;
+    private int level;
+    private String image;
+    private String kml;
+    private String description;
+    private String json;
 
     public Route(int id) {
         this.id = id;
@@ -37,13 +37,15 @@ public class Route implements Cardable {
         tags = new LinkedList<>();
     }
 
-    public int getId() {
+    int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+// --Commented out by Inspection START (05/03/2015 16:37):
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+// --Commented out by Inspection STOP (05/03/2015 16:37)
 
     public String getName() {
         return name;
@@ -64,12 +66,14 @@ public class Route implements Cardable {
         return tags;
     }
 
-    /**
-     * @param tags the tags list to set
-     */
-    public void setTags(LinkedList<String> tags) {
-        this.tags = tags;
-    }
+// --Commented out by Inspection START (05/03/2015 16:37):
+//    /**
+//     * @param tags the tags list to set
+//     */
+//    public void setTags(LinkedList<String> tags) {
+//        this.tags = tags;
+//    }
+// --Commented out by Inspection STOP (05/03/2015 16:37)
 
     /**
      * Add the tags to tags' list from a string in CSV format
@@ -126,6 +130,7 @@ public class Route implements Cardable {
         if (image != null && !image.isEmpty()) {
             this.image = image;
         } else {
+            this.image = null;
         }
     }
 

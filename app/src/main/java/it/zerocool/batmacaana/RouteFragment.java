@@ -21,7 +21,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.ShareActionProvider;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -63,14 +62,12 @@ public class RouteFragment extends Fragment implements View.OnClickListener, Tex
     private TextView lengthTv;
     private TextView tagTv;
     private Button earthButton;
-    private ImageButton fullScreenButton;
     private LinearLayout durationLayout;
     private LinearLayout levelLayout;
     private LinearLayout lengthLayout;
     private LinearLayout descriptionLayout;
     private LinearLayout tagLayout;
     private Target loadTarget;
-    private Toolbar toolbar;
     private Palette palette;
     private TextToSpeech ttsService;
     private ImageView playTTSButton;
@@ -126,14 +123,13 @@ public class RouteFragment extends Fragment implements View.OnClickListener, Tex
         levelTv = (TextView) layout.findViewById(R.id.level_tv);
         lengthTv = (TextView) layout.findViewById(R.id.length_tv);
         tagTv = (TextView) layout.findViewById(R.id.tag_tv);
-        fullScreenButton = (ImageButton) layout.findViewById(R.id.fullscreenButton);
+        ImageButton fullScreenButton = (ImageButton) layout.findViewById(R.id.fullscreenButton);
 
         durationLayout = (LinearLayout) layout.findViewById(R.id.duration_layout);
         levelLayout = (LinearLayout) layout.findViewById(R.id.level_layout);
         lengthLayout = (LinearLayout) layout.findViewById(R.id.length_layout);
         descriptionLayout = (LinearLayout) layout.findViewById(R.id.description_layout);
         tagLayout = (LinearLayout) layout.findViewById(R.id.tag_layout);
-        toolbar = (Toolbar) layout.findViewById(R.id.appbar);
         ivRoute = (ImageView) layout.findViewById(R.id.imageView);
         earthButton = (Button) layout.findViewById(R.id.earthButton);
         playTTSButton = (ImageView) layout.findViewById(R.id.tts_icon);
@@ -182,7 +178,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener, Tex
             Toast.makeText(getActivity(), R.string.tts_na, Toast.LENGTH_SHORT).show();
     }
 
-    public void loadBitmap(String url) {
+    void loadBitmap(String url) {
 
         if (loadTarget == null)
             loadTarget = new Target() {
@@ -241,7 +237,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener, Tex
 
     }
 
-    public void setBitmap(Bitmap bitmap) {
+    void setBitmap(Bitmap bitmap) {
         Picasso.with(getActivity()).
                 load(Constant.URI_IMAGE_BIG + targetRoute.getImage()).
                 placeholder(R.drawable.im_placeholder).
@@ -276,7 +272,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener, Tex
      * @see #onPrepareOptionsMenu
      * @see #onOptionsItemSelected
      */
-    @SuppressWarnings("JavadocReference")
+    @SuppressWarnings({"JavadocReference", "JavaDoc"})
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
@@ -331,6 +327,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener, Tex
      *
      * @param v The view that was clicked.
      */
+    @SuppressWarnings("deprecation")
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.earthButton) {
@@ -395,7 +392,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener, Tex
 
     private boolean earthInstalled(String uri) {
         PackageManager pm = getActivity().getPackageManager();
-        boolean app_installed = false;
+        boolean app_installed;
         try {
             pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
             app_installed = true;

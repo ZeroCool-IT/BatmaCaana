@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.support.v4.content.WakefulBroadcastReceiver;
 
 /**
+ * Broadcast receiver listening for notification
  * Created by Marco Battisti on 04/02/2015.
  */
 public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
@@ -49,6 +50,7 @@ public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
      * @param context The Context in which the receiver is running.
      * @param intent  The Intent being received.
      */
+    @SuppressWarnings("JavaDoc")
     @Override
     public void onReceive(Context context, Intent intent) {
         // Explicitly specify that GcmIntentService will handle the intent.

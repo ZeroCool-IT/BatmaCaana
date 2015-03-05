@@ -25,7 +25,6 @@ import it.zerocool.batmacaana.model.City;
 import it.zerocool.batmacaana.model.ContactCard;
 import it.zerocool.batmacaana.model.Eat;
 import it.zerocool.batmacaana.model.Event;
-import it.zerocool.batmacaana.model.MainCity;
 import it.zerocool.batmacaana.model.News;
 import it.zerocool.batmacaana.model.Place;
 import it.zerocool.batmacaana.model.Route;
@@ -110,7 +109,7 @@ public class ParsingUtilities {
                     JSONObject toBuild = data.getJSONObject(i);
                     int type = Integer.parseInt(toBuild.getString("TYPE"));
                     int id = Integer.parseInt((toBuild.getString("LUOGO_ID")));
-                    Place p = null;
+                    Place p;
                     switch (type) {
                         case Constant.TYPE_TOSEE:
                             p = new ToSee(id);
@@ -128,6 +127,7 @@ public class ParsingUtilities {
                             p = new Shop(id);
                             break;
                         default:
+                            p = null;
                             break;
                     }
                     p.setType(type);
@@ -185,7 +185,7 @@ public class ParsingUtilities {
             JSONObject toBuild = new JSONObject(json);
             int type = Integer.parseInt(toBuild.getString("TYPE"));
             int id = Integer.parseInt((toBuild.getString("LUOGO_ID")));
-            Place p = null;
+            Place p;
             switch (type) {
                 case Constant.TYPE_TOSEE:
                     p = new ToSee(id);
@@ -203,6 +203,7 @@ public class ParsingUtilities {
                     p = new Shop(id);
                     break;
                 default:
+                    p = null;
                     break;
             }
             p.setType(type);
@@ -243,100 +244,104 @@ public class ParsingUtilities {
         return null;
     }
 
-    /**
-     * Build an ArrayList containing MainCity objects from a string in JSON format
-     *
-     * @param json is the JSON string
-     * @return the list of MainCity objects
-     */
-    public static ArrayList<MainCity> parseMainCitiesFromJSON(String json) {
-        ArrayList<MainCity> res = new ArrayList<>();
-        try {
-            JSONObject reader = new JSONObject(json);
-            JSONArray data = reader.getJSONArray("Comune");
-            if (data != null) {
-                for (int i = 0; i < data.length(); i++) {
-                    JSONObject toBuild = data.getJSONObject(i);
-                    int userId = Integer.parseInt(toBuild.getString("cf_user_id"));
-                    int id = Integer.parseInt(toBuild.getString("ID"));
-                    MainCity m = new MainCity(id, userId);
-                    m.setName(toBuild.getString("NAME"));
-                    String phone = toBuild.getString("TELEFONO");
-                    String mail = toBuild.getString("EMAIL");
-                    String url = toBuild.getString("URL");
-                    ContactCard c = new ContactCard();
-                    c.setUrl(url);
-                    c.setEmail(mail);
-                    c.setTelephone(phone);
-                    m.setContactCard(c);
-                    m.setHistory(toBuild.getString("STORIA"));
-                    Location l = new Location("");
-                    String latitude = toBuild.getString("LATITUDE");
-                    String longitude = toBuild.getString("LONGITUDE");
-                    if (latitude != null && !latitude.isEmpty() && longitude != null && !longitude.isEmpty()) {
-                        l.setLatitude(Location.convert(latitude));
-                        l.setLongitude(Location.convert(longitude));
-                        m.setLocation(l);
-                    }
-                    ArrayList<String> images = new ArrayList<>();
-                    for (int j = 1; j <= 10; j++) {
-                        String im = toBuild.optString("IMAGE" + Integer.valueOf(j).toString());
-                        images.add(im);
-                    }
-                    m.setImages(images);
-                    m.setInfos(toBuild.getString("INFO"));
-                    res.add(m);
-                }
-            }
-        } catch (JSONException e) {
-            Log.e("JSON Exception", e.getMessage());
-        }
-        return res;
-    }
+// --Commented out by Inspection START (05/03/2015 16:36):
+//    /**
+//     * Build an ArrayList containing MainCity objects from a string in JSON format
+//     *
+//     * @param json is the JSON string
+//     * @return the list of MainCity objects
+//     */
+//    public static ArrayList<MainCity> parseMainCitiesFromJSON(String json) {
+//        ArrayList<MainCity> res = new ArrayList<>();
+//        try {
+//            JSONObject reader = new JSONObject(json);
+//            JSONArray data = reader.getJSONArray("Comune");
+//            if (data != null) {
+//                for (int i = 0; i < data.length(); i++) {
+//                    JSONObject toBuild = data.getJSONObject(i);
+//                    int userId = Integer.parseInt(toBuild.getString("cf_user_id"));
+//                    int id = Integer.parseInt(toBuild.getString("ID"));
+//                    MainCity m = new MainCity(id, userId);
+//                    m.setName(toBuild.getString("NAME"));
+//                    String phone = toBuild.getString("TELEFONO");
+//                    String mail = toBuild.getString("EMAIL");
+//                    String url = toBuild.getString("URL");
+//                    ContactCard c = new ContactCard();
+//                    c.setUrl(url);
+//                    c.setEmail(mail);
+//                    c.setTelephone(phone);
+//                    m.setContactCard(c);
+//                    m.setHistory(toBuild.getString("STORIA"));
+//                    Location l = new Location("");
+//                    String latitude = toBuild.getString("LATITUDE");
+//                    String longitude = toBuild.getString("LONGITUDE");
+//                    if (latitude != null && !latitude.isEmpty() && longitude != null && !longitude.isEmpty()) {
+//                        l.setLatitude(Location.convert(latitude));
+//                        l.setLongitude(Location.convert(longitude));
+//                        m.setLocation(l);
+//                    }
+//                    ArrayList<String> images = new ArrayList<>();
+//                    for (int j = 1; j <= 10; j++) {
+//                        String im = toBuild.optString("IMAGE" + Integer.valueOf(j).toString());
+//                        images.add(im);
+//                    }
+//                    m.setImages(images);
+//                    m.setInfos(toBuild.getString("INFO"));
+//                    res.add(m);
+//                }
+//            }
+//        } catch (JSONException e) {
+//            Log.e("JSON Exception", e.getMessage());
+//        }
+//        return res;
+//    }
+// --Commented out by Inspection STOP (05/03/2015 16:36)
 
-    /**
-     * Build a single MainCity object from json string
-     *
-     * @param json is the JSON string
-     * @return the MainCity object
-     */
-    public static MainCity parseSingleMainCity(String json) {
-        try {
-            JSONObject toBuild = new JSONObject(json);
-            int userId = Integer.parseInt(toBuild.getString("cf_user_id"));
-            int id = Integer.parseInt(toBuild.getString("ID"));
-            MainCity m = new MainCity(id, userId);
-            m.setName(toBuild.getString("NAME"));
-            String phone = toBuild.getString("TELEFONO");
-            String mail = toBuild.getString("EMAIL");
-            String url = toBuild.getString("URL");
-            ContactCard c = new ContactCard();
-            c.setUrl(url);
-            c.setEmail(mail);
-            c.setTelephone(phone);
-            m.setContactCard(c);
-            m.setHistory(toBuild.getString("STORIA"));
-            Location l = new Location("");
-            String latitude = toBuild.getString("LATITUDE");
-            String longitude = toBuild.getString("LONGITUDE");
-            if (latitude != null && !latitude.isEmpty() && longitude != null && !longitude.isEmpty()) {
-                l.setLatitude(Location.convert(latitude));
-                l.setLongitude(Location.convert(longitude));
-                m.setLocation(l);
-            }
-            ArrayList<String> images = new ArrayList<>();
-            for (int j = 1; j <= 10; j++) {
-                String im = toBuild.optString("IMAGE" + Integer.valueOf(j).toString());
-                images.add(im);
-            }
-            m.setImages(images);
-            m.setInfos(toBuild.getString("INFO"));
-            return m;
-        } catch (JSONException e) {
-            Log.e("JSON Exception", e.getMessage());
-        }
-        return null;
-    }
+// --Commented out by Inspection START (05/03/2015 16:36):
+//    /**
+//     * Build a single MainCity object from json string
+//     *
+//     * @param json is the JSON string
+//     * @return the MainCity object
+//     */
+//    public static MainCity parseSingleMainCity(String json) {
+//        try {
+//            JSONObject toBuild = new JSONObject(json);
+//            int userId = Integer.parseInt(toBuild.getString("cf_user_id"));
+//            int id = Integer.parseInt(toBuild.getString("ID"));
+//            MainCity m = new MainCity(id, userId);
+//            m.setName(toBuild.getString("NAME"));
+//            String phone = toBuild.getString("TELEFONO");
+//            String mail = toBuild.getString("EMAIL");
+//            String url = toBuild.getString("URL");
+//            ContactCard c = new ContactCard();
+//            c.setUrl(url);
+//            c.setEmail(mail);
+//            c.setTelephone(phone);
+//            m.setContactCard(c);
+//            m.setHistory(toBuild.getString("STORIA"));
+//            Location l = new Location("");
+//            String latitude = toBuild.getString("LATITUDE");
+//            String longitude = toBuild.getString("LONGITUDE");
+//            if (latitude != null && !latitude.isEmpty() && longitude != null && !longitude.isEmpty()) {
+//                l.setLatitude(Location.convert(latitude));
+//                l.setLongitude(Location.convert(longitude));
+//                m.setLocation(l);
+//            }
+//            ArrayList<String> images = new ArrayList<>();
+//            for (int j = 1; j <= 10; j++) {
+//                String im = toBuild.optString("IMAGE" + Integer.valueOf(j).toString());
+//                images.add(im);
+//            }
+//            m.setImages(images);
+//            m.setInfos(toBuild.getString("INFO"));
+//            return m;
+//        } catch (JSONException e) {
+//            Log.e("JSON Exception", e.getMessage());
+//        }
+//        return null;
+//    }
+// --Commented out by Inspection STOP (05/03/2015 16:36)
 
     /**
      * Build an ArrayList containing Event objects from a string in JSON format
@@ -529,7 +534,7 @@ public class ParsingUtilities {
 
 
     public static City parseSingleCity(String json) {
-        JSONObject toBuild = null;
+        JSONObject toBuild;
         try {
             toBuild = new JSONObject(json);
 
@@ -588,7 +593,7 @@ public class ParsingUtilities {
     }
 
     public static Route parseSingleRoute(String json) {
-        JSONObject toBuild = null;
+        JSONObject toBuild;
         try {
             toBuild = new JSONObject(json);
             int id = Integer.parseInt(toBuild.getString("PERCORSO_ID"));

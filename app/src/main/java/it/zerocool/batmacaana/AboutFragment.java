@@ -50,13 +50,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
         // Required empty public constructor
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
-
     /**
      * Called when the Fragment is no longer started.  This is generally
      * tied to {@link Activity#onStop() Activity.onStop} of the containing
@@ -161,6 +154,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
      *
      * @param v The view that was clicked.
      */
+    @SuppressWarnings("deprecation")
     @Override
     public void onClick(View v) {
         int id = v.getId();

@@ -16,12 +16,12 @@ import it.zerocool.batmacaana.EventFragment;
 public class EventPaletteListener implements Palette.PaletteAsyncListener {
     private final WeakReference<EventFragment> activityWeakReference;
 
-    EventPaletteListener(WeakReference<EventFragment> activityWeakReference) {
+    private EventPaletteListener(WeakReference<EventFragment> activityWeakReference) {
         this.activityWeakReference = activityWeakReference;
     }
 
     public static EventPaletteListener newInstance(EventFragment activity) {
-        WeakReference<EventFragment> activityWeakReference = new WeakReference<EventFragment>(activity);
+        WeakReference<EventFragment> activityWeakReference = new WeakReference<>(activity);
         return new EventPaletteListener(activityWeakReference);
     }
 

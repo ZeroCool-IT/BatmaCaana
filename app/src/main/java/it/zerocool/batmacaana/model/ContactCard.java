@@ -18,14 +18,14 @@ import it.zerocool.batmacaana.utilities.Constant;
  */
 public class ContactCard {
 
-    protected String address;
-    protected String telephone;
-    protected String email;
-    protected String url;
-    protected String fbLink;
-    protected String gpLink;
-    protected String taLink;
-    protected String fsqrLink;
+    private String address;
+    private String telephone;
+    private String email;
+    private String url;
+    private String fbLink;
+    private String gpLink;
+    private String taLink;
+    private String fsqrLink;
 
     /**
      * Public constructor
@@ -96,8 +96,7 @@ public class ContactCard {
      */
     public void setUrl(String url) {
         if (!url.equals(Constant.EMPTY_VALUE)) {
-            String toSet = url.replace("\\/", "/");
-            this.url = toSet;
+            this.url = url.replace("\\/", "/");
         } else
             this.url = null;
     }

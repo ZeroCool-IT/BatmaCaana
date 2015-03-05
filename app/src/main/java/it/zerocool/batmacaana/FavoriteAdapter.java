@@ -6,7 +6,6 @@ package it.zerocool.batmacaana;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -29,17 +28,15 @@ import it.zerocool.batmacaana.utilities.Constant;
  */
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> {
 
-    private Context context;
-    private LayoutInflater inflater;
-    private FragmentManager fragmentManager;
+    private final Context context;
+    private final LayoutInflater inflater;
     private List<Place> favoriteItems = Collections.emptyList();
 
 
-    public FavoriteAdapter(Context context, List<Place> data, FragmentManager fm) {
+    public FavoriteAdapter(Context context, List<Place> data) {
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.favoriteItems = data;
-        this.fragmentManager = fm;
     }
 
     /**
@@ -65,8 +62,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     @Override
     public FavoriteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.result_row, parent, false);
-        FavoriteViewHolder holder = new FavoriteViewHolder(view);
-        return holder;
+        return new FavoriteViewHolder(view);
     }
 
     /**
@@ -129,10 +125,10 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
 
     class FavoriteViewHolder extends RecyclerView.ViewHolder {
 
-        TextView header;
-        TextView description;
-        TextView tags;
-        ImageView icon;
+        final TextView header;
+        final TextView description;
+        final TextView tags;
+        final ImageView icon;
 
         public FavoriteViewHolder(final View itemView) {
             super(itemView);

@@ -20,7 +20,7 @@
         android:paddingLeft="72dp"
         android:paddingRight="16dp"
         android:paddingTop="16dp"
-        android:text="First Line"
+        android:text="@string/dummy_text"
         android:textColor="@color/primary_text_color"
         android:textSize="16sp" />
 
@@ -35,7 +35,7 @@
         android:paddingEnd="16dp"
         android:paddingLeft="72dp"
         android:paddingRight="16dp"
-        android:text="Second Line"
+        android:text="@string/dummy_text"
         android:textColor="@color/secondary_text_color"
         android:textSize="14sp" />
 
@@ -51,7 +51,7 @@
         android:paddingEnd="16dp"
         android:paddingLeft="72dp"
         android:paddingRight="16dp"
-        android:text="Third Line"
+        android:text="@string/dummy_text"
         android:textColor="@color/accentColor"
         android:textSize="14sp" />
 
@@ -60,10 +60,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/search_first_line"
+        android:contentDescription="@string/search_result_icon"
         android:paddingLeft="16dp"
         android:paddingStart="16dp"
         android:paddingTop="16dp"
-
         android:src="@drawable/ic_map_grey600_48dp" />
 </RelativeLayout>
 

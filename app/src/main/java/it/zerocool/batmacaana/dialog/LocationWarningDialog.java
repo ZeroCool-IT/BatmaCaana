@@ -8,25 +8,20 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
 import it.zerocool.batmacaana.R;
 
 /**
+ * Warn the user if the location services are disabled
  * Created by Marco on 20/01/2015.
  */
 public class LocationWarningDialog extends DialogFragment {
 
-    public static final String TITLE = "title";
-    public static final String MESSAGE = "message";
-    public static final String ICON = "icon";
-    private String title;
-    private String message;
-    private Drawable icon;
-    private AlertDialog.Builder builder;
+    // --Commented out by Inspection (05/03/2015 16:35):public static final String TITLE = "title";
 
 
     public LocationWarningDialog() {
@@ -36,13 +31,11 @@ public class LocationWarningDialog extends DialogFragment {
     /**
      * Action performed on creation of dialog
      */
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        builder = new AlertDialog.Builder(getActivity(),
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),
                 AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        /*title = getArguments().getString(TITLE);
-        message = getArguments().getString(MESSAGE);
-        icon = getActivity().getResources().getDrawable(getArguments().getInt(ICON));
-//        builder.setIcon(icon);*/
+
         builder.setTitle(getResources().getString(R.string.location_service_warning_title));
         builder.setMessage(getResources().getString(R.string.location_service_warning));
         builder.setPositiveButton(R.string.dialog_button_settings, new DialogInterface.OnClickListener() {

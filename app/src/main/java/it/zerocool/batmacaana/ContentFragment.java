@@ -41,12 +41,8 @@ import it.zerocool.batmacaana.utilities.RouteComparator;
 public class ContentFragment extends Fragment {
 
     private RecyclerView rvContent;
-    private ContentAdapter adapter;
     private RetrieveDataAsyncTask task;
     private List<Cardable> searchResults;
-    private View layout;
-    private LayoutInflater inflater;
-    private ViewGroup container;
     private ProgressBarCircularIndeterminate progressBar;
     private Location currentLocation;
     private ImageButton referesh;
@@ -56,12 +52,6 @@ public class ContentFragment extends Fragment {
 
     public ContentFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
     /**
@@ -84,10 +74,8 @@ public class ContentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.inflater = inflater;
-        this.container = container;
         readCurrentLocationFromPreferences();
-        layout = inflater.inflate(R.layout.fragment_content, container, false);
+        View layout = inflater.inflate(R.layout.fragment_content, container, false);
         progressBar = (ProgressBarCircularIndeterminate) layout.findViewById(R.id.progressBar);
         referesh = (ImageButton) layout.findViewById(R.id.bt_refresh);
         rvContent = (RecyclerView) layout.findViewById(R.id.content_recycler_view);
@@ -159,9 +147,6 @@ public class ContentFragment extends Fragment {
 //                refresh = Integer.parseInt(prefs.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
                 break;
         }
-        /*SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt(Constant.REFRESH, refresh);
-        editor.apply();*/
         uri += Integer.valueOf(Constant.USER_ID).toString();
 
         if (RequestUtilities.isOnline(getActivity())) {
@@ -265,6 +250,7 @@ public class ContentFragment extends Fragment {
          * @see #onPostExecute
          * @see #publishProgress
          */
+        @SuppressWarnings("unchecked")
         @Override
         protected List<Cardable> doInBackground(String... params) {
             String uri = params[0];
@@ -293,7 +279,6 @@ public class ContentFragment extends Fragment {
                         break;
                     case Constant.CITY:
                         res = ParsingUtilities.parseCitiesFromJSON(json);
-                        res = ParsingUtilities.parseCitiesFromJSON(json);
                         temp = (ArrayList) res;
                         Collections.sort(temp, new PlaceComparator());
                         res = (List) temp;
@@ -313,7 +298,7 @@ public class ContentFragment extends Fragment {
                 Log.e("ZCLOG TASK ERROR", e.getMessage());
                 e.printStackTrace();
             }
-            return res;
+            return null;
         }
 
         /**
@@ -360,7 +345,7 @@ public class ContentFragment extends Fragment {
                         .commit();
                 Log.e("ZCLOG TASK ERROR", "Failed to get results");
             } else {
-                adapter = new ContentAdapter(getActivity(), cardables);
+                ContentAdapter adapter = new ContentAdapter(getActivity(), cardables);
                 rvContent.setAdapter(adapter);
             }
         }

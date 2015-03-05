@@ -26,29 +26,27 @@ import it.zerocool.batmacaana.utilities.Constant;
  */
 public class Place implements Cardable {
 
-    protected int id;
-    protected String name;
-    protected String image;
-    protected int type;
-    protected boolean favorite;
-
-
-    protected LinkedList<String> tags;
-    protected String description;
-    protected ContactCard contact;
-    protected TimeCard timeCard;
-    protected Location location;
-    protected float distanceFromCurrentPosition;
-    protected String json;
-    protected boolean accessible;
+    private final int id;
+    private final LinkedList<String> tags;
+    private String name;
+    private String image;
+    private int type;
+    private boolean favorite;
+    private String description;
+    private ContactCard contact;
+    private TimeCard timeCard;
+    private Location location;
+    private float distanceFromCurrentPosition;
+    private String json;
+    private boolean accessible;
 
 
     /**
      * Public constructor
      */
-    public Place(int id) {
+    Place(int id) {
         this.id = id;
-        this.tags = new LinkedList<String>();
+        this.tags = new LinkedList<>();
         favorite = false;
     }
 
@@ -61,12 +59,14 @@ public class Place implements Cardable {
     }
 
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
+// --Commented out by Inspection START (05/03/2015 16:36):
+//    /**
+//     * @param id the id to set
+//     */
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+// --Commented out by Inspection STOP (05/03/2015 16:36)
 
     /**
      * @return the name of the place
@@ -123,12 +123,14 @@ public class Place implements Cardable {
         return tags;
     }
 
-    /**
-     * @param tags the tags list to set
-     */
-    public void setTags(LinkedList<String> tags) {
-        this.tags = tags;
-    }
+// --Commented out by Inspection START (05/03/2015 17:07):
+//    /**
+//     * @param tags the tags list to set
+//     */
+//    public void setTags(LinkedList<String> tags) {
+//        this.tags = tags;
+//    }
+// --Commented out by Inspection STOP (05/03/2015 17:07)
 
     /**
      * Add the tags to tags' list from a string in CSV format
@@ -209,7 +211,6 @@ public class Place implements Cardable {
     }
 
     /**
-     *
      * @return true if the place is accessible for disabled false otherwise
      */
     public boolean isAccessible() {
@@ -220,20 +221,19 @@ public class Place implements Cardable {
      *
      */
     public void setAccessible(String accessible) {
-        if (accessible != null && !accessible.isEmpty()) {
-            this.accessible = true;
-        } else
-            this.accessible = false;
+        this.accessible = accessible != null && !accessible.isEmpty();
     }
 
-    /**
-     * Set place accessibility
-     *
-     * @param accessible true if place is accessible for disabled, false otherwise
-     */
-    public void setAccessible(boolean accessible) {
-        this.accessible = accessible;
-    }
+// --Commented out by Inspection START (05/03/2015 16:36):
+//    /**
+//     * Set place accessibility
+//     *
+//     * @param accessible true if place is accessible for disabled, false otherwise
+//     */
+//    public void setAccessible(boolean accessible) {
+//        this.accessible = accessible;
+//    }
+// --Commented out by Inspection STOP (05/03/2015 16:36)
 
     /**
      * @return the distance in meters from the current position
@@ -257,10 +257,7 @@ public class Place implements Cardable {
     public boolean equals(Object o) {
         if (o != null && o.getClass() == Place.class) {
             Place p = (Place) o;
-            if (p.getId() == this.getId())
-                return true;
-            else
-                return false;
+            return p.getId() == this.getId();
         }
         return false;
     }

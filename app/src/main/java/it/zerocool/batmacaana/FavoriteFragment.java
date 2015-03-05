@@ -48,12 +48,6 @@ public class FavoriteFragment extends Fragment {
         // Required empty public constructor
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
     /**
      * Called when the fragment is visible to the user and actively running.
      * This is generally
@@ -66,6 +60,32 @@ public class FavoriteFragment extends Fragment {
         Log.i("ZEROLOG", "OnResume called");
         getData();
 
+    }
+
+    /**
+     * Called when the Fragment is no longer resumed.  This is generally
+     * tied to {@link Activity#onPause() Activity.onPause} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onPause() {
+        if (task != null) {
+            task.cancel(true);
+        }
+        super.onPause();
+    }
+
+    /**
+     * Called when the Fragment is no longer started.  This is generally
+     * tied to {@link Activity#onStop() Activity.onStop} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onStop() {
+        if (task != null) {
+            task.cancel(true);
+        }
+        super.onStop();
     }
 
     @Override
@@ -125,7 +145,7 @@ public class FavoriteFragment extends Fragment {
 
 
             if (favoriteList != null && !favoriteList.isEmpty()) {
-                FavoriteAdapter adapter = new FavoriteAdapter(context, favoriteList, getFragmentManager());
+                FavoriteAdapter adapter = new FavoriteAdapter(context, favoriteList);
                 rvResults.setAdapter(adapter);
             } else {
                 String title, message;
@@ -189,9 +209,7 @@ public class FavoriteFragment extends Fragment {
             db = openHelper.getWritabelDB();
             if (isCancelled())
                 return null;
-            List<Place> res = FavoriteDBMngr.favoriteList(db);
-
-            return res;
+            return FavoriteDBMngr.favoriteList(db);
         }
     }
 

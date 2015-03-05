@@ -35,9 +35,6 @@ public class NavigationDrawerFragment extends Fragment {
     private DrawerLayout mDrawerLayout;
     private boolean mUserLearnedDrawer;
     private boolean mFromSavedInstanceState;
-    private View containerView;
-    private RecyclerView recyclerView;
-    private LinearLayoutManager linearLayoutManager;
 
     private DrawerAdapter adapter;
 
@@ -47,8 +44,8 @@ public class NavigationDrawerFragment extends Fragment {
     public NavigationDrawerFragment() {
     }
 
-    public static List<DrawerItem> getData(Context context) {
-        List<DrawerItem> data = new ArrayList<DrawerItem>();
+    private static List<DrawerItem> getData(Context context) {
+        List<DrawerItem> data = new ArrayList<>();
         int[] icons = {R.drawable.ic_local_library_grey600_24dp,
                 R.drawable.ic_beenhere_grey600_24dp,
                 R.drawable.ic_event_note_grey600_24dp,
@@ -89,18 +86,18 @@ public class NavigationDrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
 
-        recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
+        RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
 
 
         adapter = new DrawerAdapter(getActivity(), getData(getActivity()), getActivity().getSupportFragmentManager());
         recyclerView.setAdapter(adapter);
-        linearLayoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         return layout;
     }
 
     public void setUp(int fragmentID, DrawerLayout drawerLayout, final Toolbar toolbar) {
-        containerView = getActivity().findViewById(fragmentID);
+        View containerView = getActivity().findViewById(fragmentID);
         mDrawerLayout = drawerLayout;
         adapter.setDrawerLayout(mDrawerLayout);
         mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close) {

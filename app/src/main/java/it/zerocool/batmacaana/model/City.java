@@ -17,7 +17,7 @@ public class City extends Place {
     /**
      * Public constructor
      *
-     * @param id
+     * @param id is City id
      */
     public City(int id) {
         super(id);
@@ -41,13 +41,4 @@ public class City extends Place {
         return Constant.TYPE_CITY;
     }
 
-    /**
-     * Get the accent info, if any
-     *
-     * @return a String representing the accent information of the card
-     */
-    @Override
-    public String getAccentInfo() {
-        return super.getAccentInfo();
-    }
 }

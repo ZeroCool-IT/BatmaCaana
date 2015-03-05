@@ -25,7 +25,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.util.List;
 
@@ -37,16 +36,11 @@ public class HomeActivity extends ActionBarActivity {
 
     public static final String PROPERTY_APP_VERSION = "appVersion";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    protected Toast pressBackToast;
-    GoogleCloudMessaging gcm;
-    String regid;
-    private Toolbar toolbar;
+    private Toast pressBackToast;
     private LocationWarningDialog dialog;
     private LocationManager locationManager;
     private LocationListener locationListener;
-    private Context context;
     private long mLastBackPress;
-    private boolean exit;
 
     /**
      * Return the version code of the app
@@ -83,18 +77,17 @@ public class HomeActivity extends ActionBarActivity {
 
         pressBackToast = Toast.makeText(this, R.string.tback,
                 Toast.LENGTH_SHORT);
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        context = getApplicationContext();
+        Context context = getApplicationContext();
 
         // Check device for Play Services APK.
         if (checkPlayServices()) {
             // If this check succeeds, proceed with normal processing.
             // Otherwise, prompt user to get valid Play Services APK.
-            gcm = GoogleCloudMessaging.getInstance(this);
-            regid = getRegistrationId(context);
+            String regid = getRegistrationId(context);
 
             if (regid.isEmpty()) {
                 registerInBackground();
@@ -115,7 +108,7 @@ public class HomeActivity extends ActionBarActivity {
      * registration ID.
      */
     private String getRegistrationId(Context context) {
-        final SharedPreferences prefs = getGCMPreferences(context);
+        final SharedPreferences prefs = getGCMPreferences();
         String registrationId = prefs.getString(Constant.PROPERTY_REG_ID, "");
         if (registrationId.isEmpty()) {
             Log.i("GCM ERROR", "Registration not found.");
@@ -134,10 +127,9 @@ public class HomeActivity extends ActionBarActivity {
     }
 
     /**
-     * @param context is the application context
      * @return Application's version code from {@code SharedPreferences}
      */
-    private SharedPreferences getGCMPreferences(Context context) {
+    private SharedPreferences getGCMPreferences() {
         return getSharedPreferences(HomeActivity.class.getSimpleName(), Context.MODE_PRIVATE);
     }
 
@@ -149,22 +141,24 @@ public class HomeActivity extends ActionBarActivity {
         task.execute();
     }
 
-    /**
-     * Stores the registration ID and app versionCode in the application's
-     * {@code SharedPreferences}.
-     *
-     * @param context application's context.
-     * @param regId   registration ID
-     */
-    private void storeRegistrationId(Context context, String regId) {
-        final SharedPreferences prefs = getGCMPreferences(context);
-        int appVersion = getAppVersion(context);
-        Log.i("GCM", "Saving regId on app version " + appVersion);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(Constant.PROPERTY_REG_ID, regId);
-        editor.putInt(PROPERTY_APP_VERSION, appVersion);
-        editor.apply();
-    }
+// --Commented out by Inspection START (05/03/2015 16:35):
+//    /**
+//     * Stores the registration ID and app versionCode in the application's
+//     * {@code SharedPreferences}.
+//     *
+//     * @param context application's context.
+//     * @param regId   registration ID
+//     */
+//    private void storeRegistrationId(Context context, String regId) {
+//        final SharedPreferences prefs = getGCMPreferences(context);
+//        int appVersion = getAppVersion(context);
+//        Log.i("GCM", "Saving regId on app version " + appVersion);
+//        SharedPreferences.Editor editor = prefs.edit();
+//        editor.putString(Constant.PROPERTY_REG_ID, regId);
+//        editor.putInt(PROPERTY_APP_VERSION, appVersion);
+//        editor.apply();
+//    }
+// --Commented out by Inspection STOP (05/03/2015 16:35)
 
     /**
      * Dispatch onResume() to fragments.  Note that for better inter-operation
@@ -270,6 +264,7 @@ public class HomeActivity extends ActionBarActivity {
      * @param menu
      * @return
      */
+    @SuppressWarnings("JavaDoc")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

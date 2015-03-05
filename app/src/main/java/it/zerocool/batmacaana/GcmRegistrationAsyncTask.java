@@ -29,9 +29,9 @@ import it.zerocool.pandoracloud.registration.Registration;
 class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
     private static final String SENDER_ID = "557298603924";
     private static Registration regService = null;
+    private final Context context;
+    private final boolean test = false;
     private GoogleCloudMessaging gcm;
-    private Context context;
-    private boolean test = false;
 
     public GcmRegistrationAsyncTask(Context context) {
         this.context = context;
@@ -64,7 +64,7 @@ class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
                 regService = builder.build();
             }
         }
-        String msg = "";
+        String msg;
         try {
             if (gcm == null) {
                 gcm = GoogleCloudMessaging.getInstance(context);

@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
 import it.zerocool.batmacaana.R;
@@ -21,9 +22,6 @@ public class WarningDialog extends DialogFragment {
     public static final String TITLE = "title";
     public static final String MESSAGE = "message";
     public static final String KILL = "kill";
-    private String title;
-    private String message;
-    private AlertDialog.Builder builder;
     private boolean killActivity;
 
 
@@ -34,11 +32,12 @@ public class WarningDialog extends DialogFragment {
     /**
      * Action performed on creation of dialog
      */
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        builder = new AlertDialog.Builder(getActivity(),
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),
                 AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        title = getArguments().getString(TITLE);
-        message = getArguments().getString(MESSAGE);
+        String title = getArguments().getString(TITLE);
+        String message = getArguments().getString(MESSAGE);
         killActivity = getArguments().getBoolean(KILL);
 
         builder.setTitle(title);

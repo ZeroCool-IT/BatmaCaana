@@ -5,6 +5,7 @@
 package it.zerocool.batmacaana.utilities;
 
 /**
+ * Utility class providing application context
  * Created by Marco on 24/01/2015.
  */
 

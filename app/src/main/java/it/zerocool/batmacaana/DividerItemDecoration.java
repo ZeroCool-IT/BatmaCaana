@@ -14,12 +14,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class DividerItemDecoration extends RecyclerView.ItemDecoration {
+class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
 
-    private Drawable mDivider;
-    private boolean mShowFirstDivider = false;
-    private boolean mShowLastDivider = false;
+    private final Drawable mDivider;
+    private final boolean mShowFirstDivider = false;
+    private final boolean mShowLastDivider = false;
 
 
     public DividerItemDecoration(Context context, AttributeSet attrs) {
@@ -29,23 +29,29 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         a.recycle();
     }
 
-    public DividerItemDecoration(Context context, AttributeSet attrs, boolean showFirstDivider,
-                                 boolean showLastDivider) {
-        this(context, attrs);
-        mShowFirstDivider = showFirstDivider;
-        mShowLastDivider = showLastDivider;
-    }
+// --Commented out by Inspection START (05/03/2015 17:06):
+//    public DividerItemDecoration(Context context, AttributeSet attrs, boolean showFirstDivider,
+//                                 boolean showLastDivider) {
+//        this(context, attrs);
+//        mShowFirstDivider = showFirstDivider;
+//        mShowLastDivider = showLastDivider;
+//    }
+// --Commented out by Inspection STOP (05/03/2015 17:06)
 
-    public DividerItemDecoration(Drawable divider) {
-        mDivider = divider;
-    }
+// --Commented out by Inspection START (05/03/2015 17:06):
+//    public DividerItemDecoration(Drawable divider) {
+//        mDivider = divider;
+//    }
+// --Commented out by Inspection STOP (05/03/2015 17:06)
 
-    public DividerItemDecoration(Drawable divider, boolean showFirstDivider,
-                                 boolean showLastDivider) {
-        this(divider);
-        mShowFirstDivider = showFirstDivider;
-        mShowLastDivider = showLastDivider;
-    }
+// --Commented out by Inspection START (05/03/2015 16:33):
+//    public DividerItemDecoration(Drawable divider, boolean showFirstDivider,
+//                                 boolean showLastDivider) {
+//        this(divider);
+//        mShowFirstDivider = showFirstDivider;
+//        mShowLastDivider = showLastDivider;
+//    }
+// --Commented out by Inspection STOP (05/03/2015 16:33)
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent,

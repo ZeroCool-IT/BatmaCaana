@@ -28,15 +28,15 @@ import it.zerocool.batmacaana.utilities.ParsingUtilities;
  */
 public class News implements Cardable {
 
-    protected int id;
-    protected int type;
-    protected String json;
-    protected String title;
-    protected String body;
-    protected GregorianCalendar date;
-    protected String image;
-    protected String url;
-    protected LinkedList<String> tags;
+    private final int id;
+    private final LinkedList<String> tags;
+    private int type;
+    private String json;
+    private String title;
+    private String body;
+    private GregorianCalendar date;
+    private String image;
+    private String url;
 
 
     /**
@@ -44,22 +44,24 @@ public class News implements Cardable {
      */
     public News(int id) {
         this.id = id;
-        tags = new LinkedList<String>();
+        tags = new LinkedList<>();
     }
 
     /**
      * @return the id
      */
-    public int getId() {
+    int getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
+// --Commented out by Inspection START (05/03/2015 16:35):
+//    /**
+//     * @param id the id to set
+//     */
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+// --Commented out by Inspection STOP (05/03/2015 16:35)
 
     /**
      * @return the title of the news
@@ -98,15 +100,8 @@ public class News implements Cardable {
     /**
      * @return the date of the news
      */
-    public GregorianCalendar getDate() {
+    GregorianCalendar getDate() {
         return date;
-    }
-
-    /**
-     * @param date the date of the news to set
-     */
-    public void setDate(GregorianCalendar date) {
-        this.date = date;
     }
 
     /**
@@ -118,6 +113,13 @@ public class News implements Cardable {
         GregorianCalendar g = ParsingUtilities.parseDate(date);
         setDate(g);
 
+    }
+
+    /**
+     * @param date the date of the news to set
+     */
+    void setDate(GregorianCalendar date) {
+        this.date = date;
     }
 
     public String getDateToString() {
@@ -135,12 +137,14 @@ public class News implements Cardable {
         return tags;
     }
 
-    /**
-     * @param tags the tags list to set
-     */
-    public void setTags(LinkedList<String> tags) {
-        this.tags = tags;
-    }
+// --Commented out by Inspection START (05/03/2015 16:35):
+//    /**
+//     * @param tags the tags list to set
+//     */
+//    public void setTags(LinkedList<String> tags) {
+//        this.tags = tags;
+//    }
+// --Commented out by Inspection STOP (05/03/2015 16:35)
 
     /**
      * Add the tags to tags' list from a string in CSV format
@@ -190,8 +194,7 @@ public class News implements Cardable {
      */
     public void setUrl(String url) {
         if (!url.equals(Constant.EMPTY_VALUE)) {
-            String toSet = url.replace("\\/", "/");
-            this.url = toSet;
+            this.url = url.replace("\\/", "/");
         } else
             this.url = null;
     }
@@ -202,10 +205,7 @@ public class News implements Cardable {
     public boolean equals(Object o) {
         if (o != null && o.getClass() == News.class) {
             News n = (News) o;
-            if (n.getId() == this.getId())
-                return true;
-            else
-                return false;
+            return n.getId() == this.getId();
         }
         return false;
     }
@@ -258,8 +258,7 @@ public class News implements Cardable {
         } else {
             dateFormat = new SimpleDateFormat("MMM\ndd", l);
         }
-        String result = dateFormat.format(getDate().getTime());
-        return result;
+        return dateFormat.format(getDate().getTime());
     }
 
     /**

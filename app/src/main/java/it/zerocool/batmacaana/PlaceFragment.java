@@ -18,7 +18,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.ShareActionProvider;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -67,7 +66,6 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
     private TextView mailTv;
     private TextView linkTv;
     private TextView tagTv;
-    private TextView reportTv;
     private Button phoneActionButton;
     private Button urlActionButton;
     private Button mailActionButton;
@@ -76,8 +74,6 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
     private Button foursquareButton;
     private Button tripAdvisorButton;
     private Button googlePlusButton;
-    private ImageButton fullScreenButton;
-    private FloatingActionButton floatingActionButton;
     private LinearLayout timecardLayout;
     private LinearLayout addressLayout;
     private LinearLayout phoneLayout;
@@ -88,7 +84,6 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
     private LinearLayout socialLayout;
     private LinearLayout accessibilityLayout;
     private Target loadTarget;
-    private Toolbar toolbar;
     private Palette palette;
     private TextToSpeech ttsService;
     private ImageView playTTSButton;
@@ -149,18 +144,18 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
         mailTv = (TextView) layout.findViewById(R.id.mail_tv);
         linkTv = (TextView) layout.findViewById(R.id.link_tv);
         tagTv = (TextView) layout.findViewById(R.id.tag_tv);
-        reportTv = (TextView) layout.findViewById(R.id.report_tv);
+        TextView reportTv = (TextView) layout.findViewById(R.id.report_tv);
         phoneActionButton = (Button) layout.findViewById(R.id.phoneButton);
         urlActionButton = (Button) layout.findViewById(R.id.urlButton);
         mailActionButton = (Button) layout.findViewById(R.id.mailButton);
         favoriteButton = (Button) layout.findViewById(R.id.favoriteButton);
-        fullScreenButton = (ImageButton) layout.findViewById(R.id.fullscreenButton);
+        ImageButton fullScreenButton = (ImageButton) layout.findViewById(R.id.fullscreenButton);
         facebookButton = (Button) layout.findViewById(R.id.facebook_button);
         foursquareButton = (Button) layout.findViewById(R.id.foursquare_button);
         tripAdvisorButton = (Button) layout.findViewById(R.id.tripadvisor_button);
         googlePlusButton = (Button) layout.findViewById(R.id.googleplus_button);
         playTTSButton = (ImageView) layout.findViewById(R.id.tts_icon);
-        floatingActionButton = (FloatingActionButton) layout.findViewById(R.id.floatingButton);
+        FloatingActionButton floatingActionButton = (FloatingActionButton) layout.findViewById(R.id.floatingButton);
         timecardLayout = (LinearLayout) layout.findViewById(R.id.timecard_layout);
         addressLayout = (LinearLayout) layout.findViewById(R.id.address_layout);
         phoneLayout = (LinearLayout) layout.findViewById(R.id.phone_layout);
@@ -170,7 +165,6 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
         descriptionLayout = (LinearLayout) layout.findViewById(R.id.description_layout);
         socialLayout = (LinearLayout) layout.findViewById(R.id.social_layout);
         accessibilityLayout = (LinearLayout) layout.findViewById((R.id.accesibility));
-        toolbar = (Toolbar) layout.findViewById(R.id.appbar);
         ivPlace = (ImageView) layout.findViewById(R.id.imageView);
 
         //Listener
@@ -232,7 +226,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
     }
 
 
-    public void loadBitmap(String url) {
+    void loadBitmap(String url) {
 
         if (loadTarget == null)
             loadTarget = new Target() {
@@ -319,7 +313,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
 
     }
 
-    public void setBitmap(Bitmap bitmap) {
+    void setBitmap(Bitmap bitmap) {
         Picasso.with(getActivity()).
                 load(Constant.URI_IMAGE_BIG + targetPlace.getImage()).
                 placeholder(R.drawable.im_placeholder).
@@ -357,6 +351,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
      * @see #onPrepareOptionsMenu
      * @see #onOptionsItemSelected
      */
+    @SuppressWarnings("JavaDoc")
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
@@ -411,6 +406,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
      *
      * @param v The view that was clicked.
      */
+    @SuppressWarnings("deprecation")
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.phoneButton) {

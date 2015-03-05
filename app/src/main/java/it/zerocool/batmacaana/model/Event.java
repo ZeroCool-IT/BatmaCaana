@@ -32,20 +32,20 @@ import it.zerocool.batmacaana.utilities.ParsingUtilities;
  */
 public class Event implements Cardable {
 
-    protected int id;
-    protected String name;
-    protected int type;
-    protected String json;
-    protected GregorianCalendar startDate;
-    protected GregorianCalendar endDate;
-    protected GregorianCalendar startHour;
-    protected GregorianCalendar endHour;
-    protected String place;
-    protected String image;
-    protected LinkedList<String> tags;
-    protected String description;
-    protected Location location;
-    protected ContactCard contact;
+    private final int id;
+    private final LinkedList<String> tags;
+    private String name;
+    private int type;
+    private String json;
+    private GregorianCalendar startDate;
+    private GregorianCalendar endDate;
+    private GregorianCalendar startHour;
+    private GregorianCalendar endHour;
+    private String place;
+    private String image;
+    private String description;
+    private Location location;
+    private ContactCard contact;
 
 
     /**
@@ -55,22 +55,24 @@ public class Event implements Cardable {
      */
     public Event(int id) {
         this.id = id;
-        this.tags = new LinkedList<String>();
+        this.tags = new LinkedList<>();
     }
 
     /**
      * @return the id of the event
      */
-    public int getId() {
+    int getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
+// --Commented out by Inspection START (05/03/2015 16:33):
+//    /**
+//     * @param id the id to set
+//     */
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+// --Commented out by Inspection STOP (05/03/2015 16:33)
 
     /**
      * @return the name of the event
@@ -97,6 +99,13 @@ public class Event implements Cardable {
     }
 
     /**
+     * @param date the start date of the event to set
+     */
+    void setStartDate(GregorianCalendar date) {
+        this.startDate = date;
+    }
+
+    /**
      * Set the event's start date parsing infos from String
      *
      * @param date it's the start date to set (YYYY-mm-DD format)
@@ -108,17 +117,17 @@ public class Event implements Cardable {
     }
 
     /**
-     * @param date the start date of the event to set
-     */
-    public void setStartDate(GregorianCalendar date) {
-        this.startDate = date;
-    }
-
-    /**
      * @return the end date of the event
      */
     public GregorianCalendar getEndDate() {
         return endDate;
+    }
+
+    /**
+     * @param endDate is the end date of the event to set
+     */
+    void setEndDate(GregorianCalendar endDate) {
+        this.endDate = endDate;
     }
 
     /**
@@ -133,17 +142,17 @@ public class Event implements Cardable {
     }
 
     /**
-     * @param endDate is the end date of the event to set
-     */
-    public void setEndDate(GregorianCalendar endDate) {
-        this.endDate = endDate;
-    }
-
-    /**
      * @return the start hour of the event
      */
     public GregorianCalendar getStartHour() {
         return startHour;
+    }
+
+    /**
+     * @param startHour the start hour of the event to set
+     */
+    void setStartHour(GregorianCalendar startHour) {
+        this.startHour = startHour;
     }
 
     /**
@@ -157,17 +166,17 @@ public class Event implements Cardable {
     }
 
     /**
-     * @param startHour the start hour of the event to set
-     */
-    public void setStartHour(GregorianCalendar startHour) {
-        this.startHour = startHour;
-    }
-
-    /**
      * @return the start hour of the event
      */
     public GregorianCalendar getEndHour() {
         return endHour;
+    }
+
+    /**
+     * @param endHour the end hour of the event to set
+     */
+    void setEndHour(GregorianCalendar endHour) {
+        this.endHour = endHour;
     }
 
     /**
@@ -178,13 +187,6 @@ public class Event implements Cardable {
     public void setEndHour(String endHour) {
         GregorianCalendar g = ParsingUtilities.parseHour(endHour);
         setEndHour(g);
-    }
-
-    /**
-     * @param endHour the end hour of the event to set
-     */
-    public void setEndHour(GregorianCalendar endHour) {
-        this.endHour = endHour;
     }
 
     /**
@@ -230,12 +232,14 @@ public class Event implements Cardable {
         return tags;
     }
 
-    /**
-     * @param tags the tags list of the event to set
-     */
-    public void setTags(LinkedList<String> tags) {
-        this.tags = tags;
-    }
+// --Commented out by Inspection START (05/03/2015 16:34):
+//    /**
+//     * @param tags the tags list of the event to set
+//     */
+//    public void setTags(LinkedList<String> tags) {
+//        this.tags = tags;
+//    }
+// --Commented out by Inspection STOP (05/03/2015 16:34)
 
     /**
      * Add the tags to tags' list from a string in CSV format
@@ -308,10 +312,7 @@ public class Event implements Cardable {
     public boolean equals(Object o) {
         if (o != null && o.getClass() == Event.class) {
             Event e = (Event) o;
-            if (e.getId() == this.getId())
-                return true;
-            else
-                return false;
+            return e.getId() == this.getId();
         }
         return false;
     }
@@ -353,7 +354,7 @@ public class Event implements Cardable {
     /**
      * @return Event start date to String
      */
-    public String startDateToString() {
+    String startDateToString() {
         if (startDate != null) {
             if (startHour != null) {
                 GregorianCalendar res = getStartDate();
@@ -372,7 +373,7 @@ public class Event implements Cardable {
     /**
      * @return Event end date to String
      */
-    public String endDateToString() {
+    String endDateToString() {
         if (endDate != null) {
             if (endHour != null) {
                 GregorianCalendar res = getEndDate();

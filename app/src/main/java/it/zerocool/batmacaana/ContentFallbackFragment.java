@@ -25,28 +25,21 @@ import it.zerocool.batmacaana.utilities.Constant;
  */
 public class ContentFallbackFragment extends Fragment {
 
-    private ImageButton btRefresh;
 
     public ContentFallbackFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_content_fallback, container, false);
+        View layout;
 
         int type = getArguments().getInt(Constant.FALLBACK_TYPE_ARG);
 
         if (type == Constant.CONNECTION_ERROR) {
             layout = inflater.inflate(R.layout.fragment_content_fallback_error, container, false);
-            btRefresh = (ImageButton) layout.findViewById(R.id.bt_refresh);
+            ImageButton btRefresh = (ImageButton) layout.findViewById(R.id.bt_refresh);
             btRefresh.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

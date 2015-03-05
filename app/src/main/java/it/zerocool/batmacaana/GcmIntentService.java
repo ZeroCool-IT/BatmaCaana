@@ -31,14 +31,14 @@ import it.zerocool.batmacaana.utilities.Constant;
  */
 public class GcmIntentService extends IntentService {
 
-    public static final int NOTIFICATION_ID_NEWS = 1;
-    public static final int NOTIFICATION_ID_EVENT = 2;
+    private static final int NOTIFICATION_ID_NEWS = 1;
+    private static final int NOTIFICATION_ID_EVENT = 2;
     private static final String TAG = "GCM INTENT";
     private static final String NEWS_GROUP = "news";
     private static final String EVENT_GROUP = "event";
-    NotificationCompat.Builder builder;
+    private final SharedPreferences sharedPreferences;
+    private NotificationCompat.Builder builder;
     private NotificationManager mNotificationManager;
-    private SharedPreferences sharedPreferences;
 
     public GcmIntentService() {
         super("GcmIntentService");

@@ -37,9 +37,9 @@ import it.zerocool.batmacaana.utilities.RequestUtilities;
  */
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
 
-    private Context context;
-    private LayoutInflater inflater;
-    private FragmentManager fragmentManager;
+    private final Context context;
+    private final LayoutInflater inflater;
+    private final FragmentManager fragmentManager;
     private List<SearchResult> searchItems = Collections.emptyList();
 
 
@@ -74,8 +74,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     @Override
     public SearchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.result_row, parent, false);
-        SearchViewHolder holder = new SearchViewHolder(view);
-        return holder;
+        return new SearchViewHolder(view);
     }
 
     /**
@@ -148,10 +147,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 
     class SearchViewHolder extends RecyclerView.ViewHolder {
 
-        TextView header;
-        TextView description;
-        TextView tags;
-        ImageView icon;
+        final TextView header;
+        final TextView description;
+        final TextView tags;
+        final ImageView icon;
 
         public SearchViewHolder(View itemView) {
             super(itemView);
@@ -198,7 +197,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
          */
         @Override
         protected String doInBackground(String... params) {
-            String res = null;
+            String res;
             String uri = params[0];
             type = Integer.parseInt(params[1]);
             try {

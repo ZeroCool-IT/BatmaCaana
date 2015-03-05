@@ -7,6 +7,7 @@ package it.zerocool.batmacaana.utilities;
 import android.content.SearchRecentSuggestionsProvider;
 
 /**
+ * Recent search queries provider
  * Created by Marco on 28/01/2015.
  */
 public class SearchHistoryProvider extends SearchRecentSuggestionsProvider {

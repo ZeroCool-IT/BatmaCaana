@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
+ * Utility class providing application shared preferences
  * Created by Marco on 29/01/2015.
  */
 public class SharedPreferencesProvider {
@@ -39,13 +40,15 @@ public class SharedPreferencesProvider {
         return sharedPreferences.getString(preferenceName, preferenceValue);
     }
 
-    /**
-     * Return the shared preferences for the app
-     *
-     * @param context is the activity context
-     * @return the SharedPreferences object
-     */
-    public static SharedPreferences getSharedPreferences(Context context) {
-        return context.getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
-    }
+// --Commented out by Inspection START (05/03/2015 17:07):
+//    /**
+//     * Return the shared preferences for the app
+//     *
+//     * @param context is the activity context
+//     * @return the SharedPreferences object
+//     */
+//    public static SharedPreferences getSharedPreferences(Context context) {
+//        return context.getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+//    }
+// --Commented out by Inspection STOP (05/03/2015 17:07)
 }

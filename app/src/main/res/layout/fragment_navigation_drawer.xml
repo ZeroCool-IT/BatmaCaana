@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#DADADA"
-    tools:context="it.zerocool.batmacaana.NavigationDrawerFragment">
+    tools:context="it.zerocool.batmacaana.NavigationDrawerFragment"
+    tools:ignore="Overdraw">
 
     <LinearLayout
         android:id="@+id/containerDrawerImage"
@@ -20,6 +21,7 @@
             android:layout_height="197dp"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="24dp"
+            android:contentDescription="@string/app_logo"
             android:padding="8dp"
             android:scaleType="fitCenter"
             android:src="@drawable/im_drawer_logo" />
