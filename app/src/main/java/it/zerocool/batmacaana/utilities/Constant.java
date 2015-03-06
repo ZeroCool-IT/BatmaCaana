@@ -130,12 +130,9 @@ public class Constant {
 
     //Gallery image
 
-    public static final Integer[] GALLERY_IMAGE = {R.drawable.im_gallery_13,
-            R.drawable.im_gallery_01, R.drawable.im_gallery_06, R.drawable.im_gallery_02,
-            R.drawable.im_gallery_12, R.drawable.im_gallery_03, R.drawable.im_gallery_08,
-            R.drawable.im_gallery_04, R.drawable.im_gallery_11, R.drawable.im_gallery_05,
-            R.drawable.im_gallery_07, R.drawable.im_gallery_10, R.drawable.im_gallery_09,
-            R.drawable.im_gallery_14};
+    public static final Integer[] GALLERY_IMAGE = {R.drawable.im_gallery_01, R.drawable.im_gallery_02,
+            R.drawable.im_gallery_03, R.drawable.im_gallery_04, R.drawable.im_gallery_05, R.drawable.im_gallery_06,
+            R.drawable.im_gallery_07, R.drawable.im_gallery_08, R.drawable.im_gallery_09, R.drawable.im_gallery_10};
 
     //Others
     public static final int VIEW_STATE_SELECTED = 100;

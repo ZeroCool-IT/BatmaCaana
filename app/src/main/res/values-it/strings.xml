@@ -23,7 +23,7 @@
     <string name="dialog_title_warning">Attenzione!</string>
     <string name="do_not_negative">Non farlo!</string>
     <string name="drawer_default">Scegli la pagina da aprire all\'avvio…</string>
-    <string name="earth">Vedi itinerario</string>
+    <string name="earth">Scarica itinerario</string>
     <string name="earth_warning_message">Sembra che Google Earth non sia installato sul tuo dispositivo. Per vedere questo percorso hai bisogno di un\'applicazione in grado di aprire i file .kml.</string>
     <string name="earth_warning_negative">Annulla</string>
     <string name="earth_warning_neutral">Apri</string>
@@ -36,7 +36,7 @@
     <string name="favorite_added">&#160;aggiunto alla tua lista preferiti!</string>
     <string name="favorite_removed">&#160;rimosso dalla tua lista preferiti!</string>
     <string name="feature_na">Questa funzionalità non è disponibile!</string>
-    <string name="from">Dalle:&#160;</string>
+    <string name="from">Da:&#160;</string>
     <string name="general_settings">Preferenze generali</string>
     <string name="iv_card_imagery">Immagine della card</string>
     <string name="location_service_warning">I servizi di localizzazione sono richiesti per una maggiore accuratezza. Vuoi attivarli?</string>
@@ -78,7 +78,7 @@
     <string name="sure_positive">Sono sicuro!</string>
     <string name="tback">Premi di nuovo indietro per uscire</string>
     <string name="title_activity_settings">Preferenze</string>
-    <string name="to">Alle:&#160;</string>
+    <string name="to">A:&#160;</string>
     <string name="too_short">La chiave di ricerca è troppo corta!</string>
     <string name="url">Sito web</string>
     <string name="yes">Si</string>
