@@ -101,8 +101,10 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
 
     private void selectView(View v) {
         TextView title = (TextView) v.findViewById(R.id.listText);
-        title.setTextColor(context.getResources().getColor(R.color.primaryColor));
-        v.setBackgroundColor(context.getResources().getColor(R.color.selected_item));
+        /*title.setTextColor(context.getResources().getColor(R.color.primaryColor));
+        v.setBackgroundColor(context.getResources().getColor(R.color.selected_item));*/
+        title.setTextColor(context.getResources().getColor(R.color.primary_text_color));
+        v.setBackgroundColor(context.getResources().getColor(R.color.light_primary_color));
         previousSelected = v;
     }
 

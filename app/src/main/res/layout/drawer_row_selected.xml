@@ -7,7 +7,7 @@
     xmlns:ripple="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@color/selected_item"
+    android:background="@color/light_primary_color"
     app:ignore="Overdraw"
     app:rv_alpha="90"
     app:rv_color="@color/ripple_color"
@@ -37,7 +37,7 @@
         android:fontFamily="sans-serif-medium"
         android:padding="8dp"
         android:text="@string/dummy_text"
-        android:textColor="@color/primaryColor"
+        android:textColor="@color/primary_text_color"
         android:textSize="14sp" />
 
 </com.andexert.library.RippleView>
