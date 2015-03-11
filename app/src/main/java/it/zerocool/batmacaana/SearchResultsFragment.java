@@ -21,7 +21,6 @@ import android.view.ViewGroup;
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import it.zerocool.batmacaana.dialog.WarningDialog;
@@ -207,8 +206,8 @@ public class SearchResultsFragment extends Fragment {
             if (isCancelled())
                 return null;
             try {
-                InputStream is = RequestUtilities.requestInputStream(uri);
-                String json = RequestUtilities.inputStreamToString(is);
+//                InputStream is = RequestUtilities.requestInputStream(uri);
+                String json = RequestUtilities.requestJsonString(uri);
                 if (isCancelled())
                     return null;
                 res = ParsingUtilities.parseSearchResultsFromJSON(json);

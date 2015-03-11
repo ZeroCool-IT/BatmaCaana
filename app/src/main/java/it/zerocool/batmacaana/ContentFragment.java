@@ -22,7 +22,6 @@ import android.widget.ImageButton;
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -259,8 +258,8 @@ public class ContentFragment extends Fragment {
             if (isCancelled())
                 return null;
             try {
-                InputStream is = RequestUtilities.requestInputStream(uri);
-                String json = RequestUtilities.inputStreamToString(is);
+//                InputStream is = RequestUtilities.requestInputStream(uri);
+                String json = RequestUtilities.requestJsonString(uri);
                 if (isCancelled())
                     return null;
                 switch (type) {

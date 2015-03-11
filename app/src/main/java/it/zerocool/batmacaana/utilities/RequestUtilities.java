@@ -13,17 +13,13 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Aux class containing Http request utility
@@ -42,26 +38,28 @@ public class RequestUtilities {
     private RequestUtilities() {
     }
 
-    /**
-     * Calls HTTP GET method for retrieving InputStream from web
-     *
-     * @param uri is the URI to call
-     * @return the InputStream containing infos, null in case of connection
-     * error
-     * @throws IOException
-     * @throws ClientProtocolException
-     */
-    public static InputStream requestInputStream(String uri)
-            throws IOException {
-        InputStream is;
-        HttpClient httpclient = new DefaultHttpClient();
-        uri = uri.replaceAll(" ", "%20");
-        HttpGet httppost = new HttpGet(uri);
-        HttpResponse response = httpclient.execute(httppost);
-        HttpEntity entity = response.getEntity();
-        is = entity.getContent();
-        return is;
-    }
+// --Commented out by Inspection START (11/03/2015 15:55):
+//    /**
+//     * Calls HTTP GET method for retrieving InputStream from web
+//     *
+//     * @param uri is the URI to call
+//     * @return the InputStream containing infos, null in case of connection
+//     * error
+//     * @throws IOException
+//     * @throws ClientProtocolException
+//     */
+//    public static InputStream requestInputStream(String uri)
+//            throws IOException {
+//        InputStream is;
+//        HttpClient httpclient = new DefaultHttpClient();
+//        uri = uri.replaceAll(" ", "%20");
+//        HttpGet httppost = new HttpGet(uri);
+//        HttpResponse response = httpclient.execute(httppost);
+//        HttpEntity entity = response.getEntity();
+//        is = entity.getContent();
+//        return is;
+//    }
+// --Commented out by Inspection STOP (11/03/2015 15:55)
 
     /**
      * Obtains String from InputStream
@@ -69,7 +67,7 @@ public class RequestUtilities {
      * @param is is the InputStream to elaborate
      * @return InputStream data in String format
      */
-    public static String inputStreamToString(InputStream is) {
+    private static String inputStreamToString(InputStream is) {
         String result = null;
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
@@ -86,6 +84,19 @@ public class RequestUtilities {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static String requestJsonString(String uri) throws IOException {
+        URL url = new URL(uri);
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        String res;
+        try {
+            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+            res = inputStreamToString(in);
+        } finally {
+            urlConnection.disconnect();
+        }
+        return res;
     }
 
 // --Commented out by Inspection START (05/03/2015 16:37):

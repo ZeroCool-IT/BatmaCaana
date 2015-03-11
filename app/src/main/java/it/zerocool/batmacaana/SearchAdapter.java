@@ -21,7 +21,6 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 
@@ -201,8 +200,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             String uri = params[0];
             type = Integer.parseInt(params[1]);
             try {
-                InputStream is = RequestUtilities.requestInputStream(uri);
-                String json = RequestUtilities.inputStreamToString(is);
+//                InputStream is = RequestUtilities.requestInputStream(uri);
+                String json = RequestUtilities.requestJsonString(uri);
                 res = ParsingUtilities.parseSingleResult(json);
             } catch (IOException e) {
                 Log.e("ZCLOG", e.getMessage());

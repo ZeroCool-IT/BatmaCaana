@@ -19,7 +19,6 @@ import android.view.View;
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -203,8 +202,8 @@ public class DetailsActivity extends ActionBarActivity {
             String uri = params[0];
             type = Integer.parseInt(params[1]);
             try {
-                InputStream is = RequestUtilities.requestInputStream(uri);
-                String json = RequestUtilities.inputStreamToString(is);
+//                InputStream is = RequestUtilities.requestInputStream(uri);
+                String json = RequestUtilities.requestJsonString(uri);
                 res = ParsingUtilities.parseSingleResult(json);
             } catch (IOException e) {
                 Log.e("ZCLOG", e.getMessage());
