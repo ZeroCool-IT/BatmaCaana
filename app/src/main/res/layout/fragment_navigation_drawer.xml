@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:elevation="8dp"
+    android:elevation="16dp"
     tools:context="it.zerocool.batmacaana.NavigationDrawerFragment"
     tools:ignore="Overdraw">
 
