@@ -128,7 +128,7 @@ public class ContentFragment extends Fragment {
 //                refresh = Constant.SERVICES;
                 break;
             case Constant.CITY:
-                uri = Constant.URI_NEARBY;
+                uri = Constant.URI_CITY;
                 type = Constant.CITY;
 //                refresh = Constant.CITY;
                 break;
@@ -278,9 +278,9 @@ public class ContentFragment extends Fragment {
                         break;
                     case Constant.CITY:
                         res = ParsingUtilities.parseCitiesFromJSON(json);
-//                        temp = (ArrayList) res;
-//                        Collections.sort(temp, new PlaceComparator());
-//                        res = (List) temp;
+                        temp = (ArrayList) res;
+                        Collections.sort(temp, new PlaceComparator());
+                        res = (List) temp;
                         break;
                     case Constant.ROUTES:
                         res = ParsingUtilities.parseRoutesFromJSON(json);

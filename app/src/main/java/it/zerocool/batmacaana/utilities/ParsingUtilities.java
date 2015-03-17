@@ -499,41 +499,30 @@ public class ParsingUtilities {
         ArrayList<Cardable> result = new ArrayList<>();
         try {
             JSONObject reader = new JSONObject(json);
-            JSONArray data = reader.getJSONArray("Comune");
+            JSONArray data = reader.getJSONArray("Comuni");
             if (data != null) {
                 for (int i = 0; i < data.length(); i++) {
                     JSONObject toBuild = data.getJSONObject(i);
-                    int id = Integer.parseInt(toBuild.getString("CITY_ID"));
+                    int id = Integer.parseInt(toBuild.getString("COMUNE_ID"));
                     City c = new City(id);
-                    c.setUserID(toBuild.getInt("cf_user_id"));
                     c.setName(toBuild.getString("NAME"));
                     c.setDescription(toBuild.getString("DESCRIPTION"));
-                    c.setCap(toBuild.getString("CAP"));
-                    c.setProvince(toBuild.getString("PROVINCIA"));
-                    c.setRegion(toBuild.getString("REGIONE"));
-                    c.setInfo(toBuild.getString("INFO"));
-                    c.setAvatar(toBuild.getString("LOGO"));
-                    for (int j = 1; j <= 10; j++) {
-                        String im = toBuild.optString("IMAGE" + Integer.valueOf(j).toString());
-                        c.addPictureFromString(im);
-                    }
+                    c.setImage(toBuild.getString("IMAGE"));
                     ContactCard con = new ContactCard();
-                    con.setAddress(toBuild.getString("ADDRESS"));
                     con.setTelephone(toBuild.getString("TELEPHONENUMBER"));
                     con.setEmail(toBuild.getString("EMAIL"));
                     con.setUrl(toBuild.getString("URL"));
-                    con.setFbLink(toBuild.getString("FACEBOOK"));
-                    con.setYtLink(toBuild.getString("YOUTUBE"));
                     c.setContact(con);
                     Location l = new Location("");
                     String latitude = toBuild.getString("LATITUDE");
                     String longitude = toBuild.getString("LONGITUDE");
-                    if (latitude != null && !latitude.isEmpty() && longitude != null && !longitude.isEmpty()) {
-                        l.setLatitude(Location.convert(latitude));
-                        l.setLongitude(Location.convert(longitude));
-                        c.setLocation(l);
-                    }
+                    l.setLatitude(Location.convert(latitude));
+                    l.setLongitude(Location.convert(longitude));
+                    c.setLocation(l);
+                    c.setLink(toBuild.optString("LINK", ""));
                     c.setJson(toBuild.toString());
+                    c.setDistanceFromCurrentPosition(Float.parseFloat(toBuild.getString("DISTANZA")));
+                    //LocationUtilities.setPlaceDistance(c, currentLocation);
                     result.add(c);
                 }
             }
@@ -549,36 +538,23 @@ public class ParsingUtilities {
         try {
             toBuild = new JSONObject(json);
 
-            int id = Integer.parseInt(toBuild.getString("CITY_ID"));
+            int id = Integer.parseInt(toBuild.getString("COMUNE_ID"));
             City c = new City(id);
-            c.setUserID(toBuild.getInt("cf_user_id"));
             c.setName(toBuild.getString("NAME"));
             c.setDescription(toBuild.getString("DESCRIPTION"));
-            c.setCap(toBuild.getString("CAP"));
-            c.setProvince(toBuild.getString("PROVINCIA"));
-            c.setRegion(toBuild.getString("REGIONE"));
-            c.setInfo(toBuild.getString("INFO"));
-            c.setAvatar(toBuild.getString("LOGO"));
-            for (int j = 1; j <= 10; j++) {
-                String im = toBuild.optString("IMAGE" + Integer.valueOf(j).toString());
-                c.addPictureFromString(im);
-            }
+            c.setImage(toBuild.getString("IMAGE"));
             ContactCard con = new ContactCard();
-            con.setAddress(toBuild.getString("ADDRESS"));
             con.setTelephone(toBuild.getString("TELEPHONENUMBER"));
             con.setEmail(toBuild.getString("EMAIL"));
             con.setUrl(toBuild.getString("URL"));
-            con.setFbLink(toBuild.getString("FACEBOOK"));
-            con.setYtLink(toBuild.getString("YOUTUBE"));
             c.setContact(con);
             Location l = new Location("");
             String latitude = toBuild.getString("LATITUDE");
             String longitude = toBuild.getString("LONGITUDE");
-            if (latitude != null && !latitude.isEmpty() && longitude != null && !longitude.isEmpty()) {
-                l.setLatitude(Location.convert(latitude));
-                l.setLongitude(Location.convert(longitude));
-                c.setLocation(l);
-            }
+            l.setLatitude(Location.convert(latitude));
+            l.setLongitude(Location.convert(longitude));
+            c.setLocation(l);
+            c.setLink(toBuild.optString("LINK", ""));
             c.setJson(toBuild.toString());
             return c;
         } catch (JSONException e) {

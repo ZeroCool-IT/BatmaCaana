@@ -21,7 +21,6 @@ public class Constant {
 
     //USER ID
     public static final int USER_ID = 594;
-    public static final int NULL_UID = 593;
 
     //Empty value
     public static final String EMPTY_VALUE = "";
@@ -68,7 +67,7 @@ public class Constant {
     public static final String URI_EAT = "http://www.exploracity.it/app/json/mangiare.php?user=";
     public static final String URI_SLEEP = "http://www.exploracity.it/app/json/dormire.php?user=";
     public static final String URI_SERVICES = "http://www.exploracity.it/app/json/servizi.php?user=";
-    public static final String URI_NEARBY = "http://www.exploracity.it/app/json/vicini.php?user=";
+    public static final String URI_CITY = "http://www.exploracity.it/app/json/comuni.php?user=";
     public static final String URI_NEWS = "http://www.exploracity.it/app/json/news.php?user=";
     public static final String URI_EVENT = "http://www.exploracity.it/app/json/eventi.php?user=";
     public static final String URI_IMAGE_BIG = "http://www.exploracity.it/app/images/big/";
