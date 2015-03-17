@@ -26,6 +26,8 @@ public class ContactCard {
     private String gpLink;
     private String taLink;
     private String fsqrLink;
+    private String ytLink;
+    private String twttrLink;
 
     /**
      * Public constructor
@@ -175,7 +177,38 @@ public class ContactCard {
      * @return true if has at least one social network link, false otherwise
      */
     public boolean hasSocial() {
-        return getFbLink() != null || getFsqrLink() != null || getTaLink() != null || getGpLink() != null;
+        return getFbLink() != null || getFsqrLink() != null || getTaLink() != null || getGpLink() != null || getTwttrLink() != null && getYtLink() != null;
     }
 
+    /**
+     * @return the Youtube Channel link
+     */
+    public String getYtLink() {
+        return ytLink;
+    }
+
+    /**
+     * Set the Youtube Channel link
+     *
+     * @param ytLink is the link to set
+     */
+    public void setYtLink(String ytLink) {
+        this.ytLink = ytLink;
+    }
+
+    /**
+     * @return the Twitter Profile link
+     */
+    public String getTwttrLink() {
+        return twttrLink;
+    }
+
+    /**
+     * Set the Twitter Profile link
+     *
+     * @param twttrLink is the link to set
+     */
+    public void setTwttrLink(String twttrLink) {
+        this.twttrLink = twttrLink;
+    }
 }

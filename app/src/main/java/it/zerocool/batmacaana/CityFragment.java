@@ -16,7 +16,6 @@ import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.graphics.Palette;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -139,15 +138,11 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
         City p = ParsingUtilities.parseSingleCity(getArguments().getString(Constant.JSON_ARG));
         targetCity = p;
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(p.getName());
-        if (!p.getTags().isEmpty()) {
-            String tags = TextUtils.join(", ", p.getTags());
-            ((ActionBarActivity) getActivity()).getSupportActionBar().setSubtitle(tags);
-        }
 
         //Load imagery and change colors
         ivCity = (ImageView) layout.findViewById(R.id.imageView);
 
-        loadBitmap(Constant.URI_IMAGE_BIG + p.getImage());
+        loadBitmap(Constant.URI_IMAGE_BIG + p.getImagery());
 
         //Fill fields
         fillFields(p);
@@ -229,7 +224,7 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
 
     private void setBitmap(Bitmap bitmap) {
         Picasso.with(getActivity()).
-                load(Constant.URI_IMAGE_BIG + targetCity.getImage()).
+                load(Constant.URI_IMAGE_BIG + targetCity.getImagery()).
                 placeholder(R.drawable.im_placeholder).
                 error(R.drawable.im_noimage).
                 into(ivCity);
@@ -335,9 +330,9 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
                     Toast.makeText(getActivity(), R.string.no_map_app, Toast.LENGTH_SHORT).show();
             }
         } else if (v.getId() == R.id.imageView || v.getId() == R.id.fullscreenButton) {
-            if (targetCity.getImage() != null) {
+            if (targetCity.getImagery() != null) {
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
-                intent.putExtra(Constant.IMAGE, targetCity.getImage());
+                intent.putExtra(Constant.IMAGE, targetCity.getImagery());
                 intent.putExtra(Constant.LANDSCAPE_ORIENTATION, true);
                 if (palette != null) {
                     String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(R.color.primaryColor)));
