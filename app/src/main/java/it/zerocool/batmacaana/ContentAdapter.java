@@ -132,8 +132,8 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
 
 //                    Toast.makeText(context, "Touched card " + (contentItems.get(getPosition())).getHeader(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, DetailsActivity.class);
-                    int type = contentItems.get(getPosition()).getType();
-                    intent.putExtra(Constant.JSON_ARG, contentItems.get(getPosition()).getJson());
+                    int type = contentItems.get(getAdapterPosition()).getType();
+                    intent.putExtra(Constant.JSON_ARG, contentItems.get(getAdapterPosition()).getJson());
                     intent.putExtra(Constant.TYPE_ARG, type);
                     context.startActivity(intent);
 
