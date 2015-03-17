@@ -81,6 +81,7 @@ public class Constant {
     public static final String SHARE_URI = "http://exploracity.it/item/";
     public static final String URI_ROUTES = "http://www.exploracity.it/app/json/percorsi.php?user=";
     public static final String URI_KML = "http://www.exploracity.it/app/kml/";
+    public static final String URI_CITY = "http://www.exploracity.it/app/json/comune.php?user=";
 
 
     //Week Days

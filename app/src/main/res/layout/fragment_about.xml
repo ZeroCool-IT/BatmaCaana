@@ -11,6 +11,7 @@
     tools:context="it.zerocool.batmacaana.AboutFragment">
 
     <com.nirhart.parallaxscroll.views.ParallaxScrollView
+        android:id="@+id/general_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
@@ -364,5 +365,14 @@
 
 
     </com.nirhart.parallaxscroll.views.ParallaxScrollView>
+
+    <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
+        android:id="@+id/progressBar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@color/primaryColor"
+        android:visibility="gone" />
 
 </RelativeLayout>
