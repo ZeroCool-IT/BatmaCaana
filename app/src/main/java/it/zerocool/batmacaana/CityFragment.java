@@ -119,7 +119,7 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) layout.findViewById(R.id.floatingButton);
 
-        phoneLayout = (LinearLayout) layout.findViewById(R.id.level_layout);
+        phoneLayout = (LinearLayout) layout.findViewById(R.id.phone_layout);
         mailLayout = (LinearLayout) layout.findViewById(R.id.mail_layout);
         linkLayout = (LinearLayout) layout.findViewById(R.id.link_layout);
         descriptionLayout = (LinearLayout) layout.findViewById(R.id.description_layout);
