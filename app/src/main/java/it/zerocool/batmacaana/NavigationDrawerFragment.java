@@ -160,6 +160,9 @@ public class NavigationDrawerFragment extends Fragment {
             mDrawerLayout.closeDrawers();
         } else {
             AboutFragment fragment = new AboutFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt(Constant.FRAG_SECTION_ID, position);
+            fragment.setArguments(bundle);
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, fragment)

@@ -4,6 +4,8 @@
 
 
 
+
+
 apply plugin: 'com.android.application'
 
 android {
@@ -14,8 +16,8 @@ android {
         applicationId "it.zerocool.batmacaana"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 42
-        versionName "0.42a"
+        versionCode 43
+        versionName "0.43a"
     }
     buildTypes {
         release {

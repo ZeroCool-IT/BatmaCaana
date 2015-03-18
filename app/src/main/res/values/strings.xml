@@ -75,7 +75,7 @@
 
 
     <string-array name="drawer_list">
-        <item>@string/city_name</item>
+        <item>About</item>
         <item>To See</item>
         <item>Event</item>
         <item>Eat</item>

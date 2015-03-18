@@ -96,33 +96,32 @@ public class FullscreenActivity extends Activity {
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-        boolean fromGallery = intent.getBooleanExtra(Constant.FROM_GALLERY, false);
         ImageView fullScreenIv = (ImageView) findViewById(R.id.fullscreen_content);
         FrameLayout layout = (FrameLayout) findViewById(R.id.fullscreen_layout);
 
-        if (fromGallery) {
+        /*if (fromGallery) {
             layout.setBackgroundColor(getResources().getColor(R.color.light_primary_color));
             int image = Constant.GALLERY_IMAGE[intent.getIntExtra(Constant.IMAGE, 0)];
             Picasso.with(this)
                     .load(image)
                     .error(R.drawable.im_noimage)
                     .into(fullScreenIv);
-        } else {
-            String hexColor = intent.getStringExtra("COLOR");
-            int bg;
-            if (hexColor != null)
-                bg = Color.parseColor(hexColor);
-            else
-                bg = R.color.primaryColor;
+        } else {*/
+        String hexColor = intent.getStringExtra("COLOR");
+        int bg;
+        if (hexColor != null)
+            bg = Color.parseColor(hexColor);
+        else
+            bg = R.color.primaryColor;
 
 
-            layout.setBackgroundColor(bg);
-            Picasso.with(this)
-                    .load(Constant.URI_IMAGE_BIG +
-                            intent.getStringExtra(Constant.IMAGE))
-                    .error(R.drawable.im_noimage)
-                    .into(fullScreenIv);
-        }
+        layout.setBackgroundColor(bg);
+        Picasso.with(this)
+                .load(Constant.URI_IMAGE_BIG +
+                        intent.getStringExtra(Constant.IMAGE))
+                .error(R.drawable.im_noimage)
+                .into(fullScreenIv);
+//        }
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
 

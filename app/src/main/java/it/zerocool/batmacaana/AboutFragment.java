@@ -11,31 +11,28 @@ import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ViewSwitcher;
 
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.nirhart.parallaxscroll.views.ParallaxScrollView;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
 
 import it.zerocool.batmacaana.dialog.WarningDialog;
+import it.zerocool.batmacaana.model.Cardable;
 import it.zerocool.batmacaana.model.City;
 import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
@@ -52,9 +49,9 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
     private static final String DESCRIPTION_TTS = "description";
     private ProgressBarCircularIndeterminate progressBarCircularIndeterminate;
     private ParallaxScrollView parallaxScrollView;
-    private ImageSwitcher mainPicture;
+    private ImageView mainPicture;
     private int current;
-    private ArrayList<Integer> imageItems;
+    private ArrayList<String> imageItems;
     private TextToSpeech ttsService;
     private ImageView playTTSButton;
     private City targetCity;
@@ -63,6 +60,13 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
     private TextView phoneTv;
     private TextView mailTv;
     private TextView websiteTv;
+    private LinearLayout phoneLayout;
+    private LinearLayout mailLayout;
+    private LinearLayout linkLayout;
+    private LinearLayout descriptionLayout;
+    private LinearLayout infoLayout;
+    private ImageButton refreshButton;
+    private RetrieveCityInfo task;
 
 
     public AboutFragment() {
@@ -79,6 +83,9 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
         if (ttsService.isSpeaking()) {
             ttsService.stop();
         }
+        if (task != null) {
+            task.cancel(true);
+        }
         super.onStop();
     }
 
@@ -89,6 +96,9 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
     @Override
     public void onDestroy() {
         ttsService.shutdown();
+        if (task != null) {
+            task.cancel(true);
+        }
         super.onDestroy();
     }
 
@@ -102,12 +112,12 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
         //Bind widget
         parallaxScrollView = (ParallaxScrollView) layout.findViewById(R.id.general_scrollview);
         progressBarCircularIndeterminate = (ProgressBarCircularIndeterminate) layout.findViewById(R.id.progressBar);
-        mainPicture = (ImageSwitcher) layout.findViewById(R.id.main_image);
+        mainPicture = (ImageView) layout.findViewById(R.id.main_image);
         descriptionText = (ExpandableTextView) layout.findViewById(R.id.description_tv);
         infoText = (ExpandableTextView) layout.findViewById(R.id.info_tv);
         phoneTv = (TextView) layout.findViewById(R.id.phone_tv);
         mailTv = (TextView) layout.findViewById(R.id.mail_tv);
-        websiteTv = (TextView) layout.findViewById(R.id.web_tv);
+        websiteTv = (TextView) layout.findViewById(R.id.link_tv);
         ImageButton leftButton = (ImageButton) layout.findViewById(R.id.left_button);
         ImageButton rightButton = (ImageButton) layout.findViewById(R.id.right_button);
         Button mailButton = (Button) layout.findViewById(R.id.mailButton);
@@ -115,7 +125,13 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
         Button urlButton = (Button) layout.findViewById(R.id.urlButton);
         Button mapButton = (Button) layout.findViewById(R.id.mapButton);
         ImageButton fullScreen = (ImageButton) layout.findViewById(R.id.fullscreenButton);
+        refreshButton = (ImageButton) layout.findViewById(R.id.bt_refresh);
         playTTSButton = (ImageView) layout.findViewById(R.id.tts_icon);
+        phoneLayout = (LinearLayout) layout.findViewById(R.id.phone_layout);
+        mailLayout = (LinearLayout) layout.findViewById(R.id.mail_layout);
+        linkLayout = (LinearLayout) layout.findViewById(R.id.link_layout);
+        descriptionLayout = (LinearLayout) layout.findViewById(R.id.description_layout);
+        infoLayout = (LinearLayout) layout.findViewById(R.id.info_layout);
 
 
 //        //Set fixed text
@@ -124,9 +140,9 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
 
 
         //Gallery image and iterator
-        imageItems = new ArrayList<>();
-        imageItems.addAll(Arrays.asList(Constant.GALLERY_IMAGE));
-        mainPicture.setFactory(new ViewSwitcher.ViewFactory() {
+//        imageItems = new ArrayList<>();
+//        imageItems.addAll(Arrays.asList(Constant.GALLERY_IMAGE));
+/*        mainPicture.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {
                 ImageView imageView = new ImageView(getActivity());
@@ -138,9 +154,9 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
                 imageView.setLayoutParams(params);
                 return imageView;
             }
-        });
-        current = 0;
-        mainPicture.setImageResource(imageItems.get(current));
+        });*/
+//        current = 0;
+//        mainPicture.setImageResource(imageItems.get(current));
         //Listener
         leftButton.setOnClickListener(this);
         rightButton.setOnClickListener(this);
@@ -151,8 +167,10 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
         mainPicture.setOnClickListener(this);
         mapButton.setOnClickListener(this);
         playTTSButton.setOnClickListener(this);
+        refreshButton.setOnClickListener(this);
 
         ttsService = new TextToSpeech(getActivity(), this);
+        retrieveCity();
 
         return layout;
     }
@@ -161,30 +179,63 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
         //TODO SharedPreferences UID
         String uri = Constant.URI_CITY +
                 Constant.USER_ID;
-        RetrieveCityInfo task = new RetrieveCityInfo();
-        task.execute(uri);
+        if (RequestUtilities.isOnline(getActivity())) {
+            task = new RetrieveCityInfo();
+            task.execute(uri);
+        } else {
+            String message = getResources().getString(
+                    R.string.dialog_message_no_connection);
+            String title = getResources().getString(
+                    R.string.dialog_title_warning);
+
+            WarningDialog dialog = new WarningDialog();
+            Bundle arguments = new Bundle();
+            arguments.putString(WarningDialog.TITLE, title);
+            arguments.putString(WarningDialog.MESSAGE, message);
+            dialog.setArguments(arguments);
+            dialog.show(getFragmentManager(), "No Connection warning");
+            parallaxScrollView.setVisibility(View.GONE);
+            refreshButton.setVisibility(View.VISIBLE);
+            Log.i("TASK ERROR", "No connection");
+        }
     }
 
     private void fillFields(City city) {
         targetCity = city;
+        imageItems = targetCity.getPictures();
+        Picasso.with(getActivity())
+                .load(Constant.URI_IMAGE_BIG + imageItems.get(0))
+                .placeholder(R.drawable.im_placeholder)
+                .into(mainPicture);
+        current = 0;
         if (targetCity.getName() != null) {
             getActivity().setTitle(targetCity.getName());
         }
         if (targetCity.getDescription() != null) {
             descriptionText.setText(targetCity.getDescription());
         } else {
-            descriptionText.setVisibility(View.GONE);
+            descriptionLayout.setVisibility(View.GONE);
         }
         if (targetCity.getInfo() != null) {
             infoText.setText(targetCity.getInfo());
         } else {
-            descriptionText.setVisibility(View.GONE);
+            infoLayout.setVisibility(View.GONE);
         }
         if (targetCity.getContact().getTelephone() != null) {
             phoneTv.setText(targetCity.getContact().getTelephone());
+        } else {
+            phoneLayout.setVisibility(View.GONE);
         }
-        //TODO Bind sections layout
-
+        if (targetCity.getContact().getEmail() != null) {
+            mailTv.setText(targetCity.getContact().getEmail());
+        } else {
+            mailLayout.setVisibility(View.GONE);
+        }
+        if (targetCity.getContact().getUrl() != null) {
+            websiteTv.setText(targetCity.getContact().getUrl());
+        } else {
+            linkLayout.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -261,18 +312,18 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
                 break;
             case R.id.fullscreenButton:
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
-                intent.putExtra(Constant.FROM_GALLERY, true);
+//                intent.putExtra(Constant.FROM_GALLERY, true);
                 intent.putExtra(Constant.LANDSCAPE_ORIENTATION, true);
-                intent.putExtra(Constant.IMAGE, current);
+                intent.putExtra(Constant.IMAGE, imageItems.get(current));
 //                String hexColor = String.format("#%06X", (0xFFFFFF & R.color.light_primary_color));
 //                intent.putExtra("COLOR", hexColor);
                 startActivity(intent);
                 break;
             case R.id.main_image:
                 intent = new Intent(getActivity(), FullscreenActivity.class);
-                intent.putExtra(Constant.FROM_GALLERY, true);
+//                intent.putExtra(Constant.FROM_GALLERY, true);
                 intent.putExtra(Constant.LANDSCAPE_ORIENTATION, true);
-                intent.putExtra(Constant.IMAGE, current);
+                intent.putExtra(Constant.IMAGE, imageItems.get(current));
 //                hexColor = String.format("#%06X", (0xFFFFFF & R.color.light_primary_color));
 //                intent.putExtra("COLOR", hexColor);
                 startActivity(intent);
@@ -302,6 +353,9 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
                         ttsService.stop();
                     }
                 }
+                break;
+            case R.id.bt_refresh:
+                retrieveCity();
 
             default:
                 break;
@@ -311,28 +365,19 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
 
     private void next() {
         if (current < imageItems.size() - 1) {
-            Animation in = AnimationUtils.loadAnimation(getActivity(),
-                    android.R.anim.fade_in);
-            Animation out = AnimationUtils.loadAnimation(getActivity(),
-                    android.R.anim.fade_out);
-            mainPicture.setInAnimation(in);
-            mainPicture.setOutAnimation(out);
-            mainPicture.setImageResource(imageItems.get(++current));
-
+            Picasso.with(getActivity())
+                    .load(Constant.URI_IMAGE_BIG + imageItems.get(++current))
+                    .placeholder(R.drawable.im_placeholder)
+                    .into(mainPicture);
         }
     }
 
     private void previous() {
         if (current > 0) {
-            Animation in = AnimationUtils.loadAnimation(getActivity(),
-                    android.R.anim.fade_out);
-            Animation out = AnimationUtils.loadAnimation(getActivity(),
-                    android.R.anim.fade_in);
-            mainPicture.setInAnimation(out);
-            mainPicture.setOutAnimation(in);
-
-            mainPicture.setImageResource(imageItems.get(--current));
-
+            Picasso.with(getActivity())
+                    .load(Constant.URI_IMAGE_BIG + imageItems.get(--current))
+                    .placeholder(R.drawable.im_placeholder)
+                    .into(mainPicture);
         }
     }
 
@@ -349,6 +394,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
         protected void onPreExecute() {
             progressBarCircularIndeterminate.setVisibility(View.VISIBLE);
             parallaxScrollView.setVisibility(View.GONE);
+            refreshButton.setVisibility(View.GONE);
         }
 
         /**
@@ -368,10 +414,14 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
         @Override
         protected City doInBackground(String... params) {
             String uri = params[0];
+            if (isCancelled())
+                return null;
             try {
                 String json = RequestUtilities.requestJsonString(uri);
-                City res = ParsingUtilities.parseSingleCity(json);
-                return res;
+                ArrayList<Cardable> list = ParsingUtilities.parseCitiesFromJSON(json);
+                if (isCancelled())
+                    return null;
+                return (City) list.get(0);
             } catch (IOException e) {
                 Log.e("ZCLOG TASK ERROR", e.getMessage());
                 return null;
@@ -397,10 +447,10 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
             if (city != null) {
                 fillFields(city);
             } else {
-                Bundle args = new Bundle();
-                args.putInt(Constant.FALLBACK_REFRESH_ARG, getArguments().getInt(Constant.FRAG_SECTION_ID));
-                ContentFallbackFragment f = new ContentFallbackFragment();
-                FragmentManager fm = getFragmentManager();
+                /*Bundle args = new Bundle();
+                args.putInt(Constant.FALLBACK_REFRESH_ARG, getArguments().getInt(Constant.FRAG_SECTION_ID));*/
+                /*ContentFallbackFragment f = new ContentFallbackFragment();
+                FragmentManager fm = getFragmentManager();*/
                 String title = getResources().getString(R.string.dialog_title_uhoh);
                 String message = getResources().getString(R.string.dialog_message_error);
                 WarningDialog dialog = new WarningDialog();
@@ -409,13 +459,34 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
                 arguments.putString(WarningDialog.MESSAGE, message);
                 dialog.setArguments(arguments);
                 dialog.show(getFragmentManager(), "Error retrieving data");
-                args.putInt(Constant.FALLBACK_TYPE_ARG, Constant.CONNECTION_ERROR);
+                parallaxScrollView.setVisibility(View.GONE);
+                refreshButton.setVisibility(View.VISIBLE);
+                /*args.putInt(Constant.FALLBACK_TYPE_ARG, Constant.CONNECTION_ERROR);
                 f.setArguments(args);
                 fm.beginTransaction()
                         .replace(R.id.content_frame, f)
-                        .commit();
+                        .commit();*/
                 Log.e("ZCLOG TASK ERROR", "Failed to get results");
             }
+        }
+
+        /**
+         * <p>Applications should preferably override {@link #onCancelled(Object)}.
+         * This method is invoked by the default implementation of
+         * {@link #onCancelled(Object)}.</p>
+         * <p/>
+         * <p>Runs on the UI thread after {@link #cancel(boolean)} is invoked and
+         * {@link #doInBackground(Object[])} has finished.</p>
+         *
+         * @see #onCancelled(Object)
+         * @see #cancel(boolean)
+         * @see #isCancelled()
+         */
+        @Override
+        protected void onCancelled() {
+            progressBarCircularIndeterminate.setVisibility(View.GONE);
+            parallaxScrollView.setVisibility(View.GONE);
+            refreshButton.setVisibility(View.VISIBLE);
         }
     }
 

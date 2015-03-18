@@ -135,7 +135,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Place current = favoriteItems.get(getPosition());
+                    Place current = favoriteItems.get(getAdapterPosition());
                     Intent intent = new Intent(context, DetailsActivity.class);
                     intent.putExtra(Constant.JSON_ARG, current.getJson());
                     intent.putExtra(Constant.TYPE_ARG, current.getType());

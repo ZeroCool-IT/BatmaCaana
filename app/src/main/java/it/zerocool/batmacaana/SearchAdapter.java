@@ -156,7 +156,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SearchResult current = searchItems.get(getPosition());
+                    SearchResult current = searchItems.get(getAdapterPosition());
                     int id = current.getId();
                     int type = current.getType();
                     String uri = Constant.OBJECT_SEARCH1 +

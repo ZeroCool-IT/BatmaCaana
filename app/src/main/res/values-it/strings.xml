@@ -84,7 +84,7 @@
     <string name="yes">Si</string>
 
     <string-array name="drawer_list">
-        <item>@string/city_name</item>
+        <item>Informazioni</item>
         <item>Da vedere</item>
         <item>Eventi</item>
         <item>Mangiare</item>

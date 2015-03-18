@@ -25,7 +25,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/iv_card_imagery"
             android:scaleType="centerCrop"
-            android:src="@drawable/im_gallery_01" />
+            android:src="@drawable/im_placeholder" />
 
         <RelativeLayout
             android:id="@+id/text_layout"

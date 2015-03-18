@@ -623,11 +623,11 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
                         targetPlace.setFavorite(fave);
                         if (fave) {
                             favoriteButton
-                                    .setCompoundDrawablesWithIntrinsicBounds(null, getResources()
+                                    .setCompoundDrawablesWithIntrinsicBounds(null, getActivity()
                                             .getDrawable(R.drawable.ic_favorite_grey600_36dp), null, null);
                         } else {
                             favoriteButton
-                                    .setCompoundDrawablesWithIntrinsicBounds(null, getResources()
+                                    .setCompoundDrawablesWithIntrinsicBounds(null, getActivity()
                                             .getDrawable(R.drawable.ic_favorite_outline_grey600_36dp), null, null);
                         }
                     default:

@@ -139,8 +139,8 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
 
         @Override
         public void onClick(View v) {
-            int position = getPosition();
-            selectItem(getPosition());
+            int position = getAdapterPosition();
+            selectItem(position);
             if (position != Constant.SETTINGS && position != Constant.UPDATE && position != Constant.SUBHEADER && position != Constant.OFFLINE && position != Constant.CREDITS) {
                 unselectView(previousSelected);
                 selectView(v);
@@ -153,6 +153,9 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
             switch (position) {
                 case Constant.ABOUT:
                     AboutFragment fragment = new AboutFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(Constant.FRAG_SECTION_ID, position);
+                    fragment.setArguments(bundle);
                     fragmentManager.beginTransaction()
                             .replace(R.id.content_frame, fragment)
                             .commit();
@@ -181,9 +184,9 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                     break;
                 default:
                     ContentFragment f = new ContentFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt(Constant.FRAG_SECTION_ID, position);
-                    f.setArguments(bundle);
+                    Bundle args = new Bundle();
+                    args.putInt(Constant.FRAG_SECTION_ID, position);
+                    f.setArguments(args);
                     fragmentManager.beginTransaction()
                             .replace(R.id.content_frame, f)
                             .commit();
