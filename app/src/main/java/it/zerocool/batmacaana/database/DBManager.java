@@ -23,7 +23,7 @@ public class DBManager {
     public static final int REMOVE = 1;
     public static final int CHECK = 2;
     //DB utility variable
-    static final String DB_NAME = "FavoriteDB";
+    static final String DB_NAME = "ExploraDB";
     static final int DB_VERSION = 1;
     //Tables and columns
     private static final String TABLE_FAVORITE = "Favorite";
