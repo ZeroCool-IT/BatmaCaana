@@ -5,6 +5,7 @@
 package it.zerocool.batmacaana;
 
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -133,30 +134,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
         descriptionLayout = (LinearLayout) layout.findViewById(R.id.description_layout);
         infoLayout = (LinearLayout) layout.findViewById(R.id.info_layout);
 
-
-//        //Set fixed text
-//        descriptionText.setText(getString(R.string.about));
-//        infoText.setText(getString(R.string.info));
-
-
-        //Gallery image and iterator
-//        imageItems = new ArrayList<>();
-//        imageItems.addAll(Arrays.asList(Constant.GALLERY_IMAGE));
-/*        mainPicture.setFactory(new ViewSwitcher.ViewFactory() {
-            @Override
-            public View makeView() {
-                ImageView imageView = new ImageView(getActivity());
-//                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                imageView.setAdjustViewBounds(true);
-                ImageSwitcher.LayoutParams params = new ImageSwitcher.LayoutParams(
-                        ImageSwitcher.LayoutParams.MATCH_PARENT, ImageSwitcher.LayoutParams.WRAP_CONTENT);
-
-                imageView.setLayoutParams(params);
-                return imageView;
-            }
-        });*/
-//        current = 0;
-//        mainPicture.setImageResource(imageItems.get(current));
         //Listener
         leftButton.setOnClickListener(this);
         rightButton.setOnClickListener(this);
@@ -271,7 +248,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
                 next();
                 break;
             case R.id.urlButton:
-                String url = getString(R.string.city_website);
+                String url = targetCity.getContact().getUrl();
                 if (url != null) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(url));
@@ -282,7 +259,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
                 }
                 break;
             case R.id.phoneButton:
-                String phone = getString(R.string.phone_number);
+                String phone = targetCity.getContact().getTelephone();
                 if (phone != null) {
                     Intent intent = new Intent(Intent.ACTION_DIAL);
                     String uri = "tel: " + phone.trim();
@@ -296,7 +273,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
                     Toast.makeText(getActivity(), R.string.no_phone_available, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.mailButton:
-                String mail = getString(R.string.info_mail);
+                String mail = targetCity.getContact().getEmail();
                 if (mail != null) {
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setData(Uri.parse("mailto:")); // only email apps should handle this
@@ -329,7 +306,10 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
                 startActivity(intent);
                 break;
             case R.id.mapButton:
-                String uri = "geo:0,0?q=41.604451, 13.085299?z=1";
+                Location l = targetCity.getLocation();
+                String lat = Double.valueOf(l.getLatitude()).toString();
+                String lon = Double.valueOf(l.getLongitude()).toString();
+                String uri = "geo:0,0?q=" + lat + ", " + lon + "?z=1";
                 intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(uri));
                 if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
@@ -340,7 +320,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
             case R.id.tts_icon:
                 if (ttsService != null) {
                     if (!ttsService.isSpeaking()) {
-                        String description = getString(R.string.about);
+                        String description = targetCity.getDescription();
                         if (description != null && !description.isEmpty()) {
                             if (Build.VERSION.SDK_INT >= 21) {
                                 ttsService.speak(description, TextToSpeech.QUEUE_FLUSH, null, DESCRIPTION_TTS);
@@ -356,7 +336,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
                 break;
             case R.id.bt_refresh:
                 retrieveCity();
-
+                break;
             default:
                 break;
         }
@@ -447,10 +427,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
             if (city != null) {
                 fillFields(city);
             } else {
-                /*Bundle args = new Bundle();
-                args.putInt(Constant.FALLBACK_REFRESH_ARG, getArguments().getInt(Constant.FRAG_SECTION_ID));*/
-                /*ContentFallbackFragment f = new ContentFallbackFragment();
-                FragmentManager fm = getFragmentManager();*/
                 String title = getResources().getString(R.string.dialog_title_uhoh);
                 String message = getResources().getString(R.string.dialog_message_error);
                 WarningDialog dialog = new WarningDialog();
@@ -461,11 +437,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
                 dialog.show(getFragmentManager(), "Error retrieving data");
                 parallaxScrollView.setVisibility(View.GONE);
                 refreshButton.setVisibility(View.VISIBLE);
-                /*args.putInt(Constant.FALLBACK_TYPE_ARG, Constant.CONNECTION_ERROR);
-                f.setArguments(args);
-                fm.beginTransaction()
-                        .replace(R.id.content_frame, f)
-                        .commit();*/
                 Log.e("ZCLOG TASK ERROR", "Failed to get results");
             }
         }
@@ -489,8 +460,4 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
             refreshButton.setVisibility(View.VISIBLE);
         }
     }
-
-
-
-
 }
