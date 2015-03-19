@@ -73,7 +73,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener, Tex
     private ImageView playTTSButton;
 
 
-//    private FavoriteDBHelper openHelper;
+//    private DBHelper openHelper;
 //    private SQLiteDatabase db;
 
 

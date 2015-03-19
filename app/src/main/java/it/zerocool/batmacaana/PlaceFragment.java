@@ -41,8 +41,8 @@ import com.squareup.picasso.Target;
 
 import java.util.Locale;
 
-import it.zerocool.batmacaana.database.FavoriteDBHelper;
-import it.zerocool.batmacaana.database.FavoriteDBMngr;
+import it.zerocool.batmacaana.database.DBHelper;
+import it.zerocool.batmacaana.database.DBManager;
 import it.zerocool.batmacaana.dialog.WarningDialog;
 import it.zerocool.batmacaana.listener.PlacePaletteListener;
 import it.zerocool.batmacaana.model.Place;
@@ -90,7 +90,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
     private ImageView playTTSButton;
 
 
-//    private FavoriteDBHelper openHelper;
+//    private DBHelper openHelper;
 //    private SQLiteDatabase db;
 
 
@@ -194,7 +194,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
 
         //Check if is favorite
         FavoriteDBEditorTask task = new FavoriteDBEditorTask();
-        task.execute(FavoriteDBMngr.CHECK);
+        task.execute(DBManager.CHECK);
 
 
         //Load imagery and change colors
@@ -492,12 +492,12 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
         } else if (v.getId() == R.id.favoriteButton) {
             FavoriteDBEditorTask task = new FavoriteDBEditorTask();
             if (targetPlace.isFavorite()) {
-                task.execute(FavoriteDBMngr.REMOVE);
+                task.execute(DBManager.REMOVE);
                 favoriteButton.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.ic_favorite_outline_grey600_36dp), null, null);
                 targetPlace.setFavorite(false);
                 buttonLayout.invalidate();
             } else {
-                task.execute(FavoriteDBMngr.ADD);
+                task.execute(DBManager.ADD);
                 favoriteButton.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.ic_favorite_grey600_36dp), null, null);
                 targetPlace.setFavorite(true);
                 buttonLayout.invalidate();
@@ -561,7 +561,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
 
         private int op;
         private SQLiteDatabase db;
-        private FavoriteDBHelper openHelper;
+        private DBHelper openHelper;
         private boolean fave;
 
         /**
@@ -581,16 +581,16 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
         @Override
         protected Boolean doInBackground(Integer... params) {
             op = params[0];
-            openHelper = FavoriteDBHelper.getInstance(getActivity());
+            openHelper = DBHelper.getInstance(getActivity());
             db = openHelper.getWritabelDB();
             switch (op) {
-                case FavoriteDBMngr.ADD:
-                    return FavoriteDBMngr.favoritePlace(db, targetPlace);
-                case FavoriteDBMngr.REMOVE:
-                    FavoriteDBMngr.unfavoritePlace(db, targetPlace);
+                case DBManager.ADD:
+                    return DBManager.favoritePlace(db, targetPlace);
+                case DBManager.REMOVE:
+                    DBManager.unfavoritePlace(db, targetPlace);
                     return true;
-                case FavoriteDBMngr.CHECK:
-                    fave = FavoriteDBMngr.isFavorite(db, targetPlace);
+                case DBManager.CHECK:
+                    fave = DBManager.isFavorite(db, targetPlace);
                     return true;
                 default:
                     return false;
@@ -612,15 +612,15 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
         protected void onPostExecute(Boolean done) {
             if (done) {
                 switch (op) {
-                    case FavoriteDBMngr.ADD:
+                    case DBManager.ADD:
                         String added = getString(R.string.favorite_added);
                         Toast.makeText(getActivity(), targetPlace.getName() + added, Toast.LENGTH_SHORT).show();
                         break;
-                    case FavoriteDBMngr.REMOVE:
+                    case DBManager.REMOVE:
                         String removed = getString(R.string.favorite_removed);
                         Toast.makeText(getActivity(), targetPlace.getName() + removed, Toast.LENGTH_SHORT).show();
                         break;
-                    case FavoriteDBMngr.CHECK:
+                    case DBManager.CHECK:
                         targetPlace.setFavorite(fave);
                         if (fave) {
                             Drawable favorite = ContextCompat.getDrawable(getActivity(), R.drawable.ic_favorite_grey600_36dp);

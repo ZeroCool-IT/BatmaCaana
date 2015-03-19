@@ -12,8 +12,8 @@ import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.util.Log;
 
-import it.zerocool.batmacaana.database.FavoriteDBHelper;
-import it.zerocool.batmacaana.database.FavoriteDBMngr;
+import it.zerocool.batmacaana.database.DBHelper;
+import it.zerocool.batmacaana.database.DBManager;
 import it.zerocool.batmacaana.utilities.ApplicationContextProvider;
 
 /**
@@ -61,9 +61,9 @@ class EraseFavoriteDialogPreference extends DialogPreference {
          */
         @Override
         protected Void doInBackground(Void... params) {
-            FavoriteDBHelper helper = FavoriteDBHelper.getInstance(ApplicationContextProvider.getContext());
+            DBHelper helper = DBHelper.getInstance(ApplicationContextProvider.getContext());
             SQLiteDatabase db = helper.getWritabelDB();
-            FavoriteDBMngr.clearFavorite(db);
+            DBManager.clearFavorite(db);
             Log.i("ZCLOG", "Favorite cleared");
             return null;
         }

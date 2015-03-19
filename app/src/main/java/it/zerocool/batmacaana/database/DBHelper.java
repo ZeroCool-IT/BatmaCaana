@@ -22,9 +22,9 @@ import it.zerocool.batmacaana.R;
  *
  * @author Marco Battisti
  */
-public class FavoriteDBHelper extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper {
 
-    private static FavoriteDBHelper singleton;
+    private static DBHelper singleton;
     private static SQLiteDatabase writabelDB;
     private final Context context;
 
@@ -34,20 +34,20 @@ public class FavoriteDBHelper extends SQLiteOpenHelper {
      *
      * @param context is the applcation context
      */
-    private FavoriteDBHelper(Context context) {
-        super(context, FavoriteDBMngr.DB_NAME, null, FavoriteDBMngr.DB_VERSION);
+    private DBHelper(Context context) {
+        super(context, DBManager.DB_NAME, null, DBManager.DB_VERSION);
         this.context = context;
     }
 
     /**
-     * Returns an instance of FavoriteDBHelper, to be shared between activities
+     * Returns an instance of DBHelper, to be shared between activities
      *
      * @param context is the applcation context
      * @return an instance of database
      */
-    public static FavoriteDBHelper getInstance(Context context) {
+    public static DBHelper getInstance(Context context) {
         if (singleton == null) {
-            singleton = new FavoriteDBHelper(context);
+            singleton = new DBHelper(context);
         }
         return singleton;
     }
@@ -61,7 +61,7 @@ public class FavoriteDBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {
-            InputStream inputStream = context.getResources().openRawResource(R.raw.build_favorite_db);
+            InputStream inputStream = context.getResources().openRawResource(R.raw.build_db);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "ISO-8859-1"));
             db.beginTransaction();
             String data = bufferedReader.readLine();

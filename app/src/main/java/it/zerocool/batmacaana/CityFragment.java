@@ -66,7 +66,7 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
     private TextToSpeech ttsService;
     private ImageView playTTSButton;
 
-//    private FavoriteDBHelper openHelper;
+//    private DBHelper openHelper;
 //    private SQLiteDatabase db;
 
 

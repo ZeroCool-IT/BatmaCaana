@@ -22,8 +22,8 @@ import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 
 import java.util.List;
 
-import it.zerocool.batmacaana.database.FavoriteDBHelper;
-import it.zerocool.batmacaana.database.FavoriteDBMngr;
+import it.zerocool.batmacaana.database.DBHelper;
+import it.zerocool.batmacaana.database.DBManager;
 import it.zerocool.batmacaana.dialog.WarningDialog;
 import it.zerocool.batmacaana.model.Place;
 
@@ -112,7 +112,7 @@ public class FavoriteFragment extends Fragment {
     }
 
     private class RetrieveFavoriteTask extends AsyncTask<Void, Void, List<Place>> {
-        private FavoriteDBHelper openHelper;
+        private DBHelper openHelper;
         private SQLiteDatabase db;
 
         /**
@@ -205,11 +205,11 @@ public class FavoriteFragment extends Fragment {
          */
         @Override
         protected List<Place> doInBackground(Void... params) {
-            openHelper = FavoriteDBHelper.getInstance(getActivity());
+            openHelper = DBHelper.getInstance(getActivity());
             db = openHelper.getWritabelDB();
             if (isCancelled())
                 return null;
-            return FavoriteDBMngr.favoriteList(db);
+            return DBManager.favoriteList(db);
         }
     }
 

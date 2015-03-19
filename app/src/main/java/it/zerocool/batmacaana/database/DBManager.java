@@ -17,7 +17,7 @@ import it.zerocool.batmacaana.utilities.ParsingUtilities;
  * DB use-case class.
  * Created by Marco Battisti on 31/01/2015.
  */
-public class FavoriteDBMngr {
+public class DBManager {
 
     public static final int ADD = 0;
     public static final int REMOVE = 1;
