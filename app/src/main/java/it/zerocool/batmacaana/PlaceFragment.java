@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.graphics.Palette;
@@ -622,13 +623,13 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
                     case FavoriteDBMngr.CHECK:
                         targetPlace.setFavorite(fave);
                         if (fave) {
+                            Drawable favorite = ContextCompat.getDrawable(getActivity(), R.drawable.ic_favorite_grey600_36dp);
                             favoriteButton
-                                    .setCompoundDrawablesWithIntrinsicBounds(null, getActivity()
-                                            .getDrawable(R.drawable.ic_favorite_grey600_36dp), null, null);
+                                    .setCompoundDrawablesWithIntrinsicBounds(null, favorite, null, null);
                         } else {
+                            Drawable outline = ContextCompat.getDrawable(getActivity(), R.drawable.ic_favorite_outline_grey600_36dp);
                             favoriteButton
-                                    .setCompoundDrawablesWithIntrinsicBounds(null, getActivity()
-                                            .getDrawable(R.drawable.ic_favorite_outline_grey600_36dp), null, null);
+                                    .setCompoundDrawablesWithIntrinsicBounds(null, outline, null, null);
                         }
                     default:
                         break;
