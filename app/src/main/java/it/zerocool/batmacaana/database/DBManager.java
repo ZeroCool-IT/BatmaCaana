@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import it.zerocool.batmacaana.model.City;
 import it.zerocool.batmacaana.model.Place;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
 
@@ -25,12 +26,25 @@ public class DBManager {
     //DB utility variable
     static final String DB_NAME = "ExploraDB";
     static final int DB_VERSION = 1;
+
     //Tables and columns
+
+    //Favorite table
     private static final String TABLE_FAVORITE = "Favorite";
     private static final String ID_COLUMN = "ID";
     private static final String TYPE_COLUMN = "TYPE";
     private static final String JSON_COLUMN = "JSON";
     private static final int JSON_COLUMN_INDEX = 2;
+
+    //Customers table
+    private static final String TABLE_CUSTOMERS = "Customers";
+    private static final String UID_COLUMN = "UID";
+    private static final String CITY_NAME_COLUMN = "NAME";
+    private static final String AVATAR_COLUMN = "AVATAR";
+    private static final int ID_COLUMN_INDEX = 0;
+    private static final int UID_COLUMN_INDEX = 1;
+    private static final int NAME_COLUMN_INDEX = 2;
+    private static final int AVATAR_COLUMN_INDEX = 3;
 
     /**
      * Add a place to favorite's list
@@ -126,4 +140,59 @@ public class DBManager {
     }
 
 
+    /**
+     * Add Customer Cities to local DB
+     *
+     * @param db        is the db
+     * @param customers is the list of Customer Cities
+     */
+    public static void addCustomers(SQLiteDatabase db, ArrayList<City> customers) {
+        if (customers != null && !customers.isEmpty()) {
+            db.beginTransaction();
+            try {
+                for (City c : customers) {
+                    ContentValues values = new ContentValues();
+                    values.put(ID_COLUMN, c.getId());
+                    values.put(UID_COLUMN, c.getUserID());
+                    values.put(CITY_NAME_COLUMN, c.getName());
+                    values.put(AVATAR_COLUMN, c.getAvatar());
+                    db.insert(TABLE_CUSTOMERS, null, values);
+                }
+                db.setTransactionSuccessful();
+            } finally {
+                db.endTransaction();
+            }
+        }
+    }
+
+    /**
+     * Clear the customers table
+     *
+     * @param db is the db
+     */
+    public static void clearCustomers(SQLiteDatabase db) {
+        db.delete(TABLE_CUSTOMERS, null, null);
+    }
+
+    public static boolean hasCustomers(SQLiteDatabase db) {
+        ArrayList<City> result = getCustomers(db);
+        return !result.isEmpty();
+    }
+
+    public static ArrayList<City> getCustomers(SQLiteDatabase db) {
+        ArrayList<City> result = new ArrayList<>();
+        Cursor c = db.query(TABLE_CUSTOMERS, null, null, null, null, null, null);
+        c.moveToFirst();
+        while (!c.isAfterLast()) {
+            int id = c.getInt(ID_COLUMN_INDEX);
+            City city = new City(id);
+            city.setUserID(c.getInt(UID_COLUMN_INDEX));
+            city.setName(c.getString(NAME_COLUMN_INDEX));
+            city.setAvatar(c.getString(AVATAR_COLUMN_INDEX));
+            result.add(city);
+            c.moveToNext();
+        }
+        c.close();
+        return result;
+    }
 }

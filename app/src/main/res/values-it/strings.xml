@@ -149,4 +149,5 @@
     <string name="tag_icon">Tags</string>
     <string name="tts_icon">Ascolta descrizione</string>
     <string name="url_icon">Indirizzo sito web</string>
+    <string name="app_needs_connection">Explora ha bisogno di una connessione dati per gestire l'elenco delle città disponibili. Per favore, controlla le tue impostazioni e riprova!</string>
 </resources>

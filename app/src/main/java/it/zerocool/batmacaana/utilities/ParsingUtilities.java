@@ -677,4 +677,26 @@ public class ParsingUtilities {
         return result;
     }
 
+    public static ArrayList<City> parseCustomersFromJSON(String json) {
+        ArrayList<City> result = new ArrayList<>();
+        try {
+            JSONObject reader = new JSONObject(json);
+            JSONArray data = reader.getJSONArray("Utenti");
+            if (data != null) {
+                for (int i = 0; i < data.length(); i++) {
+                    JSONObject toBuild = data.getJSONObject(i);
+                    int id = toBuild.getInt("CITY_ID");
+                    City c = new City(id);
+                    c.setUserID(toBuild.getInt("cf_user_id"));
+                    c.setName(toBuild.getString("name"));
+                    c.setAvatar(toBuild.getString("LOGO"));
+                    result.add(c);
+                }
+            }
+        } catch (JSONException e) {
+            Log.e("JSON Exception", e.getMessage());
+        }
+        return result;
+    }
+
 }
