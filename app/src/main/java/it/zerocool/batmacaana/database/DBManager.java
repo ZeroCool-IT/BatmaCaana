@@ -146,8 +146,10 @@ public class DBManager {
      * @param db        is the db
      * @param customers is the list of Customer Cities
      */
-    public static void addCustomers(SQLiteDatabase db, ArrayList<City> customers) {
+    public static boolean addCustomers(SQLiteDatabase db, ArrayList<City> customers) {
+        boolean done = false;
         if (customers != null && !customers.isEmpty()) {
+            int check = customers.size();
             db.beginTransaction();
             try {
                 for (City c : customers) {
@@ -156,13 +158,15 @@ public class DBManager {
                     values.put(UID_COLUMN, c.getUserID());
                     values.put(CITY_NAME_COLUMN, c.getName());
                     values.put(AVATAR_COLUMN, c.getAvatar());
-                    db.insert(TABLE_CUSTOMERS, null, values);
+                    check += db.insert(TABLE_CUSTOMERS, null, values);
                 }
                 db.setTransactionSuccessful();
+                done = check > 0;
             } finally {
                 db.endTransaction();
             }
         }
+        return done;
     }
 
     /**

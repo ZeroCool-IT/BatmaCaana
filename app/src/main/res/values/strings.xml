@@ -164,7 +164,9 @@
     <string name="length_icon">Length</string>
     <string name="level_icon">Level</string>
     <string name="search_result_icon">Search result</string>
-    <string name="app_needs_connection">Explora needs internet connection to manage cities' list. Please check your connection settings and try again! </string>
+    <string name="app_needs_connection">Explora needs internet connection to manage cities\' list. Please check your connection settings and try again! </string>
+    <string name="retry">Retry</string>
+    <string name="close">Close</string>
 
 
 </resources>
