@@ -49,7 +49,7 @@ public class SplashActivity extends ActionBarActivity {
         decorView.setSystemUiVisibility(uiOptions);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.splash_container, new PlaceholderFragment())
+                    .add(R.id.splash_container, new SplashFragment())
                     .commit();
         }
 
@@ -105,9 +105,9 @@ public class SplashActivity extends ActionBarActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class SplashFragment extends Fragment {
 
-        public PlaceholderFragment() {
+        public SplashFragment() {
         }
 
         @Override
