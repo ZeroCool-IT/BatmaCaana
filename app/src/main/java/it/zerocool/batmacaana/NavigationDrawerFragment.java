@@ -6,6 +6,8 @@ package it.zerocool.batmacaana;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,10 +20,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import it.zerocool.batmacaana.database.DBHelper;
+import it.zerocool.batmacaana.database.DBManager;
+import it.zerocool.batmacaana.model.City;
 import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.SharedPreferencesProvider;
 
@@ -29,12 +37,18 @@ import it.zerocool.batmacaana.utilities.SharedPreferencesProvider;
 /**
  *
  */
-public class NavigationDrawerFragment extends Fragment {
+public class NavigationDrawerFragment extends Fragment implements View.OnClickListener {
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private boolean mUserLearnedDrawer;
     private boolean mFromSavedInstanceState;
+    private CitiesAdapter customersAdapter;
+    private TextView selectorTv;
+    private ImageView selectorAvatar;
+    private ImageButton selectorButton;
+    private RecyclerView recyclerView;
+    private boolean customersShowed;
 
     private DrawerAdapter adapter;
 
@@ -86,13 +100,26 @@ public class NavigationDrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
 
-        RecyclerView recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
+        recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
+        selectorTv = (TextView) layout.findViewById(R.id.selector_text);
+        selectorAvatar = (ImageView) layout.findViewById(R.id.selector_avatar);
+        selectorButton = (ImageButton) layout.findViewById(R.id.selector_button);
+        ImageView appLogo = (ImageView) layout.findViewById(R.id.app_logo);
+
+        selectorAvatar.setOnClickListener(this);
+        selectorButton.setOnClickListener(this);
+        selectorTv.setOnClickListener(this);
+        appLogo.setOnClickListener(this);
+
+        customersShowed = false;
 
 
         adapter = new DrawerAdapter(getActivity(), getData(getActivity()), getActivity().getSupportFragmentManager());
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
+        RetrieveCitiesTask task = new RetrieveCitiesTask();
+        task.execute();
         return layout;
     }
 
@@ -132,7 +159,7 @@ public class NavigationDrawerFragment extends Fragment {
         }
         SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
         int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
-        selectItem(defaultView);
+        selectItem(defaultView, true);
         getActivity().setTitle(getActivity().getResources().getStringArray(R.array.drawer_list)[defaultView]);
         adapter.setCurrentSelected(defaultView);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -146,7 +173,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     }
 
-    private void selectItem(int position) {
+    private void selectItem(int position, boolean closeDrawer) {
         if (position != Constant.ABOUT) {
             ContentFragment f = new ContentFragment();
             Bundle bundle = new Bundle();
@@ -157,7 +184,6 @@ public class NavigationDrawerFragment extends Fragment {
                     .replace(R.id.content_frame, f)
                     .commit();
             getActivity().setTitle(getResources().getStringArray(R.array.drawer_list)[position]);
-            mDrawerLayout.closeDrawers();
         } else {
             AboutFragment fragment = new AboutFragment();
             Bundle bundle = new Bundle();
@@ -167,6 +193,81 @@ public class NavigationDrawerFragment extends Fragment {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, fragment)
                     .commit();
+        }
+        if (closeDrawer) {
+            mDrawerLayout.closeDrawers();
+        }
+    }
+
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if (id == R.id.selector_button || id == R.id.selector_avatar || id == R.id.selector_text) {
+            if (!customersShowed) {
+                selectorTv.setText(R.string.select_city);
+                recyclerView.setAdapter(customersAdapter);
+                recyclerView.invalidate();
+                selectorButton.setImageResource(R.drawable.ic_arrow_drop_up_black_18dp);
+                customersShowed = true;
+            } else {
+                recyclerView.setAdapter(adapter);
+                recyclerView.invalidate();
+                selectorButton.setImageResource(R.drawable.ic_arrow_drop_down_black_18dp);
+                customersShowed = false;
+                SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
+                selectItem(defaultView, false);
+            }
+        } else if (id == R.id.app_logo) {
+            //do nothing
+        }
+    }
+
+    private class RetrieveCitiesTask extends AsyncTask<Void, Void, ArrayList<City>> {
+
+        /**
+         * Override this method to perform a computation on a background thread. The
+         * specified parameters are the parameters passed to {@link #execute}
+         * by the caller of this task.
+         * <p/>
+         * This method can call {@link #publishProgress} to publish updates
+         * on the UI thread.
+         *
+         * @param params The parameters of the task.
+         * @return A result, defined by the subclass of this task.
+         * @see #onPreExecute()
+         * @see #onPostExecute
+         * @see #publishProgress
+         */
+        @Override
+        protected ArrayList<City> doInBackground(Void... params) {
+            DBHelper helper = DBHelper.getInstance(getActivity());
+            SQLiteDatabase db = helper.getWritabelDB();
+            return DBManager.getCustomers(db);
+        }
+
+        /**
+         * <p>Runs on the UI thread after {@link #doInBackground}. The
+         * specified result is the value returned by {@link #doInBackground}.</p>
+         * <p/>
+         * <p>This method won't be invoked if the task was cancelled.</p>
+         *
+         * @param cities The result of the operation computed by {@link #doInBackground}.
+         * @see #onPreExecute
+         * @see #doInBackground
+         * @see #onCancelled(Object)
+         */
+        @Override
+        protected void onPostExecute(ArrayList<City> cities) {
+            if (cities != null) {
+                customersAdapter = new CitiesAdapter(getActivity(), cities, getFragmentManager(), selectorTv, selectorAvatar);
+
+            }
         }
     }
 }

@@ -152,4 +152,7 @@
     <string name="app_needs_connection">Explora ha bisogno di una connessione dati per gestire l\'elenco delle città disponibili. Per favore, controlla le tue impostazioni e riprova!</string>
     <string name="retry">Riprova</string>
     <string name="close">Chiudi</string>
+    <string name="city_selector">Seleziona una città</string>
+    <string name="city_logo">Stemma della città</string>
+    <string name="select_city">Seleziona una Città:</string>
 </resources>

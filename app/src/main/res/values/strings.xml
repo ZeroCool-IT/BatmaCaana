@@ -167,6 +167,9 @@
     <string name="app_needs_connection">Explora needs internet connection to manage cities\' list. Please check your connection settings and try again! </string>
     <string name="retry">Retry</string>
     <string name="close">Close</string>
+    <string name="city_logo">City\'s Logo</string>
+    <string name="city_selector">Select City</string>
+    <string name="select_city">Select a City:</string>
 
 
 </resources>
