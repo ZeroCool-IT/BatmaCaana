@@ -6,6 +6,7 @@ package it.zerocool.batmacaana;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -159,8 +160,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
                     SearchResult current = searchItems.get(getAdapterPosition());
                     int id = current.getId();
                     int type = current.getType();
+                    SharedPreferences sp = context.getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                    int uid = sp.getInt(Constant.CITY_UID, Constant.USER_ID);
                     String uri = Constant.OBJECT_SEARCH1 +
-                            Constant.USER_ID +
+                            uid +
                             Constant.OBJECT_SEARCH2 +
                             Integer.valueOf(id).toString() +
                             Constant.OBJECT_SEARCH3 +

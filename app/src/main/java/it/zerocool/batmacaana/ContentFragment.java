@@ -146,7 +146,9 @@ public class ContentFragment extends Fragment {
 //                refresh = Integer.parseInt(prefs.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
                 break;
         }
-        uri += Integer.valueOf(Constant.USER_ID).toString();
+        SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        int uid = sp.getInt(Constant.CITY_UID, Constant.USER_ID);
+        uri += Integer.valueOf(uid).toString();
 
         if (RequestUtilities.isOnline(getActivity())) {
             task = new RetrieveDataAsyncTask();

@@ -5,6 +5,7 @@
 package it.zerocool.batmacaana;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -71,8 +72,10 @@ public class SearchResultsFragment extends Fragment {
         String trimmed = query.replaceAll("\\b\\w{1,2}\\b\\s?", "");
 
         if (!trimmed.isEmpty()) {
+            SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+            int uid = sp.getInt(Constant.CITY_UID, Constant.USER_ID);
             String uri = Constant.URI_SEARCH1
-                    + Constant.USER_ID
+                    + uid
                     + Constant.URI_SEARCH2
                     + Uri.encode(trimmed);
             if (RequestUtilities.isOnline(getActivity())) {

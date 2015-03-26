@@ -5,11 +5,16 @@
 package it.zerocool.batmacaana;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,16 +38,29 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
     private final FragmentManager fragmentManager;
     private final TextView nameTextView;
     private final ImageView avatarIv;
+    private final DrawerAdapter adapter;
+    private final RecyclerView recyclerView;
+    private final DrawerLayout drawerLayout;
+    private final FragmentActivity activity;
+    private final ImageButton selectorButton;
     private List<City> items = Collections.emptyList();
 
 
-    public CitiesAdapter(Context context, List<City> data, FragmentManager fm, TextView textView, ImageView iv) {
+    public CitiesAdapter(Context context, List<City> data, FragmentManager fm,
+                         TextView textView, ImageView iv, DrawerAdapter adapter,
+                         RecyclerView rv, DrawerLayout drawerLayout, FragmentActivity activity,
+                         ImageButton selectorButton) {
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.items = data;
         this.fragmentManager = fm;
         this.avatarIv = iv;
         this.nameTextView = textView;
+        this.adapter = adapter;
+        this.recyclerView = rv;
+        this.drawerLayout = drawerLayout;
+        this.activity = activity;
+        this.selectorButton = selectorButton;
     }
 
 
@@ -111,6 +129,31 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
         return items.size();
     }
 
+    private void selectItem(int position, boolean closeDrawer) {
+        if (position != Constant.ABOUT) {
+            ContentFragment f = new ContentFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt(Constant.FRAG_SECTION_ID, position);
+            f.setArguments(bundle);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, f)
+                    .commit();
+
+            activity.setTitle(context.getResources().getStringArray(R.array.drawer_list)[position]);
+        } else {
+            AboutFragment fragment = new AboutFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt(Constant.FRAG_SECTION_ID, position);
+            fragment.setArguments(bundle);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+        }
+        if (closeDrawer) {
+            drawerLayout.closeDrawers();
+        }
+    }
+
     class CitiesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         final TextView name;
@@ -134,13 +177,22 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
             int uid = city.getUserID();
             String name = city.getName();
             nameTextView.setText(name);
+            selectorButton.setImageResource(R.drawable.ic_arrow_drop_down_black_18dp);
             Picasso.with(context)
                     .load(Constant.URI_IMAGE_BIG + city.getAvatar())
                     .into(avatarIv);
-            Toast.makeText(context, "Changing to "
-                    + name
-                    + " UID: "
-                    + Integer.valueOf(uid).toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.changing_city, Toast.LENGTH_SHORT).show();
+            SharedPreferences sp = context.getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString(Constant.CITY_NAME, name);
+            editor.putString(Constant.CITY_AVATAR, city.getAvatar());
+            editor.putInt(Constant.CITY_UID, uid);
+            editor.apply();
+            recyclerView.setAdapter(adapter);
+            recyclerView.invalidate();
+            int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
+            selectItem(defaultView, true);
+
         }
     }
 }

@@ -24,6 +24,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,6 +107,21 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         selectorAvatar = (ImageView) layout.findViewById(R.id.selector_avatar);
         selectorButton = (ImageButton) layout.findViewById(R.id.selector_button);
         ImageView appLogo = (ImageView) layout.findViewById(R.id.app_logo);
+
+        SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        String name = sp.getString(Constant.CITY_NAME, Constant.DEFAULT_CITY_NAME);
+        selectorTv.setText(name);
+
+        String image = sp.getString(Constant.CITY_AVATAR, null);
+        if (image != null) {
+            Picasso.with(getActivity())
+                    .load(Constant.URI_IMAGE_BIG + image)
+                    .into(selectorAvatar);
+        } else {
+            Picasso.with(getActivity())
+                    .load(R.drawable.im_stemma_comune)
+                    .into(selectorAvatar);
+        }
 
         selectorAvatar.setOnClickListener(this);
         selectorButton.setOnClickListener(this);
@@ -221,6 +238,8 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
                 customersShowed = false;
                 SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
                 int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
+                String name = sp.getString(Constant.CITY_NAME, Constant.DEFAULT_CITY_NAME);
+                selectorTv.setText(name);
                 selectItem(defaultView, false);
             }
         } else if (id == R.id.app_logo) {
@@ -265,7 +284,8 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         @Override
         protected void onPostExecute(ArrayList<City> cities) {
             if (cities != null) {
-                customersAdapter = new CitiesAdapter(getActivity(), cities, getFragmentManager(), selectorTv, selectorAvatar);
+                customersAdapter = new CitiesAdapter(getActivity(), cities, getFragmentManager(),
+                        selectorTv, selectorAvatar, adapter, recyclerView, mDrawerLayout, getActivity(), selectorButton);
 
             }
         }

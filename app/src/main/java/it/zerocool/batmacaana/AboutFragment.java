@@ -4,7 +4,9 @@
 
 package it.zerocool.batmacaana;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -153,9 +155,10 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
     }
 
     private void retrieveCity() {
-        //TODO SharedPreferences UID
+        SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        int uid = sp.getInt(Constant.CITY_UID, Constant.USER_ID);
         String uri = Constant.URI_CITY +
-                Constant.USER_ID;
+                uid;
         if (RequestUtilities.isOnline(getActivity())) {
             task = new RetrieveCityInfo();
             task.execute(uri);

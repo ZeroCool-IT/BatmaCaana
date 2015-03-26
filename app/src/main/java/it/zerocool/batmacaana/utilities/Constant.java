@@ -19,6 +19,7 @@ public class Constant {
 
     //USER ID
     public static final int USER_ID = 594;
+    public static final String DEFAULT_CITY_NAME = "Carpineto Romano";
     public static final int NULL_UID = 593;
 
     //Empty value
@@ -123,6 +124,9 @@ public class Constant {
     public static final String NOTIFICATION_PREFS = "notification";
     public static final String EARTH_NOT_NEEDED = "earth";
     public static final String SPLASH = "splash";
+    public static final String CITY_NAME = "city_name";
+    public static final String CITY_AVATAR = "city_avatar";
+    public static final String CITY_UID = "city_uid";
 
 
     //Location Constraints

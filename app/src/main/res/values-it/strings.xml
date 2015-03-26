@@ -155,4 +155,5 @@
     <string name="city_selector">Seleziona una città</string>
     <string name="city_logo">Stemma della città</string>
     <string name="select_city">Seleziona una Città:</string>
+    <string name="changing_city">Cambio Città, attendere...</string>
 </resources>

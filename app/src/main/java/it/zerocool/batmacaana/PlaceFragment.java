@@ -4,7 +4,9 @@
 
 package it.zerocool.batmacaana;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
@@ -523,9 +525,11 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
             intent.setType("*/*");
             String[] addresses = new String[1];
             addresses[0] = mail;
+            SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+            int uid = sp.getInt(Constant.CITY_UID, Constant.USER_ID);
             String subject = "[REPORT] " +
                     "["
-                    + Integer.valueOf(Constant.USER_ID).toString()
+                    + Integer.valueOf(uid).toString()
                     + "/"
                     + targetPlace.getId()
                     + "] "
