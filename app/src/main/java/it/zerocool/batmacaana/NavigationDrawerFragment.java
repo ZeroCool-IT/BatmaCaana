@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -107,10 +108,15 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         selectorAvatar = (ImageView) layout.findViewById(R.id.selector_avatar);
         selectorButton = (ImageButton) layout.findViewById(R.id.selector_button);
         ImageView appLogo = (ImageView) layout.findViewById(R.id.app_logo);
+        RelativeLayout containerDrawer = (RelativeLayout) layout.findViewById(R.id.containerDrawerImage);
 
         SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
         String name = sp.getString(Constant.CITY_NAME, Constant.DEFAULT_CITY_NAME);
         selectorTv.setText(name);
+        String avatar = sp.getString(Constant.CITY_AVATAR, "");
+        Picasso.with(getActivity())
+                .load(Constant.URI_IMAGE_BIG + avatar)
+                .into(selectorAvatar);
 
         String image = sp.getString(Constant.CITY_AVATAR, null);
         if (image != null) {
@@ -127,6 +133,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         selectorButton.setOnClickListener(this);
         selectorTv.setOnClickListener(this);
         appLogo.setOnClickListener(this);
+        containerDrawer.setOnClickListener(this);
 
         customersShowed = false;
 
@@ -224,17 +231,17 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.selector_button || id == R.id.selector_avatar || id == R.id.selector_text) {
+        if (id == R.id.selector_button || id == R.id.selector_avatar || id == R.id.selector_text || id == R.id.containerDrawerImage || id == R.id.app_logo) {
             if (!customersShowed) {
                 selectorTv.setText(R.string.select_city);
                 recyclerView.setAdapter(customersAdapter);
                 recyclerView.invalidate();
-                selectorButton.setImageResource(R.drawable.ic_arrow_drop_up_black_18dp);
+                selectorButton.setImageResource(R.drawable.ic_arrow_drop_up_white_18dp);
                 customersShowed = true;
             } else {
                 recyclerView.setAdapter(adapter);
                 recyclerView.invalidate();
-                selectorButton.setImageResource(R.drawable.ic_arrow_drop_down_black_18dp);
+                selectorButton.setImageResource(R.drawable.ic_arrow_drop_down_white_18dp);
                 customersShowed = false;
                 SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
                 int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
@@ -242,8 +249,6 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
                 selectorTv.setText(name);
                 selectItem(defaultView, false);
             }
-        } else if (id == R.id.app_logo) {
-            //do nothing
         }
     }
 

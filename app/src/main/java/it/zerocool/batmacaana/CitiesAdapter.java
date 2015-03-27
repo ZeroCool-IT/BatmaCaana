@@ -177,7 +177,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
             int uid = city.getUserID();
             String name = city.getName();
             nameTextView.setText(name);
-            selectorButton.setImageResource(R.drawable.ic_arrow_drop_down_black_18dp);
+            selectorButton.setImageResource(R.drawable.ic_arrow_drop_down_white_18dp);
             Picasso.with(context)
                     .load(Constant.URI_IMAGE_BIG + city.getAvatar())
                     .into(avatarIv);
