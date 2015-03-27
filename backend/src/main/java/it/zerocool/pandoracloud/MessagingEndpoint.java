@@ -18,7 +18,6 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiNamespace;
 
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -36,7 +35,7 @@ import static it.zerocool.pandoracloud.OfyService.ofy;
  * authentication! If this app is deployed, anyone can access this endpoint! If
  * you'd like to add authentication, take a look at the documentation.
  */
-@Api(name = "messaging", version = "v2", namespace = @ApiNamespace(ownerDomain = "pandoracloud.zerocool.it", ownerName = "pandoracloud.zerocool.it", packagePath = ""))
+@Api(name = "messaging", version = "v3", namespace = @ApiNamespace(ownerDomain = "pandoracloud.zerocool.it", ownerName = "pandoracloud.zerocool.it", packagePath = ""))
 public class MessagingEndpoint {
     private static final Logger log = Logger.getLogger(MessagingEndpoint.class.getName());
 
@@ -45,7 +44,7 @@ public class MessagingEndpoint {
      */
     private static final String API_KEY = System.getProperty("gcm.api.key");
 
-    private static List<RegistrationRecord> filterByUID(List<RegistrationRecord> list, int uID) {
+    /*private static List<RegistrationRecord> filterByUID(List<RegistrationRecord> list, int uID) {
         List<RegistrationRecord> result = new LinkedList<>();
         for (RegistrationRecord record : list) {
             if (record.getuID() == uID) {
@@ -53,7 +52,7 @@ public class MessagingEndpoint {
             }
         }
         return result;
-    }
+    }*/
 
     /**
      * Send to the first 10 devices (You can modify this to send to any number of devices or a specific device)
@@ -70,10 +69,15 @@ public class MessagingEndpoint {
             message = message.substring(0, 1000) + "[...]";
         }
         Sender sender = new Sender(API_KEY);
-        Message msg = new Message.Builder().addData("message", message).addData("type", type).addData("id", Integer.valueOf(id).toString()).build();
+        Message msg = new Message.Builder()
+                .addData("message", message)
+                .addData("uid", Integer.valueOf(uId).toString())
+                .addData("type", type)
+                .addData("id", Integer.valueOf(id).toString())
+                .build();
         List<RegistrationRecord> records = ofy().load().type(RegistrationRecord.class).limit(0).list();
-        List<RegistrationRecord> filtered = filterByUID(records, uId);
-        for (RegistrationRecord record : filtered) {
+//        List<RegistrationRecord> filtered = filterByUID(records, uId);
+        for (RegistrationRecord record : records) {
             Result result = sender.send(msg, record.getRegId(), 5);
             if (result.getMessageId() != null) {
                 log.info("Message sent to " + record.getRegId());

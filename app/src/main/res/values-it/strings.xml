@@ -156,4 +156,6 @@
     <string name="city_logo">Stemma della città</string>
     <string name="select_city">Seleziona una Città:</string>
     <string name="changing_city">Cambio Città, attendere...</string>
+    <string name="generic_news_notification">Ultime notizie</string>
+    <string name="generic_event_notification">Nuovo evento</string>
 </resources>

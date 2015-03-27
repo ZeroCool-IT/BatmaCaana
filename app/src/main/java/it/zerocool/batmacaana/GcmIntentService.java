@@ -10,8 +10,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
@@ -19,9 +21,13 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import it.zerocool.batmacaana.database.DBHelper;
+import it.zerocool.batmacaana.database.DBManager;
+import it.zerocool.batmacaana.model.City;
 import it.zerocool.batmacaana.utilities.ApplicationContextProvider;
 import it.zerocool.batmacaana.utilities.Constant;
 
@@ -39,10 +45,13 @@ public class GcmIntentService extends IntentService {
     private final SharedPreferences sharedPreferences;
     private NotificationCompat.Builder builder;
     private NotificationManager mNotificationManager;
+    private ArrayList<City> customers;
 
     public GcmIntentService() {
         super("GcmIntentService");
         sharedPreferences = ApplicationContextProvider.getContext().getSharedPreferences(Constant.NOTIFICATION_PREFS, MODE_PRIVATE);
+        RetrieveCitiesTask task = new RetrieveCitiesTask();
+        task.execute();
     }
 
     @Override
@@ -111,6 +120,9 @@ public class GcmIntentService extends IntentService {
 
     private Map<String, String> parseMessage(Bundle extras) {
         Map<String, String> result = new HashMap<>();
+        String uid = extras.getString(Constant.USER_ID_ARG);
+        result.put(Constant.USER_ID_ARG, uid);
+        Log.i("ZCLOG UID NOTIFICATION", uid);
         String id = extras.getString(Constant.ID_ARG);
         result.put(Constant.ID_ARG, id);
         String type = extras.getString(Constant.TYPE_ARG);
@@ -162,8 +174,19 @@ public class GcmIntentService extends IntentService {
 
         String message = map.get(Constant.MESSAGE_ARG);
 
-        String title = getString(R.string.notification_news_title) +
-                getString(R.string.city_name);
+        String city = findNameByUid(map.get(Constant.USER_ID_ARG));
+        String title;
+        if (city != null && !city.isEmpty()) {
+            title = getString(R.string.notification_news_title) +
+                    findNameByUid(map.get(Constant.USER_ID_ARG));
+        } else {
+            title = getString(R.string.generic_news_notification);
+
+        }
+
+        /*String title = getString(R.string.notification_news_title) +
+                getString(R.string.city_name);*/
+
 
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         builder = new NotificationCompat.Builder(this)
@@ -201,8 +224,14 @@ public class GcmIntentService extends IntentService {
 
         String message = map.get(Constant.MESSAGE_ARG);
 
-        String title = getString(R.string.notification_event_title) +
-                getString(R.string.city_name);
+        String city = findNameByUid(map.get(Constant.USER_ID_ARG));
+        String title;
+        if (city != null && !city.isEmpty()) {
+            title = getString(R.string.notification_event_title) +
+                    findNameByUid(map.get(Constant.USER_ID_ARG));
+        } else {
+            title = getString(R.string.generic_event_notification);
+        }
 
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         builder = new NotificationCompat.Builder(this)
@@ -225,6 +254,57 @@ public class GcmIntentService extends IntentService {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, number);
         editor.apply();
+    }
+
+    private String findNameByUid(String uid) {
+        for (City c : customers) {
+            if (c.getUserID() == Integer.parseInt(uid))
+                return c.getName();
+        }
+        return null;
+    }
+
+    private class RetrieveCitiesTask extends AsyncTask<Void, Void, ArrayList<City>> {
+
+        /**
+         * Override this method to perform a computation on a background thread. The
+         * specified parameters are the parameters passed to {@link #execute}
+         * by the caller of this task.
+         * <p/>
+         * This method can call {@link #publishProgress} to publish updates
+         * on the UI thread.
+         *
+         * @param params The parameters of the task.
+         * @return A result, defined by the subclass of this task.
+         * @see #onPreExecute()
+         * @see #onPostExecute
+         * @see #publishProgress
+         */
+        @Override
+        protected ArrayList<City> doInBackground(Void... params) {
+            DBHelper helper = DBHelper.getInstance(ApplicationContextProvider.getContext());
+            SQLiteDatabase db = helper.getWritabelDB();
+            return DBManager.getCustomers(db);
+        }
+
+        /**
+         * <p>Runs on the UI thread after {@link #doInBackground}. The
+         * specified result is the value returned by {@link #doInBackground}.</p>
+         * <p/>
+         * <p>This method won't be invoked if the task was cancelled.</p>
+         *
+         * @param cities The result of the operation computed by {@link #doInBackground}.
+         * @see #onPreExecute
+         * @see #doInBackground
+         * @see #onCancelled(Object)
+         */
+        @Override
+        protected void onPostExecute(ArrayList<City> cities) {
+            if (cities != null) {
+                customers = cities;
+
+            }
+        }
     }
 
 }

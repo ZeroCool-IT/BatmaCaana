@@ -185,7 +185,7 @@ public class DBManager {
 
     public static ArrayList<City> getCustomers(SQLiteDatabase db) {
         ArrayList<City> result = new ArrayList<>();
-        Cursor c = db.query(TABLE_CUSTOMERS, null, null, null, null, null, null);
+        Cursor c = db.query(TABLE_CUSTOMERS, null, null, null, null, null, "NAME");
         c.moveToFirst();
         while (!c.isAfterLast()) {
             int id = c.getInt(ID_COLUMN_INDEX);

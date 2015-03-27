@@ -171,6 +171,8 @@
     <string name="city_selector">Select City</string>
     <string name="select_city">Select a City:</string>
     <string name="changing_city">Changing City, please wait...</string>
+    <string name="generic_news_notification">Latest news</string>
+    <string name="generic_event_notification">New event</string>
 
 
 </resources>
