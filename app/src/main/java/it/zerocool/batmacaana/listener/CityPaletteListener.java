@@ -2,17 +2,19 @@
  * Copyright ZeroApp(c) 2015. All right reserved.
  */
 
-package it.zerocool.batmacaana;
+package it.zerocool.batmacaana.listener;
 
 import android.support.v7.graphics.Palette;
 
 import java.lang.ref.WeakReference;
 
+import it.zerocool.batmacaana.CityFragment;
+
 /**
  * Listener for Generate Palette task
  * Created by Marco Battisti on 20/02/2015.
  */
-class CityPaletteListener implements Palette.PaletteAsyncListener {
+public class CityPaletteListener implements Palette.PaletteAsyncListener {
     private final WeakReference<CityFragment> activityWeakReference;
 
     private CityPaletteListener(WeakReference<CityFragment> activityWeakReference) {

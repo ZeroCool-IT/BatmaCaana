@@ -124,13 +124,9 @@ public class DetailsActivity extends ActionBarActivity {
             args[cont] = token.nextToken();
             cont++;
         }
-        SharedPreferences sp = getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
-        int uid = sp.getInt(Constant.CITY_UID, Constant.USER_ID);
         String query = Constant.OBJECT_SEARCH1 +
-                uid +
-                Constant.OBJECT_SEARCH2 +
                 args[0] +
-                Constant.OBJECT_SEARCH3 +
+                Constant.OBJECT_SEARCH2 +
                 args[1];
 
         if (RequestUtilities.isOnline(this)) {

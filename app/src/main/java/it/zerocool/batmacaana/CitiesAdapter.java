@@ -43,24 +43,24 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
     private final DrawerLayout drawerLayout;
     private final FragmentActivity activity;
     private final ImageButton selectorButton;
+    private final NavigationDrawerFragment drawer;
     private List<City> items = Collections.emptyList();
 
 
-    public CitiesAdapter(Context context, List<City> data, FragmentManager fm,
-                         TextView textView, ImageView iv, DrawerAdapter adapter,
-                         RecyclerView rv, DrawerLayout drawerLayout, FragmentActivity activity,
-                         ImageButton selectorButton) {
+    public CitiesAdapter(Context context, List<City> data, NavigationDrawerFragment fragment) {
         inflater = LayoutInflater.from(context);
+        this.drawer = fragment;
         this.context = context;
         this.items = data;
-        this.fragmentManager = fm;
-        this.avatarIv = iv;
-        this.nameTextView = textView;
-        this.adapter = adapter;
-        this.recyclerView = rv;
-        this.drawerLayout = drawerLayout;
-        this.activity = activity;
-        this.selectorButton = selectorButton;
+        this.fragmentManager = fragment.getFragmentManager();
+        this.nameTextView = fragment.getSelectorTv();
+        this.avatarIv = fragment.getSelectorAvatar();
+        this.adapter = fragment.getAdapter();
+        this.recyclerView = fragment.getRecyclerView();
+        this.drawerLayout = fragment.getDrawerLayout();
+        this.selectorButton = fragment.getSelectorButton();
+        this.activity = fragment.getActivity();
+
     }
 
 
@@ -190,6 +190,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
             editor.apply();
             recyclerView.setAdapter(adapter);
             recyclerView.invalidate();
+            drawer.setCustomersShown(false);
             int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
             selectItem(defaultView, true);
 

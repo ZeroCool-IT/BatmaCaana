@@ -74,9 +74,9 @@ public class Constant {
     public static final String URI_IMAGE_MEDIUM = "http://www.exploracity.it/app/images/big/";
     public static final String URI_SEARCH1 = "http://www.exploracity.it/app/json/cerca.php?user=";
     public static final String URI_SEARCH2 = "&stringa=";
-    public static final String OBJECT_SEARCH1 = "http://www.exploracity.it/app/json/cercadettaglio.php?user=";
-    public static final String OBJECT_SEARCH2 = "&id=";
-    public static final String OBJECT_SEARCH3 = "&type=";
+    public static final String OBJECT_SEARCH1 = "http://www.exploracity.it/app/json/cercadettaglio.php?id=";
+    /*public static final String OBJECT_SEARCH2 = "&";*/
+    public static final String OBJECT_SEARCH2 = "&type=";
     public static final String SHARE_URI = "http://exploracity.it/item/";
     public static final String URI_ROUTES = "http://www.exploracity.it/app/json/percorsi.php?user=";
     public static final String URI_KML = "http://www.exploracity.it/app/kml/";
@@ -113,7 +113,6 @@ public class Constant {
     public static final String ID_ARG = "id";
     public static final String MESSAGE_ARG = "message";
     public static final String LANDSCAPE_ORIENTATION = "orientation";
-    public static final String FROM_GALLERY = "from_gallery";
     public static final String USER_ID_ARG = "uid";
 
     //Shared Preferences
@@ -136,9 +135,6 @@ public class Constant {
 
     //Gallery image
 
-    /*public static final Integer[] GALLERY_IMAGE = {R.drawable.im_gallery_01, R.drawable.im_gallery_02,
-            R.drawable.im_gallery_03, R.drawable.im_gallery_04, R.drawable.im_gallery_05, R.drawable.im_gallery_06,
-            R.drawable.im_gallery_07, R.drawable.im_gallery_08, R.drawable.im_gallery_09, R.drawable.im_gallery_10};*/
 
     //Others
     public static final int VIEW_STATE_SELECTED = 100;

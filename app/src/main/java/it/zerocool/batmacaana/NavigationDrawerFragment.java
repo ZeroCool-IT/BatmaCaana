@@ -51,7 +51,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     private ImageView selectorAvatar;
     private ImageButton selectorButton;
     private RecyclerView recyclerView;
-    private boolean customersShowed;
+    private boolean customersShown;
 
     private DrawerAdapter adapter;
 
@@ -135,7 +135,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         appLogo.setOnClickListener(this);
         containerDrawer.setOnClickListener(this);
 
-        customersShowed = false;
+        customersShown = false;
 
 
         adapter = new DrawerAdapter(getActivity(), getData(getActivity()), getActivity().getSupportFragmentManager());
@@ -232,17 +232,17 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.selector_button || id == R.id.selector_avatar || id == R.id.selector_text || id == R.id.containerDrawerImage || id == R.id.app_logo) {
-            if (!customersShowed) {
+            if (!customersShown) {
                 selectorTv.setText(R.string.select_city);
                 recyclerView.setAdapter(customersAdapter);
                 recyclerView.invalidate();
                 selectorButton.setImageResource(R.drawable.ic_arrow_drop_up_white_18dp);
-                customersShowed = true;
+                customersShown = true;
             } else {
                 recyclerView.setAdapter(adapter);
                 recyclerView.invalidate();
                 selectorButton.setImageResource(R.drawable.ic_arrow_drop_down_white_18dp);
-                customersShowed = false;
+                customersShown = false;
                 SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
                 int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
                 String name = sp.getString(Constant.CITY_NAME, Constant.DEFAULT_CITY_NAME);
@@ -250,6 +250,54 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
                 selectItem(defaultView, false);
             }
         }
+    }
+
+    /**
+     * @return the Drawer Layout of navigation drawer
+     */
+    public DrawerLayout getDrawerLayout() {
+        return mDrawerLayout;
+    }
+
+    /**
+     * @return the TextView of cities' selector
+     */
+    public TextView getSelectorTv() {
+        return selectorTv;
+    }
+
+    /**
+     * @return the ImageView of city avatar
+     */
+    public ImageView getSelectorAvatar() {
+        return selectorAvatar;
+    }
+
+    /**
+     * @return the button of cities' selector
+     */
+    public ImageButton getSelectorButton() {
+        return selectorButton;
+    }
+
+    /**
+     * @return the navigation drawer's RecyclerView
+     */
+    public RecyclerView getRecyclerView() {
+        return recyclerView;
+    }
+
+    /**
+     * Change the flag when customers' list is shown
+     *
+     * @param shown true if the list is shown, false otherwise
+     */
+    public void setCustomersShown(boolean shown) {
+        customersShown = shown;
+    }
+
+    public DrawerAdapter getAdapter() {
+        return adapter;
     }
 
     private class RetrieveCitiesTask extends AsyncTask<Void, Void, ArrayList<City>> {
@@ -289,8 +337,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         @Override
         protected void onPostExecute(ArrayList<City> cities) {
             if (cities != null) {
-                customersAdapter = new CitiesAdapter(getActivity(), cities, getFragmentManager(),
-                        selectorTv, selectorAvatar, adapter, recyclerView, mDrawerLayout, getActivity(), selectorButton);
+                customersAdapter = new CitiesAdapter(getActivity(), cities, NavigationDrawerFragment.this);
 
             }
         }

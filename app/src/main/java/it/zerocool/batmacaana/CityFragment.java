@@ -36,6 +36,7 @@ import com.squareup.picasso.Target;
 
 import java.util.Locale;
 
+import it.zerocool.batmacaana.listener.CityPaletteListener;
 import it.zerocool.batmacaana.model.City;
 import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.ParsingUtilities;
