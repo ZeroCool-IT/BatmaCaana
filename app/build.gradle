@@ -4,6 +4,8 @@
 
 
 
+
+
 apply plugin: 'com.android.application'
 
 android {
@@ -14,8 +16,8 @@ android {
         applicationId "it.zerocool.batmacaana"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 47
-        versionName "0.47a"
+        versionCode 49
+        versionName "0.49a"
     }
     buildTypes {
         release {
@@ -40,17 +42,13 @@ android {
         }
         beta {
             applicationId "it.exploracity.carpineto.beta"
-            versionCode 14
-            versionName "0.14B RC3"
+            versionCode 16
+            versionName "0.16B RC4"
         }
     }
 }
 repositories {
     jcenter()
-    maven {
-        url 'https://raw.github.com/chrisbanes/PhotoView/maven/'
-    }
-    mavenCentral()
 }
 
 dependencies {
@@ -69,5 +67,4 @@ dependencies {
     compile 'com.android.support:support-v4:22.0.0'
     compile 'com.google.android.gms:play-services:6.5.87'
     compile 'com.github.nirhart:parallaxscroll:1.0'
-    compile 'com.github.chrisbanes.photoview:library:1.2.2'
 }
