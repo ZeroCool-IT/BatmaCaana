@@ -257,9 +257,11 @@ public class GcmIntentService extends IntentService {
     }
 
     private String findNameByUid(String uid) {
-        for (City c : customers) {
-            if (c.getUserID() == Integer.parseInt(uid))
-                return c.getName();
+        if (customers != null) {
+            for (City c : customers) {
+                if (c.getUserID() == Integer.parseInt(uid))
+                    return c.getName();
+            }
         }
         return null;
     }
