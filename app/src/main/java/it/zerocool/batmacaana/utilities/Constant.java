@@ -133,7 +133,9 @@ public class Constant {
     public static final int LOCATION_UPDATE_TIME = 30000;
     public static final int LOCATION_MIN_DISTANCE_UPDATE = 50;
 
-    //Gallery image
+    //City notification tags
+    public static final String NOT_NEWS = "news";
+    public static final String NOT_EVENT = "event";
 
 
     //Others

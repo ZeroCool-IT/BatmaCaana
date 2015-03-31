@@ -158,4 +158,9 @@
     <string name="changing_city">Cambio Città, attendere...</string>
     <string name="generic_news_notification">Ultime notizie</string>
     <string name="generic_event_notification">Nuovo evento</string>
+    <string name="city_notification_button">Sceglie le notifiche da attivare per la Città</string>
+    <string name="receive_notification">Ricevi notifiche per</string>
+    <string name="event">Eventi</string>
+    <string name="news">Notizie</string>
+    <string name="cancel">Annulla</string>
 </resources>

@@ -7,6 +7,7 @@ package it.zerocool.batmacaana;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -24,6 +25,7 @@ import com.squareup.picasso.Picasso;
 import java.util.Collections;
 import java.util.List;
 
+import it.zerocool.batmacaana.dialog.CityNotificationDialog;
 import it.zerocool.batmacaana.model.City;
 import it.zerocool.batmacaana.utilities.Constant;
 
@@ -86,7 +88,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
      */
     @Override
     public CitiesAdapter.CitiesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.drawer_row, parent, false);
+        View view = inflater.inflate(R.layout.drawer_row_city, parent, false);
         return new CitiesViewHolder(view);
     }
 
@@ -158,12 +160,16 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
 
         final TextView name;
         final ImageView avatar;
+        final ImageButton notification;
 
         public CitiesViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.listText);
             avatar = (ImageView) itemView.findViewById(R.id.listIcon);
-            itemView.setOnClickListener(this);
+            notification = (ImageButton) itemView.findViewById(R.id.notification_button);
+            notification.setOnClickListener(this);
+            name.setOnClickListener(this);
+            avatar.setOnClickListener(this);
         }
 
         /**
@@ -173,26 +179,34 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
          */
         @Override
         public void onClick(View v) {
-            City city = items.get(this.getAdapterPosition());
-            int uid = city.getUserID();
-            String name = city.getName();
-            nameTextView.setText(name);
-            selectorButton.setImageResource(R.drawable.ic_arrow_drop_down_white_18dp);
-            Picasso.with(context)
-                    .load(Constant.URI_IMAGE_BIG + city.getAvatar())
-                    .into(avatarIv);
-            Toast.makeText(context, R.string.changing_city, Toast.LENGTH_SHORT).show();
-            SharedPreferences sp = context.getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sp.edit();
-            editor.putString(Constant.CITY_NAME, name);
-            editor.putString(Constant.CITY_AVATAR, city.getAvatar());
-            editor.putInt(Constant.CITY_UID, uid);
-            editor.apply();
-            recyclerView.setAdapter(adapter);
-            recyclerView.invalidate();
-            drawer.setCustomersShown(false);
-            int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
-            selectItem(defaultView, true);
+            if (v.getId() == R.id.listText || v.getId() == R.id.listIcon) {
+                City city = items.get(this.getAdapterPosition());
+                int uid = city.getUserID();
+                String name = city.getName();
+                nameTextView.setText(name);
+                selectorButton.setImageResource(R.drawable.ic_arrow_drop_down_white_18dp);
+                Picasso.with(context)
+                        .load(Constant.URI_IMAGE_BIG + city.getAvatar())
+                        .into(avatarIv);
+                Toast.makeText(context, R.string.changing_city, Toast.LENGTH_SHORT).show();
+                SharedPreferences sp = context.getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString(Constant.CITY_NAME, name);
+                editor.putString(Constant.CITY_AVATAR, city.getAvatar());
+                editor.putInt(Constant.CITY_UID, uid);
+                editor.apply();
+                recyclerView.setAdapter(adapter);
+                recyclerView.invalidate();
+                drawer.setCustomersShown(false);
+                int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
+                selectItem(defaultView, true);
+            } else if (v.getId() == R.id.notification_button) {
+                DialogFragment selectionDialog = new CityNotificationDialog();
+                Bundle bundle = new Bundle();
+                bundle.putInt(Constant.USER_ID_ARG, items.get(getAdapterPosition()).getUserID());
+                selectionDialog.setArguments(bundle);
+                selectionDialog.show(activity.getSupportFragmentManager(), "notification");
+            }
 
         }
     }

@@ -24,4 +24,9 @@
         <item>6</item>
         <item>7</item>
     </string-array>
+
+    <string-array name="notification_dialog_item">
+        <item>@string/news</item>
+        <item>@string/event</item>
+    </string-array>
 </resources>
