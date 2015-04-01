@@ -61,9 +61,9 @@ public class GcmIntentService extends IntentService {
         // The getMessageType() intent parameter must be the intent you received
         // in your BroadcastReceiver.
         String messageType = gcm.getMessageType(intent);
-        SharedPreferences sp = getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
+        /*SharedPreferences sp = getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
         boolean newsEnabled = sp.getBoolean("news_notification_enabled", true);
-        boolean eventEnabled = sp.getBoolean("event_notification_enabled", true);
+        boolean eventEnabled = sp.getBoolean("event_notification_enabled", true);*/
 
         if (!extras.isEmpty()) {  // has effect of unparcelling Bundle
             /*
@@ -84,14 +84,15 @@ public class GcmIntentService extends IntentService {
                     MESSAGE_TYPE_MESSAGE.equals(messageType)) {
                 Map<String, String> extrasMap = parseMessage(extras);
                 int type = Integer.parseInt(extrasMap.get(Constant.TYPE_ARG));
+                int uid = Integer.parseInt(extrasMap.get(Constant.USER_ID_ARG));
                 switch (type) {
                     case Constant.TYPE_NEWS:
-                        if (newsEnabled) {
+                        if (isEnabled(uid, type)) {
                             sendNewsNotification(extrasMap);
                         }
                         break;
                     case Constant.TYPE_EVENT:
-                        if (eventEnabled) {
+                        if (isEnabled(uid, type)) {
                             sendEventNotification(extrasMap);
                         }
                         break;
@@ -155,10 +156,6 @@ public class GcmIntentService extends IntentService {
             title = getString(R.string.generic_news_notification);
 
         }
-
-        /*String title = getString(R.string.notification_news_title) +
-                getString(R.string.city_name);*/
-
 
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         builder = new NotificationCompat.Builder(this)

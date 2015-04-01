@@ -4,7 +4,6 @@
 
 package it.zerocool.batmacaana.dialog;
 
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -18,13 +17,11 @@ import it.zerocool.batmacaana.R;
 import it.zerocool.batmacaana.utilities.Constant;
 
 /**
- * Dialog for notifications enabling
- * Created by Marco Battisti on 31/03/2015.
+ * Alert dialog for disabling notifications
+ * Created by Marco Battisti on 01/04/2015.
  */
-public class CityNotificationDialog extends DialogFragment implements DialogInterface.OnClickListener {
+public class AlertsDisablingDialog extends DialogFragment implements DialogInterface.OnClickListener {
 
-    private int cityUid;
-    private boolean[] checked;
     private SharedPreferences sp;
 
     /**
@@ -41,8 +38,8 @@ public class CityNotificationDialog extends DialogFragment implements DialogInte
      * <p><em>Note: DialogFragment own the {@link android.app.Dialog#setOnCancelListener
      * Dialog.setOnCancelListener} and {@link android.app.Dialog#setOnDismissListener
      * Dialog.setOnDismissListener} callbacks.  You must not set them yourself.</em>
-     * To find out about these events, override {@link #onCancel(DialogInterface)}
-     * and {@link #onDismiss(DialogInterface)}.</p>
+     * To find out about these events, override {@link #onCancel(android.content.DialogInterface)}
+     * and {@link #onDismiss(android.content.DialogInterface)}.</p>
      *
      * @param savedInstanceState The last saved instance state of the Fragment,
      *                           or null if this is a freshly created Fragment.
@@ -51,25 +48,14 @@ public class CityNotificationDialog extends DialogFragment implements DialogInte
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        cityUid = getArguments().getInt(Constant.USER_ID_ARG);
         sp = getActivity().getSharedPreferences(Constant.NOTIFICATION_PREFS, Context.MODE_PRIVATE);
-        checked = new boolean[2];
-        checked[0] = sp.getBoolean(Constant.NOT_NEWS + cityUid, true);
-        checked[1] = sp.getBoolean(Constant.NOT_EVENT + cityUid, true);
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.receive_notification);
-        builder.setMultiChoiceItems(R.array.city_notification_dialog_item, checked, new DialogInterface.OnMultiChoiceClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                checked[which] = isChecked;
-            }
-        });
-        builder.setPositiveButton(R.string.dialog_button_ok, this)
-                .setNegativeButton(R.string.cancel, this);
+        builder.setTitle(R.string.notifications);
+        builder.setSingleChoiceItems(R.array.disabling_notifications_dialog, 0, this);
 
 
         return builder.create();
+
     }
 
     /**
@@ -81,12 +67,6 @@ public class CityNotificationDialog extends DialogFragment implements DialogInte
      */
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        if (which == DialogInterface.BUTTON_POSITIVE) {
-            SharedPreferences.Editor editor = sp.edit();
-            editor.putBoolean(Constant.NOT_NEWS + cityUid, checked[0]);
-            editor.putBoolean(Constant.NOT_EVENT + cityUid, checked[1]);
-            editor.apply();
-        }
 
     }
 }

@@ -163,4 +163,10 @@
     <string name="event">Eventi</string>
     <string name="news">Notizie</string>
     <string name="cancel">Annulla</string>
+    <string name="disable_eight_hours">Disabilita per 8 ore</string>
+    <string name="disable_one_hour">Disabilita per un\'ora</string>
+    <string name="disable_till_eight_am">Disabilita fino alle ore 8.00</string>
+    <string name="disable_two_hours">Disabilita per 2 ore</string>
+    <string name="enabled">Attive</string>
+    <string name="notifications">Notifiche</string>
 </resources>

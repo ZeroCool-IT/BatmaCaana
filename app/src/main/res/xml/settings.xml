@@ -19,24 +19,24 @@
             android:title="@string/drawer_default" />
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:key="notification"
-        android:title="@string/notification_title">
+    <!--    <PreferenceCategory
+            android:key="notification"
+            android:title="@string/notification_title">
 
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="news_notification_enabled"
-            android:title="@string/news_notification_enabled"
-            android:widgetLayout="@layout/switchpref" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="news_notification_enabled"
+                android:title="@string/news_notification_enabled"
+                android:widgetLayout="@layout/switchpref" />
 
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="event_notification_enabled"
-            android:title="@string/event_notification_enabled"
-            android:widgetLayout="@layout/switchpref" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="event_notification_enabled"
+                android:title="@string/event_notification_enabled"
+                android:widgetLayout="@layout/switchpref" />
 
 
-    </PreferenceCategory>
+        </PreferenceCategory>-->
 
 
     <PreferenceCategory
