@@ -3,15 +3,35 @@
   -->
 
 <resources>
+
+    <string-array name="drawer_list">
+        <item>@string/about</item>
+        <item>@string/to_see</item>
+        <item>@string/event</item>
+        <item>@string/eat</item>
+        <item>@string/sleep</item>
+        <item>@string/news</item>
+        <item>@string/services</item>
+        <item>@string/trekking_routes</item>
+        <item>@string/other</item>
+        <item>@string/nearby_cities</item>
+        <item>@string/favorite</item>
+        <item>@string/notifications</item>
+        <item>@string/settings</item>
+        <item>@string/credits</item>
+        <!-- <item>Offline</item> -->
+        <!-- <item>Update offline content</item> -->
+    </string-array>
+
     <string-array name="drawer_default_view">
-        <item>About</item>
-        <item>To See</item>
-        <item>Event</item>
-        <item>Eat</item>
-        <item>Sleep</item>
-        <item>News</item>
-        <item>Services</item>
-        <item>Trekking Routes</item>
+        <item>@string/about</item>
+        <item>@string/to_see</item>
+        <item>@string/event</item>
+        <item>@string/eat</item>
+        <item>@string/sleep</item>
+        <item>@string/news</item>
+        <item>@string/services</item>
+        <item>@string/trekking_routes</item>
     </string-array>
 
     <string-array name="drawer_values">
@@ -26,7 +46,7 @@
     </string-array>
 
     <string-array name="city_notification_dialog_item">
-    <item>@string/news</item>
+        <item>@string/news</item>
         <item>@string/event</item>
     </string-array>
 
@@ -37,5 +57,14 @@
         <item>@string/disable_eight_hours</item>
         <item>@string/disable_till_eight_am</item>
         <item>@string/off</item>
+    </string-array>
+
+    <string-array name="route_level">
+        <item>-</item>
+        <item>@string/easy</item>
+        <item>@string/intermediate</item>
+        <item>@string/hard</item>
+        <item>@string/very_hard</item>
+        <item>@string/experts_only</item>
     </string-array>
 </resources>

@@ -61,7 +61,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:text="@string/city_name"
+                android:text="@string/dummy_text"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />

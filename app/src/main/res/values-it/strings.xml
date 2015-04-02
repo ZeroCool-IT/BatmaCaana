@@ -82,33 +82,6 @@
     <string name="too_short">La chiave di ricerca è troppo corta!</string>
     <string name="url">Sito web</string>
     <string name="yes">Si</string>
-
-    <string-array name="drawer_list">
-        <item>Informazioni</item>
-        <item>Da vedere</item>
-        <item>Eventi</item>
-        <item>Mangiare</item>
-        <item>Dormire</item>
-        <item>Notizie</item>
-        <item>Servizi</item>
-        <item>Itinerari</item>
-        <item>Altro</item>
-        <item>Città nelle vicinanze</item>
-        <item>Preferiti</item>
-        <item>Preferenze…</item>
-        <item>Credits</item>
-        <!-- <item>Offline</item> -->
-        <!-- <item>Update offline content</item> -->
-    </string-array>
-
-    <string-array name="route_level">
-        <item>-</item>
-        <item>Facile</item>
-        <item>Intermedio</item>
-        <item>Impegnativo</item>
-        <item>Molto impegnativo</item>
-        <item>Per esperti</item>
-    </string-array>
     <string name="no_app">Non c\'è nessuna applicazione adeguata sul tuo dispositivo!</string>
     <string name="copyright">&#169; MAG Technologies 2015. Tutti i diritti riservati.</string>
     <string name="report"><u>Suggerisci una modifica</u></string>
@@ -169,4 +142,19 @@
     <string name="disable_two_hours">Disabilita per 2 ore</string>
     <string name="enabled">Attive</string>
     <string name="notifications">Notifiche</string>
+    <string name="about">Informazioni</string>
+    <string name="eat">Mangiare</string>
+    <string name="nearby_cities">Città vicine</string>
+    <string name="other">Altro</string>
+    <string name="services">Servizi</string>
+    <string name="settings">Preferenze…</string>
+    <string name="sleep">Dormire</string>
+    <string name="to_see">Da vedere</string>
+    <string name="trekking_routes">Itinerari</string>
+    <string name="easy">Facile</string>
+    <string name="experts_only">Per esperti</string>
+    <string name="hard">Impegnativo</string>
+    <string name="intermediate">Intermedio</string>
+    <string name="very_hard">Molto impegnativo</string>
+    <string name="sound">Suono</string>
 </resources>

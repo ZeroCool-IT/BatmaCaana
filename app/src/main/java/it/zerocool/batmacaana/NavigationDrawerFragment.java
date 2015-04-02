@@ -74,6 +74,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
                 R.drawable.ic_subheader_ph_24dp,
                 R.drawable.ic_location_city_grey600_24dp,
                 R.drawable.ic_favorite_grey600_24dp,
+                R.drawable.ic_notifications_grey600_24dp,
                 R.drawable.ic_settings_grey600_24dp,
                 R.drawable.im_android_logo
 //                R.drawable.ic_cloud_download_grey600_24dp,

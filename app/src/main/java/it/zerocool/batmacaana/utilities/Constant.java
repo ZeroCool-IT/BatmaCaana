@@ -54,8 +54,9 @@ public class Constant {
     public static final int SUBHEADER = 8;
     public static final int CITY = 9;
     public static final int FAVORITE = 10;
-    public static final int SETTINGS = 11;
-    public static final int CREDITS = 12;
+    public static final int NOTIFICATIONS = 11;
+    public static final int SETTINGS = 12;
+    public static final int CREDITS = 13;
     public static final int OFFLINE = 14;
     public static final int UPDATE = 15;
 

@@ -7,6 +7,7 @@ package it.zerocool.batmacaana;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
+import it.zerocool.batmacaana.dialog.AlertsDisablingDialog;
 import it.zerocool.batmacaana.utilities.Constant;
 
 /**
@@ -181,6 +183,10 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                     Intent creditsIntent = new Intent(context, CreditsActivity.class);
                     context.startActivity(creditsIntent);
                     drawerLayout.closeDrawers();
+                    break;
+                case Constant.NOTIFICATIONS:
+                    DialogFragment alertsFragment = new AlertsDisablingDialog();
+                    alertsFragment.show(fragmentManager, "notifications_disable");
                     break;
                 default:
                     ContentFragment f = new ContentFragment();

@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.view.LayoutInflater;
 
 import it.zerocool.batmacaana.R;
 import it.zerocool.batmacaana.utilities.Constant;
@@ -50,8 +51,16 @@ public class AlertsDisablingDialog extends DialogFragment implements DialogInter
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         sp = getActivity().getSharedPreferences(Constant.NOTIFICATION_PREFS, Context.MODE_PRIVATE);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        // Get the layout inflater
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        builder.setView(inflater.inflate(R.layout.notifications_dialog, null));
+
         builder.setTitle(R.string.notifications);
-        builder.setSingleChoiceItems(R.array.disabling_notifications_dialog, 0, this);
+//        builder.setSingleChoiceItems(R.array.disabling_notifications_dialog, 0, this);
+        builder.setPositiveButton(R.string.dialog_button_ok, this);
 
 
         return builder.create();
