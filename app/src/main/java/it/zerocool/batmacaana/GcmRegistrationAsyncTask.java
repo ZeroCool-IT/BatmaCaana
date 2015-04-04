@@ -30,7 +30,7 @@ class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
     private static final String SENDER_ID = "557298603924";
     private static Registration regService = null;
     private final Context context;
-    private final boolean test = true;
+    private final boolean test = false;
     private GoogleCloudMessaging gcm;
 
     public GcmRegistrationAsyncTask(Context context) {
