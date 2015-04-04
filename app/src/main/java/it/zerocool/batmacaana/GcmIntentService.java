@@ -30,6 +30,7 @@ import it.zerocool.batmacaana.database.DBManager;
 import it.zerocool.batmacaana.model.City;
 import it.zerocool.batmacaana.utilities.ApplicationContextProvider;
 import it.zerocool.batmacaana.utilities.Constant;
+import it.zerocool.batmacaana.utilities.NotificationsUtil;
 
 /**
  * Service listening for notification message.
@@ -236,7 +237,7 @@ public class GcmIntentService extends IntentService {
     }
 
     private boolean isEnabled(int uid, int type) {
-        return isCityEnabled(uid, type);
+        return isCityEnabled(uid, type) && !NotificationsUtil.isNotificationsDisabled();
     }
 
     private boolean isCityEnabled(int uid, int type) {

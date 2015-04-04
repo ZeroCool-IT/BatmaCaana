@@ -170,6 +170,7 @@
     <string name="very_hard">Very Hard</string>
     <string name="experts_only">Experts Only</string>
     <string name="sound">Alert sound</string>
+    <string name="disabled_until">Disabled until&#160;</string>
 
 
 </resources>

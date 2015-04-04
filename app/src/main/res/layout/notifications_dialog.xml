@@ -21,10 +21,12 @@
         android:text="@string/sound" />
 
     <RadioGroup
+        android:id="@+id/notifications_radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/sound_switch"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="16dp"
@@ -78,4 +80,20 @@
             android:layout_marginTop="8dp"
             android:text="@string/off" />
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/enabling_time_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notifications_radio_group"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="24dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/enabled"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="gone" />
 </RelativeLayout>

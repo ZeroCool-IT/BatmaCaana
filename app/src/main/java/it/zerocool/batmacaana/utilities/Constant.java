@@ -128,6 +128,10 @@ public class Constant {
     public static final String CITY_NAME = "city_name";
     public static final String CITY_AVATAR = "city_avatar";
     public static final String CITY_UID = "city_uid";
+    public static final String NOTIFICATIONS_SOUND = "notifications_sound";
+    public static final String REACTIVATE_TIME = "reactivate_time";
+    public static final String NOTIFICATION_DISABLED = "disabled";
+    public static final String RB_SELECTED = "rb_selected";
 
 
     //Location Constraints

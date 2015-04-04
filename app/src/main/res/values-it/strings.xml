@@ -157,4 +157,5 @@
     <string name="intermediate">Intermedio</string>
     <string name="very_hard">Molto impegnativo</string>
     <string name="sound">Suono</string>
+    <string name="disabled_until">Disabilitate fino alle&#160;</string>
 </resources>
