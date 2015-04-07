@@ -23,6 +23,7 @@ import java.util.List;
 
 import it.zerocool.batmacaana.dialog.AlertsDisablingDialog;
 import it.zerocool.batmacaana.utilities.Constant;
+import it.zerocool.batmacaana.utilities.NotificationsUtil;
 
 /**
  * Navigation Drawer RecyclerView adapter
@@ -44,7 +45,6 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         this.context = context;
         this.drawerItems = data;
         this.fragmentManager = fm;
-
     }
 
     @Override
@@ -57,10 +57,28 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
             view = inflater.inflate(R.layout.drawer_row_subheader, parent, false);
         } else if (viewType == Constant.ROUTES) {
             view = inflater.inflate(R.layout.drawer_row_last_main, parent, false);
+        } else if (viewType == Constant.NOTIFICATIONS) {
+            view = inflater.inflate(R.layout.drawer_row_notifications, parent, false);
+            fillNotificationTime(view);
         } else {
             view = inflater.inflate(R.layout.drawer_row, parent, false);
         }
         return new DrawerViewHolder(view);
+    }
+
+    private void fillNotificationTime(View v) {
+        TextView notificationTimeTV = (TextView) v.findViewById(R.id.activate_time);
+        if (!NotificationsUtil.isNotificationsDisabled()) {
+            notificationTimeTV.setText(R.string.enabled);
+            notificationTimeTV.setTextColor(context.getResources().getColor(android.R.color.holo_green_light));
+        } else if (NotificationsUtil.isNotificationOff()) {
+            notificationTimeTV.setText(R.string.off);
+            notificationTimeTV.setTextColor(context.getResources().getColor(android.R.color.holo_red_light));
+        } else {
+            notificationTimeTV.setText(context.getString(R.string.disabled_until) + NotificationsUtil.getEnablingTimeToString());
+            notificationTimeTV.setTextColor(context.getResources().getColor(android.R.color.holo_red_light));
+
+        }
     }
 
     @Override
@@ -98,10 +116,12 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
             return Constant.NAV_DRAWER_SUBHEADER;
         else if (position == Constant.ROUTES)
             return Constant.ROUTES;
+        else if (position == Constant.NOTIFICATIONS)
+            return Constant.NOTIFICATIONS;
         return position;
     }
 
-    private void selectView(View v) {
+    public void selectView(View v) {
         TextView title = (TextView) v.findViewById(R.id.listText);
         /*title.setTextColor(context.getResources().getColor(R.color.primaryColor));
         v.setBackgroundColor(context.getResources().getColor(R.color.selected_item));*/
@@ -110,7 +130,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         previousSelected = v;
     }
 
-    private void unselectView(View v) {
+    public void unselectView(View v) {
         if (v != null) {
             TextView title = (TextView) v.findViewById(R.id.listText);
             title.setTextColor(context.getResources().getColor(R.color.primary_text_color));
@@ -143,7 +163,8 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         public void onClick(View v) {
             int position = getAdapterPosition();
             selectItem(position);
-            if (position != Constant.SETTINGS && position != Constant.UPDATE && position != Constant.SUBHEADER && position != Constant.OFFLINE && position != Constant.CREDITS) {
+            if (position != Constant.SETTINGS && position != Constant.UPDATE && position != Constant.SUBHEADER
+                    && position != Constant.OFFLINE && position != Constant.CREDITS && position != Constant.NOTIFICATIONS) {
                 unselectView(previousSelected);
                 selectView(v);
 //                setCurrentSelected(position);

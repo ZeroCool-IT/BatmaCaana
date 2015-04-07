@@ -24,7 +24,9 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import it.zerocool.batmacaana.DrawerAdapter;
 import it.zerocool.batmacaana.R;
+import it.zerocool.batmacaana.listener.DialogReturnListener;
 import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.NotificationsUtil;
 
@@ -40,6 +42,8 @@ public class AlertsDisablingDialog extends DialogFragment implements RadioGroup.
     private SharedPreferences.Editor editor;
     private SharedPreferences sp;
     private TextView enablingTimeTV;
+    private DrawerAdapter adapter;
+
 
     /**
      * Override to build your own custom Dialog container.  This is typically
@@ -95,7 +99,7 @@ public class AlertsDisablingDialog extends DialogFragment implements RadioGroup.
                         java.text.DateFormat extDateFormat = SimpleDateFormat.getDateTimeInstance(java.text.DateFormat.MEDIUM, java.text.DateFormat.SHORT);
                         GregorianCalendar time = new GregorianCalendar();
                         time.setTimeInMillis(NotificationsUtil.getEnablingTime());
-                        enablingTimeTV.setText(getString(R.string.disabled_until) + extDateFormat.format(time.getTime()));
+                        enablingTimeTV.setText(getString(R.string.disabled_until2) + extDateFormat.format(time.getTime()));
                         break;
                     default:
                         enablingTimeTV.setText(getString(R.string.disabled_until) + NotificationsUtil.getEnablingTimeToString());
@@ -113,6 +117,7 @@ public class AlertsDisablingDialog extends DialogFragment implements RadioGroup.
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 editor.putBoolean(Constant.NOTIFICATIONS_SOUND, isChecked);
+                editor.apply();
             }
         });
 
@@ -126,6 +131,8 @@ public class AlertsDisablingDialog extends DialogFragment implements RadioGroup.
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 editor.apply();
+                DialogReturnListener activity = (DialogReturnListener) getActivity();
+                activity.onDialogReturn();
             }
         });
 
@@ -179,6 +186,7 @@ public class AlertsDisablingDialog extends DialogFragment implements RadioGroup.
                 enablingTimeTV.setVisibility(View.VISIBLE);
                 break;
             case R.id.rb_disable_8am:
+                text = getString(R.string.disabled_until2);
                 GregorianCalendar toSet = new GregorianCalendar();
                 java.text.DateFormat extDateFormat = SimpleDateFormat.getDateTimeInstance(java.text.DateFormat.MEDIUM, java.text.DateFormat.SHORT);
                 toSet.setTimeInMillis(h);
@@ -205,5 +213,7 @@ public class AlertsDisablingDialog extends DialogFragment implements RadioGroup.
                 break;
         }
         editor.putLong(Constant.REACTIVATE_TIME, h);
+        editor.apply();
+
     }
 }

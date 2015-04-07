@@ -158,7 +158,7 @@ public class GcmIntentService extends IntentService {
 
         }
 
-        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
         builder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_stat_newspaper_white_48dp)
                 .setContentTitle(title)
@@ -167,10 +167,17 @@ public class GcmIntentService extends IntentService {
                 .setTicker(title)
                 .setContentText(message)
                 .setAutoCancel(true)
-                .setSound(soundUri)
                 .setNumber(++number)
                 .setGroup(NEWS_GROUP);
         builder.setContentIntent(detailsPendingIntent);
+
+        boolean isSoundEnabled = sharedPreferences.getBoolean(Constant.NOTIFICATIONS_SOUND, true);
+
+        if (isSoundEnabled) {
+            Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            builder.setSound(soundUri);
+        }
+
         mNotificationManager.notify(NOTIFICATION_ID_NEWS, builder.build());
         saveToPreferences(Constant.KEY_NEWS_NOTIFICATION_NUMBER, Integer.valueOf(number).toString());
     }
@@ -203,7 +210,6 @@ public class GcmIntentService extends IntentService {
             title = getString(R.string.generic_event_notification);
         }
 
-        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         builder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_stat_event_white_48dp)
                 .setContentTitle(title)
@@ -212,10 +218,15 @@ public class GcmIntentService extends IntentService {
                 .setTicker(title)
                 .setContentText(message)
                 .setAutoCancel(true)
-                .setSound(soundUri)
                 .setNumber(++number)
                 .setGroup(EVENT_GROUP);
         builder.setContentIntent(detailsPendingIntent);
+
+        boolean isSoundEnabled = sharedPreferences.getBoolean(Constant.NOTIFICATIONS_SOUND, true);
+        if (isSoundEnabled) {
+            Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            builder.setSound(soundUri);
+        }
         mNotificationManager.notify(NOTIFICATION_ID_EVENT, builder.build());
         saveToPreferences(Constant.KEY_EVENT_NOTIFICATION_NUMBER, Integer.valueOf(number).toString());
     }

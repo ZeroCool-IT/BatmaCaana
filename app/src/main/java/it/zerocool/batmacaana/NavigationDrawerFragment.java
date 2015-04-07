@@ -32,6 +32,7 @@ import java.util.List;
 
 import it.zerocool.batmacaana.database.DBHelper;
 import it.zerocool.batmacaana.database.DBManager;
+import it.zerocool.batmacaana.listener.DialogReturnListener;
 import it.zerocool.batmacaana.model.City;
 import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.SharedPreferencesProvider;
@@ -40,7 +41,7 @@ import it.zerocool.batmacaana.utilities.SharedPreferencesProvider;
 /**
  *
  */
-public class NavigationDrawerFragment extends Fragment implements View.OnClickListener {
+public class NavigationDrawerFragment extends Fragment implements View.OnClickListener, DialogReturnListener {
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -56,8 +57,6 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     private DrawerAdapter adapter;
 
 
-    //Commit test
-    //2nd commit test
     public NavigationDrawerFragment() {
     }
 
@@ -224,6 +223,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         }
     }
 
+
     /**
      * Called when a view has been clicked.
      *
@@ -299,6 +299,12 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 
     public DrawerAdapter getAdapter() {
         return adapter;
+    }
+
+    @Override
+    public void onDialogReturn() {
+        recyclerView.invalidate();
+        recyclerView.setAdapter(adapter);
     }
 
     private class RetrieveCitiesTask extends AsyncTask<Void, Void, ArrayList<City>> {

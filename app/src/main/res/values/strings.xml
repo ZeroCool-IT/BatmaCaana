@@ -171,6 +171,7 @@
     <string name="experts_only">Experts Only</string>
     <string name="sound">Alert sound</string>
     <string name="disabled_until">Disabled until&#160;</string>
+    <string name="disabled_until2">Disabled until&#160;</string>
 
 
 </resources>

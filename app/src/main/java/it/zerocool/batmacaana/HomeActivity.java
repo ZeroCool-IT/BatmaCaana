@@ -29,10 +29,11 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import java.util.List;
 
 import it.zerocool.batmacaana.dialog.LocationWarningDialog;
+import it.zerocool.batmacaana.listener.DialogReturnListener;
 import it.zerocool.batmacaana.utilities.Constant;
 
 
-public class HomeActivity extends ActionBarActivity {
+public class HomeActivity extends ActionBarActivity implements DialogReturnListener {
 
     public static final String PROPERTY_APP_VERSION = "appVersion";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
@@ -41,6 +42,7 @@ public class HomeActivity extends ActionBarActivity {
     private LocationManager locationManager;
     private LocationListener locationListener;
     private long mLastBackPress;
+    private NavigationDrawerFragment drawerFragment;
 
     /**
      * Return the version code of the app
@@ -92,7 +94,7 @@ public class HomeActivity extends ActionBarActivity {
             if (regid.isEmpty()) {
                 registerInBackground();
             }
-            NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+            drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
             drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
 
         } else {
@@ -379,5 +381,10 @@ public class HomeActivity extends ActionBarActivity {
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_COARSE);
         return locationManager.getBestProvider(criteria, true);
+    }
+
+    @Override
+    public void onDialogReturn() {
+        drawerFragment.onDialogReturn();
     }
 }
