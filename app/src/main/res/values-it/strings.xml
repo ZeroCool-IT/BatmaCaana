@@ -128,7 +128,7 @@
     <string name="city_selector">Seleziona una città</string>
     <string name="city_logo">Stemma della città</string>
     <string name="select_city">Seleziona una Città:</string>
-    <string name="changing_city">Cambio Città, attendere...</string>
+    <string name="changing_city">Cambio Città, attendere&#8230;</string>
     <string name="generic_news_notification">Ultime notizie</string>
     <string name="generic_event_notification">Nuovo evento</string>
     <string name="city_notification_button">Sceglie le notifiche da attivare per la Città</string>
