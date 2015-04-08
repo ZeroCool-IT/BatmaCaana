@@ -34,7 +34,7 @@
         <item>@string/trekking_routes</item>
     </string-array>
 
-    <string-array name="drawer_values">
+    <string-array name="drawer_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -60,7 +60,7 @@
     </string-array>
 
     <string-array name="route_level">
-        <item>-</item>
+        <item>@string/underscore</item>
         <item>@string/easy</item>
         <item>@string/intermediate</item>
         <item>@string/hard</item>
