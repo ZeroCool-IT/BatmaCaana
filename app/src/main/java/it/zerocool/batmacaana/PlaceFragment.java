@@ -573,7 +573,6 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
                     lastPressed = currentTime;
                 } else {
                     easterCounter++;
-                    Log.i("ZCLOG", Integer.valueOf(easterCounter).toString());
                     lastPressed = currentTime;
                     switch (easterCounter) {
                         case 3:
