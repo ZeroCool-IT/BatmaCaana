@@ -64,7 +64,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
     private Place targetPlace;
     private ImageView ivPlace;
     private LinearLayout buttonLayout;
-    private TextView timecardTv;
+    private ExpandableTextView timecardTv;
     private TextView addressTv;
     private TextView phoneTv;
     private TextView mailTv;
@@ -145,7 +145,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
         //Bind widget
         buttonLayout = (LinearLayout) layout.findViewById(R.id.button_layout);
         tvDescription = (ExpandableTextView) layout.findViewById(R.id.description_tv);
-        timecardTv = (TextView) layout.findViewById(R.id.timecard_tv);
+        timecardTv = (ExpandableTextView) layout.findViewById(R.id.timecard_tv);
         addressTv = (TextView) layout.findViewById(R.id.address_tv);
         phoneTv = (TextView) layout.findViewById(R.id.phone_tv);
         mailTv = (TextView) layout.findViewById(R.id.mail_tv);

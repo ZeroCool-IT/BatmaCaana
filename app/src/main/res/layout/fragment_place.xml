@@ -208,14 +208,34 @@
                         android:paddingRight="8dp"
                         android:src="@drawable/ic_access_time_grey600_24dp" />
 
-                    <TextView
+                    <com.ms.square.android.expandabletextview.ExpandableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/timecard_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:text="@string/dummy_text" />
+                        android:orientation="vertical"
+                        expandableTextView:animDuration="200"
+                        expandableTextView:collapseDrawable="@drawable/ic_expand_less_grey600_36dp"
+                        expandableTextView:expandDrawable="@drawable/ic_expand_more_grey600_36dp"
+                        expandableTextView:maxCollapsedLines="10">
+
+                        <TextView
+                            android:id="@id/expandable_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:textSize="16sp" />
+
+                        <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|bottom"
+                            android:layout_margin="8dp"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/expand_description" />
+                    </com.ms.square.android.expandabletextview.ExpandableTextView>
 
                 </LinearLayout>
 
