@@ -148,6 +148,7 @@ public class Constant {
     public static final int VIEW_STATE_SELECTED = 100;
     public static final int NAV_DRAWER_SUBHEADER = 8;
     public static final long M_BACK_PRESS_THRESHOLD = 3500;
+    public static final long EASTER_EGG_THRESHOLD = 2500;
 
     /**
      * Private constructor

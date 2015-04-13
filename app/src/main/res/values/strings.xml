@@ -173,6 +173,9 @@
     <string name="disabled_until">Disabled until&#160;</string>
     <string name="disabled_until2">Disabled until&#160;</string>
     <string name="underscore" translatable="false">_</string>
+    <string name="easter_content">Easter egg picture</string>
+    <string name="easter_mooo">Moooo!</string>
+    <string name="easter_almost_there">You\'re almost there&#8230;</string>
 
 
 </resources>

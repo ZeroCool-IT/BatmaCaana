@@ -45,6 +45,7 @@ import java.util.Locale;
 
 import it.zerocool.batmacaana.database.DBHelper;
 import it.zerocool.batmacaana.database.DBManager;
+import it.zerocool.batmacaana.dialog.EasterDialog;
 import it.zerocool.batmacaana.dialog.WarningDialog;
 import it.zerocool.batmacaana.listener.PlacePaletteListener;
 import it.zerocool.batmacaana.model.Place;
@@ -90,6 +91,9 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
     private Palette palette;
     private TextToSpeech ttsService;
     private ImageView playTTSButton;
+
+    private int easterCounter = 0;
+    private long lastPressed;
 
 
 //    private DBHelper openHelper;
@@ -170,6 +174,8 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
         accessibilityLayout = (LinearLayout) layout.findViewById((R.id.accesibility));
         ivPlace = (ImageView) layout.findViewById(R.id.imageView);
 
+        ImageView easterEggIcon = (ImageView) layout.findViewById(R.id.easter_egg_icon);
+
         //Listener
         phoneActionButton.setOnClickListener(this);
         urlActionButton.setOnClickListener(this);
@@ -184,6 +190,8 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
         ivPlace.setOnClickListener(this);
         reportTv.setOnClickListener(this);
         playTTSButton.setOnClickListener(this);
+
+        easterEggIcon.setOnClickListener(this);
 
         //Args read
         Place p = ParsingUtilities.parseSinglePlace(getArguments().getString(Constant.JSON_ARG));
@@ -557,6 +565,30 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
                     ttsService.stop();
                 }
             }
+        } else if (v.getId() == R.id.easter_egg_icon) {
+            if (targetPlace.getId() == 29) {
+                long currentTime = System.currentTimeMillis();
+                if (Math.abs(currentTime - lastPressed) > Constant.EASTER_EGG_THRESHOLD) {
+                    easterCounter = 0;
+                    lastPressed = currentTime;
+                } else {
+                    easterCounter++;
+                    Log.i("ZCLOG", Integer.valueOf(easterCounter).toString());
+                    lastPressed = currentTime;
+                    switch (easterCounter) {
+                        case 3:
+                            Toast.makeText(getActivity(), "Ci sei quasi...", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 4:
+                            EasterDialog dialog = new EasterDialog();
+                            dialog.setCancelable(false);
+                            dialog.show(getFragmentManager(), "EASTER EGG");
+                            break;
+                    }
+                }
+            }
+
+
         }
     }
 

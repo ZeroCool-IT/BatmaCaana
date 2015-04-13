@@ -159,4 +159,7 @@
     <string name="sound">Suono</string>
     <string name="disabled_until">Disabilitate fino alle&#160;</string>
     <string name="disabled_until2">Disabilitate fino al&#160;</string>
+    <string name="easter_almost_there">Ci sei quasi&#8230;</string>
+    <string name="easter_content">Immagine Easter Egg</string>
+    <string name="easter_mooo">Muuuu!</string>
 </resources>

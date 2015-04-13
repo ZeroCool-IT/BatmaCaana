@@ -7,15 +7,11 @@
     <color name="primaryColorDark">#1976D2</color>
     <color name="light_primary_color">#BBDEFB</color>
     <color name="accentColor">#FF9800</color>
-    <!--    <color name="primaryColor">#009688</color>
-        <color name="primaryColorDark">#00796B</color>-->
-    <!--<color name="accentColor">#FF5722</color>-->
     <color name="text87">#de000000</color>
     <color name="primary_text_color">#212121</color>
     <color name="secondary_text_color">#727272</color>
     <color name="ripple_color">#B6B6B6</color>
     <color name="transparent_bg">#00FFFFFF</color>
-    <!--<color name="light_primary_color">#B2DFDB</color>-->
     <color name="action_button_text">#FFFFFF</color>
     <color name="white">#FFFFFF</color>
     <color name="black_overlay">#66000000</color>

@@ -229,10 +229,12 @@
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
+                        android:id="@+id/easter_egg_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/address_icon"
                         android:paddingRight="8dp"
+                        android:soundEffectsEnabled="false"
                         android:src="@drawable/ic_place_grey600_24dp" />
 
                     <TextView
