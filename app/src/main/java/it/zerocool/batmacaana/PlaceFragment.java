@@ -576,7 +576,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
                     lastPressed = currentTime;
                     switch (easterCounter) {
                         case 3:
-                            Toast.makeText(getActivity(), "Ci sei quasi...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), R.string.easter_almost_there, Toast.LENGTH_SHORT).show();
                             break;
                         case 4:
                             EasterDialog dialog = new EasterDialog();

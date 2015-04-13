@@ -6,6 +6,8 @@
 
 
 
+
+
 apply plugin: 'com.android.application'
 
 android {
@@ -32,8 +34,8 @@ android {
     }
 
     productFlavors {
-        carpineto {
-            applicationId "it.exploracity.carpineto"
+        prod {
+            applicationId "it.exploracity.explora"
             versionCode 1
             versionName "1.0"
         }
@@ -42,8 +44,8 @@ android {
         }
         beta {
             applicationId "it.exploracity.carpineto.beta"
-            versionCode 16
-            versionName "0.16B RC4"
+            versionCode 18
+            versionName "0.18B RC4"
         }
     }
 }
