@@ -10,8 +10,10 @@
 package it.zerocool.batmacaana.utilities;
 
 import android.location.Location;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import org.jetbrains.annotations.Nullable;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,7 +57,8 @@ public class ParsingUtilities {
      * @param d is the date to build
      * @return the date in GregorianCalendar format
      */
-    public static GregorianCalendar parseDate(String d) {
+    @Nullable
+    public static GregorianCalendar parseDate(@Nullable String d) {
         if (d != null && !d.equals(Constant.EMPTY_VALUE)) {
             GregorianCalendar result = new GregorianCalendar();
             StringTokenizer tokenizer = new StringTokenizer(d, "-");
@@ -78,7 +81,8 @@ public class ParsingUtilities {
      * @param h is the hour to build
      * @return the hour in GregorianCalendar format
      */
-    public static GregorianCalendar parseHour(String h) {
+    @Nullable
+    public static GregorianCalendar parseHour(@Nullable String h) {
         if (h != null && !h.equals(Constant.EMPTY_VALUE)) {
             GregorianCalendar result = new GregorianCalendar();
             StringTokenizer tokenizer = new StringTokenizer(h, ":");
@@ -99,6 +103,7 @@ public class ParsingUtilities {
      * @param json is the JSON string
      * @return the list of Place objects
      */
+    @NonNull
     public static ArrayList<Cardable> parsePlaceFromJSON(String json, Location currentLocation) {
         ArrayList<Cardable> result = new ArrayList<>();
         try {
@@ -130,6 +135,7 @@ public class ParsingUtilities {
                             p = null;
                             break;
                     }
+                    assert p != null;
                     p.setType(type);
                     p.setJson(toBuild.toString());
                     p.setName(toBuild.getString("NAME"));
@@ -180,6 +186,7 @@ public class ParsingUtilities {
      * @param json is the JSON string
      * @return the place object
      */
+    @Nullable
     public static Place parseSinglePlace(String json) {
         try {
             JSONObject toBuild = new JSONObject(json);
@@ -206,6 +213,7 @@ public class ParsingUtilities {
                     p = null;
                     break;
             }
+            assert p != null;
             p.setType(type);
             p.setJson(toBuild.toString());
             p.setName(toBuild.getString("NAME"));
@@ -349,6 +357,7 @@ public class ParsingUtilities {
      * @param json is the JSON string
      * @return the list of Event objects
      */
+    @NonNull
     public static ArrayList<Cardable> parseEventFromJSON(String json) {
         ArrayList<Cardable> result = new ArrayList<>();
         try {
@@ -400,6 +409,7 @@ public class ParsingUtilities {
      * @param json is the JSON string
      * @return an Event object
      */
+    @Nullable
     public static Event parseSingleEvent(String json) {
         try {
             JSONObject toBuild = new JSONObject(json);
@@ -443,6 +453,7 @@ public class ParsingUtilities {
      * @param json is the JSON string
      * @return the list of News objects
      */
+    @NonNull
     public static ArrayList<Cardable> parseNewsFromJSON(String json) {
         ArrayList<Cardable> result = new ArrayList<>();
         try {
@@ -476,6 +487,7 @@ public class ParsingUtilities {
      * @param json is the JSON string
      * @return an News object
      */
+    @Nullable
     public static News parseSingleNews(String json) {
         try {
             JSONObject toBuild = new JSONObject(json);
@@ -495,6 +507,7 @@ public class ParsingUtilities {
         return null;
     }
 
+    @NonNull
     public static ArrayList<Cardable> parseCitiesFromJSON(String json) {
         ArrayList<Cardable> result = new ArrayList<>();
         try {
@@ -544,6 +557,7 @@ public class ParsingUtilities {
     }
 
 
+    @Nullable
     public static City parseSingleCity(String json) {
         JSONObject toBuild;
         try {
@@ -588,6 +602,7 @@ public class ParsingUtilities {
 
     }
 
+    @NonNull
     public static ArrayList<Cardable> parseRoutesFromJSON(String json) {
         ArrayList<Cardable> result = new ArrayList<>();
         try {
@@ -616,6 +631,7 @@ public class ParsingUtilities {
         return result;
     }
 
+    @Nullable
     public static Route parseSingleRoute(String json) {
         JSONObject toBuild;
         try {
@@ -639,6 +655,7 @@ public class ParsingUtilities {
         return null;
     }
 
+    @NonNull
     public static ArrayList<SearchResult> parseSearchResultsFromJSON(String json) {
         ArrayList<SearchResult> result = new ArrayList<>();
         try {
@@ -662,6 +679,7 @@ public class ParsingUtilities {
         return result;
     }
 
+    @Nullable
     public static String parseSingleResult(String json) {
         String result = null;
         try {
@@ -677,6 +695,7 @@ public class ParsingUtilities {
         return result;
     }
 
+    @NonNull
     public static ArrayList<City> parseCustomersFromJSON(String json) {
         ArrayList<City> result = new ArrayList<>();
         try {

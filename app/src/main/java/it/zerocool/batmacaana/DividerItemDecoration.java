@@ -9,20 +9,22 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
+import org.jetbrains.annotations.Nullable;
+
 class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
 
+    @Nullable
     private final Drawable mDivider;
-    private final boolean mShowFirstDivider = false;
-    private final boolean mShowLastDivider = false;
 
 
-    public DividerItemDecoration(Context context, AttributeSet attrs) {
+    public DividerItemDecoration(@NonNull Context context, @NonNull AttributeSet attrs) {
         final TypedArray a = context
                 .obtainStyledAttributes(attrs, new int[]{android.R.attr.listDivider});
         mDivider = a.getDrawable(0);
@@ -54,7 +56,7 @@ class DividerItemDecoration extends RecyclerView.ItemDecoration {
 // --Commented out by Inspection STOP (05/03/2015 16:33)
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
+    public void getItemOffsets(@NonNull Rect outRect, View view, @NonNull RecyclerView parent,
                                RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         if (mDivider == null) {
@@ -71,8 +73,9 @@ class DividerItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
+    @SuppressWarnings("PointlessBooleanExpression")
     @Override
-    public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+    public void onDrawOver(Canvas c, @NonNull RecyclerView parent, RecyclerView.State state) {
         if (mDivider == null) {
             super.onDrawOver(c, parent, state);
             return;
@@ -93,6 +96,7 @@ class DividerItemDecoration extends RecyclerView.ItemDecoration {
             bottom = parent.getHeight() - parent.getPaddingBottom();
         }
 
+        boolean mShowFirstDivider = false;
         for (int i = mShowFirstDivider ? 0 : 1; i < childCount; i++) {
             View child = parent.getChildAt(i);
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
@@ -109,6 +113,7 @@ class DividerItemDecoration extends RecyclerView.ItemDecoration {
         }
 
         // show last divider
+        boolean mShowLastDivider = false;
         if (mShowLastDivider && childCount > 0) {
             View child = parent.getChildAt(childCount - 1);
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
@@ -124,7 +129,7 @@ class DividerItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
-    private int getOrientation(RecyclerView parent) {
+    private int getOrientation(@NonNull RecyclerView parent) {
         if (parent.getLayoutManager() instanceof LinearLayoutManager) {
             LinearLayoutManager layoutManager = (LinearLayoutManager) parent.getLayoutManager();
             return layoutManager.getOrientation();

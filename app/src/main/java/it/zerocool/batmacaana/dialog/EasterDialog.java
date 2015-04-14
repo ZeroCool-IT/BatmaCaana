@@ -4,6 +4,7 @@
 
 package it.zerocool.batmacaana.dialog;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -50,7 +51,7 @@ public class EasterDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.easter_layout, null);
+        @SuppressLint("InflateParams") View v = inflater.inflate(R.layout.easter_layout, null);
         builder.setView(v);
 
         final MediaPlayer mediaPlayer = MediaPlayer.create(getActivity(), R.raw.cow);

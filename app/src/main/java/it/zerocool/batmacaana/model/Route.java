@@ -4,7 +4,10 @@
 
 package it.zerocool.batmacaana.model;
 
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.text.DecimalFormat;
 import java.util.LinkedList;
@@ -20,15 +23,22 @@ import it.zerocool.batmacaana.utilities.Constant;
 public class Route implements Cardable {
 
     private final int id;
+    @NonNull
     private final LinkedList<String> tags;
     private final int type;
+    @Nullable
     private String name;
     private float length;
+    @Nullable
     private String duration;
     private int level;
+    @Nullable
     private String image;
+    @Nullable
     private String kml;
+    @Nullable
     private String description;
+    @Nullable
     private String json;
 
     public Route(int id) {
@@ -47,11 +57,12 @@ public class Route implements Cardable {
 //    }
 // --Commented out by Inspection STOP (05/03/2015 16:37)
 
+    @Nullable
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@Nullable String name) {
         if (name != null && !name.isEmpty()) {
             this.name = name;
         } else {
@@ -62,6 +73,7 @@ public class Route implements Cardable {
     /**
      * @return the tags list
      */
+    @NonNull
     public LinkedList<String> getTags() {
         return tags;
     }
@@ -80,7 +92,7 @@ public class Route implements Cardable {
      *
      * @param csv is the string in CSV format
      */
-    public void setTagsFromCSV(String csv) {
+    public void setTagsFromCSV(@Nullable String csv) {
         if (csv != null && !csv.equals(Constant.EMPTY_VALUE)) {
             StringTokenizer tokenizer = new StringTokenizer(csv, ",");
             while (tokenizer.hasMoreTokens()) {
@@ -102,11 +114,12 @@ public class Route implements Cardable {
         this.length = length;
     }
 
+    @Nullable
     public String getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(@Nullable String duration) {
         if (duration != null && !duration.isEmpty()) {
             this.duration = duration;
         } else {
@@ -122,11 +135,12 @@ public class Route implements Cardable {
         this.level = level;
     }
 
+    @Nullable
     public String getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(@Nullable String image) {
         if (image != null && !image.isEmpty()) {
             this.image = image;
         } else {
@@ -134,11 +148,12 @@ public class Route implements Cardable {
         }
     }
 
+    @Nullable
     public String getKml() {
         return kml;
     }
 
-    public void setKml(String kml) {
+    public void setKml(@Nullable String kml) {
         if (kml != null && !kml.isEmpty()) {
             this.kml = kml;
         } else {
@@ -146,11 +161,12 @@ public class Route implements Cardable {
         }
     }
 
+    @Nullable
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(@Nullable String description) {
         if (description != null && !description.isEmpty()) {
             this.description = description;
         } else {
@@ -158,6 +174,7 @@ public class Route implements Cardable {
         }
     }
 
+    @NonNull
     public String getItemURI() {
         return Constant.SHARE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
     }
@@ -171,6 +188,7 @@ public class Route implements Cardable {
      *
      * @return a String representing card's header
      */
+    @Nullable
     @Override
     public String getHeader() {
         return getName();
@@ -181,6 +199,7 @@ public class Route implements Cardable {
      *
      * @return a String representing the imagery for the card
      */
+    @Nullable
     @Override
     public String getImagery() {
         return getImage();
@@ -191,6 +210,7 @@ public class Route implements Cardable {
      *
      * @return a String representing card's sub-header
      */
+    @NonNull
     @Override
     public String getSubheader() {
         return TextUtils.join(", ", getTags());
@@ -223,12 +243,13 @@ public class Route implements Cardable {
      *
      * @return a JSON String representing the object
      */
+    @Nullable
     @Override
     public String getJson() {
         return json;
     }
 
-    public void setJson(String json) {
+    public void setJson(@Nullable String json) {
         if (json != null && !json.isEmpty()) {
             this.json = json;
         } else {

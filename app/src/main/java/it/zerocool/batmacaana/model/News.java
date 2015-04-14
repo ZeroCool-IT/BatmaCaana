@@ -9,7 +9,10 @@
  */
 package it.zerocool.batmacaana.model;
 
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -29,13 +32,18 @@ import it.zerocool.batmacaana.utilities.ParsingUtilities;
 public class News implements Cardable {
 
     private final int id;
+    @NonNull
     private final LinkedList<String> tags;
     private int type;
     private String json;
+    @Nullable
     private String title;
+    @Nullable
     private String body;
     private GregorianCalendar date;
+    @Nullable
     private String image;
+    @Nullable
     private String url;
 
 
@@ -66,6 +74,7 @@ public class News implements Cardable {
     /**
      * @return the title of the news
      */
+    @Nullable
     public String getTitle() {
         return title;
     }
@@ -73,7 +82,7 @@ public class News implements Cardable {
     /**
      * @param title the title of the news to set
      */
-    public void setTitle(String title) {
+    public void setTitle(@NonNull String title) {
         if (!title.equals(Constant.EMPTY_VALUE)) {
             this.title = title;
         } else
@@ -83,6 +92,7 @@ public class News implements Cardable {
     /**
      * @return the body of the news
      */
+    @Nullable
     public String getBody() {
         return body;
     }
@@ -90,7 +100,7 @@ public class News implements Cardable {
     /**
      * @param body the body to set
      */
-    public void setBody(String body) {
+    public void setBody(@NonNull String body) {
         if (!body.equals(Constant.EMPTY_VALUE)) {
             this.body = body;
         } else
@@ -105,6 +115,13 @@ public class News implements Cardable {
     }
 
     /**
+     * @param date the date of the news to set
+     */
+    void setDate(GregorianCalendar date) {
+        this.date = date;
+    }
+
+    /**
      * Set the news date parsing infos from String
      *
      * @param date it's the start date to set (YYYY-mm-DD format)
@@ -115,13 +132,7 @@ public class News implements Cardable {
 
     }
 
-    /**
-     * @param date the date of the news to set
-     */
-    void setDate(GregorianCalendar date) {
-        this.date = date;
-    }
-
+    @Nullable
     public String getDateToString() {
         if (getDate() != null) {
             DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
@@ -133,6 +144,7 @@ public class News implements Cardable {
     /**
      * @return the tags list
      */
+    @NonNull
     public LinkedList<String> getTags() {
         return tags;
     }
@@ -151,7 +163,7 @@ public class News implements Cardable {
      *
      * @param csv is the string in CSV format
      */
-    public void setTagsFromCSV(String csv) {
+    public void setTagsFromCSV(@Nullable String csv) {
         if (csv != null && !csv.equals(Constant.EMPTY_VALUE)) {
             StringTokenizer tokenizer = new StringTokenizer(csv, ",");
             while (tokenizer.hasMoreTokens()) {
@@ -168,6 +180,7 @@ public class News implements Cardable {
     /**
      * @return the image
      */
+    @Nullable
     public String getImage() {
         return image;
     }
@@ -175,7 +188,7 @@ public class News implements Cardable {
     /**
      * @param image the image of the news to set
      */
-    public void setImage(String image) {
+    public void setImage(@NonNull String image) {
         if (!image.equals(Constant.EMPTY_VALUE)) {
             this.image = image;
         } else
@@ -185,6 +198,7 @@ public class News implements Cardable {
     /**
      * @return the url
      */
+    @Nullable
     public String getUrl() {
         return url;
     }
@@ -192,7 +206,7 @@ public class News implements Cardable {
     /**
      * @param url the url of the news to set
      */
-    public void setUrl(String url) {
+    public void setUrl(@NonNull String url) {
         if (!url.equals(Constant.EMPTY_VALUE)) {
             this.url = url.replace("\\/", "/");
         } else
@@ -202,7 +216,7 @@ public class News implements Cardable {
     /**
      * Redefine equals: 2 news are equals if their ids are equals
      */
-    public boolean equals(Object o) {
+    public boolean equals(@Nullable Object o) {
         if (o != null && o.getClass() == News.class) {
             News n = (News) o;
             return n.getId() == this.getId();
@@ -210,6 +224,7 @@ public class News implements Cardable {
         return false;
     }
 
+    @NonNull
     public String getItemURI() {
         return Constant.SHARE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
     }
@@ -219,6 +234,7 @@ public class News implements Cardable {
      *
      * @return a String representing card's header
      */
+    @Nullable
     @Override
     public String getHeader() {
         return getTitle();
@@ -229,6 +245,7 @@ public class News implements Cardable {
      *
      * @return a String representing the imagery for the card
      */
+    @Nullable
     @Override
     public String getImagery() {
         return getImage();
@@ -239,6 +256,7 @@ public class News implements Cardable {
      *
      * @return a String representing card's sub-header
      */
+    @NonNull
     @Override
     public String getSubheader() {
         return TextUtils.join(", ", getTags());

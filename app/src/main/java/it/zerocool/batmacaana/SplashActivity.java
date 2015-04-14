@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -19,6 +20,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,7 +43,7 @@ public class SplashActivity extends ActionBarActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 //        View decorView = getWindow().getDecorView();
@@ -82,7 +85,7 @@ public class SplashActivity extends ActionBarActivity {
             builder.setCancelable(false);
             builder.setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(@NonNull DialogInterface dialog, int which) {
                     dialog.dismiss();
                     checkCustomersDB();
                 }
@@ -111,7 +114,7 @@ public class SplashActivity extends ActionBarActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             return inflater.inflate(R.layout.fragment_splash, container, false);
         }
@@ -119,6 +122,7 @@ public class SplashActivity extends ActionBarActivity {
 
     private class CustomersUpdate extends AsyncTask<Void, Void, Boolean> {
 
+        @Nullable
         private SQLiteDatabase db;
         private DBHelper openHelper;
 
@@ -147,11 +151,12 @@ public class SplashActivity extends ActionBarActivity {
                 String json = RequestUtilities.requestJsonString(uri);
                 results = ParsingUtilities.parseCustomersFromJSON(json);
                 if (results != null && !results.isEmpty()) {
+                    assert db != null;
                     DBManager.clearCustomers(db);
                     return DBManager.addCustomers(db, results);
                 }
             } catch (IOException e) {
-                Log.e("ZCLOG TASK ERROR", e.getMessage());
+                Log.e("TASK ERROR", e.getMessage());
             }
             return false;
         }
@@ -194,14 +199,14 @@ public class SplashActivity extends ActionBarActivity {
                 builder.setCancelable(false);
                 builder.setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(@NonNull DialogInterface dialog, int which) {
                         dialog.dismiss();
                         checkCustomersDB();
                     }
                 });
                 builder.setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(@NonNull DialogInterface dialog, int which) {
                         dialog.dismiss();
                         SplashActivity.this.finish();
                     }

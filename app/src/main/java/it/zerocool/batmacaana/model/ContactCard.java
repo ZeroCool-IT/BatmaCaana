@@ -9,6 +9,10 @@
  */
 package it.zerocool.batmacaana.model;
 
+import android.support.annotation.NonNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import it.zerocool.batmacaana.utilities.Constant;
 
 /**
@@ -18,13 +22,21 @@ import it.zerocool.batmacaana.utilities.Constant;
  */
 public class ContactCard {
 
+    @Nullable
     private String address;
+    @Nullable
     private String telephone;
+    @Nullable
     private String email;
+    @Nullable
     private String url;
+    @Nullable
     private String fbLink;
+    @Nullable
     private String gpLink;
+    @Nullable
     private String taLink;
+    @Nullable
     private String fsqrLink;
     private String ytLink;
     private String twttrLink;
@@ -38,6 +50,7 @@ public class ContactCard {
     /**
      * @return the address
      */
+    @Nullable
     public String getAddress() {
         return address;
     }
@@ -45,7 +58,7 @@ public class ContactCard {
     /**
      * @param address the address to set
      */
-    public void setAddress(String address) {
+    public void setAddress(@NonNull String address) {
         if (!address.equals(Constant.EMPTY_VALUE)) {
             this.address = address;
         } else
@@ -55,6 +68,7 @@ public class ContactCard {
     /**
      * @return the telephone
      */
+    @Nullable
     public String getTelephone() {
         return telephone;
     }
@@ -62,7 +76,7 @@ public class ContactCard {
     /**
      * @param telephone the telephone to set
      */
-    public void setTelephone(String telephone) {
+    public void setTelephone(@NonNull String telephone) {
         if (!telephone.equals(Constant.EMPTY_VALUE)) {
             this.telephone = telephone;
         } else
@@ -72,6 +86,7 @@ public class ContactCard {
     /**
      * @return the email
      */
+    @Nullable
     public String getEmail() {
         return email;
     }
@@ -79,7 +94,7 @@ public class ContactCard {
     /**
      * @param email the email to set
      */
-    public void setEmail(String email) {
+    public void setEmail(@NonNull String email) {
         if (!email.equals(Constant.EMPTY_VALUE)) {
             this.email = email;
         } else
@@ -89,6 +104,7 @@ public class ContactCard {
     /**
      * @return the url
      */
+    @Nullable
     public String getUrl() {
         return url;
     }
@@ -96,7 +112,7 @@ public class ContactCard {
     /**
      * @param url the url to set
      */
-    public void setUrl(String url) {
+    public void setUrl(@NonNull String url) {
         if (!url.equals(Constant.EMPTY_VALUE)) {
             this.url = url.replace("\\/", "/");
         } else
@@ -106,6 +122,7 @@ public class ContactCard {
     /**
      * @return the link to 4square
      */
+    @Nullable
     public String getFsqrLink() {
         return fsqrLink;
     }
@@ -113,7 +130,7 @@ public class ContactCard {
     /**
      * @param fsqrLink the 4square link to set
      */
-    public void setFsqrLink(String fsqrLink) {
+    public void setFsqrLink(@NonNull String fsqrLink) {
         if (!fsqrLink.equals(Constant.EMPTY_VALUE)) {
             this.fsqrLink = fsqrLink;
         } else
@@ -123,6 +140,7 @@ public class ContactCard {
     /**
      * @return the link to Facebook page
      */
+    @Nullable
     public String getFbLink() {
         return fbLink;
     }
@@ -130,7 +148,7 @@ public class ContactCard {
     /**
      * @param fbLink is the FB link to set
      */
-    public void setFbLink(String fbLink) {
+    public void setFbLink(@NonNull String fbLink) {
         if (!fbLink.equals(Constant.EMPTY_VALUE)) {
             this.fbLink = fbLink;
         } else
@@ -140,6 +158,7 @@ public class ContactCard {
     /**
      * @return the link Google Plus page
      */
+    @Nullable
     public String getGpLink() {
         return gpLink;
     }
@@ -147,7 +166,7 @@ public class ContactCard {
     /**
      * @param gpLink is the G+ link to set
      */
-    public void setGpLink(String gpLink) {
+    public void setGpLink(@NonNull String gpLink) {
         if (!gpLink.equals(Constant.EMPTY_VALUE)) {
             this.gpLink = gpLink;
         } else
@@ -157,6 +176,7 @@ public class ContactCard {
     /**
      * @return the TripAdvisor link
      */
+    @Nullable
     public String getTaLink() {
         return taLink;
     }
@@ -164,7 +184,7 @@ public class ContactCard {
     /**
      * @param taLink is the link to TripAdvisor page
      */
-    public void setTaLink(String taLink) {
+    public void setTaLink(@NonNull String taLink) {
         if (!taLink.equals(Constant.EMPTY_VALUE)) {
             this.taLink = taLink;
         } else
@@ -183,7 +203,7 @@ public class ContactCard {
     /**
      * @return the Youtube Channel link
      */
-    public String getYtLink() {
+    String getYtLink() {
         return ytLink;
     }
 
@@ -199,7 +219,7 @@ public class ContactCard {
     /**
      * @return the Twitter Profile link
      */
-    public String getTwttrLink() {
+    String getTwttrLink() {
         return twttrLink;
     }
 

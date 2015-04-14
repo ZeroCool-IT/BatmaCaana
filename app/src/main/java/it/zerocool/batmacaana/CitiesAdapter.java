@@ -7,6 +7,7 @@ package it.zerocool.batmacaana;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -35,7 +36,9 @@ import it.zerocool.batmacaana.utilities.Constant;
  */
 public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesViewHolder> {
 
+    @NonNull
     private final Context context;
+    @NonNull
     private final LayoutInflater inflater;
     private final FragmentManager fragmentManager;
     private final TextView nameTextView;
@@ -45,11 +48,12 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
     private final DrawerLayout drawerLayout;
     private final FragmentActivity activity;
     private final ImageButton selectorButton;
+    @NonNull
     private final NavigationDrawerFragment drawer;
     private List<City> items = Collections.emptyList();
 
 
-    public CitiesAdapter(Context context, List<City> data, NavigationDrawerFragment fragment) {
+    public CitiesAdapter(@NonNull Context context, List<City> data, @NonNull NavigationDrawerFragment fragment) {
         inflater = LayoutInflater.from(context);
         this.drawer = fragment;
         this.context = context;
@@ -86,6 +90,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
      * @see #getItemViewType(int)
      * @see #onBindViewHolder(ViewHolder, int)
      */
+    @NonNull
     @Override
     public CitiesAdapter.CitiesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.drawer_row_city, parent, false);
@@ -110,7 +115,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(CitiesAdapter.CitiesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CitiesAdapter.CitiesViewHolder holder, int position) {
         City current = items.get(position);
         holder.name.setText(current.getName());
         Picasso.with(context)
@@ -158,11 +163,14 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
 
     class CitiesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        @NonNull
         final TextView name;
+        @NonNull
         final ImageView avatar;
+        @NonNull
         final ImageButton notification;
 
-        public CitiesViewHolder(View itemView) {
+        public CitiesViewHolder(@NonNull View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.listText);
             avatar = (ImageView) itemView.findViewById(R.id.listIcon);
@@ -178,7 +186,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
          * @param v The view that was clicked.
          */
         @Override
-        public void onClick(View v) {
+        public void onClick(@NonNull View v) {
             if (v.getId() == R.id.listText || v.getId() == R.id.listIcon) {
                 City city = items.get(this.getAdapterPosition());
                 int uid = city.getUserID();

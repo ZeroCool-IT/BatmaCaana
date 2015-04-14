@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +30,8 @@ import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.nirhart.parallaxscroll.views.ParallaxScrollView;
 import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -106,7 +109,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View layout = inflater.inflate(R.layout.fragment_about, container, false);
@@ -228,7 +231,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
         if (status == TextToSpeech.SUCCESS) {
             Locale language = Locale.ITALIAN;
             ttsService.setLanguage(language);
-            Log.i("UTTERANCE", "service started");
             playTTSButton.setEnabled(true);
         } else
             Toast.makeText(getActivity(), R.string.tts_na, Toast.LENGTH_SHORT).show();
@@ -241,7 +243,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
      */
     @SuppressWarnings("deprecation")
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         switch (id) {
             case R.id.left_button:
@@ -394,6 +396,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
          * @see #onPostExecute
          * @see #publishProgress
          */
+        @Nullable
         @Override
         protected City doInBackground(String... params) {
             String uri = params[0];
@@ -406,7 +409,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
                     return null;
                 return (City) list.get(0);
             } catch (IOException e) {
-                Log.e("ZCLOG TASK ERROR", e.getMessage());
+                Log.e("TASK ERROR", e.getMessage());
                 return null;
             }
         }
@@ -423,7 +426,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
          * @see #onCancelled(Object)
          */
         @Override
-        protected void onPostExecute(City city) {
+        protected void onPostExecute(@Nullable City city) {
             progressBarCircularIndeterminate.setVisibility(View.GONE);
             parallaxScrollView.setVisibility(View.VISIBLE);
 
@@ -440,7 +443,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
                 dialog.show(getFragmentManager(), "Error retrieving data");
                 parallaxScrollView.setVisibility(View.GONE);
                 refreshButton.setVisibility(View.VISIBLE);
-                Log.e("ZCLOG TASK ERROR", "Failed to get results");
+                Log.e("TASK ERROR", "Failed to get results");
             }
         }
 

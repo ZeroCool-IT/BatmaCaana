@@ -4,6 +4,8 @@
 
 package it.zerocool.batmacaana.utilities;
 
+import android.support.annotation.NonNull;
+
 import java.util.Comparator;
 
 import it.zerocool.batmacaana.model.Route;
@@ -35,7 +37,7 @@ public class RouteComparator implements Comparator<Route> {
      * @throws ClassCastException if objects are not of the correct type.
      */
     @Override
-    public int compare(Route lhs, Route rhs) {
+    public int compare(@NonNull Route lhs, @NonNull Route rhs) {
         return Float.compare(lhs.getLength(), rhs.getLength());
     }
 }

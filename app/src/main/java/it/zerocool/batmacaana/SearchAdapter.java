@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -19,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -36,13 +39,15 @@ import it.zerocool.batmacaana.utilities.RequestUtilities;
  */
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
 
+    @NonNull
     private final Context context;
+    @NonNull
     private final LayoutInflater inflater;
     private final FragmentManager fragmentManager;
     private List<SearchResult> searchItems = Collections.emptyList();
 
 
-    public SearchAdapter(Context context, List<SearchResult> data, FragmentManager fm) {
+    public SearchAdapter(@NonNull Context context, List<SearchResult> data, FragmentManager fm) {
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.searchItems = data;
@@ -69,6 +74,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
      * @see #getItemViewType(int)
      * @see #onBindViewHolder(android.support.v7.widget.RecyclerView.ViewHolder, int)
      */
+    @NonNull
     @SuppressWarnings("JavadocReference")
     @Override
     public SearchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -95,7 +101,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
      */
     @SuppressWarnings("JavadocReference")
     @Override
-    public void onBindViewHolder(SearchViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SearchViewHolder holder, int position) {
         SearchResult current = searchItems.get(position);
         holder.header.setText(current.getheader());
         holder.description.setText(current.getDescription());
@@ -146,12 +152,16 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 
     class SearchViewHolder extends RecyclerView.ViewHolder {
 
+        @NonNull
         final TextView header;
+        @NonNull
         final TextView description;
+        @NonNull
         final TextView tags;
+        @NonNull
         final ImageView icon;
 
-        public SearchViewHolder(View itemView) {
+        public SearchViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -192,6 +202,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
          * @see #onPostExecute
          * @see #publishProgress
          */
+        @Nullable
         @Override
         protected String doInBackground(String... params) {
             String res;
@@ -202,7 +213,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
                 String json = RequestUtilities.requestJsonString(uri);
                 res = ParsingUtilities.parseSingleResult(json);
             } catch (IOException e) {
-                Log.e("ZCLOG", e.getMessage());
+                Log.e("TASK", e.getMessage());
 //                this.cancel(true);
                 return null;
             }
@@ -221,7 +232,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
          * @see #onCancelled(Object)
          */
         @Override
-        protected void onPostExecute(String s) {
+        protected void onPostExecute(@Nullable String s) {
             if (s != null && !s.equals(Constant.EMPTY_VALUE)) {
                 Intent intent = new Intent(context, DetailsActivity.class);
                 intent.putExtra(Constant.JSON_ARG, s);

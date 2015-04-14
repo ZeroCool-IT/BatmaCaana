@@ -6,6 +6,7 @@ package it.zerocool.batmacaana;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,11 +28,13 @@ import it.zerocool.batmacaana.utilities.Constant;
  */
 public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentViewHolder> {
 
+    @NonNull
     private final Context context;
+    @NonNull
     private final LayoutInflater inflater;
     private List<Cardable> contentItems = Collections.emptyList();
 
-    public ContentAdapter(Context context, List<Cardable> data) {
+    public ContentAdapter(@NonNull Context context, List<Cardable> data) {
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.contentItems = data;
@@ -57,6 +60,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
      * @see #getItemViewType(int)
      * @see #onBindViewHolder(ViewHolder, int)
      */
+    @NonNull
     @Override
     public ContentAdapter.ContentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.card_content_alt, parent, false);
@@ -81,7 +85,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(ContentAdapter.ContentViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ContentAdapter.ContentViewHolder holder, int position) {
         Cardable current = contentItems.get(position);
         holder.header.setText(current.getHeader());
         String subHeader = current.getSubheader();
@@ -119,12 +123,16 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
 
     class ContentViewHolder extends RecyclerView.ViewHolder {
 
+        @NonNull
         final TextView header;
+        @NonNull
         final TextView subHeader;
+        @NonNull
         final TextView accent;
+        @NonNull
         final ImageView imagery;
 
-        public ContentViewHolder(View itemView) {
+        public ContentViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

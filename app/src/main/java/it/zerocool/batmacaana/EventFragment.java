@@ -13,13 +13,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.ShareActionProvider;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,6 +38,8 @@ import com.shamanland.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -51,6 +53,7 @@ import it.zerocool.batmacaana.utilities.ParsingUtilities;
 public class EventFragment extends Fragment implements View.OnClickListener, TextToSpeech.OnInitListener {
     private static final String DESCRIPTION_TTS = "description";
     private ExpandableTextView tvDescription;
+    @Nullable
     private Event targetEvent;
     private ImageView ivEvent;
     private LinearLayout buttonLayout;
@@ -114,7 +117,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Inflate layout
         View layout = inflater.inflate(R.layout.fragment_event, container, false);
@@ -158,6 +161,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
         //Args read
         Event e = ParsingUtilities.parseSingleEvent(getArguments().getString(Constant.JSON_ARG));
         targetEvent = e;
+        assert e != null;
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(e.getName());
         if (!e.getTags().isEmpty()) {
             String tags = TextUtils.join(", ", e.getTags());
@@ -165,6 +169,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
         }
 
         //Load imagery and change colors
+        assert targetEvent != null;
         loadBitmap(Constant.URI_IMAGE_BIG + targetEvent.getImage());
 
 
@@ -187,7 +192,6 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
         if (status == TextToSpeech.SUCCESS) {
             Locale language = Locale.ITALIAN;
             ttsService.setLanguage(language);
-            Log.i("UTTERANCE", "service started");
             playTTSButton.setEnabled(true);
         } else
             Toast.makeText(getActivity(), R.string.tts_na, Toast.LENGTH_SHORT).show();
@@ -219,7 +223,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
         Picasso.with(getActivity()).load(url).into(loadTarget);
     }
 
-    private void fillFields(Event e) {
+    private void fillFields(@NonNull Event e) {
         if (e.getDescription() != null)
             tvDescription.setText(e.getDescription());
         else
@@ -267,6 +271,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
     }
 
     void setBitmap(Bitmap bitmap) {
+        assert targetEvent != null;
         Picasso.with(getActivity()).
                 load(Constant.URI_IMAGE_MEDIUM + targetEvent.getImage()).
                 error(R.drawable.im_noimage).
@@ -275,7 +280,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
 
     }
 
-    public void setPalette(Palette palette) {
+    public void setPalette(@NonNull Palette palette) {
         this.palette = palette;
         ((ActionBarActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(R.color.primaryColor)));
         if (Build.VERSION.SDK_INT >= 21) {
@@ -296,8 +301,9 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
      */
     @SuppressWarnings("deprecation")
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         if (v.getId() == R.id.phoneButton) {
+            assert targetEvent != null;
             String phone = targetEvent.getContact().getTelephone();
             if (phone != null) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
@@ -313,6 +319,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
 
 
         } else if (v.getId() == R.id.mailButton) {
+            assert targetEvent != null;
             String mail = targetEvent.getContact().getEmail();
             if (mail != null) {
                 Intent intent = new Intent(Intent.ACTION_SEND);
@@ -329,6 +336,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
             } else
                 Toast.makeText(getActivity(), R.string.no_email_available, Toast.LENGTH_SHORT).show();
         } else if (v.getId() == R.id.urlButton) {
+            assert targetEvent != null;
             String url = targetEvent.getContact().getUrl();
             if (url != null) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -344,6 +352,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
 
         } else if (v.getId() == R.id.floatingButton) {
 
+            assert targetEvent != null;
             Intent intent = new Intent(Intent.ACTION_INSERT)
                     .setData(CalendarContract.Events.CONTENT_URI)
                     .putExtra(CalendarContract.Events.TITLE, targetEvent.getName());
@@ -384,6 +393,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
 
         } else if (v.getId() == R.id.mapButton) {
             String uri = "geo:0,0?q=";
+            assert targetEvent != null;
             if (targetEvent.getLocation() != null || targetEvent.getContact().getAddress() != null) {
                 if (targetEvent.getLocation() != null) {
                     String lat = Double.valueOf(targetEvent.getLocation().getLatitude()).toString();
@@ -403,6 +413,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
             }
 
         } else if (v.getId() == R.id.imageView || v.getId() == R.id.fullscreenButton) {
+            assert targetEvent != null;
             if (targetEvent.getImage() != null) {
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
                 intent.putExtra(Constant.IMAGE, targetEvent.getImage());
@@ -418,6 +429,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
         } else if (v.getId() == R.id.tts_icon) {
             if (ttsService != null) {
                 if (!ttsService.isSpeaking()) {
+                    assert targetEvent != null;
                     String description = targetEvent.getDescription();
                     if (description != null && !description.isEmpty()) {
                         if (Build.VERSION.SDK_INT >= 21) {
@@ -449,7 +461,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
      */
     @SuppressWarnings("JavaDoc")
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 
         inflater.inflate(R.menu.menu_details, menu);
         MenuItem item = menu.findItem(R.id.menu_item_share);
@@ -480,11 +492,12 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
      * @see #onCreateOptionsMenu
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_item_share) {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_SEND);
+            assert targetEvent != null;
             String message = getResources().getString(R.string.share_event_message) +
                     targetEvent.getName() + "\n" +
                     targetEvent.getItemURI();

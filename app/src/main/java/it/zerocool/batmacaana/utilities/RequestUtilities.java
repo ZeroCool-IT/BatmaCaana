@@ -12,6 +12,9 @@ package it.zerocool.batmacaana.utilities;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.NonNull;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -44,7 +47,8 @@ public class RequestUtilities {
      * @param is is the InputStream to elaborate
      * @return InputStream data in String format
      */
-    private static String inputStreamToString(InputStream is) {
+    @Nullable
+    private static String inputStreamToString(@NonNull InputStream is) {
         String result = null;
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
@@ -63,6 +67,7 @@ public class RequestUtilities {
         return result;
     }
 
+    @Nullable
     public static String requestJsonString(String uri) throws IOException {
         URL url = new URL(uri);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -83,7 +88,7 @@ public class RequestUtilities {
      * @param context is the context of SearchActivity
      * @return true if device is connected, false otherwise
      */
-    public static boolean isOnline(Context context) {
+    public static boolean isOnline(@NonNull Context context) {
         ConnectivityManager cm = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
 

@@ -166,7 +166,7 @@
                             android:id="@id/expand_collapse"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="right|bottom"
+                            android:layout_gravity="end|bottom"
                             android:layout_margin="8dp"
                             android:background="@android:color/transparent"
                             android:contentDescription="@string/expand_description" />
@@ -277,6 +277,7 @@
         android:layout_alignParentEnd="false"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="-32dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:baselineAlignBottom="false"
         android:src="@drawable/ic_navigation_white_24dp"

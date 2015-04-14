@@ -10,6 +10,7 @@
 package it.zerocool.batmacaana.model;
 
 import android.location.Location;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import java.text.DecimalFormat;
@@ -27,6 +28,7 @@ import it.zerocool.batmacaana.utilities.Constant;
 public class Place implements Cardable {
 
     private final int id;
+    @NonNull
     private final LinkedList<String> tags;
     private String name;
     private String image;
@@ -92,7 +94,7 @@ public class Place implements Cardable {
     /**
      * @param image the image of the place to set
      */
-    public void setImage(String image) {
+    public void setImage(@NonNull String image) {
         if (!image.equals(Constant.EMPTY_VALUE)) {
             this.image = image;
         } else
@@ -119,6 +121,7 @@ public class Place implements Cardable {
     /**
      * @return the tags list
      */
+    @NonNull
     public LinkedList<String> getTags() {
         return tags;
     }
@@ -161,7 +164,7 @@ public class Place implements Cardable {
     /**
      * @param description the description of the place to set
      */
-    public void setDescription(String description) {
+    public void setDescription(@NonNull String description) {
         if (!description.equals(Constant.EMPTY_VALUE)) {
             this.description = description;
         } else
@@ -262,6 +265,7 @@ public class Place implements Cardable {
         return false;
     }
 
+    @NonNull
     public String getItemURI() {
         return Constant.SHARE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
     }
@@ -291,6 +295,7 @@ public class Place implements Cardable {
      *
      * @return a String representing card's sub-header
      */
+    @NonNull
     @Override
     public String getSubheader() {
         return TextUtils.join(", ", getTags());

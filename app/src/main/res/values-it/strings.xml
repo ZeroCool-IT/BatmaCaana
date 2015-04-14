@@ -31,7 +31,6 @@
     <string name="earth_warning_title">App necessaria</string>
     <string name="email">E-Mail</string>
     <string name="erase_favorite_message">Questo cancellerà i tuoi preferiti!</string>
-    <string name="event_notification_enabled">Eventi</string>
     <string name="favorite">Preferiti</string>
     <string name="favorite_added">&#160;aggiunto alla tua lista preferiti!</string>
     <string name="favorite_removed">&#160;rimosso dalla tua lista preferiti!</string>
@@ -44,7 +43,6 @@
     <string name="map">Mappa</string>
     <string name="nav_drawer_close">Menu di navigazione chiuso</string>
     <string name="nav_drawer_open">Menu di navigazione aperto</string>
-    <string name="news_notification_enabled">Notizie</string>
     <string name="no">No</string>
     <string name="no_browser_app">Non è installato alcun browser web sul dispositivo!</string>
     <string name="no_dial_app">Non è installata alcuna applicazione per chiamare sul dispositivo!</string>
@@ -60,7 +58,6 @@
     <string name="no_url_available">Nessun sito web disponibile!</string>
     <string name="notification_event_title">Nuovo evento a &#160;</string>
     <string name="notification_news_title">Ultime notizie a&#160;</string>
-    <string name="notification_title">Abilita notifiche</string>
     <string name="r_u_sure_title">Sei sicuro?</string>
     <string name="remember_choose">Ricordare questa scelta?</string>
     <string name="restore_alerts">Ripristina avvisi applicazione</string>

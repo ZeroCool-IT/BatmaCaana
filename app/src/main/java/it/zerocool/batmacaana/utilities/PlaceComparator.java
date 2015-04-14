@@ -4,6 +4,8 @@
 
 package it.zerocool.batmacaana.utilities;
 
+import android.support.annotation.NonNull;
+
 import java.util.Comparator;
 
 import it.zerocool.batmacaana.model.Place;
@@ -35,7 +37,7 @@ public class PlaceComparator implements Comparator<Place> {
      * @throws ClassCastException if objects are not of the correct type.
      */
     @Override
-    public int compare(Place lhs, Place rhs) {
+    public int compare(@NonNull Place lhs, @NonNull Place rhs) {
         return Float.compare(lhs.getDistanceFromCurrentPosition(), rhs.getDistanceFromCurrentPosition());
     }
 

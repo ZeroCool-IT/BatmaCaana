@@ -6,6 +6,7 @@ package it.zerocool.batmacaana;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -28,12 +29,14 @@ import it.zerocool.batmacaana.utilities.Constant;
  */
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> {
 
+    @NonNull
     private final Context context;
+    @NonNull
     private final LayoutInflater inflater;
     private List<Place> favoriteItems = Collections.emptyList();
 
 
-    public FavoriteAdapter(Context context, List<Place> data) {
+    public FavoriteAdapter(@NonNull Context context, List<Place> data) {
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.favoriteItems = data;
@@ -59,6 +62,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
      * @see #getItemViewType(int)
      * @see #onBindViewHolder(ViewHolder, int)
      */
+    @NonNull
     @Override
     public FavoriteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.result_row, parent, false);
@@ -83,7 +87,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(FavoriteViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FavoriteViewHolder holder, int position) {
         Place current = favoriteItems.get(position);
         holder.header.setText(current.getName());
         holder.description.setText(current.getDescription());
@@ -125,12 +129,16 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
 
     class FavoriteViewHolder extends RecyclerView.ViewHolder {
 
+        @NonNull
         final TextView header;
+        @NonNull
         final TextView description;
+        @NonNull
         final TextView tags;
+        @NonNull
         final ImageView icon;
 
-        public FavoriteViewHolder(final View itemView) {
+        public FavoriteViewHolder(@NonNull final View itemView) {
             super(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -47,6 +48,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     private DrawerLayout mDrawerLayout;
     private boolean mUserLearnedDrawer;
     private boolean mFromSavedInstanceState;
+    @org.jetbrains.annotations.Nullable
     private CitiesAdapter customersAdapter;
     private TextView selectorTv;
     private ImageView selectorAvatar;
@@ -60,7 +62,8 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     public NavigationDrawerFragment() {
     }
 
-    private static List<DrawerItem> getData(Context context) {
+    @NonNull
+    private static List<DrawerItem> getData(@NonNull Context context) {
         List<DrawerItem> data = new ArrayList<>();
         int[] icons = {R.drawable.ic_local_library_grey600_24dp,
                 R.drawable.ic_beenhere_grey600_24dp,
@@ -91,7 +94,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mUserLearnedDrawer = Boolean.valueOf(SharedPreferencesProvider.readFromPreferences(getActivity(), Constant.KEY_USER_LEARNED_DRAWER, "false"));
         if (savedInstanceState != null) {
@@ -100,7 +103,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
 
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
@@ -147,7 +150,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         return layout;
     }
 
-    public void setUp(int fragmentID, DrawerLayout drawerLayout, final Toolbar toolbar) {
+    public void setUp(int fragmentID, DrawerLayout drawerLayout, @NonNull final Toolbar toolbar) {
         View containerView = getActivity().findViewById(fragmentID);
         mDrawerLayout = drawerLayout;
         adapter.setDrawerLayout(mDrawerLayout);
@@ -230,7 +233,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
      * @param v The view that was clicked.
      */
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         int id = v.getId();
         if (id == R.id.selector_button || id == R.id.selector_avatar || id == R.id.selector_text || id == R.id.containerDrawerImage || id == R.id.app_logo) {
             if (!customersShown) {
@@ -323,10 +326,12 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
          * @see #onPostExecute
          * @see #publishProgress
          */
+        @NonNull
         @Override
         protected ArrayList<City> doInBackground(Void... params) {
             DBHelper helper = DBHelper.getInstance(getActivity());
             SQLiteDatabase db = helper.getWritabelDB();
+            assert db != null;
             return DBManager.getCustomers(db);
         }
 
@@ -342,7 +347,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
          * @see #onCancelled(Object)
          */
         @Override
-        protected void onPostExecute(ArrayList<City> cities) {
+        protected void onPostExecute(@org.jetbrains.annotations.Nullable ArrayList<City> cities) {
             if (cities != null) {
                 customersAdapter = new CitiesAdapter(getActivity(), cities, NavigationDrawerFragment.this);
 

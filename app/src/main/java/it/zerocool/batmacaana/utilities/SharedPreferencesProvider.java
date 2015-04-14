@@ -6,6 +6,7 @@ package it.zerocool.batmacaana.utilities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 
 /**
  * Utility class providing application shared preferences
@@ -20,7 +21,7 @@ public class SharedPreferencesProvider {
      * @param preferenceName  is the name of the preference's field
      * @param preferenceValue is the value to save
      */
-    public static void saveToPreferences(Context context, String preferenceName, String preferenceValue) {
+    public static void saveToPreferences(@NonNull Context context, String preferenceName, String preferenceValue) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(preferenceName, preferenceValue);
@@ -35,7 +36,7 @@ public class SharedPreferencesProvider {
      * @param preferenceValue is the default value to return if the preference doesn't exists
      * @return the String in the field preferenceName
      */
-    public static String readFromPreferences(Context context, String preferenceName, String preferenceValue) {
+    public static String readFromPreferences(@NonNull Context context, String preferenceName, String preferenceValue) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(preferenceName, preferenceValue);
     }

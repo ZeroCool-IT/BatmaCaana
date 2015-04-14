@@ -10,6 +10,8 @@
 
 package it.zerocool.batmacaana.model;
 
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Public interface representing all the items that can be represented with a CardView
  */
@@ -20,6 +22,7 @@ public interface Cardable {
      *
      * @return a String representing card's header
      */
+    @Nullable
     public String getHeader();
 
     /**
@@ -27,6 +30,7 @@ public interface Cardable {
      *
      * @return a String representing the imagery for the card
      */
+    @Nullable
     public String getImagery();
 
     /**
@@ -34,6 +38,7 @@ public interface Cardable {
      *
      * @return a String representing card's sub-header
      */
+    @Nullable
     public String getSubheader();
 
     /**
@@ -41,6 +46,7 @@ public interface Cardable {
      *
      * @return a String representing the accent information of the card
      */
+    @Nullable
     public String getAccentInfo();
 
     /**
@@ -48,6 +54,7 @@ public interface Cardable {
      *
      * @return a JSON String representing the object
      */
+    @Nullable
     public String getJson();
 
     /**

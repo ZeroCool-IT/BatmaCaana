@@ -74,9 +74,6 @@
     <string name="android_logo_attribution">The Android robot is reproduced or modified from work created and shared by Google and used according to terms described in the Creative Commons 3.0 Attribution License.</string>
     <string name="title_activity_fullscreen" translatable="false">FullscreenActivity</string>
     <string name="title_activity_search_results" translatable="false">SearchResultsActivity</string>
-    <string name="notification_title">Enable Notification</string>
-    <string name="news_notification_enabled">News</string>
-    <string name="event_notification_enabled">Event</string>
     <string name="drawer_default">Choose the default start view…</string>
     <string name="general_settings">General settings</string>
     <string name="clear_favorite">Clear favorite</string>

@@ -7,6 +7,7 @@ package it.zerocool.batmacaana;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -17,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +34,9 @@ import it.zerocool.batmacaana.utilities.NotificationsUtil;
  */
 public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerViewHolder> {
 
+    @NonNull
     private final Context context;
+    @NonNull
     private final LayoutInflater inflater;
     private final FragmentManager fragmentManager;
     private List<DrawerItem> drawerItems = Collections.emptyList();
@@ -40,13 +45,14 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
     private DrawerLayout drawerLayout;
 
 
-    public DrawerAdapter(Context context, List<DrawerItem> data, FragmentManager fm) {
+    public DrawerAdapter(@NonNull Context context, List<DrawerItem> data, FragmentManager fm) {
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.drawerItems = data;
         this.fragmentManager = fm;
     }
 
+    @NonNull
     @Override
     public DrawerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
@@ -66,7 +72,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         return new DrawerViewHolder(view);
     }
 
-    private void fillNotificationTime(View v) {
+    private void fillNotificationTime(@NonNull View v) {
         TextView notificationTimeTV = (TextView) v.findViewById(R.id.activate_time);
         if (!NotificationsUtil.isNotificationsDisabled()) {
             notificationTimeTV.setText(R.string.enabled);
@@ -82,7 +88,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
     }
 
     @Override
-    public void onBindViewHolder(DrawerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DrawerViewHolder holder, int position) {
         DrawerItem current = drawerItems.get(position);
         holder.title.setText(current.title);
         holder.icon.setImageResource(current.iconID);
@@ -121,7 +127,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         return position;
     }
 
-    public void selectView(View v) {
+    void selectView(@NonNull View v) {
         TextView title = (TextView) v.findViewById(R.id.listText);
         /*title.setTextColor(context.getResources().getColor(R.color.primaryColor));
         v.setBackgroundColor(context.getResources().getColor(R.color.selected_item));*/
@@ -130,7 +136,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         previousSelected = v;
     }
 
-    public void unselectView(View v) {
+    void unselectView(@Nullable View v) {
         if (v != null) {
             TextView title = (TextView) v.findViewById(R.id.listText);
             title.setTextColor(context.getResources().getColor(R.color.primary_text_color));
@@ -149,10 +155,12 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
 
     class DrawerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        @NonNull
         final TextView title;
+        @NonNull
         final ImageView icon;
 
-        public DrawerViewHolder(View itemView) {
+        public DrawerViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             title = (TextView) itemView.findViewById(R.id.listText);
@@ -160,7 +168,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(@NonNull View v) {
             int position = getAdapterPosition();
             selectItem(position);
             if (position != Constant.SETTINGS && position != Constant.UPDATE && position != Constant.SUBHEADER

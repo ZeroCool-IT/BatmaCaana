@@ -11,7 +11,10 @@ package it.zerocool.batmacaana.model;
 
 import android.content.Context;
 import android.location.Location;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -33,7 +36,9 @@ import it.zerocool.batmacaana.utilities.ParsingUtilities;
 public class Event implements Cardable {
 
     private final int id;
+    @NonNull
     private final LinkedList<String> tags;
+    @Nullable
     private String name;
     private int type;
     private String json;
@@ -41,8 +46,11 @@ public class Event implements Cardable {
     private GregorianCalendar endDate;
     private GregorianCalendar startHour;
     private GregorianCalendar endHour;
+    @Nullable
     private String place;
+    @Nullable
     private String image;
+    @Nullable
     private String description;
     private Location location;
     private ContactCard contact;
@@ -77,6 +85,7 @@ public class Event implements Cardable {
     /**
      * @return the name of the event
      */
+    @Nullable
     public String getName() {
         return name;
     }
@@ -84,7 +93,7 @@ public class Event implements Cardable {
     /**
      * @param name the name of the event to set
      */
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         if (!name.equals(Constant.EMPTY_VALUE)) {
             this.name = name;
         } else
@@ -99,13 +108,6 @@ public class Event implements Cardable {
     }
 
     /**
-     * @param date the start date of the event to set
-     */
-    void setStartDate(GregorianCalendar date) {
-        this.startDate = date;
-    }
-
-    /**
      * Set the event's start date parsing infos from String
      *
      * @param date it's the start date to set (YYYY-mm-DD format)
@@ -117,17 +119,17 @@ public class Event implements Cardable {
     }
 
     /**
+     * @param date the start date of the event to set
+     */
+    void setStartDate(GregorianCalendar date) {
+        this.startDate = date;
+    }
+
+    /**
      * @return the end date of the event
      */
     public GregorianCalendar getEndDate() {
         return endDate;
-    }
-
-    /**
-     * @param endDate is the end date of the event to set
-     */
-    void setEndDate(GregorianCalendar endDate) {
-        this.endDate = endDate;
     }
 
     /**
@@ -142,17 +144,17 @@ public class Event implements Cardable {
     }
 
     /**
+     * @param endDate is the end date of the event to set
+     */
+    void setEndDate(GregorianCalendar endDate) {
+        this.endDate = endDate;
+    }
+
+    /**
      * @return the start hour of the event
      */
     public GregorianCalendar getStartHour() {
         return startHour;
-    }
-
-    /**
-     * @param startHour the start hour of the event to set
-     */
-    void setStartHour(GregorianCalendar startHour) {
-        this.startHour = startHour;
     }
 
     /**
@@ -166,17 +168,17 @@ public class Event implements Cardable {
     }
 
     /**
+     * @param startHour the start hour of the event to set
+     */
+    void setStartHour(GregorianCalendar startHour) {
+        this.startHour = startHour;
+    }
+
+    /**
      * @return the start hour of the event
      */
     public GregorianCalendar getEndHour() {
         return endHour;
-    }
-
-    /**
-     * @param endHour the end hour of the event to set
-     */
-    void setEndHour(GregorianCalendar endHour) {
-        this.endHour = endHour;
     }
 
     /**
@@ -190,8 +192,16 @@ public class Event implements Cardable {
     }
 
     /**
+     * @param endHour the end hour of the event to set
+     */
+    void setEndHour(GregorianCalendar endHour) {
+        this.endHour = endHour;
+    }
+
+    /**
      * @return The name of the place of the event
      */
+    @Nullable
     public String getPlace() {
         return place;
     }
@@ -201,7 +211,7 @@ public class Event implements Cardable {
      *
      * @param place is the place of the event to set
      */
-    public void setPlace(String place) {
+    public void setPlace(@NonNull String place) {
         if (!place.equals(Constant.EMPTY_VALUE)) {
             this.place = place;
         } else
@@ -211,6 +221,7 @@ public class Event implements Cardable {
     /**
      * @return the image of the event
      */
+    @Nullable
     public String getImage() {
         return image;
     }
@@ -218,7 +229,7 @@ public class Event implements Cardable {
     /**
      * @param image the image  of the event to set
      */
-    public void setImage(String image) {
+    public void setImage(@NonNull String image) {
         if (!image.equals(Constant.EMPTY_VALUE)) {
             this.image = image;
         } else
@@ -228,6 +239,7 @@ public class Event implements Cardable {
     /**
      * @return the tags list of the event
      */
+    @NonNull
     public LinkedList<String> getTags() {
         return tags;
     }
@@ -247,7 +259,7 @@ public class Event implements Cardable {
      *
      * @param csv is the string in CSV format
      */
-    public void setTagsFromCSV(String csv) {
+    public void setTagsFromCSV(@Nullable String csv) {
         if (csv != null) {
             StringTokenizer tokenizer = new StringTokenizer(csv, ",");
             while (tokenizer.hasMoreTokens()) {
@@ -264,6 +276,7 @@ public class Event implements Cardable {
     /**
      * @return the description of the event
      */
+    @Nullable
     public String getDescription() {
         return description;
     }
@@ -271,7 +284,7 @@ public class Event implements Cardable {
     /**
      * @param description the description of the event to set
      */
-    public void setDescription(String description) {
+    public void setDescription(@NonNull String description) {
         if (!description.equals(Constant.EMPTY_VALUE)) {
             this.description = description;
         } else
@@ -309,7 +322,7 @@ public class Event implements Cardable {
     /**
      * Redefine equals: 2 events are equals if their ids are equals
      */
-    public boolean equals(Object o) {
+    public boolean equals(@Nullable Object o) {
         if (o != null && o.getClass() == Event.class) {
             Event e = (Event) o;
             return e.getId() == this.getId();
@@ -317,6 +330,7 @@ public class Event implements Cardable {
         return false;
     }
 
+    @NonNull
     public String getItemURI() {
         return Constant.SHARE_URI + Integer.valueOf(getId()).toString() + "&" + Integer.valueOf(getType()).toString();
     }
@@ -326,6 +340,7 @@ public class Event implements Cardable {
      *
      * @return a String representing card's header
      */
+    @Nullable
     @Override
     public String getHeader() {
         return getName();
@@ -336,6 +351,7 @@ public class Event implements Cardable {
      *
      * @return a String representing the imagery for the card
      */
+    @Nullable
     @Override
     public String getImagery() {
         return getImage();
@@ -346,6 +362,7 @@ public class Event implements Cardable {
      *
      * @return a String representing card's sub-header
      */
+    @NonNull
     @Override
     public String getSubheader() {
         return TextUtils.join(", ", getTags());
@@ -354,6 +371,7 @@ public class Event implements Cardable {
     /**
      * @return Event start date to String
      */
+    @Nullable
     String startDateToString() {
         if (startDate != null) {
             if (startHour != null) {
@@ -373,6 +391,7 @@ public class Event implements Cardable {
     /**
      * @return Event end date to String
      */
+    @Nullable
     String endDateToString() {
         if (endDate != null) {
             if (endHour != null) {
@@ -394,6 +413,7 @@ public class Event implements Cardable {
      *
      * @return a String with event start and end time
      */
+    @Nullable
     public String eventTimeToString() {
         Context context = ApplicationContextProvider.getContext();
         if (startDateToString() != null) {

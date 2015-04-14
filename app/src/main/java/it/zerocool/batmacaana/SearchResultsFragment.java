@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,8 @@ import android.view.ViewGroup;
 
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -31,6 +34,7 @@ import it.zerocool.batmacaana.utilities.ParsingUtilities;
 import it.zerocool.batmacaana.utilities.RequestUtilities;
 
 
+@SuppressWarnings("ConstantConditions")
 public class SearchResultsFragment extends Fragment {
 
 
@@ -44,7 +48,7 @@ public class SearchResultsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_search_results, container, false);
         Toolbar toolbar = (Toolbar) layout.findViewById(R.id.appbar);
@@ -63,7 +67,7 @@ public class SearchResultsFragment extends Fragment {
         return layout;
     }
 
-    private void getData(String query) {
+    private void getData(@NonNull String query) {
         ((ActionBarActivity) getActivity())
                 .getSupportActionBar()
                 .setTitle(getResources()
@@ -140,7 +144,7 @@ public class SearchResultsFragment extends Fragment {
          * @see #onCancelled(Object)
          */
         @Override
-        protected void onPostExecute(List<SearchResult> searchResults) {
+        protected void onPostExecute(@Nullable List<SearchResult> searchResults) {
             progressBar.setVisibility(View.GONE);
             rvResults.setVisibility(View.VISIBLE);
 
@@ -156,11 +160,11 @@ public class SearchResultsFragment extends Fragment {
                 if (searchResults != null && searchResults.isEmpty()) {
                     title = getResources().getString(R.string.no_results);
                     message = getResources().getString(R.string.no_search_results) + query;
-                    Log.i("ZCLOG", "No results!");
+                    Log.i("TASK", "No results!");
                 } else {
                     title = getResources().getString(R.string.dialog_title_uhoh);
                     message = getResources().getString(R.string.dialog_message_error);
-                    Log.e("ZCLOG TASK ERROR", "Failed to get results");
+                    Log.e("TASK ERROR", "Failed to get results");
 
                 }
                 args.putString(WarningDialog.TITLE, title);
@@ -185,7 +189,6 @@ public class SearchResultsFragment extends Fragment {
         @Override
         protected void onCancelled() {
             super.onCancelled();
-            Log.i("ZCLOG", "onCancelled() called");
         }
 
         /**
@@ -202,6 +205,7 @@ public class SearchResultsFragment extends Fragment {
          * @see #onPostExecute
          * @see #publishProgress
          */
+        @Nullable
         @Override
         protected List<SearchResult> doInBackground(String... params) {
             String uri = params[0];
@@ -216,7 +220,7 @@ public class SearchResultsFragment extends Fragment {
                 res = ParsingUtilities.parseSearchResultsFromJSON(json);
                 return res;
             } catch (IOException e) {
-                Log.e("ZCLOG TASK", e.getMessage());
+                Log.e("TASK", e.getMessage());
                 e.printStackTrace();
             }
             return null;

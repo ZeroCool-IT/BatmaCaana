@@ -33,7 +33,7 @@
         android:paddingRight="8dp"
         android:paddingTop="4dp">
 
-    <TextView
+        <TextView
             android:id="@+id/listText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             android:fontFamily="sans-serif-medium"
             android:text="@string/dummy_text"
             android:textColor="@android:color/holo_green_light"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
     </RelativeLayout>
 
 

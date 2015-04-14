@@ -4,6 +4,7 @@
 
 package it.zerocool.batmacaana.listener;
 
+import android.support.annotation.NonNull;
 import android.support.v7.graphics.Palette;
 
 import java.lang.ref.WeakReference;
@@ -20,6 +21,7 @@ public class EventPaletteListener implements Palette.PaletteAsyncListener {
         this.activityWeakReference = activityWeakReference;
     }
 
+    @NonNull
     public static EventPaletteListener newInstance(EventFragment activity) {
         WeakReference<EventFragment> activityWeakReference = new WeakReference<>(activity);
         return new EventPaletteListener(activityWeakReference);

@@ -15,11 +15,14 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,6 +49,7 @@ public class GcmIntentService extends IntentService {
     private final SharedPreferences sharedPreferences;
     private NotificationCompat.Builder builder;
     private NotificationManager mNotificationManager;
+    @Nullable
     private ArrayList<City> customers;
 
     public GcmIntentService() {
@@ -56,7 +60,7 @@ public class GcmIntentService extends IntentService {
     }
 
     @Override
-    protected void onHandleIntent(Intent intent) {
+    protected void onHandleIntent(@NonNull Intent intent) {
         Bundle extras = intent.getExtras();
         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
         // The getMessageType() intent parameter must be the intent you received
@@ -73,46 +77,50 @@ public class GcmIntentService extends IntentService {
              * any message types you're not interested in, or that you don't
              * recognize.
              */
-            if (GoogleCloudMessaging.
-                    MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
-                sendNotification("Send error: " + extras.toString());
-            } else if (GoogleCloudMessaging.
-                    MESSAGE_TYPE_DELETED.equals(messageType)) {
-                sendNotification("Deleted messages on server: " +
-                        extras.toString());
-                // If it's a regular GCM message, do some work.
-            } else if (GoogleCloudMessaging.
-                    MESSAGE_TYPE_MESSAGE.equals(messageType)) {
-                Map<String, String> extrasMap = parseMessage(extras);
-                int type = Integer.parseInt(extrasMap.get(Constant.TYPE_ARG));
-                int uid = Integer.parseInt(extrasMap.get(Constant.USER_ID_ARG));
-                switch (type) {
-                    case Constant.TYPE_NEWS:
-                        if (isEnabled(uid, type)) {
-                            sendNewsNotification(extrasMap);
-                        }
-                        break;
-                    case Constant.TYPE_EVENT:
-                        if (isEnabled(uid, type)) {
-                            sendEventNotification(extrasMap);
-                        }
-                        break;
-                    default:
-                        sendNotification(extras.toString());
-                        break;
-                }
-                Log.i(TAG, "Received: " + extras.toString());
+            switch (messageType) {
+                case GoogleCloudMessaging.
+                        MESSAGE_TYPE_SEND_ERROR:
+                    sendNotification("Send error: " + extras.toString());
+                    break;
+                case GoogleCloudMessaging.
+                        MESSAGE_TYPE_DELETED:
+                    sendNotification("Deleted messages on server: " +
+                            extras.toString());
+                    // If it's a regular GCM message, do some work.
+                    break;
+                case GoogleCloudMessaging.
+                        MESSAGE_TYPE_MESSAGE:
+                    Map<String, String> extrasMap = parseMessage(extras);
+                    int type = Integer.parseInt(extrasMap.get(Constant.TYPE_ARG));
+                    int uid = Integer.parseInt(extrasMap.get(Constant.USER_ID_ARG));
+                    switch (type) {
+                        case Constant.TYPE_NEWS:
+                            if (isEnabled(uid, type)) {
+                                sendNewsNotification(extrasMap);
+                            }
+                            break;
+                        case Constant.TYPE_EVENT:
+                            if (isEnabled(uid, type)) {
+                                sendEventNotification(extrasMap);
+                            }
+                            break;
+                        default:
+                            sendNotification(extras.toString());
+                            break;
+                    }
+                    Log.i(TAG, "Received: " + extras.toString());
+                    break;
             }
         }
         // Release the wake lock provided by the WakefulBroadcastReceiver.
         GcmBroadcastReceiver.completeWakefulIntent(intent);
     }
 
-    private Map<String, String> parseMessage(Bundle extras) {
+    @NonNull
+    private Map<String, String> parseMessage(@NonNull Bundle extras) {
         Map<String, String> result = new HashMap<>();
         String uid = extras.getString(Constant.USER_ID_ARG);
         result.put(Constant.USER_ID_ARG, uid);
-        Log.i("ZCLOG UID NOTIFICATION", uid);
         String id = extras.getString(Constant.ID_ARG);
         result.put(Constant.ID_ARG, id);
         String type = extras.getString(Constant.TYPE_ARG);
@@ -129,7 +137,7 @@ public class GcmIntentService extends IntentService {
         Log.i("NOTIFICATION", msg);
     }
 
-    private void sendNewsNotification(Map<String, String> map) {
+    private void sendNewsNotification(@NonNull Map<String, String> map) {
         int number = Integer.parseInt(sharedPreferences.getString(Constant.KEY_NEWS_NOTIFICATION_NUMBER, "0"));
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -182,7 +190,7 @@ public class GcmIntentService extends IntentService {
         saveToPreferences(Constant.KEY_NEWS_NOTIFICATION_NUMBER, Integer.valueOf(number).toString());
     }
 
-    private void sendEventNotification(Map<String, String> map) {
+    private void sendEventNotification(@NonNull Map<String, String> map) {
         int number = Integer.parseInt(sharedPreferences.getString(Constant.KEY_EVENT_NOTIFICATION_NUMBER, "0"));
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -237,6 +245,7 @@ public class GcmIntentService extends IntentService {
         editor.apply();
     }
 
+    @Nullable
     private String findNameByUid(String uid) {
         if (customers != null) {
             for (City c : customers) {
@@ -278,10 +287,12 @@ public class GcmIntentService extends IntentService {
          * @see #onPostExecute
          * @see #publishProgress
          */
+        @NonNull
         @Override
         protected ArrayList<City> doInBackground(Void... params) {
             DBHelper helper = DBHelper.getInstance(ApplicationContextProvider.getContext());
             SQLiteDatabase db = helper.getWritabelDB();
+            assert db != null;
             return DBManager.getCustomers(db);
         }
 
@@ -297,7 +308,7 @@ public class GcmIntentService extends IntentService {
          * @see #onCancelled(Object)
          */
         @Override
-        protected void onPostExecute(ArrayList<City> cities) {
+        protected void onPostExecute(@Nullable ArrayList<City> cities) {
             if (cities != null) {
                 customers = cities;
 

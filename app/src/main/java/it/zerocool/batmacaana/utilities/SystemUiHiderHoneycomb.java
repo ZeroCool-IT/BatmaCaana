@@ -7,6 +7,7 @@ package it.zerocool.batmacaana.utilities;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -41,6 +42,7 @@ public class SystemUiHiderHoneycomb extends SystemUiHiderBase {
      * {@link android.view.View.OnSystemUiVisibilityChangeListener}.
      */
     private boolean mVisible = true;
+    @NonNull
     private View.OnSystemUiVisibilityChangeListener mSystemUiVisibilityChangeListener
             = new View.OnSystemUiVisibilityChangeListener() {
         @Override

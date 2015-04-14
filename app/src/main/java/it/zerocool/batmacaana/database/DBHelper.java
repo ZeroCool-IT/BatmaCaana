@@ -8,7 +8,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
 import android.util.Log;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,6 +28,7 @@ import it.zerocool.batmacaana.R;
 public class DBHelper extends SQLiteOpenHelper {
 
     private static DBHelper singleton;
+    @Nullable
     private static SQLiteDatabase writabelDB;
     private final Context context;
 
@@ -59,7 +63,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param db The database.
      */
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(@NonNull SQLiteDatabase db) {
         try {
             InputStream inputStream = context.getResources().openRawResource(R.raw.build_db);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "ISO-8859-1"));
@@ -111,6 +115,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *
      * @return a writable instance of the DB
      */
+    @Nullable
     public SQLiteDatabase getWritabelDB() {
         if (writabelDB == null || !writabelDB.isOpen()) {
             writabelDB = this.getWritableDatabase();

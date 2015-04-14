@@ -6,7 +6,10 @@ package it.zerocool.batmacaana.utilities;
 
 import android.app.Activity;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.view.View;
+
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A utility class that helps with showing and hiding system UI such as the
@@ -59,6 +62,7 @@ public abstract class SystemUiHider {
     /**
      * A dummy no-op callback for use when there is no other listener set.
      */
+    @NonNull
     private static OnVisibilityChangeListener sDummyListener = new OnVisibilityChangeListener() {
         @Override
         public void onVisibilityChange(boolean visible) {
@@ -67,6 +71,7 @@ public abstract class SystemUiHider {
     /**
      * The current visibility callback.
      */
+    @Nullable
     protected OnVisibilityChangeListener mOnVisibilityChangeListener = sDummyListener;
     /**
      * The activity associated with this UI hider object.
@@ -105,6 +110,7 @@ public abstract class SystemUiHider {
      *                   {@link #FLAG_HIDE_NAVIGATION}, and
      *                   {@link #FLAG_LAYOUT_IN_SCREEN_OLDER_DEVICES}.
      */
+    @NonNull
     public static SystemUiHider getInstance(Activity activity, View anchorView, int flags) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             return new SystemUiHiderHoneycomb(activity, anchorView, flags);
@@ -149,7 +155,7 @@ public abstract class SystemUiHider {
      * Registers a callback, to be triggered when the system UI visibility
      * changes.
      */
-    public void setOnVisibilityChangeListener(OnVisibilityChangeListener listener) {
+    public void setOnVisibilityChangeListener(@Nullable OnVisibilityChangeListener listener) {
         if (listener == null) {
             listener = sDummyListener;
         }

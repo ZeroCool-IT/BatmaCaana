@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.preference.DialogPreference;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 
 import it.zerocool.batmacaana.utilities.ApplicationContextProvider;
@@ -19,7 +20,7 @@ import it.zerocool.batmacaana.utilities.Constant;
  */
 class RestoreAlertsDialogPreference extends DialogPreference {
 
-    public RestoreAlertsDialogPreference(Context context, AttributeSet attrs) {
+    public RestoreAlertsDialogPreference(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
     }
 

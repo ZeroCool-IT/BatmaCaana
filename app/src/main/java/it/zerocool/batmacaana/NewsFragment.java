@@ -12,13 +12,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.ShareActionProvider;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,6 +36,8 @@ import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Locale;
 
 import it.zerocool.batmacaana.listener.NewsPaletteListener;
@@ -48,6 +50,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
 
     private static final String DESCRIPTION_TTS = "description";
     private ExpandableTextView tvBody;
+    @Nullable
     private News targetNews;
     private ImageView playTTSButton;
     private ImageView ivNews;
@@ -100,7 +103,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Inflate layout
         View layout = inflater.inflate(R.layout.fragment_news, container, false);
@@ -129,12 +132,14 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
         //Args read
         News n = ParsingUtilities.parseSingleNews(getArguments().getString(Constant.JSON_ARG));
         targetNews = n;
+        assert n != null;
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(n.getTitle());
         if (n.getDateToString() != null) {
             ((ActionBarActivity) getActivity()).getSupportActionBar().setSubtitle(n.getDateToString());
         }
 
         //Load imagery and change colors
+        assert targetNews != null;
         loadBitmap(Constant.URI_IMAGE_BIG + targetNews.getImage());
 
 
@@ -156,7 +161,6 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
         if (status == TextToSpeech.SUCCESS) {
             Locale language = Locale.ITALIAN;
             ttsService.setLanguage(language);
-            Log.i("UTTERANCE", "service started");
             playTTSButton.setEnabled(true);
         } else
             Toast.makeText(getActivity(), R.string.tts_na, Toast.LENGTH_SHORT).show();
@@ -188,7 +192,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
         Picasso.with(getActivity()).load(url).into(loadTarget);
     }
 
-    private void fillFields(News n) {
+    private void fillFields(@NonNull News n) {
         if (n.getBody() != null)
             tvBody.setText(n.getBody());
         else
@@ -209,6 +213,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
     }
 
     void setBitmap(Bitmap bitmap) {
+        assert targetNews != null;
         Picasso.with(getActivity()).
                 load(Constant.URI_IMAGE_MEDIUM + targetNews.getImage()).
                 error(R.drawable.im_noimage).
@@ -217,7 +222,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
 
     }
 
-    public void setPalette(Palette palette) {
+    public void setPalette(@NonNull Palette palette) {
         this.palette = palette;
         ((ActionBarActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(R.color.primaryColor)));
         if (Build.VERSION.SDK_INT >= 21) {
@@ -235,8 +240,9 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
      */
     @SuppressWarnings("deprecation")
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         if (v.getId() == R.id.urlButton) {
+            assert targetNews != null;
             String url = targetNews.getUrl();
             if (url != null) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -250,6 +256,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
                 Toast.makeText(getActivity(), R.string.no_url_available, Toast.LENGTH_SHORT).show();
 
         } else if (v.getId() == R.id.fullscreenButton || v.getId() == R.id.imageView) {
+            assert targetNews != null;
             if (targetNews.getImage() != null) {
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
                 intent.putExtra(Constant.IMAGE, targetNews.getImage());
@@ -264,6 +271,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
         } else if (v.getId() == R.id.tts_icon) {
             if (ttsService != null) {
                 if (!ttsService.isSpeaking()) {
+                    assert targetNews != null;
                     String description = targetNews.getBody();
                     if (description != null && !description.isEmpty()) {
                         if (Build.VERSION.SDK_INT >= 21) {
@@ -295,7 +303,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
      */
     @SuppressWarnings("JavaDoc")
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 
         inflater.inflate(R.menu.menu_details, menu);
         MenuItem item = menu.findItem(R.id.menu_item_share);
@@ -326,11 +334,12 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
      * @see #onCreateOptionsMenu
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_item_share) {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_SEND);
+            assert targetNews != null;
             String message = getResources().getString(R.string.share_news_message) +
                     targetNews.getTitle() + "\n" +
                     targetNews.getItemURI();

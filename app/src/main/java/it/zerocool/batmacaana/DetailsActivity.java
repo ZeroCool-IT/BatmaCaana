@@ -18,6 +18,8 @@ import android.view.View;
 
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -33,7 +35,7 @@ public class DetailsActivity extends ActionBarActivity {
     private Context context;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
@@ -66,6 +68,7 @@ public class DetailsActivity extends ActionBarActivity {
             Fragment frag = chooseFragment(intent.getIntExtra(Constant.TYPE_ARG, 0));
             Bundle args = new Bundle();
             args.putString(Constant.JSON_ARG, intent.getStringExtra(Constant.JSON_ARG));
+            assert frag != null;
             frag.setArguments(args);
             if (savedInstanceState == null) {
                 getSupportFragmentManager().beginTransaction()
@@ -82,6 +85,7 @@ public class DetailsActivity extends ActionBarActivity {
         editor.apply();
     }
 
+    @Nullable
     private Fragment chooseFragment(int type) {
         Fragment f = null;
         switch (type) {
@@ -194,6 +198,7 @@ public class DetailsActivity extends ActionBarActivity {
          * @see #onPostExecute
          * @see #publishProgress
          */
+        @Nullable
         @Override
         protected String doInBackground(String... params) {
             String res;
@@ -204,7 +209,7 @@ public class DetailsActivity extends ActionBarActivity {
                 String json = RequestUtilities.requestJsonString(uri);
                 res = ParsingUtilities.parseSingleResult(json);
             } catch (IOException e) {
-                Log.e("ZCLOG", e.getMessage());
+                Log.e("TASK ERROR", e.getMessage());
                 return null;
             }
             return res;
@@ -222,13 +227,14 @@ public class DetailsActivity extends ActionBarActivity {
          * @see #onCancelled(Object)
          */
         @Override
-        protected void onPostExecute(String s) {
+        protected void onPostExecute(@Nullable String s) {
             bar.setVisibility(View.GONE);
             if (s != null && !s.equals(Constant.EMPTY_VALUE)) {
 
                 Fragment frag = chooseFragment(type);
                 Bundle args = new Bundle();
                 args.putString(Constant.JSON_ARG, s);
+                assert frag != null;
                 frag.setArguments(args);
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.container, frag)

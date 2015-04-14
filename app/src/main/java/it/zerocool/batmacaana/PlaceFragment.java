@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
@@ -22,7 +23,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.ShareActionProvider;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,6 +40,8 @@ import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.shamanland.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
 
@@ -61,6 +63,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
     private static final String DESCRIPTION_TTS = "description";
     private ShareActionProvider shareActionProvider;
     private ExpandableTextView tvDescription;
+    @Nullable
     private Place targetPlace;
     private ImageView ivPlace;
     private LinearLayout buttonLayout;
@@ -137,7 +140,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Inflate layout
         View layout = inflater.inflate(R.layout.fragment_place, container, false);
@@ -196,6 +199,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
         //Args read
         Place p = ParsingUtilities.parseSinglePlace(getArguments().getString(Constant.JSON_ARG));
         targetPlace = p;
+        assert p != null;
         ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(p.getName());
         if (!p.getTags().isEmpty()) {
             String tags = TextUtils.join(", ", p.getTags());
@@ -230,7 +234,6 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
         if (status == TextToSpeech.SUCCESS) {
             Locale language = Locale.ITALIAN;
             ttsService.setLanguage(language);
-            Log.i("UTTERANCE", "service started");
             playTTSButton.setEnabled(true);
         } else
             Toast.makeText(getActivity(), R.string.tts_na, Toast.LENGTH_SHORT).show();
@@ -263,7 +266,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
         Picasso.with(getActivity()).load(url).into(loadTarget);
     }
 
-    private void fillFields(Place p) {
+    private void fillFields(@NonNull Place p) {
         if (p.getDescription() != null)
             tvDescription.setText(p.getDescription());
         else
@@ -325,6 +328,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
     }
 
     void setBitmap(Bitmap bitmap) {
+        assert targetPlace != null;
         Picasso.with(getActivity()).
                 load(Constant.URI_IMAGE_BIG + targetPlace.getImage()).
                 placeholder(R.drawable.im_placeholder).
@@ -334,7 +338,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
 
     }
 
-    public void setPalette(Palette palette) {
+    public void setPalette(@NonNull Palette palette) {
         this.palette = palette;
         ((ActionBarActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(R.color.primaryColor)));
         if (VERSION.SDK_INT >= 21) {
@@ -364,7 +368,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
      */
     @SuppressWarnings("JavaDoc")
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 
         inflater.inflate(R.menu.menu_details, menu);
         MenuItem item = menu.findItem(R.id.menu_item_share);
@@ -395,11 +399,12 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
      * @see #onCreateOptionsMenu
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_item_share) {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_SEND);
+            assert targetPlace != null;
             String message = getResources().getString(R.string.share_place_message) +
                     targetPlace.getName() + "\n" +
                     targetPlace.getItemURI();
@@ -419,8 +424,9 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
      */
     @SuppressWarnings("deprecation")
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         if (v.getId() == R.id.phoneButton) {
+            assert targetPlace != null;
             String phone = targetPlace.getContact().getTelephone();
             if (phone != null) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
@@ -436,6 +442,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
 
 
         } else if (v.getId() == R.id.mailButton) {
+            assert targetPlace != null;
             String mail = targetPlace.getContact().getEmail();
             if (mail != null) {
                 Intent intent = new Intent(Intent.ACTION_SEND);
@@ -457,21 +464,27 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
             String url;
             switch (v.getId()) {
                 case R.id.urlButton:
+                    assert targetPlace != null;
                     url = targetPlace.getContact().getUrl();
                     break;
                 case R.id.facebook_button:
+                    assert targetPlace != null;
                     url = targetPlace.getContact().getFbLink();
                     break;
                 case R.id.foursquare_button:
+                    assert targetPlace != null;
                     url = targetPlace.getContact().getFsqrLink();
                     break;
                 case R.id.tripadvisor_button:
+                    assert targetPlace != null;
                     url = targetPlace.getContact().getTaLink();
                     break;
                 case R.id.googleplus_button:
+                    assert targetPlace != null;
                     url = targetPlace.getContact().getGpLink();
                     break;
                 default:
+                    assert targetPlace != null;
                     url = targetPlace.getContact().getUrl();
             }
 
@@ -488,6 +501,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
 
 
         } else if (v.getId() == R.id.floatingButton) {
+            assert targetPlace != null;
             if (targetPlace.getLocation() != null) {
                 String lat = Double.valueOf(targetPlace.getLocation().getLatitude()).toString();
                 String lon = Double.valueOf(targetPlace.getLocation().getLongitude()).toString();
@@ -501,6 +515,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
             }
         } else if (v.getId() == R.id.favoriteButton) {
             FavoriteDBEditorTask task = new FavoriteDBEditorTask();
+            assert targetPlace != null;
             if (targetPlace.isFavorite()) {
                 task.execute(DBManager.REMOVE);
                 favoriteButton.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.ic_favorite_outline_grey600_36dp), null, null);
@@ -514,6 +529,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
 
             }
         } else if (v.getId() == R.id.imageView || v.getId() == R.id.fullscreenButton) {
+            assert targetPlace != null;
             if (targetPlace.getImage() != null) {
                 Intent intent = new Intent(getActivity(), FullscreenActivity.class);
                 intent.putExtra(Constant.IMAGE, targetPlace.getImage());
@@ -535,6 +551,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
             addresses[0] = mail;
             SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
             int uid = sp.getInt(Constant.CITY_UID, Constant.USER_ID);
+            assert targetPlace != null;
             String subject = "[REPORT] " +
                     "["
                     + Integer.valueOf(uid).toString()
@@ -552,6 +569,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
         } else if (v.getId() == R.id.tts_icon) {
             if (ttsService != null) {
                 if (!ttsService.isSpeaking()) {
+                    assert targetPlace != null;
                     String description = targetPlace.getDescription();
                     if (description != null && !description.isEmpty()) {
                         if (VERSION.SDK_INT >= 21) {
@@ -566,6 +584,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
                 }
             }
         } else if (v.getId() == R.id.easter_egg_icon) {
+            assert targetPlace != null;
             if (targetPlace.getId() == 29) {
                 long currentTime = System.currentTimeMillis();
                 if (Math.abs(currentTime - lastPressed) > Constant.EASTER_EGG_THRESHOLD) {
@@ -595,6 +614,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
     private class FavoriteDBEditorTask extends AsyncTask<Integer, Void, Boolean> {
 
         private int op;
+        @Nullable
         private SQLiteDatabase db;
         private DBHelper openHelper;
         private boolean fave;
@@ -620,11 +640,15 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
             db = openHelper.getWritabelDB();
             switch (op) {
                 case DBManager.ADD:
+                    assert db != null;
                     return DBManager.favoritePlace(db, targetPlace);
                 case DBManager.REMOVE:
+                    assert db != null;
                     DBManager.unfavoritePlace(db, targetPlace);
                     return true;
                 case DBManager.CHECK:
+                    assert targetPlace != null;
+                    assert db != null;
                     fave = DBManager.isFavorite(db, targetPlace);
                     return true;
                 default:
@@ -649,13 +673,16 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
                 switch (op) {
                     case DBManager.ADD:
                         String added = getString(R.string.favorite_added);
+                        assert targetPlace != null;
                         Toast.makeText(getActivity(), targetPlace.getName() + added, Toast.LENGTH_SHORT).show();
                         break;
                     case DBManager.REMOVE:
                         String removed = getString(R.string.favorite_removed);
+                        assert targetPlace != null;
                         Toast.makeText(getActivity(), targetPlace.getName() + removed, Toast.LENGTH_SHORT).show();
                         break;
                     case DBManager.CHECK:
+                        assert targetPlace != null;
                         targetPlace.setFavorite(fave);
                         if (fave) {
                             Drawable favorite = ContextCompat.getDrawable(getActivity(), R.drawable.ic_favorite_grey600_36dp);

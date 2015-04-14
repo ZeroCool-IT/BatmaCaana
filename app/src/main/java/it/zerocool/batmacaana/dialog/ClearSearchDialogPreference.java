@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.preference.DialogPreference;
 import android.provider.SearchRecentSuggestions;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 
 import it.zerocool.batmacaana.utilities.SearchHistoryProvider;
@@ -18,7 +19,7 @@ import it.zerocool.batmacaana.utilities.SearchHistoryProvider;
  */
 class ClearSearchDialogPreference extends DialogPreference {
 
-    public ClearSearchDialogPreference(Context context, AttributeSet attrs) {
+    public ClearSearchDialogPreference(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
     }
 

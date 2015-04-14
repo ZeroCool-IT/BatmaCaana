@@ -9,8 +9,10 @@ import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.preference.DialogPreference;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
-import android.util.Log;
+
+import org.jetbrains.annotations.Nullable;
 
 import it.zerocool.batmacaana.database.DBHelper;
 import it.zerocool.batmacaana.database.DBManager;
@@ -22,7 +24,7 @@ import it.zerocool.batmacaana.utilities.ApplicationContextProvider;
  */
 class EraseFavoriteDialogPreference extends DialogPreference {
 
-    public EraseFavoriteDialogPreference(Context context, AttributeSet attrs) {
+    public EraseFavoriteDialogPreference(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -59,12 +61,13 @@ class EraseFavoriteDialogPreference extends DialogPreference {
          * @see #onPostExecute
          * @see #publishProgress
          */
+        @Nullable
         @Override
         protected Void doInBackground(Void... params) {
             DBHelper helper = DBHelper.getInstance(ApplicationContextProvider.getContext());
             SQLiteDatabase db = helper.getWritabelDB();
+            assert db != null;
             DBManager.clearFavorite(db);
-            Log.i("ZCLOG", "Favorite cleared");
             return null;
         }
     }

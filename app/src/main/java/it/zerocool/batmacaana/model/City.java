@@ -5,6 +5,9 @@
 package it.zerocool.batmacaana.model;
 
 import android.location.Location;
+import android.support.annotation.NonNull;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
@@ -17,17 +20,24 @@ import it.zerocool.batmacaana.utilities.Constant;
 public class City implements Cardable {
 
     private final int id;
+    @NonNull
     private final ArrayList<String> pictures;
     private String name;
+    @Nullable
     private String description;
     private ContactCard contact;
     private Location location;
     private String json;
     private int userID;
+    @Nullable
     private String province;
+    @Nullable
     private String region;
+    @Nullable
     private String cap;
+    @Nullable
     private String info;
+    @Nullable
     private String avatar;
 
 
@@ -44,6 +54,7 @@ public class City implements Cardable {
     /**
      * @return an ArrayList containing City's pictures
      */
+    @NonNull
     public ArrayList<String> getPictures() {
         return pictures;
     }
@@ -53,7 +64,7 @@ public class City implements Cardable {
      *
      * @param picture is the picture to add
      */
-    public void addPictureFromString(String picture) {
+    public void addPictureFromString(@Nullable String picture) {
         if (picture != null && !picture.isEmpty()) {
             getPictures().add(picture);
         }
@@ -85,6 +96,7 @@ public class City implements Cardable {
     /**
      * @return the description of the City
      */
+    @Nullable
     public String getDescription() {
         return description;
     }
@@ -94,7 +106,7 @@ public class City implements Cardable {
      *
      * @param description is the description to set
      */
-    public void setDescription(String description) {
+    public void setDescription(@Nullable String description) {
         if (description != null && !description.isEmpty()) {
             this.description = description;
         } else
@@ -158,6 +170,7 @@ public class City implements Cardable {
      *
      * @return a String representing card's sub-header
      */
+    @Nullable
     @Override
     public String getSubheader() {
         return null;
@@ -168,6 +181,7 @@ public class City implements Cardable {
      *
      * @return a String representing the accent information of the card
      */
+    @Nullable
     @Override
     public String getAccentInfo() {
         return null;
@@ -216,6 +230,7 @@ public class City implements Cardable {
     /**
      * @return the province of the City
      */
+    @Nullable
     public String getProvince() {
         return province;
     }
@@ -225,7 +240,7 @@ public class City implements Cardable {
      *
      * @param province is the province to set
      */
-    public void setProvince(String province) {
+    public void setProvince(@Nullable String province) {
         if (province != null && !province.isEmpty()) {
             this.province = province;
         } else {
@@ -236,6 +251,7 @@ public class City implements Cardable {
     /**
      * @return the Region of the City
      */
+    @Nullable
     public String getRegion() {
         return region;
     }
@@ -245,7 +261,7 @@ public class City implements Cardable {
      *
      * @param region is the Region to set
      */
-    public void setRegion(String region) {
+    public void setRegion(@Nullable String region) {
         if (region != null && !region.isEmpty()) {
             this.region = region;
         } else {
@@ -256,6 +272,7 @@ public class City implements Cardable {
     /**
      * @return th CAP (ZIP Code) of the City
      */
+    @Nullable
     public String getCap() {
         return cap;
     }
@@ -265,7 +282,7 @@ public class City implements Cardable {
      *
      * @param cap id the CAP to set
      */
-    public void setCap(String cap) {
+    public void setCap(@Nullable String cap) {
         if (cap != null && !cap.isEmpty()) {
             this.cap = cap;
         } else {
@@ -276,6 +293,7 @@ public class City implements Cardable {
     /**
      * @return the Geographic Info of the City
      */
+    @Nullable
     public String getInfo() {
         return info;
     }
@@ -285,7 +303,7 @@ public class City implements Cardable {
      *
      * @param info is the info to set
      */
-    public void setInfo(String info) {
+    public void setInfo(@Nullable String info) {
         if (info != null && !info.isEmpty()) {
             this.info = info;
         } else {
@@ -296,6 +314,7 @@ public class City implements Cardable {
     /**
      * @return the avatar representing the City
      */
+    @Nullable
     public String getAvatar() {
         return avatar;
     }
@@ -305,7 +324,7 @@ public class City implements Cardable {
      *
      * @param avatar is the avatar to set
      */
-    public void setAvatar(String avatar) {
+    public void setAvatar(@Nullable String avatar) {
         if (avatar != null && !avatar.isEmpty()) {
             this.avatar = avatar;
         } else {
@@ -337,7 +356,7 @@ public class City implements Cardable {
      * @see #hashCode
      */
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(@Nullable Object o) {
         if (o != null && o.getClass() == City.class) {
             City c = (City) o;
             return this.getId() == c.getId();

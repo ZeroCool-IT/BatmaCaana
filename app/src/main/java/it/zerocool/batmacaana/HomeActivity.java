@@ -15,6 +15,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -50,7 +51,7 @@ public class HomeActivity extends ActionBarActivity implements DialogReturnListe
      * @param context is the application context
      * @return the version code of the app
      */
-    public static int getAppVersion(Context context) {
+    public static int getAppVersion(@NonNull Context context) {
         try {
             PackageInfo packageInfo = context.getPackageManager()
                     .getPackageInfo(context.getPackageName(), 0);
@@ -109,7 +110,7 @@ public class HomeActivity extends ActionBarActivity implements DialogReturnListe
      * @return registration ID, or empty string if there is no existing
      * registration ID.
      */
-    private String getRegistrationId(Context context) {
+    private String getRegistrationId(@NonNull Context context) {
         final SharedPreferences prefs = getGCMPreferences();
         String registrationId = prefs.getString(Constant.PROPERTY_REG_ID, "");
         if (registrationId.isEmpty()) {
@@ -268,7 +269,7 @@ public class HomeActivity extends ActionBarActivity implements DialogReturnListe
      */
     @SuppressWarnings("JavaDoc")
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
         SearchManager searchManager =
@@ -284,7 +285,7 @@ public class HomeActivity extends ActionBarActivity implements DialogReturnListe
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -303,7 +304,7 @@ public class HomeActivity extends ActionBarActivity implements DialogReturnListe
      *
      * @param location is the location to save
      */
-    private void saveLocationToPreferences(Location location) {
+    private void saveLocationToPreferences(@NonNull Location location) {
         SharedPreferences sharedPreferences = getSharedPreferences(Constant.PREF_FILE_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -330,7 +331,7 @@ public class HomeActivity extends ActionBarActivity implements DialogReturnListe
 
         locationListener = new LocationListener() {
             @Override
-            public void onLocationChanged(Location location) {
+            public void onLocationChanged(@NonNull Location location) {
                 saveLocationToPreferences(location);
             }
 
@@ -341,20 +342,18 @@ public class HomeActivity extends ActionBarActivity implements DialogReturnListe
 
             @Override
             public void onProviderEnabled(String provider) {
-                Log.w("ZCLOG", "The provider " + provider + " is enabled!");
             }
 
             @Override
             public void onProviderDisabled(String provider) {
-                Log.w("ZCLOG", "The provider " + provider + " is disabled!");
             }
         };
         if (provider != null && locationManager.getAllProviders().contains(provider)) {
-            Log.i("ZCLOG", "Using " + provider + " provider");
+            Log.i("LOCATION", "Using " + provider + " provider");
             locationManager.requestLocationUpdates(provider, Constant.LOCATION_UPDATE_TIME,
                     Constant.LOCATION_MIN_DISTANCE_UPDATE, locationListener);
         } else
-            Log.e("ZCLOG", "The provider " + provider + " is not available!");
+            Log.e("LOCATION", "The provider " + provider + " is not available!");
     }
 
     /**

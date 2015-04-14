@@ -4,6 +4,7 @@
 
 package it.zerocool.batmacaana.dialog;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -24,7 +25,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import it.zerocool.batmacaana.DrawerAdapter;
 import it.zerocool.batmacaana.R;
 import it.zerocool.batmacaana.listener.DialogReturnListener;
 import it.zerocool.batmacaana.utilities.Constant;
@@ -40,9 +40,7 @@ public class AlertsDisablingDialog extends DialogFragment implements RadioGroup.
     private final static long TWO_HOURS = 7200000;
     private final static long EIGHT_HOURS = 28800000;
     private SharedPreferences.Editor editor;
-    private SharedPreferences sp;
     private TextView enablingTimeTV;
-    private DrawerAdapter adapter;
 
 
     /**
@@ -69,13 +67,13 @@ public class AlertsDisablingDialog extends DialogFragment implements RadioGroup.
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        sp = getActivity().getSharedPreferences(Constant.NOTIFICATION_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences sp = getActivity().getSharedPreferences(Constant.NOTIFICATION_PREFS, Context.MODE_PRIVATE);
         editor = sp.edit();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.notifications_dialog, null);
+        @SuppressLint("InflateParams") View v = inflater.inflate(R.layout.notifications_dialog, null);
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout

@@ -50,15 +50,6 @@
         <item>@string/event</item>
     </string-array>
 
-    <string-array name="disabling_notifications_dialog">
-        <item>@string/enabled</item>
-        <item>@string/disable_one_hour</item>
-        <item>@string/disable_two_hours</item>
-        <item>@string/disable_eight_hours</item>
-        <item>@string/disable_till_eight_am</item>
-        <item>@string/off</item>
-    </string-array>
-
     <string-array name="route_level">
         <item>@string/underscore</item>
         <item>@string/easy</item>

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -36,6 +39,7 @@ import it.zerocool.batmacaana.model.Place;
  * Use the  factory method to
  * create an instance of this fragment.
  */
+@SuppressWarnings("ConstantConditions")
 public class FavoriteFragment extends Fragment {
     private RecyclerView rvResults;
     private ProgressBarCircularIndeterminate progressBar;
@@ -57,7 +61,6 @@ public class FavoriteFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.i("ZEROLOG", "OnResume called");
         getData();
 
     }
@@ -89,7 +92,7 @@ public class FavoriteFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_favorite, container, false);
         context = getActivity();
@@ -111,8 +114,10 @@ public class FavoriteFragment extends Fragment {
         task.execute();
     }
 
+    @SuppressWarnings("ConstantConditions")
     private class RetrieveFavoriteTask extends AsyncTask<Void, Void, List<Place>> {
         private DBHelper openHelper;
+        @Nullable
         private SQLiteDatabase db;
 
         /**
@@ -139,7 +144,7 @@ public class FavoriteFragment extends Fragment {
          * @see #onCancelled(Object)
          */
         @Override
-        protected void onPostExecute(List<Place> favoriteList) {
+        protected void onPostExecute(@Nullable List<Place> favoriteList) {
             progressBar.setVisibility(View.GONE);
             rvResults.setVisibility(View.VISIBLE);
 
@@ -160,7 +165,7 @@ public class FavoriteFragment extends Fragment {
                 } else {
                     title = getResources().getString(R.string.dialog_title_uhoh);
                     message = getResources().getString(R.string.dialog_message_db_error);
-                    Log.e("ZCLOG TASK ERROR", "Failed to get favorite");
+                    Log.e("TASK ERROR", "Failed to get favorite");
                     args.putString(WarningDialog.TITLE, title);
                     args.putString(WarningDialog.MESSAGE, message);
                     dialog.setArguments(args);
@@ -186,7 +191,6 @@ public class FavoriteFragment extends Fragment {
         protected void onCancelled() {
             super.onCancelled();
             openHelper.close();
-            Log.i("ZCLOG", "onCancelled() called");
         }
 
         /**
@@ -203,6 +207,7 @@ public class FavoriteFragment extends Fragment {
          * @see #onPostExecute
          * @see #publishProgress
          */
+        @Nullable
         @Override
         protected List<Place> doInBackground(Void... params) {
             openHelper = DBHelper.getInstance(getActivity());

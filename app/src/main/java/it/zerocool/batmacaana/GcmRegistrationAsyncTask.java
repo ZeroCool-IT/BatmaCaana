@@ -7,6 +7,7 @@ package it.zerocool.batmacaana;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -14,6 +15,8 @@ import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -26,8 +29,10 @@ import it.zerocool.pandoracloud.registration.Registration;
  * Task for Google Cloud Service device registration
  * Created by Marco Battisti on 05/02/2015.
  */
+@SuppressWarnings("FieldCanBeLocal")
 class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
     private static final String SENDER_ID = "557298603924";
+    @Nullable
     private static Registration regService = null;
     private final Context context;
     private final boolean test = false;
@@ -50,7 +55,7 @@ class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
                         .setRootUrl("http://10.0.2.2:8080/_ah/api/")
                         .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                             @Override
-                            public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest)
+                            public void initialize(@NonNull AbstractGoogleClientRequest<?> abstractGoogleClientRequest)
                                     throws IOException {
                                 abstractGoogleClientRequest.setDisableGZipContent(true);
                             }
@@ -99,7 +104,7 @@ class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
      * @param context application's context.
      * @param regId   registration ID
      */
-    private void storeRegistrationId(Context context, String regId) {
+    private void storeRegistrationId(@NonNull Context context, String regId) {
         SharedPreferences sp = context.getSharedPreferences(HomeActivity.class.getSimpleName(), Context.MODE_PRIVATE);
         int appVersion = HomeActivity.getAppVersion(context);
         Log.i("GCM", "Saving regId on app version " + appVersion);

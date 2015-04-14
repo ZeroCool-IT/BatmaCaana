@@ -9,7 +9,10 @@
  */
 package it.zerocool.batmacaana.model;
 
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,6 +34,7 @@ import it.zerocool.batmacaana.utilities.ParsingUtilities;
  */
 public class TimeCard {
 
+    @NonNull
     private final ArrayList<GregorianCalendar> closingDays;
     private GregorianCalendar amOpening;
     private GregorianCalendar amClosing;
@@ -55,6 +59,15 @@ public class TimeCard {
     }
 
     /**
+     * Set the place AM opening
+     *
+     * @param amOpening the AM opening hour to set
+     */
+    void setAmOpening(GregorianCalendar amOpening) {
+        this.amOpening = amOpening;
+    }
+
+    /**
      * Set the place AM opening from String
      *
      * @param amOpening the AM opening hour to set
@@ -65,19 +78,19 @@ public class TimeCard {
     }
 
     /**
-     * Set the place AM opening
-     *
-     * @param amOpening the AM opening hour to set
-     */
-    void setAmOpening(GregorianCalendar amOpening) {
-        this.amOpening = amOpening;
-    }
-
-    /**
      * @return the AM closing hour
      */
     GregorianCalendar getAmClosing() {
         return amClosing;
+    }
+
+    /**
+     * Set the place AM closing
+     *
+     * @param amClosing AM closing hour to set
+     */
+    void setAmClosing(GregorianCalendar amClosing) {
+        this.amClosing = amClosing;
     }
 
     /**
@@ -91,19 +104,19 @@ public class TimeCard {
     }
 
     /**
-     * Set the place AM closing
-     *
-     * @param amClosing AM closing hour to set
-     */
-    void setAmClosing(GregorianCalendar amClosing) {
-        this.amClosing = amClosing;
-    }
-
-    /**
      * @return the PM opening hour
      */
     GregorianCalendar getPmOpening() {
         return pmOpening;
+    }
+
+    /**
+     * Set the place PM opening
+     *
+     * @param pmOpening the PM opening hour to set
+     */
+    void setPmOpening(GregorianCalendar pmOpening) {
+        this.pmOpening = pmOpening;
     }
 
     /**
@@ -117,19 +130,19 @@ public class TimeCard {
     }
 
     /**
-     * Set the place PM opening
-     *
-     * @param pmOpening the PM opening hour to set
-     */
-    void setPmOpening(GregorianCalendar pmOpening) {
-        this.pmOpening = pmOpening;
-    }
-
-    /**
      * @return the PM closing hour
      */
     GregorianCalendar getPmClosing() {
         return pmClosing;
+    }
+
+    /**
+     * Set the place PM closing
+     *
+     * @param pmClosing the PM closing hour to set
+     */
+    void setPmClosing(GregorianCalendar pmClosing) {
+        this.pmClosing = pmClosing;
     }
 
     /**
@@ -143,17 +156,9 @@ public class TimeCard {
     }
 
     /**
-     * Set the place PM closing
-     *
-     * @param pmClosing the PM closing hour to set
-     */
-    void setPmClosing(GregorianCalendar pmClosing) {
-        this.pmClosing = pmClosing;
-    }
-
-    /**
      * @return the closing days list
      */
+    @NonNull
     ArrayList<GregorianCalendar> getClosingDays() {
         return closingDays;
     }
@@ -173,7 +178,7 @@ public class TimeCard {
      *
      * @param csv is the string in CSV format
      */
-    public void setClosingDaysFromCSV(String csv) {
+    public void setClosingDaysFromCSV(@Nullable String csv) {
         if (csv != null && !csv.equals(Constant.EMPTY_VALUE)) {
             StringTokenizer tokenizer = new StringTokenizer(csv, ",");
             while (tokenizer.hasMoreTokens()) {
@@ -231,6 +236,7 @@ public class TimeCard {
     /**
      * @return a String representing AM opening hours
      */
+    @Nullable
     String openAMtoString() {
         String amOp, amCl, res = null;
         if (getAmClosing() != null && getAmOpening() != null) {
@@ -249,6 +255,7 @@ public class TimeCard {
     /**
      * @return a String representing PM opening hours
      */
+    @Nullable
     String openPMtoString() {
         String pmOp, pmCl, res = null;
         if (getPmClosing() != null && getPmOpening() != null) {
@@ -266,6 +273,7 @@ public class TimeCard {
     /**
      * @return a String representing place closing days
      */
+    @Nullable
     String closingDayToString() {
         String res = null;
         if (!getClosingDays().isEmpty()) {
@@ -284,6 +292,7 @@ public class TimeCard {
     /**
      * @return a string representing the time card of the place
      */
+    @Nullable
     public String toString() {
         if (openAMtoString() != null || openPMtoString() != null || getNotes() != null || !getClosingDays().isEmpty()) {
             String res = "";

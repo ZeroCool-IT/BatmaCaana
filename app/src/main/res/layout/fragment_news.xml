@@ -135,7 +135,7 @@
                             android:id="@id/expand_collapse"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="right|bottom"
+                            android:layout_gravity="end|bottom"
                             android:layout_margin="8dp"
                             android:background="@android:color/transparent"
                             android:contentDescription="@string/expand_description" />

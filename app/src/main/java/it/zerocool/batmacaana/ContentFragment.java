@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +21,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -69,9 +72,8 @@ public class ContentFragment extends Fragment {
 
         super.onResume();
     }*/
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         readCurrentLocationFromPreferences();
         View layout = inflater.inflate(R.layout.fragment_content, container, false);
@@ -251,6 +253,7 @@ public class ContentFragment extends Fragment {
          * @see #onPostExecute
          * @see #publishProgress
          */
+        @Nullable
         @SuppressWarnings("unchecked")
         @Override
         protected List<Cardable> doInBackground(String... params) {
@@ -266,7 +269,6 @@ public class ContentFragment extends Fragment {
                     return null;
                 switch (type) {
                     case Constant.PLACE:
-                        Log.i("ZCLOG", "Current position: " + currentLocation.toString());
                         res = ParsingUtilities.parsePlaceFromJSON(json, currentLocation);
                         ArrayList<Place> temp = (ArrayList) res;
                         Collections.sort(temp, new PlaceComparator());
@@ -296,7 +298,7 @@ public class ContentFragment extends Fragment {
                 return res;
 
             } catch (IOException e) {
-                Log.e("ZCLOG TASK ERROR", e.getMessage());
+                Log.e("TASK ERROR", e.getMessage());
                 e.printStackTrace();
             }
             return null;
@@ -314,7 +316,7 @@ public class ContentFragment extends Fragment {
          * @see #onCancelled(Object)
          */
         @Override
-        protected void onPostExecute(List<Cardable> cardables) {
+        protected void onPostExecute(@Nullable List<Cardable> cardables) {
             progressBar.setVisibility(View.INVISIBLE);
             rvContent.setVisibility(View.VISIBLE);
             Bundle args = new Bundle();
@@ -328,7 +330,7 @@ public class ContentFragment extends Fragment {
                 fm.beginTransaction()
                         .replace(R.id.content_frame, f)
                         .commit();
-                Log.i("ZCLOG", "No results!");
+                Log.i("TASK", "No results!");
 
             } else if (cardables == null) {
                 String title = getResources().getString(R.string.dialog_title_uhoh);
@@ -344,7 +346,7 @@ public class ContentFragment extends Fragment {
                 fm.beginTransaction()
                         .replace(R.id.content_frame, f)
                         .commit();
-                Log.e("ZCLOG TASK ERROR", "Failed to get results");
+                Log.e("TASK ERROR", "Failed to get results");
             } else {
                 ContentAdapter adapter = new ContentAdapter(getActivity(), cardables);
                 rvContent.setAdapter(adapter);
@@ -370,13 +372,12 @@ public class ContentFragment extends Fragment {
             referesh.setVisibility(View.VISIBLE);
             referesh.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(@NonNull View v) {
                     if (v.getId() == R.id.bt_refresh) {
                         getData(getArguments().getInt(Constant.FRAG_SECTION_ID));
                     }
                 }
             });
-            Log.i("ZCLOG", "onCancelled() called");
         }
 
         /**

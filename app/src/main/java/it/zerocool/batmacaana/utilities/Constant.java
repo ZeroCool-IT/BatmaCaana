@@ -20,7 +20,6 @@ public class Constant {
     //USER ID
     public static final int USER_ID = 594;
     public static final String DEFAULT_CITY_NAME = "Carpineto Romano";
-    public static final int NULL_UID = 593;
 
     //Empty value
     public static final String EMPTY_VALUE = "";
@@ -115,7 +114,6 @@ public class Constant {
     public static final String MESSAGE_ARG = "message";
     public static final String LANDSCAPE_ORIENTATION = "orientation";
     public static final String USER_ID_ARG = "uid";
-    public static final String DRAWER_SELECTED = "selected";
 
     //Shared Preferences
     public static final String PREF_FILE_NAME = "preference";

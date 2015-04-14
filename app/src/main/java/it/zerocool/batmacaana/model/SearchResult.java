@@ -4,6 +4,10 @@
 
 package it.zerocool.batmacaana.model;
 
+import android.support.annotation.NonNull;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -17,10 +21,13 @@ import it.zerocool.batmacaana.utilities.Constant;
  */
 public class SearchResult {
 
+    @NonNull
     private final List<String> tags;
     private int id;
+    @Nullable
     private String header;
     private int type;
+    @Nullable
     private String description;
 
     /**
@@ -51,6 +58,7 @@ public class SearchResult {
     /**
      * @return the header of the object result
      */
+    @Nullable
     public String getheader() {
         return header;
     }
@@ -60,7 +68,7 @@ public class SearchResult {
      *
      * @param header is the header to set
      */
-    public void setheader(String header) {
+    public void setheader(@NonNull String header) {
         if (!header.equals(Constant.EMPTY_VALUE))
             this.header = header;
         else
@@ -86,6 +94,7 @@ public class SearchResult {
     /**
      * @return the tags list of the object result
      */
+    @NonNull
     public List<String> getTags() {
         return tags;
     }
@@ -106,7 +115,7 @@ public class SearchResult {
      *
      * @param csv is the string in CSV format
      */
-    public void setTagsFromCSV(String csv) {
+    public void setTagsFromCSV(@Nullable String csv) {
         if (csv != null && !csv.equals(Constant.EMPTY_VALUE)) {
             StringTokenizer tokenizer = new StringTokenizer(csv, ",");
             while (tokenizer.hasMoreTokens()) {
@@ -123,6 +132,7 @@ public class SearchResult {
     /**
      * @return the description of the object result
      */
+    @Nullable
     public String getDescription() {
         return description;
     }
@@ -132,7 +142,7 @@ public class SearchResult {
      *
      * @param description is the descriptio to set
      */
-    public void setDescription(String description) {
+    public void setDescription(@NonNull String description) {
         if (!description.equals(Constant.EMPTY_VALUE)) {
             this.description = description;
         } else {

@@ -5,6 +5,9 @@
 package it.zerocool.batmacaana.utilities;
 
 import android.location.Location;
+import android.support.annotation.NonNull;
+
+import org.jetbrains.annotations.Nullable;
 
 import it.zerocool.batmacaana.model.Place;
 
@@ -14,7 +17,7 @@ import it.zerocool.batmacaana.model.Place;
  */
 class LocationUtilities {
 
-    public static void setPlaceDistance(Place place, Location current) {
+    public static void setPlaceDistance(@NonNull Place place, @Nullable Location current) {
         if (current != null) {
             float distance = place.getLocation().distanceTo(current);
 //            float distance = getDistance(current, place.getLocation());

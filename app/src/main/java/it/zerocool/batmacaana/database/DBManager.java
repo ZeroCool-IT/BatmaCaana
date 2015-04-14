@@ -7,6 +7,9 @@ package it.zerocool.batmacaana.database;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
@@ -52,7 +55,7 @@ public class DBManager {
      * @param db    is the db
      * @param place is the place to add
      */
-    public static boolean favoritePlace(SQLiteDatabase db, Place place) {
+    public static boolean favoritePlace(@NonNull SQLiteDatabase db, @Nullable Place place) {
         if (place != null) {
             ContentValues values = new ContentValues();
             values.put(ID_COLUMN, place.getId());
@@ -71,7 +74,7 @@ public class DBManager {
      * @param db    is the db
      * @param place is the place to remove
      */
-    public static void unfavoritePlace(SQLiteDatabase db, Place place) {
+    public static void unfavoritePlace(@NonNull SQLiteDatabase db, @Nullable Place place) {
         if (place != null) {
             String whereClause = ID_COLUMN + "= ?";
             String[] whereArgs = new String[1];
@@ -86,7 +89,8 @@ public class DBManager {
      * @param db is the db
      * @return a List of favorite Places
      */
-    public static ArrayList<Place> favoriteList(SQLiteDatabase db) {
+    @NonNull
+    public static ArrayList<Place> favoriteList(@NonNull SQLiteDatabase db) {
         ArrayList<Place> result = new ArrayList<>();
         Cursor c = db.query(TABLE_FAVORITE, null, null, null, null, null, TYPE_COLUMN);
         c.moveToFirst();
@@ -111,7 +115,7 @@ public class DBManager {
      * @param place is the place to check
      * @return true if place is in the database, false otherwise
      */
-    public static boolean isFavorite(SQLiteDatabase db, Place place) {
+    public static boolean isFavorite(@NonNull SQLiteDatabase db, @NonNull Place place) {
         Place result = null;
         String whereClause = ID_COLUMN + "= ?";
         String[] whereArgs = new String[1];
@@ -135,7 +139,7 @@ public class DBManager {
      *
      * @param db is the db
      */
-    public static void clearFavorite(SQLiteDatabase db) {
+    public static void clearFavorite(@NonNull SQLiteDatabase db) {
         db.delete(TABLE_FAVORITE, null, null);
     }
 
@@ -146,7 +150,7 @@ public class DBManager {
      * @param db        is the db
      * @param customers is the list of Customer Cities
      */
-    public static boolean addCustomers(SQLiteDatabase db, ArrayList<City> customers) {
+    public static boolean addCustomers(@NonNull SQLiteDatabase db, @Nullable ArrayList<City> customers) {
         boolean done = false;
         if (customers != null && !customers.isEmpty()) {
             int check = customers.size();
@@ -174,16 +178,23 @@ public class DBManager {
      *
      * @param db is the db
      */
-    public static void clearCustomers(SQLiteDatabase db) {
+    public static void clearCustomers(@NonNull SQLiteDatabase db) {
         db.delete(TABLE_CUSTOMERS, null, null);
     }
 
-    public static boolean hasCustomers(SQLiteDatabase db) {
-        ArrayList<City> result = getCustomers(db);
-        return !result.isEmpty();
-    }
+// --Commented out by Inspection START (14/04/2015 11:06):
+//    public static boolean hasCustomers(SQLiteDatabase db) {
+//        ArrayList<City> result = getCustomers(db);
+//        return !result.isEmpty();
+//    }
+// --Commented out by Inspection STOP (14/04/2015 11:06)
 
-    public static ArrayList<City> getCustomers(SQLiteDatabase db) {
+    /**
+     * @param db is the db
+     * @return an ArrayList of City that have an Explora account
+     */
+    @NonNull
+    public static ArrayList<City> getCustomers(@NonNull SQLiteDatabase db) {
         ArrayList<City> result = new ArrayList<>();
         Cursor c = db.query(TABLE_CUSTOMERS, null, null, null, null, null, "NAME");
         c.moveToFirst();
