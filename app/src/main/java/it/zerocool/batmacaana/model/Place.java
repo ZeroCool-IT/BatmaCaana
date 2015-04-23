@@ -310,16 +310,19 @@ public class Place implements Cardable {
     public String getAccentInfo() {
         String res;
         float distance = getDistanceFromCurrentPosition();
-        if (distance > 1000) {
+        if (distance > 1000 && distance <= 10000) {
             distance /= 1000;
             DecimalFormat format = new DecimalFormat("###.#");
             res = format.format(distance);
             res += " Km";
-        } else {
+        } else if (distance <= 1000) {
             DecimalFormat format = new DecimalFormat("###");
             res = format.format(distance);
             res += " m";
+        } else {
+            res = ">10 Km";
         }
+
         return res;
 
     }
