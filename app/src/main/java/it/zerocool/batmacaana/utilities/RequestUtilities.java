@@ -34,7 +34,7 @@ public class RequestUtilities {
 
     private static final int BUFFER_SIZE = 8;
     private static final String ENCODING = "UTF-8";
-    private static final int CONNECTION_TIMEOUT = 20000;
+    private static final int CONNECTION_TIMEOUT = 15000;
 
     /**
      * Private constructor
