@@ -34,6 +34,7 @@ public class RequestUtilities {
 
     private static final int BUFFER_SIZE = 8;
     private static final String ENCODING = "UTF-8";
+    private static final int CONNECTION_TIMEOUT = 20000;
 
     /**
      * Private constructor
@@ -71,6 +72,7 @@ public class RequestUtilities {
     public static String requestJsonString(String uri) throws IOException {
         URL url = new URL(uri);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setConnectTimeout(CONNECTION_TIMEOUT);
         String res;
         try {
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());
