@@ -9,6 +9,8 @@
 
 
 
+
+
 apply plugin: 'com.android.application'
 
 android {
@@ -37,7 +39,7 @@ android {
     productFlavors {
         prod {
             applicationId "it.exploracity.explora"
-            versionCode 2
+            versionCode 3
             versionName "1.0"
         }
         alpha {
