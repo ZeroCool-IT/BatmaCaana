@@ -131,6 +131,7 @@ public class Constant {
     public static final String REACTIVATE_TIME = "reactivate_time";
     public static final String NOTIFICATION_DISABLED = "disabled";
     public static final String RB_SELECTED = "rb_selected";
+    public static final String FIRST_TIME = "first_time";
 
 
     //Location Constraints

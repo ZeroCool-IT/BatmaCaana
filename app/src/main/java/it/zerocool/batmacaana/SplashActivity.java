@@ -28,6 +28,7 @@ import java.util.ArrayList;
 
 import it.zerocool.batmacaana.database.DBHelper;
 import it.zerocool.batmacaana.database.DBManager;
+import it.zerocool.batmacaana.dialog.InitialCityDialog;
 import it.zerocool.batmacaana.model.City;
 import it.zerocool.batmacaana.utilities.ApplicationContextProvider;
 import it.zerocool.batmacaana.utilities.Constant;
@@ -175,18 +176,32 @@ public class SplashActivity extends ActionBarActivity {
         @Override
         protected void onPostExecute(Boolean success) {
             if (success) {
-                new Handler().postDelayed(new Runnable() {
+                SharedPreferences sharedPreferences = getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
+                boolean isFirstTime = sharedPreferences.getBoolean(Constant.FIRST_TIME, true);
+                if (!isFirstTime) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                /* Create an Intent that will start the Main-Activity. */
+                            Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
+                            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            SplashActivity.this.startActivity(mainIntent);
+                            SplashActivity.this.finish();
+                        }
+                    }, SPLASH_DISPLAY_LENGTH);
+                } else {
+                    new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                /* Create an Intent that will start the Menu-Activity. */
-                        Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
-                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                        SplashActivity.this.startActivity(mainIntent);
-                        SplashActivity.this.finish();
+                /* Create an Intent that will start the Main-Activity. */
+                        InitialCityDialog dialog = new InitialCityDialog();
+                        dialog.show(getSupportFragmentManager(), "First time dialog");
                     }
                 }, SPLASH_DISPLAY_LENGTH);
+
+                }
             } else {
                 String message = getResources().getString(
                         R.string.dialog_message_error);
