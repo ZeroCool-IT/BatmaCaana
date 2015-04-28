@@ -75,7 +75,6 @@ public class Constant {
     public static final String URI_SEARCH1 = "http://www.exploracity.it/app/json/cerca.php?user=";
     public static final String URI_SEARCH2 = "&stringa=";
     public static final String OBJECT_SEARCH1 = "http://www.exploracity.it/app/json/cercadettaglio.php?id=";
-    /*public static final String OBJECT_SEARCH2 = "&";*/
     public static final String OBJECT_SEARCH2 = "&type=";
     public static final String SHARE_URI = "http://exploracity.it/item/";
     public static final String URI_ROUTES = "http://www.exploracity.it/app/json/percorsi.php?user=";
@@ -83,6 +82,27 @@ public class Constant {
     public static final String URI_CITY = "http://www.exploracity.it/app/json/comune.php?user=";
     public static final String URI_CUSTOMERS = "http://www.exploracity.it/app/json/utenti.php";
 
+/*    //TEST URI=========================================================================================
+    public static final String URI_TOSEE = "http://www.ilmiositodemo.altervista.org/app/json/vedere.php?user=";
+    public static final String URI_EAT = "http://www.ilmiositodemo.altervista.org/app/json/mangiare.php?user=";
+    public static final String URI_SLEEP = "http://www.ilmiositodemo.altervista.org/app/json/dormire.php?user=";
+    public static final String URI_SERVICES = "http://www.ilmiositodemo.altervista.org/app/json/servizi.php?user=";
+    public static final String URI_NEARBY = "http://www.ilmiositodemo.altervista.org/app/json/vicini.php?user=";
+    public static final String URI_NEWS = "http://www.ilmiositodemo.altervista.org/app/json/news.php?user=";
+    public static final String URI_EVENT = "http://www.ilmiositodemo.altervista.org/app/json/eventi.php?user=";
+    public static final String URI_IMAGE_BIG = "http://www.ilmiositodemo.altervista.org/app/images/big/";
+    public static final String URI_IMAGE_MEDIUM = "http://www.ilmiositodemo.altervista.org/app/images/big/";
+    public static final String URI_SEARCH1 = "http://www.ilmiositodemo.altervista.org/app/json/cerca.php?user=";
+    public static final String URI_SEARCH2 = "&stringa=";
+    public static final String OBJECT_SEARCH1 = "http://www.ilmiositodemo.altervista.org/app/json/cercadettaglio.php?id=";
+    *//*public static final String OBJECT_SEARCH2 = "&";*//*
+    public static final String OBJECT_SEARCH2 = "&type=";
+    public static final String SHARE_URI = "http://exploracity.it/item/";
+    public static final String URI_ROUTES = "http://www.ilmiositodemo.altervista.org/app/json/percorsi.php?user=";
+    public static final String URI_KML = "http://www.ilmiositodemo.altervista.org/app/kml/";
+    public static final String URI_CITY = "http://www.ilmiositodemo.altervista.org/app/json/comune.php?user=";
+    public static final String URI_CUSTOMERS = "http://www.ilmiositodemo.altervista.org/app/json/utenti.php";
+    //==================================================================================================*/
 
     //Week Days
     public static final int MONDAY = 1;
