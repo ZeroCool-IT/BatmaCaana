@@ -197,6 +197,7 @@ public class SplashActivity extends ActionBarActivity {
                     public void run() {
                 /* Create an Intent that will start the Main-Activity. */
                         InitialCityDialog dialog = new InitialCityDialog();
+                        dialog.setCancelable(false);
                         dialog.show(getSupportFragmentManager(), "First time dialog");
                     }
                 }, SPLASH_DISPLAY_LENGTH);

@@ -78,6 +78,11 @@ public class InitialCityDialog extends DialogFragment {
                 editor.apply();
             }
         });
+        City defaultCity = customers.get(0);
+        editor.putString(Constant.CITY_NAME, defaultCity.getName());
+        editor.putString(Constant.CITY_AVATAR, defaultCity.getAvatar());
+        editor.putInt(Constant.CITY_UID, defaultCity.getUserID());
+        editor.apply();
         builder.setIcon(R.drawable.ic_launcher);
         builder.setTitle(R.string.city_initial_chooser);
 //        builder.setMessage(R.string.city_initial_chooser);
@@ -89,6 +94,7 @@ public class InitialCityDialog extends DialogFragment {
                     editor.apply();
                     InitialCityDialog.this.dismiss();
                     MoreInfoDialog moreInfoDialog = new MoreInfoDialog();
+                    moreInfoDialog.setCancelable(false);
                     moreInfoDialog.show(getFragmentManager(), "More info dialog");
                 }
             }
