@@ -202,6 +202,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
                 editor.putString(Constant.CITY_NAME, name);
                 editor.putString(Constant.CITY_AVATAR, city.getAvatar());
                 editor.putInt(Constant.CITY_UID, uid);
+                editor.putInt(Constant.CITY_ID, city.getId());
                 editor.apply();
                 recyclerView.setAdapter(adapter);
                 recyclerView.invalidate();

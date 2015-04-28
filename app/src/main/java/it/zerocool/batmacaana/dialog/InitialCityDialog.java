@@ -72,6 +72,7 @@ public class InitialCityDialog extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 City target = customers.get(which);
+                editor.putInt(Constant.CITY_ID, target.getId());
                 editor.putString(Constant.CITY_NAME, target.getName());
                 editor.putString(Constant.CITY_AVATAR, target.getAvatar());
                 editor.putInt(Constant.CITY_UID, target.getUserID());
@@ -79,6 +80,7 @@ public class InitialCityDialog extends DialogFragment {
             }
         });
         City defaultCity = customers.get(0);
+        editor.putInt(Constant.CITY_ID, defaultCity.getId());
         editor.putString(Constant.CITY_NAME, defaultCity.getName());
         editor.putString(Constant.CITY_AVATAR, defaultCity.getAvatar());
         editor.putInt(Constant.CITY_UID, defaultCity.getUserID());

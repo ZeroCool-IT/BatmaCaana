@@ -550,7 +550,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
             String[] addresses = new String[1];
             addresses[0] = mail;
             SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
-            int uid = sp.getInt(Constant.CITY_UID, Constant.USER_ID);
+            int uid = sp.getInt(Constant.CITY_UID, Constant.DEFAULT_USER_ID);
             assert targetPlace != null;
             String subject = "[REPORT] " +
                     "["

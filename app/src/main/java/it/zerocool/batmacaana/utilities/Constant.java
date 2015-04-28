@@ -18,7 +18,7 @@ public class Constant {
 
 
     //USER ID
-    public static final int USER_ID = 594;
+    public static final int DEFAULT_USER_ID = 594;
     public static final String DEFAULT_CITY_NAME = "Carpineto Romano";
 
     //Empty value
@@ -95,7 +95,6 @@ public class Constant {
     public static final String URI_SEARCH1 = "http://www.ilmiositodemo.altervista.org/app/json/cerca.php?user=";
     public static final String URI_SEARCH2 = "&stringa=";
     public static final String OBJECT_SEARCH1 = "http://www.ilmiositodemo.altervista.org/app/json/cercadettaglio.php?id=";
-    *//*public static final String OBJECT_SEARCH2 = "&";*//*
     public static final String OBJECT_SEARCH2 = "&type=";
     public static final String SHARE_URI = "http://exploracity.it/item/";
     public static final String URI_ROUTES = "http://www.ilmiositodemo.altervista.org/app/json/percorsi.php?user=";
@@ -147,6 +146,7 @@ public class Constant {
     public static final String CITY_NAME = "city_name";
     public static final String CITY_AVATAR = "city_avatar";
     public static final String CITY_UID = "city_uid";
+    public static final String CITY_ID = "city_id";
     public static final String NOTIFICATIONS_SOUND = "notifications_sound";
     public static final String REACTIVATE_TIME = "reactivate_time";
     public static final String NOTIFICATION_DISABLED = "disabled";

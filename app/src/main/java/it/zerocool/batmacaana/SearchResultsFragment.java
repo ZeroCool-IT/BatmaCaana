@@ -77,7 +77,7 @@ public class SearchResultsFragment extends Fragment {
 
         if (!trimmed.isEmpty()) {
             SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
-            int uid = sp.getInt(Constant.CITY_UID, Constant.USER_ID);
+            int uid = sp.getInt(Constant.CITY_UID, Constant.DEFAULT_USER_ID);
             String uri = Constant.URI_SEARCH1
                     + uid
                     + Constant.URI_SEARCH2

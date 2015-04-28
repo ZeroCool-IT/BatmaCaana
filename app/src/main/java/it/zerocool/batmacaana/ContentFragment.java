@@ -149,7 +149,7 @@ public class ContentFragment extends Fragment {
                 break;
         }
         SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
-        int uid = sp.getInt(Constant.CITY_UID, Constant.USER_ID);
+        int uid = sp.getInt(Constant.CITY_UID, Constant.DEFAULT_USER_ID);
         uri += Integer.valueOf(uid).toString();
 
         if (RequestUtilities.isOnline(getActivity())) {

@@ -159,7 +159,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
 
     private void retrieveCity() {
         SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
-        int uid = sp.getInt(Constant.CITY_UID, Constant.USER_ID);
+        int uid = sp.getInt(Constant.CITY_UID, Constant.DEFAULT_USER_ID);
         String uri = Constant.URI_CITY +
                 uid;
         if (RequestUtilities.isOnline(getActivity())) {

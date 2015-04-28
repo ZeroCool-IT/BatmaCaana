@@ -126,6 +126,7 @@ public class SplashActivity extends ActionBarActivity {
         @Nullable
         private SQLiteDatabase db;
         private DBHelper openHelper;
+        private ArrayList<City> results;
 
         /**
          * Override this method to perform a computation on a background thread. The
@@ -147,7 +148,7 @@ public class SplashActivity extends ActionBarActivity {
             String uri = Constant.URI_CUSTOMERS;
             openHelper = DBHelper.getInstance(ApplicationContextProvider.getContext());
             db = openHelper.getWritabelDB();
-            ArrayList<City> results;
+
             try {
                 String json = RequestUtilities.requestJsonString(uri);
                 results = ParsingUtilities.parseCustomersFromJSON(json);
@@ -178,7 +179,8 @@ public class SplashActivity extends ActionBarActivity {
             if (success) {
                 SharedPreferences sharedPreferences = getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
                 boolean isFirstTime = sharedPreferences.getBoolean(Constant.FIRST_TIME, true);
-                if (!isFirstTime) {
+                if (!isFirstTime || results.size() < 2) {
+                    checkDefaultCity();
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -232,6 +234,31 @@ public class SplashActivity extends ActionBarActivity {
             }
 
 
+        }
+
+        private void checkDefaultCity() {
+            SharedPreferences sp = getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
+            int id = sp.getInt(Constant.CITY_ID, 0);
+            if (id != 0) {
+                City c = new City(id);
+                if (!results.contains(c)) {
+                    City defaultCity = findDefault();
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putInt(Constant.CITY_ID, defaultCity.getId());
+                    editor.putString(Constant.CITY_NAME, defaultCity.getName());
+                    editor.putString(Constant.CITY_AVATAR, defaultCity.getAvatar());
+                    editor.putInt(Constant.CITY_UID, defaultCity.getUserID());
+                    editor.apply();
+                }
+            }
+        }
+
+        private City findDefault() {
+            for (City c : results) {
+                if (c.getUserID() == Constant.DEFAULT_USER_ID)
+                    return c;
+            }
+            return null;
         }
     }
 }
