@@ -39,8 +39,8 @@ android {
     productFlavors {
         prod {
             applicationId "it.exploracity.explora"
-            versionCode 4
-            versionName "1.1"
+            versionCode 5
+            versionName "1.2"
         }
         alpha {
             applicationId "it.exploracity.carpineto.alpha"

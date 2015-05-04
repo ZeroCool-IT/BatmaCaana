@@ -26,6 +26,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import it.zerocool.batmacaana.dialog.WarningDialog;
 import it.zerocool.batmacaana.model.SearchResult;
@@ -173,6 +174,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
                             Integer.valueOf(id).toString() +
                             Constant.OBJECT_SEARCH2 +
                             Integer.valueOf(type).toString();
+                    String lang = Locale.getDefault().getLanguage().toLowerCase();
+                    uri += Constant.URI_LANGUAGE + lang;
                     RequestObjectTask task = new RequestObjectTask();
                     task.execute(uri, Integer.valueOf(type).toString());
                 }

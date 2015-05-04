@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import it.zerocool.batmacaana.dialog.WarningDialog;
 import it.zerocool.batmacaana.model.Cardable;
@@ -151,6 +152,10 @@ public class ContentFragment extends Fragment {
         SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
         int uid = sp.getInt(Constant.CITY_UID, Constant.DEFAULT_USER_ID);
         uri += Integer.valueOf(uid).toString();
+
+        String lang = Locale.getDefault().getLanguage().toLowerCase();
+
+        uri += Constant.URI_LANGUAGE + lang;
 
         if (RequestUtilities.isOnline(getActivity())) {
             task = new RetrieveDataAsyncTask();

@@ -22,6 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 import it.zerocool.batmacaana.dialog.WarningDialog;
@@ -132,7 +133,8 @@ public class DetailsActivity extends ActionBarActivity {
                 args[0] +
                 Constant.OBJECT_SEARCH2 +
                 args[1];
-
+        String lang = Locale.getDefault().getLanguage().toLowerCase();
+        query += Constant.URI_LANGUAGE + lang;
         if (RequestUtilities.isOnline(this)) {
             RequestObjectTask task = new RequestObjectTask();
             task.execute(query, args[1]);

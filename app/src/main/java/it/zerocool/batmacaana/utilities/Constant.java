@@ -63,7 +63,8 @@ public class Constant {
     public static final int PLACE = 8;
 
     //Requests URI
-    public static final String URI_TOSEE = "http://www.exploracity.it/app/json/vedere.php?user=";
+    //TODO UNCOMMENT THIS!
+/*    public static final String URI_TOSEE = "http://www.exploracity.it/app/json/vedere.php?user=";
     public static final String URI_EAT = "http://www.exploracity.it/app/json/mangiare.php?user=";
     public static final String URI_SLEEP = "http://www.exploracity.it/app/json/dormire.php?user=";
     public static final String URI_SERVICES = "http://www.exploracity.it/app/json/servizi.php?user=";
@@ -80,9 +81,11 @@ public class Constant {
     public static final String URI_ROUTES = "http://www.exploracity.it/app/json/percorsi.php?user=";
     public static final String URI_KML = "http://www.exploracity.it/app/kml/";
     public static final String URI_CITY = "http://www.exploracity.it/app/json/comune.php?user=";
-    public static final String URI_CUSTOMERS = "http://www.exploracity.it/app/json/utenti.php";
+    public static final String URI_CUSTOMERS = "http://www.exploracity.it/app/json/utenti.php";*/
+    public static final String URI_LANGUAGE = "&language=";
 
-/*    //TEST URI=========================================================================================
+    //TODO COMMENT THIS!
+    //TEST URI=========================================================================================
     public static final String URI_TOSEE = "http://www.ilmiositodemo.altervista.org/app/json/vedere.php?user=";
     public static final String URI_EAT = "http://www.ilmiositodemo.altervista.org/app/json/mangiare.php?user=";
     public static final String URI_SLEEP = "http://www.ilmiositodemo.altervista.org/app/json/dormire.php?user=";
@@ -101,7 +104,7 @@ public class Constant {
     public static final String URI_KML = "http://www.ilmiositodemo.altervista.org/app/kml/";
     public static final String URI_CITY = "http://www.ilmiositodemo.altervista.org/app/json/comune.php?user=";
     public static final String URI_CUSTOMERS = "http://www.ilmiositodemo.altervista.org/app/json/utenti.php";
-    //==================================================================================================*/
+    //==================================================================================================
 
     //Week Days
     public static final int MONDAY = 1;
