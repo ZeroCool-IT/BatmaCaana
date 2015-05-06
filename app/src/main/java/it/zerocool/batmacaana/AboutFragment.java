@@ -162,6 +162,8 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
         int uid = sp.getInt(Constant.CITY_UID, Constant.DEFAULT_USER_ID);
         String uri = Constant.URI_CITY +
                 uid;
+        String lang = Locale.getDefault().getLanguage().toLowerCase();
+        uri += Constant.URI_LANGUAGE + lang;
         if (RequestUtilities.isOnline(getActivity())) {
             task = new RetrieveCityInfo();
             task.execute(uri);

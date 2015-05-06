@@ -26,6 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 import it.zerocool.batmacaana.dialog.WarningDialog;
 import it.zerocool.batmacaana.model.SearchResult;
@@ -82,6 +83,8 @@ public class SearchResultsFragment extends Fragment {
                     + uid
                     + Constant.URI_SEARCH2
                     + Uri.encode(trimmed);
+            String lang = Locale.getDefault().getLanguage().toLowerCase();
+            uri += Constant.URI_LANGUAGE + lang;
             if (RequestUtilities.isOnline(getActivity())) {
                 SearchTask task = new SearchTask();
                 task.execute(uri);
