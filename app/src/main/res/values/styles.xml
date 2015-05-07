@@ -16,7 +16,9 @@
         <item name="colorAccent">@color/accentColor</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="searchViewStyle">@style/CustomSearchView</item>
+        <item name="android:textColor">@color/secondary_text_color</item>
     </style>
+
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
