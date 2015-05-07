@@ -35,7 +35,7 @@ class GcmRegistrationAsyncTask extends AsyncTask<Void, Void, String> {
     @Nullable
     private static Registration regService = null;
     private final Context context;
-    private final boolean test = true;
+    private final boolean test = false;
     private GoogleCloudMessaging gcm;
 
     public GcmRegistrationAsyncTask(Context context) {
