@@ -50,7 +50,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/version"
-                android:layout_marginTop="16dp"
                 android:background="@color/background_material_light"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
