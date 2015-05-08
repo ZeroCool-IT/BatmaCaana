@@ -203,7 +203,7 @@ public class ContactCard {
     /**
      * @return the Youtube Channel link
      */
-    String getYtLink() {
+    private String getYtLink() {
         return ytLink;
     }
 
@@ -219,7 +219,7 @@ public class ContactCard {
     /**
      * @return the Twitter Profile link
      */
-    String getTwttrLink() {
+    private String getTwttrLink() {
         return twttrLink;
     }
 

@@ -15,7 +15,7 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -142,7 +142,9 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
         City p = ParsingUtilities.parseSingleCity(getArguments().getString(Constant.JSON_ARG));
         targetCity = p;
         assert p != null;
-        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(p.getName());
+        if (p.getName() != null)
+            //noinspection ConstantConditions
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(p.getName());
 
         //Load imagery and change colors
         ivCity = (ImageView) layout.findViewById(R.id.imageView);
@@ -172,7 +174,7 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
             Toast.makeText(getActivity(), R.string.tts_na, Toast.LENGTH_SHORT).show();
     }
 
-    void loadBitmap(String url) {
+    private void loadBitmap(String url) {
 
         if (loadTarget == null)
             loadTarget = new Target() {
@@ -238,7 +240,7 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
 
     public void setPalette(@NonNull Palette palette) {
         this.palette = palette;
-        ((ActionBarActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(R.color.primaryColor)));
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(R.color.primaryColor)));
         if (Build.VERSION.SDK_INT >= 21) {
             getActivity().getWindow().setStatusBarColor(palette.getDarkVibrantColor(R.color.primaryColor));
         }

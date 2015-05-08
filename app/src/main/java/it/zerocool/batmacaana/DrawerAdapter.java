@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -127,7 +127,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         return position;
     }
 
-    void selectView(@NonNull View v) {
+    private void selectView(@NonNull View v) {
         TextView title = (TextView) v.findViewById(R.id.listText);
         /*title.setTextColor(context.getResources().getColor(R.color.primaryColor));
         v.setBackgroundColor(context.getResources().getColor(R.color.selected_item));*/
@@ -136,7 +136,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         previousSelected = v;
     }
 
-    void unselectView(@Nullable View v) {
+    private void unselectView(@Nullable View v) {
         if (v != null) {
             TextView title = (TextView) v.findViewById(R.id.listText);
             title.setTextColor(context.getResources().getColor(R.color.primary_text_color));
@@ -190,7 +190,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                     fragmentManager.beginTransaction()
                             .replace(R.id.content_frame, fragment)
                             .commit();
-                    ((ActionBarActivity) context).setTitle(context.getResources().getStringArray(R.array.drawer_list)[position]);
+                    ((AppCompatActivity) context).setTitle(context.getResources().getStringArray(R.array.drawer_list)[position]);
                     drawerLayout.closeDrawers();
                     break;
                 case Constant.SUBHEADER:
@@ -200,7 +200,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                     fragmentManager.beginTransaction()
                             .replace(R.id.content_frame, frag)
                             .commit();
-                    ((ActionBarActivity) context).setTitle(context.getResources().getStringArray(R.array.drawer_list)[position]);
+                    ((AppCompatActivity) context).setTitle(context.getResources().getStringArray(R.array.drawer_list)[position]);
                     drawerLayout.closeDrawers();
                     break;
                 case Constant.SETTINGS:
@@ -225,7 +225,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                     fragmentManager.beginTransaction()
                             .replace(R.id.content_frame, f)
                             .commit();
-                    ((ActionBarActivity) context).setTitle(context.getResources().getStringArray(R.array.drawer_list)[position]);
+                    ((AppCompatActivity) context).setTitle(context.getResources().getStringArray(R.array.drawer_list)[position]);
                     drawerLayout.closeDrawers();
                     break;
             }

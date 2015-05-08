@@ -30,12 +30,26 @@
                 android:paddingBottom="8dp"
                 android:src="@drawable/im_splash_logo" />
 
+            <TextView
+                android:id="@+id/version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/app_logo"
+                android:layout_marginTop="16dp"
+                android:background="@color/background_material_light"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/version"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
 
             <TextView
                 android:id="@+id/by"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/app_logo"
+                android:layout_below="@id/version"
                 android:layout_marginTop="16dp"
                 android:background="@color/background_material_light"
                 android:fontFamily="sans-serif"

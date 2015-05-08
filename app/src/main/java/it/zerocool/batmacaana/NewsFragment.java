@@ -15,7 +15,7 @@ import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.ShareActionProvider;
 import android.text.TextUtils;
@@ -133,9 +133,9 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
         News n = ParsingUtilities.parseSingleNews(getArguments().getString(Constant.JSON_ARG));
         targetNews = n;
         assert n != null;
-        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(n.getTitle());
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(n.getTitle());
         if (n.getDateToString() != null) {
-            ((ActionBarActivity) getActivity()).getSupportActionBar().setSubtitle(n.getDateToString());
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(n.getDateToString());
         }
 
         //Load imagery and change colors
@@ -166,7 +166,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
             Toast.makeText(getActivity(), R.string.tts_na, Toast.LENGTH_SHORT).show();
     }
 
-    void loadBitmap(String url) {
+    private void loadBitmap(String url) {
 
         if (loadTarget == null)
             loadTarget = new Target() {
@@ -212,7 +212,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
 
     }
 
-    void setBitmap(Bitmap bitmap) {
+    private void setBitmap(Bitmap bitmap) {
         assert targetNews != null;
         Picasso.with(getActivity()).
                 load(Constant.URI_IMAGE_MEDIUM + targetNews.getImage()).
@@ -224,7 +224,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
 
     public void setPalette(@NonNull Palette palette) {
         this.palette = palette;
-        ((ActionBarActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(R.color.primaryColor)));
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(R.color.primaryColor)));
         if (Build.VERSION.SDK_INT >= 21) {
             getActivity().getWindow().setStatusBarColor(palette.getDarkVibrantColor(R.color.primaryColor));
         }

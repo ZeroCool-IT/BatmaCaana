@@ -58,7 +58,7 @@ public class News implements Cardable {
     /**
      * @return the id
      */
-    int getId() {
+    private int getId() {
         return id;
     }
 
@@ -110,15 +110,8 @@ public class News implements Cardable {
     /**
      * @return the date of the news
      */
-    GregorianCalendar getDate() {
+    private GregorianCalendar getDate() {
         return date;
-    }
-
-    /**
-     * @param date the date of the news to set
-     */
-    void setDate(GregorianCalendar date) {
-        this.date = date;
     }
 
     /**
@@ -130,6 +123,13 @@ public class News implements Cardable {
         GregorianCalendar g = ParsingUtilities.parseDate(date);
         setDate(g);
 
+    }
+
+    /**
+     * @param date the date of the news to set
+     */
+    private void setDate(GregorianCalendar date) {
+        this.date = date;
     }
 
     @Nullable

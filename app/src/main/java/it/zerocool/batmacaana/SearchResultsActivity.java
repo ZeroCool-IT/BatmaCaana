@@ -10,14 +10,14 @@ import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 
 import it.zerocool.batmacaana.utilities.Constant;
 import it.zerocool.batmacaana.utilities.SearchHistoryProvider;
 
 
-public class SearchResultsActivity extends ActionBarActivity {
+public class SearchResultsActivity extends AppCompatActivity {
 
 
     @Override

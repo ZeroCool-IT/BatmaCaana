@@ -17,7 +17,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -34,7 +34,7 @@ import it.zerocool.batmacaana.listener.DialogReturnListener;
 import it.zerocool.batmacaana.utilities.Constant;
 
 
-public class HomeActivity extends ActionBarActivity implements DialogReturnListener {
+public class HomeActivity extends AppCompatActivity implements DialogReturnListener {
 
     public static final String PROPERTY_APP_VERSION = "appVersion";
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;

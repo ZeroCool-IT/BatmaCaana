@@ -9,11 +9,12 @@ android {
     buildToolsVersion "22"
 
     defaultConfig {
-        applicationId "it.zerocool.batmacaana"
+        applicationId "it.exploracity.explora"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 54
-        versionName "0.54a"
+        versionCode 5
+        versionName "1.2"
+
     }
     buildTypes {
         release {
@@ -27,21 +28,7 @@ android {
         }
     }
 
-    productFlavors {
-        prod {
-            applicationId "it.exploracity.explora"
-            versionCode 5
-            versionName "1.2"
-        }
-        alpha {
-            applicationId "it.exploracity.carpineto.alpha"
-        }
-        beta {
-            applicationId "it.exploracity.carpineto.beta"
-            versionCode 19
-            versionName "0.19B RC4"
-        }
-    }
+
 }
 repositories {
     jcenter()

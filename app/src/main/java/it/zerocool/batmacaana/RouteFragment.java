@@ -19,7 +19,7 @@ import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.ShareActionProvider;
 import android.text.TextUtils;
@@ -147,10 +147,10 @@ public class RouteFragment extends Fragment implements View.OnClickListener, Tex
         Route p = ParsingUtilities.parseSingleRoute(getArguments().getString(Constant.JSON_ARG));
         targetRoute = p;
         assert p != null;
-        ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(p.getName());
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(p.getName());
         if (!p.getTags().isEmpty()) {
             String tags = TextUtils.join(", ", p.getTags());
-            ((ActionBarActivity) getActivity()).getSupportActionBar().setSubtitle(tags);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setSubtitle(tags);
         }
 
         //Load imagery and change colors
@@ -181,7 +181,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener, Tex
             Toast.makeText(getActivity(), R.string.tts_na, Toast.LENGTH_SHORT).show();
     }
 
-    void loadBitmap(String url) {
+    private void loadBitmap(String url) {
 
         if (loadTarget == null)
             loadTarget = new Target() {
@@ -240,7 +240,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener, Tex
 
     }
 
-    void setBitmap(Bitmap bitmap) {
+    private void setBitmap(Bitmap bitmap) {
         assert targetRoute != null;
         Picasso.with(getActivity()).
                 load(Constant.URI_IMAGE_BIG + targetRoute.getImage()).
@@ -253,7 +253,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener, Tex
 
     public void setPalette(@NonNull Palette palette) {
         this.palette = palette;
-        ((ActionBarActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(R.color.primaryColor)));
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(R.color.primaryColor)));
         if (Build.VERSION.SDK_INT >= 21) {
             getActivity().getWindow().setStatusBarColor(palette.getDarkVibrantColor(R.color.primaryColor));
         }

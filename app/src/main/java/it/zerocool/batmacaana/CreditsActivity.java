@@ -9,7 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import org.jetbrains.annotations.Nullable;
 
-public class CreditsActivity extends ActionBarActivity {
+public class CreditsActivity extends AppCompatActivity {
 
 
     @Override
@@ -88,6 +88,12 @@ public class CreditsActivity extends ActionBarActivity {
             androidTR = (ImageView) rootView.findViewById(R.id.android_logo_tr);
             androidBL = (ImageView) rootView.findViewById(R.id.android_logo_bl);
             androidTL = (ImageView) rootView.findViewById(R.id.android_logo_tl);
+
+            TextView version = (TextView) rootView.findViewById(R.id.version);
+            int versionCode = BuildConfig.VERSION_CODE;
+            String versionName = BuildConfig.VERSION_NAME;
+            version.append(versionName);
+            version.append(" build " + versionCode);
 
             email = (TextView) rootView.findViewById(R.id.mail_tv);
             website = (TextView) rootView.findViewById(R.id.web_tv);

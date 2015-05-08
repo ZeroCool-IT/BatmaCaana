@@ -69,7 +69,7 @@ public class Event implements Cardable {
     /**
      * @return the id of the event
      */
-    int getId() {
+    private int getId() {
         return id;
     }
 
@@ -121,7 +121,7 @@ public class Event implements Cardable {
     /**
      * @param date the start date of the event to set
      */
-    void setStartDate(GregorianCalendar date) {
+    private void setStartDate(GregorianCalendar date) {
         this.startDate = date;
     }
 
@@ -146,7 +146,7 @@ public class Event implements Cardable {
     /**
      * @param endDate is the end date of the event to set
      */
-    void setEndDate(GregorianCalendar endDate) {
+    private void setEndDate(GregorianCalendar endDate) {
         this.endDate = endDate;
     }
 
@@ -170,7 +170,7 @@ public class Event implements Cardable {
     /**
      * @param startHour the start hour of the event to set
      */
-    void setStartHour(GregorianCalendar startHour) {
+    private void setStartHour(GregorianCalendar startHour) {
         this.startHour = startHour;
     }
 
@@ -194,7 +194,7 @@ public class Event implements Cardable {
     /**
      * @param endHour the end hour of the event to set
      */
-    void setEndHour(GregorianCalendar endHour) {
+    private void setEndHour(GregorianCalendar endHour) {
         this.endHour = endHour;
     }
 
@@ -372,7 +372,7 @@ public class Event implements Cardable {
      * @return Event start date to String
      */
     @Nullable
-    String startDateToString() {
+    private String startDateToString() {
         if (startDate != null) {
             if (startHour != null) {
                 GregorianCalendar res = getStartDate();
@@ -392,7 +392,7 @@ public class Event implements Cardable {
      * @return Event end date to String
      */
     @Nullable
-    String endDateToString() {
+    private String endDateToString() {
         if (endDate != null) {
             if (endHour != null) {
                 GregorianCalendar res = getEndDate();

@@ -11,7 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -53,8 +53,8 @@ public class SearchResultsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_search_results, container, false);
         Toolbar toolbar = (Toolbar) layout.findViewById(R.id.appbar);
-        ((ActionBarActivity) getActivity()).setSupportActionBar(toolbar);
-        ((ActionBarActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         context = getActivity();
         rvResults = (RecyclerView) layout.findViewById(R.id.search_results_recycler_view);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(context);
@@ -69,7 +69,7 @@ public class SearchResultsFragment extends Fragment {
     }
 
     private void getData(@NonNull String query) {
-        ((ActionBarActivity) getActivity())
+        ((AppCompatActivity) getActivity())
                 .getSupportActionBar()
                 .setTitle(getResources()
                         .getString(R.string.results) + query);

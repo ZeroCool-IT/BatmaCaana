@@ -54,7 +54,7 @@ public class TimeCard {
     /**
      * @return the AM opening hour
      */
-    GregorianCalendar getAmOpening() {
+    private GregorianCalendar getAmOpening() {
         return amOpening;
     }
 
@@ -63,7 +63,7 @@ public class TimeCard {
      *
      * @param amOpening the AM opening hour to set
      */
-    void setAmOpening(GregorianCalendar amOpening) {
+    private void setAmOpening(GregorianCalendar amOpening) {
         this.amOpening = amOpening;
     }
 
@@ -80,7 +80,7 @@ public class TimeCard {
     /**
      * @return the AM closing hour
      */
-    GregorianCalendar getAmClosing() {
+    private GregorianCalendar getAmClosing() {
         return amClosing;
     }
 
@@ -89,7 +89,7 @@ public class TimeCard {
      *
      * @param amClosing AM closing hour to set
      */
-    void setAmClosing(GregorianCalendar amClosing) {
+    private void setAmClosing(GregorianCalendar amClosing) {
         this.amClosing = amClosing;
     }
 
@@ -106,7 +106,7 @@ public class TimeCard {
     /**
      * @return the PM opening hour
      */
-    GregorianCalendar getPmOpening() {
+    private GregorianCalendar getPmOpening() {
         return pmOpening;
     }
 
@@ -115,7 +115,7 @@ public class TimeCard {
      *
      * @param pmOpening the PM opening hour to set
      */
-    void setPmOpening(GregorianCalendar pmOpening) {
+    private void setPmOpening(GregorianCalendar pmOpening) {
         this.pmOpening = pmOpening;
     }
 
@@ -132,7 +132,7 @@ public class TimeCard {
     /**
      * @return the PM closing hour
      */
-    GregorianCalendar getPmClosing() {
+    private GregorianCalendar getPmClosing() {
         return pmClosing;
     }
 
@@ -141,7 +141,7 @@ public class TimeCard {
      *
      * @param pmClosing the PM closing hour to set
      */
-    void setPmClosing(GregorianCalendar pmClosing) {
+    private void setPmClosing(GregorianCalendar pmClosing) {
         this.pmClosing = pmClosing;
     }
 
@@ -159,7 +159,7 @@ public class TimeCard {
      * @return the closing days list
      */
     @NonNull
-    ArrayList<GregorianCalendar> getClosingDays() {
+    private ArrayList<GregorianCalendar> getClosingDays() {
         return closingDays;
     }
 
@@ -220,7 +220,7 @@ public class TimeCard {
     /**
      * @return the notes
      */
-    String getNotes() {
+    private String getNotes() {
         return notes;
     }
 
@@ -237,7 +237,7 @@ public class TimeCard {
      * @return a String representing AM opening hours
      */
     @Nullable
-    String openAMtoString() {
+    private String openAMtoString() {
         String amOp, amCl, res = null;
         if (getAmClosing() != null && getAmOpening() != null) {
 //            DecimalFormat format = new DecimalFormat("00");
@@ -256,7 +256,7 @@ public class TimeCard {
      * @return a String representing PM opening hours
      */
     @Nullable
-    String openPMtoString() {
+    private String openPMtoString() {
         String pmOp, pmCl, res = null;
         if (getPmClosing() != null && getPmOpening() != null) {
 //            DecimalFormat format = new DecimalFormat("00");
@@ -274,7 +274,7 @@ public class TimeCard {
      * @return a String representing place closing days
      */
     @Nullable
-    String closingDayToString() {
+    private String closingDayToString() {
         String res = null;
         if (!getClosingDays().isEmpty()) {
             Iterator<GregorianCalendar> it = getClosingDays().iterator();
