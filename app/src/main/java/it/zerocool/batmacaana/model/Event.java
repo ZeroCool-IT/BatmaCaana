@@ -108,6 +108,13 @@ public class Event implements Cardable {
     }
 
     /**
+     * @param date the start date of the event to set
+     */
+    private void setStartDate(GregorianCalendar date) {
+        this.startDate = date;
+    }
+
+    /**
      * Set the event's start date parsing infos from String
      *
      * @param date it's the start date to set (YYYY-mm-DD format)
@@ -119,17 +126,17 @@ public class Event implements Cardable {
     }
 
     /**
-     * @param date the start date of the event to set
-     */
-    private void setStartDate(GregorianCalendar date) {
-        this.startDate = date;
-    }
-
-    /**
      * @return the end date of the event
      */
     public GregorianCalendar getEndDate() {
         return endDate;
+    }
+
+    /**
+     * @param endDate is the end date of the event to set
+     */
+    private void setEndDate(GregorianCalendar endDate) {
+        this.endDate = endDate;
     }
 
     /**
@@ -144,17 +151,17 @@ public class Event implements Cardable {
     }
 
     /**
-     * @param endDate is the end date of the event to set
-     */
-    private void setEndDate(GregorianCalendar endDate) {
-        this.endDate = endDate;
-    }
-
-    /**
      * @return the start hour of the event
      */
     public GregorianCalendar getStartHour() {
         return startHour;
+    }
+
+    /**
+     * @param startHour the start hour of the event to set
+     */
+    private void setStartHour(GregorianCalendar startHour) {
+        this.startHour = startHour;
     }
 
     /**
@@ -168,17 +175,17 @@ public class Event implements Cardable {
     }
 
     /**
-     * @param startHour the start hour of the event to set
-     */
-    private void setStartHour(GregorianCalendar startHour) {
-        this.startHour = startHour;
-    }
-
-    /**
      * @return the start hour of the event
      */
     public GregorianCalendar getEndHour() {
         return endHour;
+    }
+
+    /**
+     * @param endHour the end hour of the event to set
+     */
+    private void setEndHour(GregorianCalendar endHour) {
+        this.endHour = endHour;
     }
 
     /**
@@ -189,13 +196,6 @@ public class Event implements Cardable {
     public void setEndHour(String endHour) {
         GregorianCalendar g = ParsingUtilities.parseHour(endHour);
         setEndHour(g);
-    }
-
-    /**
-     * @param endHour the end hour of the event to set
-     */
-    private void setEndHour(GregorianCalendar endHour) {
-        this.endHour = endHour;
     }
 
     /**
@@ -244,14 +244,6 @@ public class Event implements Cardable {
         return tags;
     }
 
-// --Commented out by Inspection START (05/03/2015 16:34):
-//    /**
-//     * @param tags the tags list of the event to set
-//     */
-//    public void setTags(LinkedList<String> tags) {
-//        this.tags = tags;
-//    }
-// --Commented out by Inspection STOP (05/03/2015 16:34)
 
     /**
      * Add the tags to tags' list from a string in CSV format
@@ -378,10 +370,11 @@ public class Event implements Cardable {
                 GregorianCalendar res = getStartDate();
                 res.set(GregorianCalendar.HOUR_OF_DAY, getStartHour().get(Calendar.HOUR_OF_DAY));
                 res.set(GregorianCalendar.MINUTE, getStartHour().get(Calendar.MINUTE));
-                java.text.DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance(java.text.DateFormat.LONG, java.text.DateFormat.SHORT);
+                java.text.DateFormat dateFormat = SimpleDateFormat
+                        .getDateTimeInstance(java.text.DateFormat.LONG, java.text.DateFormat.SHORT, Locale.getDefault());
                 return dateFormat.format(res.getTime());
             } else {
-                java.text.DateFormat dateFormat = SimpleDateFormat.getDateInstance(java.text.DateFormat.LONG);
+                java.text.DateFormat dateFormat = SimpleDateFormat.getDateInstance(java.text.DateFormat.LONG, Locale.getDefault());
                 return dateFormat.format(getStartDate().getTime());
             }
         }
@@ -398,10 +391,11 @@ public class Event implements Cardable {
                 GregorianCalendar res = getEndDate();
                 res.set(GregorianCalendar.HOUR_OF_DAY, getEndHour().get(Calendar.HOUR_OF_DAY));
                 res.set(GregorianCalendar.MINUTE, getEndHour().get(Calendar.MINUTE));
-                java.text.DateFormat dateFormat = SimpleDateFormat.getDateTimeInstance(java.text.DateFormat.LONG, java.text.DateFormat.SHORT);
+                java.text.DateFormat dateFormat = SimpleDateFormat
+                        .getDateTimeInstance(java.text.DateFormat.LONG, java.text.DateFormat.SHORT, Locale.getDefault());
                 return dateFormat.format(res.getTime());
             } else {
-                java.text.DateFormat dateFormat = SimpleDateFormat.getDateInstance(java.text.DateFormat.LONG);
+                java.text.DateFormat dateFormat = SimpleDateFormat.getDateInstance(java.text.DateFormat.LONG, Locale.getDefault());
                 return dateFormat.format(getEndDate().getTime());
             }
         }
