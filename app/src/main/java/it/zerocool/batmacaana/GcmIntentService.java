@@ -13,17 +13,18 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.util.Base64;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,6 +47,7 @@ public class GcmIntentService extends IntentService {
     private static final String TAG = "GCM INTENT";
     private static final String NEWS_GROUP = "news";
     private static final String EVENT_GROUP = "event";
+    private static final String BASE64_FLAG = "*BASE64*";
     private final SharedPreferences sharedPreferences;
     private NotificationCompat.Builder builder;
     private NotificationManager mNotificationManager;
@@ -55,8 +57,12 @@ public class GcmIntentService extends IntentService {
     public GcmIntentService() {
         super("GcmIntentService");
         sharedPreferences = ApplicationContextProvider.getContext().getSharedPreferences(Constant.NOTIFICATION_PREFS, MODE_PRIVATE);
-        RetrieveCitiesTask task = new RetrieveCitiesTask();
-        task.execute();
+        /*RetrieveCitiesTask task = new RetrieveCitiesTask();
+        task.execute();*/
+        DBHelper helper = DBHelper.getInstance(ApplicationContextProvider.getContext());
+        SQLiteDatabase db = helper.getWritabelDB();
+        assert db != null;
+        customers = DBManager.getCustomers(db);
     }
 
     @Override
@@ -126,7 +132,30 @@ public class GcmIntentService extends IntentService {
         String type = extras.getString(Constant.TYPE_ARG);
         result.put(Constant.TYPE_ARG, type);
         String message = extras.getString(Constant.MESSAGE_ARG);
-        result.put(Constant.MESSAGE_ARG, message);
+        if (message.startsWith(BASE64_FLAG)) {
+            byte[] out;
+            try {
+                message = message.substring(7);
+                out = Base64.decode(message, Base64.DEFAULT);
+            } catch (IllegalArgumentException e) {
+                Log.w("BASE64 ERROR", e.getMessage());
+                result.put(Constant.MESSAGE_ARG, message);
+                return result;
+            }
+            String decoded = null;
+            try {
+                decoded = new String(out, "UTF-8");
+                Log.i("BASE64", "String successful decoded: " + decoded);
+            } catch (UnsupportedEncodingException e) {
+                Log.w("BASE64 ERROR", e.getMessage());
+            }
+
+            result.put(Constant.MESSAGE_ARG, decoded);
+        } else {
+            result.put(Constant.MESSAGE_ARG, message);
+        }
+
+
         return result;
     }
 
@@ -160,7 +189,7 @@ public class GcmIntentService extends IntentService {
         String title;
         if (city != null && !city.isEmpty()) {
             title = getString(R.string.notification_news_title) +
-                    findNameByUid(map.get(Constant.USER_ID_ARG));
+                    city;
         } else {
             title = getString(R.string.generic_news_notification);
 
@@ -213,7 +242,7 @@ public class GcmIntentService extends IntentService {
         String title;
         if (city != null && !city.isEmpty()) {
             title = getString(R.string.notification_event_title) +
-                    findNameByUid(map.get(Constant.USER_ID_ARG));
+                    city;
         } else {
             title = getString(R.string.generic_event_notification);
         }
@@ -271,9 +300,9 @@ public class GcmIntentService extends IntentService {
         }
     }
 
-    private class RetrieveCitiesTask extends AsyncTask<Void, Void, ArrayList<City>> {
+    /*private class RetrieveCitiesTask extends AsyncTask<Void, Void, ArrayList<City>> {
 
-        /**
+        *//**
          * Override this method to perform a computation on a background thread. The
          * specified parameters are the parameters passed to {@link #execute}
          * by the caller of this task.
@@ -286,7 +315,7 @@ public class GcmIntentService extends IntentService {
          * @see #onPreExecute()
          * @see #onPostExecute
          * @see #publishProgress
-         */
+     *//*
         @NonNull
         @Override
         protected ArrayList<City> doInBackground(Void... params) {
@@ -296,7 +325,7 @@ public class GcmIntentService extends IntentService {
             return DBManager.getCustomers(db);
         }
 
-        /**
+        *//**
          * <p>Runs on the UI thread after {@link #doInBackground}. The
          * specified result is the value returned by {@link #doInBackground}.</p>
          * <p/>
@@ -306,7 +335,7 @@ public class GcmIntentService extends IntentService {
          * @see #onPreExecute
          * @see #doInBackground
          * @see #onCancelled(Object)
-         */
+     *//*
         @Override
         protected void onPostExecute(@Nullable ArrayList<City> cities) {
             if (cities != null) {
@@ -314,6 +343,6 @@ public class GcmIntentService extends IntentService {
 
             }
         }
-    }
+    }*/
 
 }
