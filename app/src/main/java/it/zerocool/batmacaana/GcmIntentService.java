@@ -47,7 +47,7 @@ public class GcmIntentService extends IntentService {
     private static final String TAG = "GCM INTENT";
     private static final String NEWS_GROUP = "news";
     private static final String EVENT_GROUP = "event";
-    private static final String BASE64_FLAG = "*BASE64*";
+    private static final String BASE64_FLAG = "*B64*";
     private final SharedPreferences sharedPreferences;
     private NotificationCompat.Builder builder;
     private NotificationManager mNotificationManager;
@@ -135,7 +135,7 @@ public class GcmIntentService extends IntentService {
         if (message.startsWith(BASE64_FLAG)) {
             byte[] out;
             try {
-                message = message.substring(7);
+                message = message.substring(BASE64_FLAG.length());
                 out = Base64.decode(message, Base64.DEFAULT);
             } catch (IllegalArgumentException e) {
                 Log.w("BASE64 ERROR", e.getMessage());
