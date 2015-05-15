@@ -85,7 +85,7 @@ public class InitialCityDialog extends DialogFragment {
         editor.putString(Constant.CITY_AVATAR, defaultCity.getAvatar());
         editor.putInt(Constant.CITY_UID, defaultCity.getUserID());
         editor.apply();
-        builder.setIcon(R.drawable.ic_launcher);
+        builder.setIcon(R.drawable.ic_launcher_x);
         builder.setTitle(R.string.city_initial_chooser);
 //        builder.setMessage(R.string.city_initial_chooser);
         builder.setPositiveButton(R.string.dialog_button_ok, new DialogInterface.OnClickListener() {
