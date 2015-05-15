@@ -1,0 +1,72 @@
+<!--
+  ~ Copyright ZeroApp(c) 2015. All right reserved.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="it.zerocool.batmacaana.SearchResultsFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
+
+        <include
+            android:id="@+id/appbar"
+            layout="@layout/app_bar" />
+
+        <RelativeLayout
+            android:id="@+id/header_row"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_below="@id/appbar">
+
+            <Button
+                android:id="@+id/news_column_icon"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawableLeft="@drawable/ic_newspaper_grey600_24dp"
+                android:drawableStart="@drawable/ic_newspaper_grey600_24dp"
+                android:enabled="false"
+                android:text="@string/news" />
+
+            <Button
+                android:id="@+id/event_column_icon"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/news_column_icon"
+                android:layout_toStartOf="@+id/news_column_icon"
+                android:drawableLeft="@drawable/ic_event_note_grey600_24dp"
+                android:drawableStart="@drawable/ic_event_note_grey600_24dp"
+                android:enabled="false"
+                android:text="@string/event" />
+        </RelativeLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/cities_list_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_row"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp" />
+
+        <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
+            android:id="@+id/cities_list_progressbar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@color/primaryColor"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</FrameLayout>

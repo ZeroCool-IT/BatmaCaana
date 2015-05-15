@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,6 +26,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import it.zerocool.batmacaana.NotificationActivity;
 import it.zerocool.batmacaana.R;
 import it.zerocool.batmacaana.listener.DialogReturnListener;
 import it.zerocool.batmacaana.utilities.Constant;
@@ -34,7 +36,7 @@ import it.zerocool.batmacaana.utilities.NotificationsUtil;
  * Alert dialog for disabling notifications
  * Created by Marco Battisti on 01/04/2015.
  */
-public class AlertsDisablingDialog extends DialogFragment implements RadioGroup.OnCheckedChangeListener {
+public class AlertsDisablingDialog extends DialogFragment implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
     private final static long ONE_HOUR = 3600000;
     private final static long TWO_HOURS = 7200000;
@@ -83,6 +85,8 @@ public class AlertsDisablingDialog extends DialogFragment implements RadioGroup.
 
         RadioGroup radioGroup = (RadioGroup) v.findViewById(R.id.notifications_radio_group);
         SwitchCompat switchCompat = (SwitchCompat) v.findViewById(R.id.sound_switch);
+        TextView manage = (TextView) v.findViewById(R.id.manage_cities_notifications);
+        manage.setOnClickListener(this);
 
         boolean soundEnabled = sp.getBoolean(Constant.NOTIFICATIONS_SOUND, true);
         switchCompat.setChecked(soundEnabled);
@@ -213,5 +217,18 @@ public class AlertsDisablingDialog extends DialogFragment implements RadioGroup.
         editor.putLong(Constant.REACTIVATE_TIME, h);
         editor.apply();
 
+    }
+
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.manage_cities_notifications) {
+            Intent intent = new Intent(getActivity(), NotificationActivity.class);
+            startActivity(intent);
+        }
     }
 }
