@@ -5,11 +5,13 @@
 package it.zerocool.batmacaana;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,12 +33,14 @@ public class CityNotificationAdapter extends RecyclerView.Adapter<CityNotificati
 
     private final Context context;
     private final LayoutInflater inflater;
+    private final SharedPreferences sp;
     private List<City> citiesList = Collections.emptyList();
 
     public CityNotificationAdapter(Context context, List<City> data) {
         inflater = LayoutInflater.from(context);
         this.citiesList = data;
         this.context = context;
+        this.sp = context.getSharedPreferences(Constant.NOTIFICATION_PREFS, Context.MODE_PRIVATE);
 
     }
 
@@ -87,8 +91,34 @@ public class CityNotificationAdapter extends RecyclerView.Adapter<CityNotificati
     public void onBindViewHolder(CityHolder holder, int position) {
         City current = citiesList.get(position);
         holder.cityName.setText(current.getName());
+        final int userId = current.getUserID();
+        holder.newsCheck.setChecked(sp.getBoolean(Constant.NOT_NEWS + userId, true));
+        holder.eventCheck.setChecked(sp.getBoolean(Constant.NOT_EVENT + userId, true));
+        CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                int id = buttonView.getId();
+                SharedPreferences.Editor editor = sp.edit();
+
+                switch (id) {
+                    case R.id.event_check:
+                        editor.putBoolean(Constant.NOT_EVENT + userId, isChecked);
+                        break;
+                    case R.id.news_check:
+                        editor.putBoolean(Constant.NOT_NEWS + userId, isChecked);
+                        break;
+                    default:
+                        break;
+                }
+                editor.apply();
+            }
+        };
+        holder.eventCheck.setOnCheckedChangeListener(listener);
+        holder.newsCheck.setOnCheckedChangeListener(listener);
+
         Picasso.with(context)
                 .load(Constant.URI_IMAGE_BIG + current.getAvatar())
+                .resize(96, 96)
                 .into(holder.cityAvatar);
 
 
@@ -104,6 +134,7 @@ public class CityNotificationAdapter extends RecyclerView.Adapter<CityNotificati
         return citiesList.size();
     }
 
+
     class CityHolder extends RecyclerView.ViewHolder {
 
         final TextView cityName;
@@ -114,9 +145,10 @@ public class CityNotificationAdapter extends RecyclerView.Adapter<CityNotificati
         public CityHolder(View itemView) {
             super(itemView);
             cityName = (TextView) itemView.findViewById(R.id.city_name);
+            cityAvatar = (ImageView) itemView.findViewById(R.id.city_logo);
             eventCheck = (CheckBox) itemView.findViewById(R.id.event_check);
             newsCheck = (CheckBox) itemView.findViewById(R.id.news_check);
-            cityAvatar = (ImageView) itemView.findViewById(R.id.city_logo);
         }
     }
+
 }

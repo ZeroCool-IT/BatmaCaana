@@ -5,8 +5,12 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="56dp"
+
+    android:layout_marginEnd="16dp"
+    android:layout_marginRight="16dp">
 
     <ImageView
         android:id="@+id/city_logo"
@@ -14,25 +18,12 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:contentDescription="@string/city_image"
-        android:padding="8dp"
-        android:src="@drawable/ic_map_grey600_48dp" />
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:src="@drawable/im_stemma_placeholder" />
 
 
-    <TextView
-        android:id="@+id/city_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@id/city_logo"
-        android:layout_toRightOf="@id/city_logo"
-        android:ellipsize="end"
-        android:fontFamily="sans-serif-medium"
-        android:maxLines="1"
-        android:paddingEnd="16dp"
-        android:paddingRight="16dp"
-        android:text="@string/dummy_text"
-        android:textColor="@color/text87"
-        android:textSize="14sp" />
+
 
 
     <CheckBox
@@ -42,7 +33,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:padding="16dp" />
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/news"
+        android:textSize="13sp" />
 
     <CheckBox
         android:id="@+id/event_check"
@@ -50,8 +43,32 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@id/news_check"
+
         android:layout_toStartOf="@+id/news_check"
-        android:padding="16dp" />
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/event"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/city_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/city_logo"
+        android:layout_toLeftOf="@id/event_check"
+        android:layout_toRightOf="@id/city_logo"
+        android:layout_toStartOf="@id/event_check"
+        android:ellipsize="none"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="1"
+        android:paddingBottom="20dp"
+        android:paddingEnd="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="20dp"
+        android:text="@string/dummy_text"
+        android:textColor="@color/text87"
+        android:textSize="13sp"
+        tools:ignore="RtlSymmetry" />
 
 </RelativeLayout>
 

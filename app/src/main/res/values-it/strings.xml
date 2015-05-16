@@ -164,5 +164,7 @@
     <string name="more_info_cities">Puoi sempre cambiare Città usando il selettore sul menu di navigazione a sinistra.</string>
     <string name="got_it">Capito!</string>
     <string name="version">Versione&#160;</string>
-    <string name="manage_cities_alerts">Gestisci le notifiche delle città</string>
+    <string name="manage_cities_alerts">Gestisci le notifiche dalle Città…</string>
+    <string name="notification_city_title">Scegli le notifiche che vuoi ricevere:</string>
+    <string name="manage_notification_activity_title">Gestisci notifiche</string>
 </resources>

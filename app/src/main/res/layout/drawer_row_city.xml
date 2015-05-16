@@ -39,7 +39,7 @@
         android:textColor="@color/text87"
         android:textSize="14sp" />
 
-    <ImageButton
+    <!--<ImageButton
         android:id="@+id/notification_button"
 
         style="?android:attr/borderlessButtonStyle"
@@ -53,6 +53,6 @@
         android:alpha="0.35"
         android:contentDescription="@string/city_notification_button"
         android:padding="8dp"
-        android:src="@drawable/ic_notifications_grey600_18dp" />
+        android:src="@drawable/ic_notifications_grey600_18dp" />-->
 
 </com.andexert.library.RippleView>

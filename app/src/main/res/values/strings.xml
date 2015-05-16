@@ -179,10 +179,10 @@
     <string name="more_info_cities">You can always change City using the selector on the left navigation drawer.</string>
     <string name="got_it">Got it!</string>
     <string name="version">Version&#160;</string>
-    <string name="manage_cities_alerts">Manage Cities\' notifications</string>
-    <string name="title_activity_notification">NotificationActivity</string>
-
-    <string name="hello_world">Hello world!</string>
+    <string name="manage_cities_alerts">Manage Cities\' notifications…</string>
+    <string name="title_activity_notification" translatable="false">NotificationActivity</string>
+    <string name="notification_city_title">Choose the notifications you want to receive:</string>
+    <string name="manage_notification_activity_title">Manage notifications</string>
 
 
 </resources>
