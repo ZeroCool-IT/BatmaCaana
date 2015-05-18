@@ -58,7 +58,7 @@
         android:layout_toLeftOf="@id/event_check"
         android:layout_toRightOf="@id/city_logo"
         android:layout_toStartOf="@id/event_check"
-        android:ellipsize="none"
+        android:ellipsize="end"
         android:fontFamily="sans-serif-medium"
         android:maxLines="1"
         android:paddingBottom="20dp"
