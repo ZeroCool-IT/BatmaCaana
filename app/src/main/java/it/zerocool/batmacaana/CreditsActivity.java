@@ -90,10 +90,9 @@ public class CreditsActivity extends AppCompatActivity {
             androidTL = (ImageView) rootView.findViewById(R.id.android_logo_tl);
 
             TextView version = (TextView) rootView.findViewById(R.id.version);
-            int versionCode = BuildConfig.VERSION_CODE;
             String versionName = BuildConfig.VERSION_NAME;
             version.append(versionName);
-            version.append(" build " + versionCode);
+//            version.append(" build " + versionCode);
 
             email = (TextView) rootView.findViewById(R.id.mail_tv);
             website = (TextView) rootView.findViewById(R.id.web_tv);

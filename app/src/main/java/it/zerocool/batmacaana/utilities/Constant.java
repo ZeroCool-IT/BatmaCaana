@@ -83,8 +83,7 @@ public class Constant {
     public static final String URI_CUSTOMERS = "http://www.exploracity.it/app/json/utenti.php";
     public static final String URI_LANGUAGE = "&language=";
 
-    /*
-    //TEST URI=========================================================================================
+/*    //TEST URI=========================================================================================
     public static final String URI_TOSEE = "http://www.ilmiositodemo.altervista.org/app/json/vedere.php?user=";
     public static final String URI_EAT = "http://www.ilmiositodemo.altervista.org/app/json/mangiare.php?user=";
     public static final String URI_SLEEP = "http://www.ilmiositodemo.altervista.org/app/json/dormire.php?user=";

@@ -1,0 +1,26 @@
+<!--
+  ~ Copyright ZeroApp(c) 2015. All right reserved.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="it.zerocool.batmacaana.SearchResultsFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/content_recycler_top_margin"
+        tools:ignore="UselessParent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/cities_list_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp" />
+    </RelativeLayout>
+
+</FrameLayout>

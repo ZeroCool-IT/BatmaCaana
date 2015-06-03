@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -26,7 +25,6 @@ import com.squareup.picasso.Picasso;
 import java.util.Collections;
 import java.util.List;
 
-import it.zerocool.batmacaana.dialog.CityNotificationDialog;
 import it.zerocool.batmacaana.model.City;
 import it.zerocool.batmacaana.utilities.Constant;
 
@@ -167,15 +165,15 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
         final TextView name;
         @NonNull
         final ImageView avatar;
-        @NonNull
-        final ImageButton notification;
+//        @NonNull
+//        final ImageButton notification;
 
         public CitiesViewHolder(@NonNull View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.listText);
             avatar = (ImageView) itemView.findViewById(R.id.listIcon);
-            notification = (ImageButton) itemView.findViewById(R.id.notification_button);
-            notification.setOnClickListener(this);
+            //notification = (ImageButton) itemView.findViewById(R.id.notification_button);
+            //notification.setOnClickListener(this);
             name.setOnClickListener(this);
             avatar.setOnClickListener(this);
         }
@@ -209,13 +207,13 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
                 drawer.setCustomersShown(false);
                 int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
                 selectItem(defaultView, true);
-            } else if (v.getId() == R.id.notification_button) {
+            }/* else if (v.getId() == R.id.notification_button) {
                 DialogFragment selectionDialog = new CityNotificationDialog();
                 Bundle bundle = new Bundle();
                 bundle.putInt(Constant.USER_ID_ARG, items.get(getAdapterPosition()).getUserID());
                 selectionDialog.setArguments(bundle);
                 selectionDialog.show(activity.getSupportFragmentManager(), "notification");
-            }
+            }*/
 
         }
     }
