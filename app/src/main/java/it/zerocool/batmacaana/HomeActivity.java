@@ -24,6 +24,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
@@ -44,6 +47,7 @@ public class HomeActivity extends AppCompatActivity implements DialogReturnListe
     private LocationListener locationListener;
     private long mLastBackPress;
     private NavigationDrawerFragment drawerFragment;
+    private InterstitialAd interstitialAd;
 
     /**
      * Return the version code of the app
@@ -66,6 +70,17 @@ public class HomeActivity extends AppCompatActivity implements DialogReturnListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId(getString(R.string.admob_interstitial_id_unit));
+        requestNewInterstitial();
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                requestNewInterstitial();
+                HomeActivity.this.finish();
+            }
+        });
         requestLocationServices();
 
         String provider = getLocationProvider();
@@ -101,6 +116,14 @@ public class HomeActivity extends AppCompatActivity implements DialogReturnListe
         } else {
             Log.i("PLAY SERVICE ERROR", "No valid Google Play Services APK found.");
         }
+    }
+
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("EBB1C7107089A8B00F47923963541577")
+                .build();
+        interstitialAd.loadAd(adRequest);
     }
 
     /**
@@ -250,7 +273,12 @@ public class HomeActivity extends AppCompatActivity implements DialogReturnListe
             mLastBackPress = currentTime;
         } else {
             pressBackToast.cancel();
-            finish();
+//            finish();
+            if (interstitialAd.isLoaded()) {
+                interstitialAd.show();
+            } else {
+                finish();
+            }
             SharedPreferences sharedPreferences = getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean(Constant.SPLASH, true);

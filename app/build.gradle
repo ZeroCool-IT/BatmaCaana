@@ -51,5 +51,7 @@ dependencies {
     compile 'com.android.support:support-v4:22.2.0'
     compile 'com.google.android.gms:play-services-gcm:7.5.0'
     compile 'com.github.nirhart:parallaxscroll:1.0'
+    compile 'com.google.android.gms:play-services-ads:7.5.0'
+    compile 'com.google.android.gms:play-services-analytics:7.5.0'
     compile files('libs/annotations-12.0.jar')
 }

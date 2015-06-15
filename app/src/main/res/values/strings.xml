@@ -183,6 +183,7 @@
     <string name="title_activity_notification" translatable="false">NotificationActivity</string>
     <string name="notification_city_title">Choose the notifications you want to receive:</string>
     <string name="manage_notification_activity_title">Manage notifications</string>
+    <string name="admob_interstitial_id_unit" translatable="false">ca-app-pub-8223853865998693/4269285965</string>
 
 
 </resources>
