@@ -25,11 +25,11 @@ public class CookiesDialog extends DialogFragment implements DialogInterface.OnC
     /**
      * Override to build your own custom Dialog container.  This is typically
      * used to show an AlertDialog instead of a generic Dialog; when doing so,
-     * {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)} does not need
+     *  does not need
      * to be implemented since the AlertDialog takes care of its own content.
      * <p/>
      * <p>This method will be called after {@link #onCreate(Bundle)} and
-     * before {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.  The
+     * before .  The
      * default implementation simply instantiates and returns a {@link Dialog}
      * class.
      * <p/>
