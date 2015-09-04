@@ -28,6 +28,7 @@ import java.util.ArrayList;
 
 import it.zerocool.batmacaana.database.DBHelper;
 import it.zerocool.batmacaana.database.DBManager;
+import it.zerocool.batmacaana.dialog.CookiesDialog;
 import it.zerocool.batmacaana.dialog.InitialCityDialog;
 import it.zerocool.batmacaana.model.City;
 import it.zerocool.batmacaana.utilities.ApplicationContextProvider;
@@ -70,6 +71,36 @@ public class SplashActivity extends AppCompatActivity {
             SplashActivity.this.startActivity(mainIntent);
             SplashActivity.this.finish();
         }
+    }
+
+    /**
+     * Dispatch onResume() to fragments.  Note that for better inter-operation
+     * with older versions of the platform, at the point of this call the
+     * fragments attached to the activity are <em>not</em> resumed.  This means
+     * that in some cases the previous state may still be saved, not allowing
+     * fragment transactions that modify the state.  To correctly interact
+     * with fragments in their proper state, you should instead override
+     * {@link #onResumeFragments()}.
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        final SharedPreferences sharedPreferences = getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
+        boolean isFirstTime = sharedPreferences.getBoolean(Constant.COOKIES_FIRST_TIME, true);
+        if (isFirstTime) {
+            CookiesDialog dialog = new CookiesDialog();
+            dialog.setCancelable(false);
+            dialog.show(getSupportFragmentManager(), "Resumed First time dialog");
+        }
+/*        else {
+            Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            SplashActivity.this.startActivity(mainIntent);
+            SplashActivity.this.finish();
+        }*/
+
     }
 
     private void checkCustomersDB() {
@@ -169,7 +200,7 @@ public class SplashActivity extends AppCompatActivity {
          * <p/>
          * <p>This method won't be invoked if the task was cancelled.</p>
          *
-         * @param aVoid The result of the operation computed by {@link #doInBackground}.
+         * @param success The result of the operation computed by {@link #doInBackground}.
          * @see #onPreExecute
          * @see #doInBackground
          * @see #onCancelled(Object)
@@ -177,8 +208,8 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean success) {
             if (success) {
-                SharedPreferences sharedPreferences = getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
-                boolean isFirstTime = sharedPreferences.getBoolean(Constant.FIRST_TIME, true);
+                final SharedPreferences sharedPreferences = getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
+                boolean isFirstTime = sharedPreferences.getBoolean(Constant.COOKIES_FIRST_TIME, true);
                 if (!isFirstTime || results.size() < 2) {
                     checkDefaultCity();
                     new Handler().postDelayed(new Runnable() {
@@ -198,7 +229,7 @@ public class SplashActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                 /* Create an Intent that will start the Main-Activity. */
-                        InitialCityDialog dialog = new InitialCityDialog();
+                        CookiesDialog dialog = new CookiesDialog();
                         dialog.setCancelable(false);
                         dialog.show(getSupportFragmentManager(), "First time dialog");
                     }
