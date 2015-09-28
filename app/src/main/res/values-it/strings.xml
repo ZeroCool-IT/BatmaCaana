@@ -167,4 +167,7 @@
     <string name="manage_cities_alerts">Gestisci le notifiche dalle Città…</string>
     <string name="notification_city_title">Scegli le notifiche che vuoi ricevere:</string>
     <string name="manage_notification_activity_title">Gestisci notifiche</string>
+    <string name="cookies_law">Per migliorare l\'esperienza utente, questa applicazione raccoglie alcuni dati dell\'utente, quali geolocalizzazione , cookies e dati di utilizzo.\nMaggiori informazioni alla pagina www.exploracity.it/privacy</string>
+    <string name="accept">Accetto!</string>
+    <string name="privacy_policy">Vai alla Privacy Policy</string>
 </resources>

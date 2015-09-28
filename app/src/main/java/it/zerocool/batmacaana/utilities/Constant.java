@@ -153,6 +153,7 @@ public class Constant {
     public static final String NOTIFICATION_DISABLED = "disabled";
     public static final String RB_SELECTED = "rb_selected";
     public static final String FIRST_TIME = "first_time";
+    public static final String COOKIES_FIRST_TIME = "cookies_first_time";
 
 
     //Location Constraints
