@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 import it.zerocool.batmacaana.R;
 
@@ -107,6 +108,25 @@ public class DBHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if (oldVersion < 2) {
+            InputStream inputStream = context.getResources().openRawResource(R.raw.alter_customers_v2);
+            try {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "ISO-8859-1"));
+                db.beginTransaction();
+                String data = bufferedReader.readLine();
+                while (data != null) {
+                    db.execSQL(data);
+                    data = bufferedReader.readLine();
+                }
+                db.setTransactionSuccessful();
+            } catch (IOException e) {
+                Log.e("I/O ERROR", e.getMessage());
+            }  catch (SQLiteException e) {
+                Log.e("DATABASE ERROR", e.getMessage());
+            } finally {
+                db.endTransaction();
+            }
+        }
 
     }
 

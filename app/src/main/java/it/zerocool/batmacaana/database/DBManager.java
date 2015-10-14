@@ -28,7 +28,7 @@ public class DBManager {
     public static final int CHECK = 2;
     //DB utility variable
     static final String DB_NAME = "ExploraDB";
-    static final int DB_VERSION = 1;
+    static final int DB_VERSION = 2;
 
     //Tables and columns
 
@@ -44,10 +44,12 @@ public class DBManager {
     private static final String UID_COLUMN = "UID";
     private static final String CITY_NAME_COLUMN = "NAME";
     private static final String AVATAR_COLUMN = "AVATAR";
+    private static final String PREMIUM_COLUMN = "PREMIUM";
     private static final int ID_COLUMN_INDEX = 0;
     private static final int UID_COLUMN_INDEX = 1;
     private static final int NAME_COLUMN_INDEX = 2;
     private static final int AVATAR_COLUMN_INDEX = 3;
+    private static final int PREMIUM_COLUMN_INDEX = 4;
 
     /**
      * Add a place to favorite's list
@@ -162,6 +164,7 @@ public class DBManager {
                     values.put(UID_COLUMN, c.getUserID());
                     values.put(CITY_NAME_COLUMN, c.getName());
                     values.put(AVATAR_COLUMN, c.getAvatar());
+                    values.put(PREMIUM_COLUMN, c.isPremium());
                     check += db.insert(TABLE_CUSTOMERS, null, values);
                 }
                 db.setTransactionSuccessful();
@@ -204,6 +207,7 @@ public class DBManager {
             city.setUserID(c.getInt(UID_COLUMN_INDEX));
             city.setName(c.getString(NAME_COLUMN_INDEX));
             city.setAvatar(c.getString(AVATAR_COLUMN_INDEX));
+            city.setPremium(c.getInt(PREMIUM_COLUMN_INDEX));
             result.add(city);
             c.moveToNext();
         }

@@ -76,6 +76,7 @@ public class InitialCityDialog extends DialogFragment {
                 editor.putString(Constant.CITY_NAME, target.getName());
                 editor.putString(Constant.CITY_AVATAR, target.getAvatar());
                 editor.putInt(Constant.CITY_UID, target.getUserID());
+                editor.putBoolean(Constant.CITY_PREMIUM, target.isPremium());
                 editor.apply();
             }
         });
@@ -84,6 +85,7 @@ public class InitialCityDialog extends DialogFragment {
         editor.putString(Constant.CITY_NAME, defaultCity.getName());
         editor.putString(Constant.CITY_AVATAR, defaultCity.getAvatar());
         editor.putInt(Constant.CITY_UID, defaultCity.getUserID());
+        editor.putBoolean(Constant.CITY_PREMIUM, defaultCity.isPremium());
         editor.apply();
         builder.setIcon(R.drawable.ic_launcher_x);
         builder.setTitle(R.string.city_initial_chooser);

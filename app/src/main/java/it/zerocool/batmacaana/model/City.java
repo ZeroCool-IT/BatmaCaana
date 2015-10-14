@@ -39,6 +39,7 @@ public class City implements Cardable {
     private String info;
     @Nullable
     private String avatar;
+    private boolean premium;
 
 
     /**
@@ -330,6 +331,21 @@ public class City implements Cardable {
         } else {
             this.avatar = null;
         }
+    }
+
+    public boolean isPremium() {
+        return premium;
+    }
+
+    public void setPremium(boolean premium) {
+        this.premium = premium;
+    }
+
+    public void setPremium(int premium) {
+        if (premium == 0)
+            setPremium(false);
+        else
+            setPremium(true);
     }
 
     /**

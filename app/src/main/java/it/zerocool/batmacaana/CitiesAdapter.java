@@ -69,7 +69,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
 
 
     /**
-     * Called when RecyclerView needs a new {@link ViewHolder} of the given type to represent
+     * Called when RecyclerView needs a new {@link RecyclerView.ViewHolder} of the given type to represent
      * an item.
      * <p/>
      * This new ViewHolder should be constructed with a new View that can represent the items
@@ -77,7 +77,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
      * layout file.
      * <p/>
      * The new ViewHolder will be used to display items of the adapter using
-     * {@link #onBindViewHolder(ViewHolder, int)}. Since it will be re-used to display different
+     * {@link #onBindViewHolder(RecyclerView.ViewHolder, int)}. Since it will be re-used to display different
      * items in the data set, it is a good idea to cache references to sub views of the View to
      * avoid unnecessary {@link View#findViewById(int)} calls.
      *
@@ -86,7 +86,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
      * @param viewType The view type of the new View.
      * @return A new ViewHolder that holds a View of the given view type.
      * @see #getItemViewType(int)
-     * @see #onBindViewHolder(ViewHolder, int)
+     * @see #onBindViewHolder(RecyclerView.ViewHolder, int)
      */
     @NonNull
     @Override
@@ -97,7 +97,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
 
     /**
      * Called by RecyclerView to display the data at the specified position. This method
-     * should update the contents of the {@link ViewHolder#itemView} to reflect the item at
+     * should update the contents of the {@link RecyclerView.ViewHolder#itemView} to reflect the item at
      * the given position.
      * <p/>
      * Note that unlike {@link android.widget.ListView}, RecyclerView will not call this
@@ -105,7 +105,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
      * is invalidated or the new position cannot be determined. For this reason, you should only
      * use the <code>position</code> parameter while acquiring the related data item inside this
      * method and should not keep a copy of it. If you need the position of an item later on
-     * (e.g. in a click listener), use {@link ViewHolder#getAdapterPosition()} which will have
+     * (e.g. in a click listener), use {@link RecyclerView.ViewHolder#getAdapterPosition()} which will have
      * the updated adapter position.
      *
      * @param holder   The ViewHolder which should be updated to represent the contents of the
@@ -201,6 +201,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
                 editor.putString(Constant.CITY_AVATAR, city.getAvatar());
                 editor.putInt(Constant.CITY_UID, uid);
                 editor.putInt(Constant.CITY_ID, city.getId());
+                editor.putBoolean(Constant.CITY_PREMIUM, city.isPremium());
                 editor.apply();
                 recyclerView.setAdapter(adapter);
                 recyclerView.invalidate();

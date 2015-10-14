@@ -187,6 +187,9 @@
     <string name="cookie_law_title" translatable="false">Privacy &amp; cookies</string>
     <string name="accept">I accept!</string>
     <string name="privacy_policy">Go to Privacy Policy</string>
+    <string name="admob_interstitial_id_unit" translatable="false">ca-app-pub-8223853865998693/4269285965</string>
+    <string name="admob_details_banner_id_unit" translatable="false">ca-app-pub-8223853865998693/9815629568</string>
+
 
 
 </resources>

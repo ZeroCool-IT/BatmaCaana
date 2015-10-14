@@ -526,6 +526,7 @@ public class ParsingUtilities {
                     c.setRegion(toBuild.getString("REGIONE"));
                     c.setInfo(toBuild.getString("INFO"));
                     c.setAvatar(toBuild.getString("LOGO"));
+                    c.setPremium(toBuild.getInt("PREMIUM"));
                     for (int j = 1; j <= 10; j++) {
                         String im = toBuild.optString("IMAGE" + Integer.valueOf(j).toString());
                         c.addPictureFromString(im);
@@ -573,6 +574,7 @@ public class ParsingUtilities {
             c.setRegion(toBuild.getString("REGIONE"));
             c.setInfo(toBuild.getString("INFO"));
             c.setAvatar(toBuild.getString("LOGO"));
+            c.setPremium(toBuild.getInt("PREMIUM"));
             for (int j = 1; j <= 10; j++) {
                 String im = toBuild.optString("IMAGE" + Integer.valueOf(j).toString());
                 c.addPictureFromString(im);
@@ -709,6 +711,7 @@ public class ParsingUtilities {
                     c.setUserID(toBuild.getInt("cf_user_id"));
                     c.setName(toBuild.getString("name"));
                     c.setAvatar(toBuild.getString("LOGO"));
+                    c.setPremium(toBuild.getInt("PREMIUM"));
                     result.add(c);
                 }
             }

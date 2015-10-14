@@ -4,7 +4,9 @@
 
 package it.zerocool.batmacaana;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -121,6 +123,17 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
                              Bundle savedInstanceState) {
         //Inflate layout
         View layout = inflater.inflate(R.layout.fragment_event, container, false);
+
+        SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        boolean isPremium = sp.getBoolean(Constant.CITY_PREMIUM, false);
+
+        //TODO This is not working!
+        if (!isPremium) {
+            LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            llp.setMargins(0, 0, 0, 50);
+            layout.setLayoutParams(llp);
+            layout.invalidate();
+        }
 
         //Bind widget
         buttonLayout = (LinearLayout) layout.findViewById(R.id.button_layout);

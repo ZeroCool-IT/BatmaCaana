@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.View;
 
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -47,6 +49,20 @@ public class DetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         final String action = intent.getAction();
         boolean fromNotification = intent.getBooleanExtra(Constant.FLAG_FROM_NOTIFICATION, false);
+
+        SharedPreferences sp = getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
+        boolean isPremium = sp.getBoolean(Constant.CITY_PREMIUM, false);
+
+        //TODO This is working, but maybe it can be moved somewhere else
+        AdView mAdView = (AdView) findViewById(R.id.details_banner);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("YOUR_DEVICE_HASH")
+                .build();
+        mAdView.loadAd(adRequest);
+        if (isPremium) {
+            mAdView.setVisibility(View.GONE);
+        }
+
 
         if (Intent.ACTION_VIEW.equals(action)) {
             final List<String> segments = intent.getData().getPathSegments();
