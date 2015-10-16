@@ -5,7 +5,10 @@
 package it.zerocool.batmacaana;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -29,6 +32,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.shamanland.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
@@ -104,9 +109,22 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //Inflate layout
-        View layout = inflater.inflate(R.layout.fragment_city, container, false);
 
+        SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        boolean isPremium = sp.getBoolean(Constant.CITY_PREMIUM, false);
+        //Inflate layout
+        View layout;
+        if (isPremium) {
+            layout = inflater.inflate(R.layout.fragment_city, container, false);
+        }
+        else {
+            layout = inflater.inflate(R.layout.fragment_city_ads, container, false);
+            AdView mAdView = (AdView) layout.findViewById(R.id.details_banner);
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addTestDevice("AFF0741D3C184BA727BE5B28EAA86E3E")
+                    .build();
+            mAdView.loadAd(adRequest);
+        }
         //Bind widget
         buttonLayout = (LinearLayout) layout.findViewById(R.id.button_layout);
         tvDescription = (ExpandableTextView) layout.findViewById(R.id.description_tv);

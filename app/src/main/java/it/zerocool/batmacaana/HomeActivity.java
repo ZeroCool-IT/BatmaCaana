@@ -72,7 +72,7 @@ public class HomeActivity extends AppCompatActivity implements DialogReturnListe
         setContentView(R.layout.activity_home);
 
         interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId(getString(R.string.admob_interstitial_id_unit));
+        interstitialAd.setAdUnitId(getString(R.string.admob_quit_interstitial_id_unit));
         requestNewInterstitial();
         interstitialAd.setAdListener(new AdListener() {
             @Override
@@ -121,7 +121,7 @@ public class HomeActivity extends AppCompatActivity implements DialogReturnListe
     private void requestNewInterstitial() {
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("EBB1C7107089A8B00F47923963541577")
+                .addTestDevice("AFF0741D3C184BA727BE5B28EAA86E3E")
                 .build();
         interstitialAd.loadAd(adRequest);
     }

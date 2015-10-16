@@ -139,6 +139,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
             ContentFragment f = new ContentFragment();
             Bundle bundle = new Bundle();
             bundle.putInt(Constant.FRAG_SECTION_ID, position);
+            bundle.putBoolean(Constant.CITY_CHANGING, true);
             f.setArguments(bundle);
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, f)

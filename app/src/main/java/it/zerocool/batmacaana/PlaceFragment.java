@@ -36,6 +36,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.shamanland.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
@@ -143,7 +145,21 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Inflate layout
-        View layout = inflater.inflate(R.layout.fragment_place, container, false);
+        View layout;
+        SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        boolean isPremium = sp.getBoolean(Constant.CITY_PREMIUM, false);
+
+        if (isPremium) {
+            layout = inflater.inflate(R.layout.fragment_place, container, false);
+        }
+        else {
+            layout = inflater.inflate(R.layout.fragment_place_ads, container, false);
+            AdView mAdView = (AdView) layout.findViewById(R.id.details_banner);
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addTestDevice("AFF0741D3C184BA727BE5B28EAA86E3E")
+                    .build();
+            mAdView.loadAd(adRequest);
+        }
 
         //Bind widget
         buttonLayout = (LinearLayout) layout.findViewById(R.id.button_layout);
