@@ -47,7 +47,8 @@ public class HomeActivity extends AppCompatActivity implements DialogReturnListe
     private LocationListener locationListener;
     private long mLastBackPress;
     private NavigationDrawerFragment drawerFragment;
-    private InterstitialAd interstitialAd;
+    private InterstitialAd quitInterstitial;
+    private InterstitialAd citiesInterstitial;
 
     /**
      * Return the version code of the app
@@ -71,14 +72,23 @@ public class HomeActivity extends AppCompatActivity implements DialogReturnListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId(getString(R.string.admob_quit_interstitial_id_unit));
+        quitInterstitial = new InterstitialAd(this);
+        quitInterstitial.setAdUnitId(getString(R.string.admob_quit_interstitial_id_unit));
+
+        citiesInterstitial = new InterstitialAd(this);
+        citiesInterstitial.setAdUnitId(getString(R.string.admob_cities_interstitial_id_unit));
         requestNewInterstitial();
-        interstitialAd.setAdListener(new AdListener() {
+        quitInterstitial.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
                 requestNewInterstitial();
                 HomeActivity.this.finish();
+            }
+        });
+        citiesInterstitial.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                requestNewInterstitial();
             }
         });
         requestLocationServices();
@@ -119,11 +129,20 @@ public class HomeActivity extends AppCompatActivity implements DialogReturnListe
     }
 
     private void requestNewInterstitial() {
-        AdRequest adRequest = new AdRequest.Builder()
+        AdRequest quitAdRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .addTestDevice("AFF0741D3C184BA727BE5B28EAA86E3E")
                 .build();
-        interstitialAd.loadAd(adRequest);
+        quitInterstitial.loadAd(quitAdRequest);
+        AdRequest citiesAdRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("AFF0741D3C184BA727BE5B28EAA86E3E")
+                .build();
+        citiesInterstitial.loadAd(citiesAdRequest);
+    }
+
+    public InterstitialAd getCitiesInterstitial() {
+        return citiesInterstitial;
     }
 
     /**
@@ -274,8 +293,8 @@ public class HomeActivity extends AppCompatActivity implements DialogReturnListe
         } else {
             pressBackToast.cancel();
 //            finish();
-            if (interstitialAd.isLoaded()) {
-                interstitialAd.show();
+            if (quitInterstitial.isLoaded()) {
+                quitInterstitial.show();
             } else {
                 finish();
             }

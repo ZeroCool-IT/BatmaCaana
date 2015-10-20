@@ -21,6 +21,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -48,7 +51,8 @@ public class ContentFragment extends Fragment {
     private List<Cardable> searchResults;
     private ProgressBarCircularIndeterminate progressBar;
     private Location currentLocation;
-    private ImageButton referesh;
+    private ImageButton refresh;
+    private InterstitialAd interstitialAd;
 
 
 //    private ImageView ivContent;
@@ -57,33 +61,53 @@ public class ContentFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
+
+
+/*    *//**
      * Called when the fragment is visible to the user and actively running.
      * This is generally
      * tied to {@link android.app.Activity#onResume() Activity.onResume} of the containing
      * Activity's lifecycle.
-     */
-/*    @Override
+     *//*
+    @Override
     public void onResume() {
-
-        SharedPreferences prefs = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
-        int refresh = prefs.getInt(Constant.REFRESH, Integer.parseInt(prefs.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0")));
-        searchResults = getData(refresh);
-        Log.i("ZCLOG", "Resuming.. " + Integer.valueOf(refresh).toString());
-
         super.onResume();
+        SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        boolean isPremium = sp.getBoolean(Constant.CITY_PREMIUM, false);
+        boolean isLoaded = interstitialAd.isLoaded();
+        if (!isPremium && isLoaded) {
+            interstitialAd.show();
+        }
+
     }*/
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         readCurrentLocationFromPreferences();
-        View layout = inflater.inflate(R.layout.fragment_content, container, false);
+        HomeActivity homeActivity = (HomeActivity)getActivity();
+        interstitialAd = homeActivity.getCitiesInterstitial();
+
+        View layout;
+        SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        boolean isPremium = sp.getBoolean(Constant.CITY_PREMIUM, false);
+        if (isPremium) {
+            layout = inflater.inflate(R.layout.fragment_content, container, false);
+        } else {
+            layout = inflater.inflate(R.layout.fragment_content_ads, container, false);
+            AdView mAdView = (AdView) layout.findViewById(R.id.details_banner);
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addTestDevice("AFF0741D3C184BA727BE5B28EAA86E3E")
+                    .build();
+            mAdView.loadAd(adRequest);
+        }
         progressBar = (ProgressBarCircularIndeterminate) layout.findViewById(R.id.progressBar);
-        referesh = (ImageButton) layout.findViewById(R.id.bt_refresh);
+        refresh = (ImageButton) layout.findViewById(R.id.bt_refresh);
         rvContent = (RecyclerView) layout.findViewById(R.id.content_recycler_view);
         rvContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         int id = getArguments().getInt(Constant.FRAG_SECTION_ID);
         searchResults = getData(id);
+
 
         return layout;
 
@@ -356,6 +380,13 @@ public class ContentFragment extends Fragment {
                 ContentAdapter adapter = new ContentAdapter(getActivity(), cardables);
                 rvContent.setAdapter(adapter);
             }
+            SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+            boolean isPremium = sp.getBoolean(Constant.CITY_PREMIUM, false);
+            boolean cityChanging = getArguments().getBoolean(Constant.CITY_CHANGING);
+            boolean isLoaded = interstitialAd.isLoaded();
+            if (cityChanging && !isPremium && isLoaded) {
+                interstitialAd.show();
+            }
         }
 
         /**
@@ -374,8 +405,8 @@ public class ContentFragment extends Fragment {
         protected void onCancelled() {
             super.onCancelled();
             progressBar.setVisibility(View.GONE);
-            referesh.setVisibility(View.VISIBLE);
-            referesh.setOnClickListener(new View.OnClickListener() {
+            refresh.setVisibility(View.VISIBLE);
+            refresh.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(@NonNull View v) {
                     if (v.getId() == R.id.bt_refresh) {
@@ -395,7 +426,7 @@ public class ContentFragment extends Fragment {
         protected void onPreExecute() {
             progressBar.setVisibility(View.VISIBLE);
             rvContent.setVisibility(View.INVISIBLE);
-            referesh.setVisibility(View.GONE);
+            refresh.setVisibility(View.GONE);
         }
     }
 
