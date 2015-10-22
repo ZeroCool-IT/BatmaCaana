@@ -190,7 +190,7 @@
     <string name="admob_quit_interstitial_id_unit" translatable="false">ca-app-pub-8223853865998693/4269285965</string>
     <string name="admob_details_banner_id_unit" translatable="false">ca-app-pub-8223853865998693/9815629568</string>
     <string name="admob_cities_interstitial_id_unit" translatable="false">ca-app-pub-8223853865998693/8836593965</string>
-
+    <string name="letsgo">Let\'s go!</string>
 
 
 </resources>

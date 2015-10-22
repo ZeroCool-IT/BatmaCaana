@@ -27,6 +27,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.nirhart.parallaxscroll.views.ParallaxScrollView;
 import com.squareup.picasso.Picasso;
@@ -73,6 +76,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
     private LinearLayout infoLayout;
     private ImageButton refreshButton;
     private RetrieveCityInfo task;
+    private InterstitialAd interstitialAd;
 
 
     public AboutFragment() {
@@ -111,8 +115,19 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View layout = inflater.inflate(R.layout.fragment_about, container, false);
+        SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+        boolean isPremium = sp.getBoolean(Constant.CITY_PREMIUM, false);
+        View layout;
+        if (isPremium) {
+            layout = inflater.inflate(R.layout.fragment_about, container, false);
+        } else {
+            layout = inflater.inflate(R.layout.fragment_about_ads, container, false);
+            AdView mAdView = (AdView) layout.findViewById(R.id.details_banner);
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addTestDevice("AFF0741D3C184BA727BE5B28EAA86E3E")
+                    .build();
+            mAdView.loadAd(adRequest);
+        }
 
 
         //Bind widget
@@ -138,6 +153,8 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
         linkLayout = (LinearLayout) layout.findViewById(R.id.link_layout);
         descriptionLayout = (LinearLayout) layout.findViewById(R.id.description_layout);
         infoLayout = (LinearLayout) layout.findViewById(R.id.info_layout);
+        HomeActivity homeActivity = (HomeActivity)getActivity();
+        interstitialAd = homeActivity.getCitiesInterstitial();
 
         //Listener
         leftButton.setOnClickListener(this);
@@ -434,6 +451,13 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
 
             if (city != null) {
                 fillFields(city);
+                SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                boolean isPremium = sp.getBoolean(Constant.CITY_PREMIUM, false);
+                boolean cityChanging = getArguments().getBoolean(Constant.CITY_CHANGING);
+                boolean isLoaded = interstitialAd.isLoaded();
+                if (cityChanging && !isPremium && isLoaded) {
+                    interstitialAd.show();
+                }
             } else {
                 String title = getResources().getString(R.string.dialog_title_uhoh);
                 String message = getResources().getString(R.string.dialog_message_error);

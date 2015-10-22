@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="@color/background_material_light">
+
+    <TextView
+        android:padding="8dp"
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="@string/city_initial_chooser"
+        android:textSize="24sp"
+        android:textColor="@color/accentColor"
+
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:paddingTop="8dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/customersRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:layout_below="@id/title"/>
+
+    <Button
+        android:id="@+id/buttonNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/borderlessButtonStyle"
+        android:text="@string/letsgo"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:paddingBottom="@dimen/action_button_td_padding"
+        android:paddingLeft="@dimen/action_button_lr_padding"
+        android:paddingRight="@dimen/action_button_lr_padding"
+        android:paddingTop="@dimen/action_button_td_padding"
+        android:textColor="@color/accentColor"
+        android:textSize="14sp"/>
+</RelativeLayout>

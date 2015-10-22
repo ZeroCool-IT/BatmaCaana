@@ -170,4 +170,5 @@
     <string name="cookies_law">Per migliorare l\'esperienza utente, questa applicazione raccoglie alcuni dati dell\'utente, quali geolocalizzazione , cookies e dati di utilizzo.\nMaggiori informazioni alla pagina www.exploracity.it/privacy</string>
     <string name="accept">Accetto!</string>
     <string name="privacy_policy">Vai alla Privacy Policy</string>
+    <string name="letsgo">Iniziamo!</string>
 </resources>

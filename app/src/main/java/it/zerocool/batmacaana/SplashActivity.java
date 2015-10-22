@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import it.exploracity.explora.CookiesFragment;
 import it.zerocool.batmacaana.database.DBHelper;
 import it.zerocool.batmacaana.database.DBManager;
 import it.zerocool.batmacaana.dialog.CookiesDialog;
@@ -88,9 +90,9 @@ public class SplashActivity extends AppCompatActivity {
         final SharedPreferences sharedPreferences = getSharedPreferences(Constant.PREF_FILE_NAME, MODE_PRIVATE);
         boolean isFirstTime = sharedPreferences.getBoolean(Constant.COOKIES_FIRST_TIME, true);
         if (isFirstTime) {
-            CookiesDialog dialog = new CookiesDialog();
+            /*CookiesDialog dialog = new CookiesDialog();
             dialog.setCancelable(false);
-            dialog.show(getSupportFragmentManager(), "Resumed First time dialog");
+            dialog.show(getSupportFragmentManager(), "Resumed First time dialog");*/
         }
 /*        else {
             Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
@@ -229,9 +231,14 @@ public class SplashActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                 /* Create an Intent that will start the Main-Activity. */
-                        CookiesDialog dialog = new CookiesDialog();
+                        /*CookiesDialog dialog = new CookiesDialog();
                         dialog.setCancelable(false);
-                        dialog.show(getSupportFragmentManager(), "First time dialog");
+                        dialog.show(getSupportFragmentManager(), "First time dialog");*/
+                        FragmentManager fm = getSupportFragmentManager();
+                        CookiesFragment fragment = new CookiesFragment();
+                        fm.beginTransaction()
+                                .replace(R.id.splash_container, fragment, "Cookie fragment")
+                                .commit();
                     }
                 }, SPLASH_DISPLAY_LENGTH);
 

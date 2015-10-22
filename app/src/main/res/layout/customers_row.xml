@@ -37,5 +37,31 @@
         android:padding="8dp"
         android:text="@string/dummy_text"
         android:textColor="@color/text87"
-        android:textSize="14sp" />
+        android:textSize="18sp" />
+
+    <android.support.v7.widget.AppCompatRadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:id="@+id/listRadio"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:padding="8dp"/>
+<!--    <ImageView
+        android:id="@+id/listCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:alpha="54"
+        android:contentDescription="@string/drawer_menu_icon"
+        android:padding="8dp"
+        android:src="@drawable/ic_about" />-->
 </com.andexert.library.RippleView>

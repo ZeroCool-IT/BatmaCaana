@@ -9,9 +9,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import it.zerocool.batmacaana.CustomersAdapter;
+import it.zerocool.batmacaana.CustomersFragment;
 import it.zerocool.batmacaana.HomeActivity;
 import it.zerocool.batmacaana.R;
 import it.zerocool.batmacaana.utilities.Constant;
@@ -70,9 +73,16 @@ public class CookiesDialog extends DialogFragment implements DialogInterface.OnC
             SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
             boolean isFirstTime = sharedPreferences.getBoolean(Constant.FIRST_TIME, true);
             if (isFirstTime) {
-                InitialCityDialog initialCityDialog = new InitialCityDialog();
+                /*InitialCityDialog initialCityDialog = new InitialCityDialog();
                 initialCityDialog.setCancelable(false);
-                initialCityDialog.show(getFragmentManager(), "Initial City Dialog");
+                initialCityDialog.show(getFragmentManager(), "Initial City Dialog");*/
+                CustomersFragment fragment = new CustomersFragment();
+                FragmentManager fm = getFragmentManager();
+
+                fm.beginTransaction()
+                        .replace(R.id.splash_container, fragment, "TEST")
+                        .commit();
+
 
             } else {
                 Intent mainIntent = new Intent(getActivity(), HomeActivity.class);
