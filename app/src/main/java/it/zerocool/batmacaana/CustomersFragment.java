@@ -45,7 +45,7 @@ public class CustomersFragment extends Fragment {
         letsgo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editor.putBoolean(Constant.COOKIES_FIRST_TIME, false);
+                editor.putBoolean(Constant.ADS_UPDATE_FIRST_TIME, false);
                 editor.apply();
                 MoreInfoDialog moreInfoDialog = new MoreInfoDialog();
                 moreInfoDialog.setCancelable(false);

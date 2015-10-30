@@ -49,7 +49,6 @@ import java.util.Locale;
 
 import it.zerocool.batmacaana.database.DBHelper;
 import it.zerocool.batmacaana.database.DBManager;
-import it.zerocool.batmacaana.dialog.EasterDialog;
 import it.zerocool.batmacaana.dialog.WarningDialog;
 import it.zerocool.batmacaana.listener.PlacePaletteListener;
 import it.zerocool.batmacaana.model.Place;
@@ -599,30 +598,6 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
                     ttsService.stop();
                 }
             }
-        } else if (v.getId() == R.id.easter_egg_icon) {
-            assert targetPlace != null;
-            if (targetPlace.getId() == 29) {
-                long currentTime = System.currentTimeMillis();
-                if (Math.abs(currentTime - lastPressed) > Constant.EASTER_EGG_THRESHOLD) {
-                    easterCounter = 0;
-                    lastPressed = currentTime;
-                } else {
-                    easterCounter++;
-                    lastPressed = currentTime;
-                    switch (easterCounter) {
-                        case 3:
-                            Toast.makeText(getActivity(), R.string.easter_almost_there, Toast.LENGTH_SHORT).show();
-                            break;
-                        case 4:
-                            EasterDialog dialog = new EasterDialog();
-                            dialog.setCancelable(false);
-                            dialog.show(getFragmentManager(), "EASTER EGG");
-                            break;
-                    }
-                }
-            }
-
-
         }
     }
 

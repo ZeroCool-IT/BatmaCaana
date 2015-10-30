@@ -154,8 +154,7 @@ public class Constant {
     public static final String REACTIVATE_TIME = "reactivate_time";
     public static final String NOTIFICATION_DISABLED = "disabled";
     public static final String RB_SELECTED = "rb_selected";
-    public static final String FIRST_TIME = "first_time";
-    public static final String COOKIES_FIRST_TIME = "cookies_first_time";
+    public static final String ADS_UPDATE_FIRST_TIME = "ads_update_first_time";
 
 
     //Location Constraints
@@ -171,7 +170,6 @@ public class Constant {
     public static final int VIEW_STATE_SELECTED = 100;
     public static final int NAV_DRAWER_SUBHEADER = 8;
     public static final long M_BACK_PRESS_THRESHOLD = 3500;
-    public static final long EASTER_EGG_THRESHOLD = 2500;
 
     /**
      * Private constructor
