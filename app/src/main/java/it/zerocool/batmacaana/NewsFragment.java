@@ -4,6 +4,7 @@
 
 package it.zerocool.batmacaana;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
@@ -218,18 +220,19 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
                 load(Constant.URI_IMAGE_MEDIUM + targetNews.getImage()).
                 error(R.drawable.im_noimage).
                 into(ivNews);
-        Palette.generateAsync(bitmap, NewsPaletteListener.newInstance(this));
+        Palette.Builder builder = new Palette.Builder(bitmap);
+        builder.generate(NewsPaletteListener.newInstance(this));
 
     }
 
     public void setPalette(@NonNull Palette palette) {
         this.palette = palette;
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(R.color.primaryColor)));
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(ContextCompat.getColor(getContext(), R.color.primaryColor))));
         if (Build.VERSION.SDK_INT >= 21) {
-            getActivity().getWindow().setStatusBarColor(palette.getDarkVibrantColor(R.color.primaryColor));
+            getActivity().getWindow().setStatusBarColor(palette.getDarkVibrantColor(ContextCompat.getColor(getContext(), R.color.primaryColor)));
         }
-        buttonLayout.setBackgroundColor(palette.getLightMutedColor(R.color.primaryColor));
-        urlActionButton.setTextColor(palette.getDarkVibrantColor(R.color.white));
+        buttonLayout.setBackgroundColor(palette.getLightMutedColor(ContextCompat.getColor(getContext(), R.color.primaryColor)));
+        urlActionButton.setTextColor(palette.getDarkVibrantColor(ContextCompat.getColor(getContext(), R.color.white)));
 
     }
 
@@ -262,7 +265,7 @@ public class NewsFragment extends Fragment implements View.OnClickListener, Text
                 intent.putExtra(Constant.IMAGE, targetNews.getImage());
                 intent.putExtra(Constant.LANDSCAPE_ORIENTATION, false);
                 if (palette != null) {
-                    String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(R.color.primaryColor)));
+                    String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(ContextCompat.getColor(getContext(), R.color.primaryColor))));
                     intent.putExtra("COLOR", hexColor);
                 }
                 startActivity(intent);

@@ -34,8 +34,7 @@ public class EarthInstalledDialog extends DialogFragment implements DialogInterf
      */
     @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),
-                AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         String title = getString(R.string.earth_warning_title);
         String message = getString(R.string.earth_warning_message);
 

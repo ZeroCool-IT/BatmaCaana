@@ -96,9 +96,6 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
     private TextToSpeech ttsService;
     private ImageView playTTSButton;
 
-    private int easterCounter = 0;
-    private long lastPressed;
-
 
 //    private DBHelper openHelper;
 //    private SQLiteDatabase db;
@@ -119,7 +116,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
 
     /**
      * Called when the Fragment is no longer started.  This is generally
-     * tied to {@link Activity#onStop() Activity.onStop} of the containing
+     * tied to  of the containing
      * Activity's lifecycle.
      */
     @Override
@@ -349,22 +346,24 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
                 placeholder(R.drawable.im_placeholder).
                 error(R.drawable.im_noimage).
                 into(ivPlace);
-        Palette.generateAsync(bitmap, PlacePaletteListener.newInstance(this));
+//        Palette.generateAsync(bitmap, PlacePaletteListener.newInstance(this));
+        Palette.Builder builder = new Palette.Builder(bitmap);
+        builder.generate(PlacePaletteListener.newInstance(this));
 
     }
 
     public void setPalette(@NonNull Palette palette) {
         this.palette = palette;
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(R.color.primaryColor)));
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(ContextCompat.getColor(getContext(), R.color.primaryColor))));
         if (VERSION.SDK_INT >= 21) {
-            getActivity().getWindow().setStatusBarColor(palette.getDarkVibrantColor(R.color.primaryColor));
+            getActivity().getWindow().setStatusBarColor(palette.getDarkVibrantColor(ContextCompat.getColor(getContext(), R.color.primaryColor)));
         }
 
-        buttonLayout.setBackgroundColor(palette.getLightMutedColor(R.color.primaryColor));
-        phoneActionButton.setTextColor(palette.getDarkVibrantColor(R.color.white));
-        mailActionButton.setTextColor(palette.getDarkVibrantColor(R.color.white));
-        urlActionButton.setTextColor(palette.getDarkVibrantColor(R.color.white));
-        favoriteButton.setTextColor(palette.getDarkVibrantColor(R.color.white));
+        buttonLayout.setBackgroundColor(palette.getLightMutedColor(ContextCompat.getColor(getContext(), R.color.primaryColor)));
+        phoneActionButton.setTextColor(palette.getDarkVibrantColor(ContextCompat.getColor(getContext(), R.color.white)));
+        mailActionButton.setTextColor(palette.getDarkVibrantColor(ContextCompat.getColor(getContext(), R.color.white)));
+        urlActionButton.setTextColor(palette.getDarkVibrantColor(ContextCompat.getColor(getContext(), R.color.white)));
+        favoriteButton.setTextColor(palette.getDarkVibrantColor(ContextCompat.getColor(getContext(), R.color.white)));
 
     }
 
@@ -550,7 +549,7 @@ public class PlaceFragment extends Fragment implements View.OnClickListener, Tex
                 intent.putExtra(Constant.IMAGE, targetPlace.getImage());
                 intent.putExtra(Constant.LANDSCAPE_ORIENTATION, true);
                 if (palette != null) {
-                    String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(R.color.primaryColor)));
+                    String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(ContextCompat.getColor(getContext(), R.color.primaryColor))));
                     intent.putExtra("COLOR", hexColor);
                 }
                 startActivity(intent);

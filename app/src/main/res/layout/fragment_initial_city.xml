@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:background="@color/background_material_light">
+    android:background="@color/primaryColor">
 
     <TextView
         android:padding="8dp"
@@ -17,9 +17,7 @@
         android:layout_alignParentTop="true"
         android:text="@string/city_initial_chooser"
         android:textSize="24sp"
-        android:textColor="@color/accentColor"
-
-        />
+        android:textColor="@color/white"/>
 
     <android.support.v7.widget.RecyclerView
         android:paddingTop="8dp"

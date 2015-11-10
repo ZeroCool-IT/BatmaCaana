@@ -35,8 +35,7 @@ public class ConfirmationDialog extends DialogFragment implements DialogInterfac
      */
     @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),
-                AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         String message = getString(R.string.remember_choose);
 
         builder.setMessage(message);

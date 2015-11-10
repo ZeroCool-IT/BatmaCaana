@@ -28,6 +28,7 @@ public class Constant {
     //Error fallback type fragment
     public static final int CONNECTION_ERROR = 0;
     public static final int NO_RESULTS = 1;
+    public static final int ITS_NOT_PREMIUM = 2;
 
     //Object types
     public static final int TYPE_PLACE = 0;

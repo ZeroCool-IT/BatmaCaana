@@ -191,6 +191,8 @@
     <string name="admob_details_banner_id_unit" translatable="false">ca-app-pub-8223853865998693/9815629568</string>
     <string name="admob_cities_interstitial_id_unit" translatable="false">ca-app-pub-8223853865998693/8836593965</string>
     <string name="letsgo">Let\'s go!</string>
+    <string name="cookies_picture">There is a funny cookie jar picture</string>
+    <string name="premium_service">This is a Premium Service that can be purchased by local administration to communicate with them citizens about local news or events.</string>
 
 
 </resources>

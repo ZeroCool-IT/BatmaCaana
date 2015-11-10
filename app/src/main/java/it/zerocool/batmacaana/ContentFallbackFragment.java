@@ -17,12 +17,8 @@ import it.zerocool.batmacaana.utilities.Constant;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ContentFallbackFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ContentFallbackFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * This Fragment will appear when there are no results in web request, there is a connection error
+ * or when the customers it's not premium
  */
 public class ContentFallbackFragment extends Fragment {
 
@@ -56,7 +52,11 @@ public class ContentFallbackFragment extends Fragment {
 
                 }
             });
-        } else {
+        }
+        else if (type == Constant.ITS_NOT_PREMIUM) {
+            layout = inflater.inflate(R.layout.fragment_fallback_nopremium, container, false);
+        }
+        else {
             layout = inflater.inflate(R.layout.fragment_content_fallback, container, false);
         }
 

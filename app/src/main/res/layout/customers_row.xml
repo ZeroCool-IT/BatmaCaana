@@ -36,7 +36,7 @@
         android:fontFamily="sans-serif-medium"
         android:padding="8dp"
         android:text="@string/dummy_text"
-        android:textColor="@color/text87"
+        android:textColor="@color/primary_text_color"
         android:textSize="18sp" />
 
     <android.support.v7.widget.AppCompatRadioButton

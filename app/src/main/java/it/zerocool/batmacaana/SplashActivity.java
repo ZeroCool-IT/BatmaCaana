@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +28,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import it.exploracity.explora.CookiesFragment;
 import it.zerocool.batmacaana.database.DBHelper;
 import it.zerocool.batmacaana.database.DBManager;
 import it.zerocool.batmacaana.model.City;
@@ -207,6 +207,7 @@ public class SplashActivity extends AppCompatActivity {
                         CookiesFragment fragment = new CookiesFragment();
                         fm.beginTransaction()
                                 .replace(R.id.splash_container, fragment, "Cookie fragment")
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                                 .commit();
                     }
                 }, SPLASH_DISPLAY_LENGTH);

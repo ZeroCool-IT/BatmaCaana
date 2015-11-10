@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright ZeroApp(c) 2015. All right reserved.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/content_recycler_top_margin"
+    android:orientation="vertical"
+    android:background="@color/primaryColor">
+
+    <TextView
+        android:id="@+id/no_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@+id/logo_premium"
+        android:layout_marginTop="20dp"
+        android:text="@string/premium_service"
+        android:textSize="@dimen/cookies_text"
+        android:textColor="@color/primary_text_color"/>
+
+    <ImageView
+        android:id="@+id/logo_premium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:contentDescription="@string/no_results"
+        android:src="@drawable/logo_premium"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/details_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-8223853865998693/9815629568"
+        android:background="@color/transparent_bg">
+    </com.google.android.gms.ads.AdView>
+
+</RelativeLayout>

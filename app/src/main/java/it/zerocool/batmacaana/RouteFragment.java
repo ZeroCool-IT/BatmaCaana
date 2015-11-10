@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
@@ -247,19 +248,20 @@ public class RouteFragment extends Fragment implements View.OnClickListener, Tex
                 placeholder(R.drawable.im_placeholder).
                 error(R.drawable.im_noimage).
                 into(ivRoute);
-        Palette.generateAsync(bitmap, RoutePaletteListener.newInstance(this));
+        Palette.Builder builder = new Palette.Builder(bitmap);
+        builder.generate(RoutePaletteListener.newInstance(this));
 
     }
 
     public void setPalette(@NonNull Palette palette) {
         this.palette = palette;
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(R.color.primaryColor)));
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(palette.getVibrantColor(ContextCompat.getColor(getContext(), R.color.primaryColor))));
         if (Build.VERSION.SDK_INT >= 21) {
-            getActivity().getWindow().setStatusBarColor(palette.getDarkVibrantColor(R.color.primaryColor));
+            getActivity().getWindow().setStatusBarColor(palette.getDarkVibrantColor(ContextCompat.getColor(getContext(), R.color.primaryColor)));
         }
 
-        buttonLayout.setBackgroundColor(palette.getLightMutedColor(R.color.primaryColor));
-        earthButton.setTextColor(palette.getVibrantColor(R.color.white));
+        buttonLayout.setBackgroundColor(palette.getLightMutedColor(ContextCompat.getColor(getContext(), R.color.primaryColor)));
+        earthButton.setTextColor(palette.getVibrantColor(ContextCompat.getColor(getContext(), R.color.white)));
 
     }
 
@@ -371,7 +373,7 @@ public class RouteFragment extends Fragment implements View.OnClickListener, Tex
                 intent.putExtra(Constant.IMAGE, targetRoute.getImage());
                 intent.putExtra(Constant.LANDSCAPE_ORIENTATION, true);
                 if (palette != null) {
-                    String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(R.color.primaryColor)));
+                    String hexColor = String.format("#%06X", (0xFFFFFF & palette.getLightVibrantColor(ContextCompat.getColor(getContext(), R.color.primaryColor))));
                     intent.putExtra("COLOR", hexColor);
                 }
                 startActivity(intent);

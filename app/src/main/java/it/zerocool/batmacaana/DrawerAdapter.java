@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -76,13 +77,13 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         TextView notificationTimeTV = (TextView) v.findViewById(R.id.activate_time);
         if (!NotificationsUtil.isNotificationsDisabled()) {
             notificationTimeTV.setText(R.string.enabled);
-            notificationTimeTV.setTextColor(context.getResources().getColor(android.R.color.holo_green_light));
+            notificationTimeTV.setTextColor(ContextCompat.getColor(context, android.R.color.holo_green_light));
         } else if (NotificationsUtil.isNotificationOff()) {
             notificationTimeTV.setText(R.string.off);
-            notificationTimeTV.setTextColor(context.getResources().getColor(android.R.color.holo_red_light));
+            notificationTimeTV.setTextColor(ContextCompat.getColor(context, android.R.color.holo_red_light));
         } else {
             notificationTimeTV.setText(context.getString(R.string.disabled_until) + NotificationsUtil.getEnablingTimeToString());
-            notificationTimeTV.setTextColor(context.getResources().getColor(android.R.color.holo_red_light));
+            notificationTimeTV.setTextColor(ContextCompat.getColor(context, android.R.color.holo_red_light));
 
         }
     }
@@ -131,16 +132,16 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
         TextView title = (TextView) v.findViewById(R.id.listText);
         /*title.setTextColor(context.getResources().getColor(R.color.primaryColor));
         v.setBackgroundColor(context.getResources().getColor(R.color.selected_item));*/
-        title.setTextColor(context.getResources().getColor(R.color.primary_text_color));
-        v.setBackgroundColor(context.getResources().getColor(R.color.light_primary_color));
+        title.setTextColor(ContextCompat.getColor(context, R.color.primary_text_color));
+        v.setBackgroundColor(ContextCompat.getColor(context, R.color.light_primary_color));
         previousSelected = v;
     }
 
     private void unselectView(@Nullable View v) {
         if (v != null) {
             TextView title = (TextView) v.findViewById(R.id.listText);
-            title.setTextColor(context.getResources().getColor(R.color.primary_text_color));
-            v.setBackgroundColor(context.getResources().getColor(R.color.transparent_bg));
+            title.setTextColor(ContextCompat.getColor(context, R.color.primary_text_color));
+            v.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent_bg));
         }
     }
 

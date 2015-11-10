@@ -4,4 +4,5 @@
 
 <resources>
     <dimen name="card_height">408dp</dimen>
+    <dimen name="cookies_text">48sp</dimen>
 </resources>

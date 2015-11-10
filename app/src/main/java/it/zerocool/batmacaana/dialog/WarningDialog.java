@@ -34,8 +34,7 @@ public class WarningDialog extends DialogFragment {
      */
     @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),
-                AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         String title = getArguments().getString(TITLE);
         String message = getArguments().getString(MESSAGE);
         killActivity = getArguments().getBoolean(KILL);

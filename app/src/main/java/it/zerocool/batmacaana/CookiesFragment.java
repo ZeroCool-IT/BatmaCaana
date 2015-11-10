@@ -1,4 +1,4 @@
-package it.exploracity.explora;
+package it.zerocool.batmacaana;
 
 
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,7 @@ public class CookiesFragment extends Fragment implements View.OnClickListener {
             FragmentManager fm = getActivity().getSupportFragmentManager();
             fm.beginTransaction()
                     .replace(R.id.splash_container, fragment, "TEST")
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit();
         }
     }

@@ -171,4 +171,6 @@
     <string name="accept">Accetto!</string>
     <string name="privacy_policy">Vai alla Privacy Policy</string>
     <string name="letsgo">Iniziamo!</string>
+    <string name="cookies_picture">C\'è una simpatica immagine di un barattolo di biscotti.</string>
+    <string name="premium_service">Questo è un Servizio Premium che può essere acquistato dagli Enti Locali per comunicare con i propri cittadini su notizie o eventi, direttamente sul loro smartphone.</string>
 </resources>

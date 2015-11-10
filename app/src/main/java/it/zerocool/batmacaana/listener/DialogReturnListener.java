@@ -10,6 +10,6 @@ package it.zerocool.batmacaana.listener;
  */
 public interface DialogReturnListener {
 
-    public void onDialogReturn();
+    void onDialogReturn();
 
 }

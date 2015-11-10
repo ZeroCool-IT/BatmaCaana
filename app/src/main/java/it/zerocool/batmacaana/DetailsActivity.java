@@ -17,8 +17,6 @@ import android.view.Menu;
 import android.view.View;
 
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 
 import org.jetbrains.annotations.Nullable;
 

@@ -284,11 +284,13 @@ public class ContentFragment extends Fragment {
          */
         @Nullable
         @SuppressWarnings("unchecked")
+
+        private int type;
         @Override
         protected List<Cardable> doInBackground(String... params) {
             String uri = params[0];
             List<Cardable> res = null;
-            int type = Integer.parseInt(params[1]);
+            type = Integer.parseInt(params[1]);
             if (isCancelled())
                 return null;
             try {
@@ -354,12 +356,25 @@ public class ContentFragment extends Fragment {
             FragmentManager fm = getFragmentManager();
 
             if (cardables != null && cardables.isEmpty()) {
-                args.putInt(Constant.FALLBACK_TYPE_ARG, Constant.NO_RESULTS);
-                f.setArguments(args);
-                fm.beginTransaction()
-                        .replace(R.id.content_frame, f)
-                        .commit();
-                Log.i("TASK", "No results!");
+                SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                boolean isPremium = sp.getBoolean(Constant.CITY_PREMIUM, false);
+                if (!isPremium && (type == Constant.NEWS || type == Constant.EVENT || type == Constant.ROUTES)) {
+                    args.putInt(Constant.FALLBACK_TYPE_ARG, Constant.ITS_NOT_PREMIUM);
+                    f.setArguments(args);
+                    fm.beginTransaction()
+                            .replace(R.id.content_frame, f)
+                            .commit();
+                    Log.i("TASK", "It's not premium!");
+                }
+                else {
+                    args.putInt(Constant.FALLBACK_TYPE_ARG, Constant.NO_RESULTS);
+                    f.setArguments(args);
+                    fm.beginTransaction()
+                            .replace(R.id.content_frame, f)
+                            .commit();
+                    Log.i("TASK", "No results!");
+
+                }
 
             } else if (cardables == null) {
                 String title = getResources().getString(R.string.dialog_title_uhoh);

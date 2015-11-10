@@ -23,7 +23,7 @@ public interface Cardable {
      * @return a String representing card's header
      */
     @Nullable
-    public String getHeader();
+    String getHeader();
 
     /**
      * Get the imagery for the item
@@ -31,7 +31,7 @@ public interface Cardable {
      * @return a String representing the imagery for the card
      */
     @Nullable
-    public String getImagery();
+    String getImagery();
 
     /**
      * Get the sub-header, if any
@@ -39,7 +39,7 @@ public interface Cardable {
      * @return a String representing card's sub-header
      */
     @Nullable
-    public String getSubheader();
+    String getSubheader();
 
     /**
      * Get the accent info, if any
@@ -47,7 +47,7 @@ public interface Cardable {
      * @return a String representing the accent information of the card
      */
     @Nullable
-    public String getAccentInfo();
+    String getAccentInfo();
 
     /**
      * Get a JSON String representing the object
@@ -55,12 +55,12 @@ public interface Cardable {
      * @return a JSON String representing the object
      */
     @Nullable
-    public String getJson();
+    String getJson();
 
     /**
      * Get an Integer representing the type of the object
      *
      * @return an Integer representing the type of the object
      */
-    public int getType();
+    int getType();
 }

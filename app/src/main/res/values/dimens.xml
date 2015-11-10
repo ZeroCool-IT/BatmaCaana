@@ -18,5 +18,6 @@
     <dimen name="settings_frag_padding">8dp</dimen>
     <dimen name="card_corner_radius">0dp</dimen>
     <dimen name="card_height">203dp</dimen>
+    <dimen name="cookies_text">24sp</dimen>
 
 </resources>
