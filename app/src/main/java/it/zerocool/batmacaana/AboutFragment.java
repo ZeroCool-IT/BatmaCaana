@@ -451,13 +451,13 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
 
             if (city != null) {
                 fillFields(city);
-                SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
-                boolean isPremium = sp.getBoolean(Constant.CITY_PREMIUM, false);
+                /*SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
+                *//*boolean isPremium = sp.getBoolean(Constant.CITY_PREMIUM, false);
                 boolean cityChanging = getArguments().getBoolean(Constant.CITY_CHANGING);
                 boolean isLoaded = interstitialAd.isLoaded();
                 if (cityChanging && !isPremium && isLoaded) {
                     interstitialAd.show();
-                }
+                }*/
             } else {
                 String title = getResources().getString(R.string.dialog_title_uhoh);
                 String message = getResources().getString(R.string.dialog_message_error);

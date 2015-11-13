@@ -85,12 +85,29 @@ public class HomeActivity extends AppCompatActivity implements DialogReturnListe
                 HomeActivity.this.finish();
             }
         });
-        citiesInterstitial.setAdListener(new AdListener() {
+/*        citiesInterstitial.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
+                int position = cityChangingBundle.getInt(Constant.FRAG_SECTION_ID);
+                if (position != Constant.ABOUT) {
+                    ContentFragment f = new ContentFragment();
+
+                    f.setArguments(cityChangingBundle);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.content_frame, f)
+                            .commit();
+
+                    setTitle(getResources().getStringArray(R.array.drawer_list)[position]);
+                } else {
+                    AboutFragment fragment = new AboutFragment();
+                    fragment.setArguments(cityChangingBundle);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.content_frame, fragment)
+                            .commit();
+                }
                 requestNewInterstitial();
             }
-        });
+        });*/
         requestLocationServices();
 
         String provider = getLocationProvider();
@@ -144,6 +161,7 @@ public class HomeActivity extends AppCompatActivity implements DialogReturnListe
     public InterstitialAd getCitiesInterstitial() {
         return citiesInterstitial;
     }
+
 
     /**
      * Gets the current registration ID for application on GCM service.

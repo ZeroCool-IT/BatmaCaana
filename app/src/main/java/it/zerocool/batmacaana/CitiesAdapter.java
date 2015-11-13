@@ -20,6 +20,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
@@ -46,12 +49,14 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
     private final DrawerLayout drawerLayout;
     private final FragmentActivity activity;
     private final ImageButton selectorButton;
+    private InterstitialAd interstitialAd;
     @NonNull
     private final NavigationDrawerFragment drawer;
     private List<City> items = Collections.emptyList();
+    private Bundle cityChangingBundle;
 
 
-    public CitiesAdapter(@NonNull Context context, List<City> data, @NonNull NavigationDrawerFragment fragment) {
+    public CitiesAdapter(@NonNull Context context, List<City> data, @NonNull final NavigationDrawerFragment fragment) {
         inflater = LayoutInflater.from(context);
         this.drawer = fragment;
         this.context = context;
@@ -64,7 +69,42 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
         this.drawerLayout = fragment.getDrawerLayout();
         this.selectorButton = fragment.getSelectorButton();
         this.activity = fragment.getActivity();
+        this.interstitialAd = fragment.getChangingCityAd();
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                int position = cityChangingBundle.getInt(Constant.FRAG_SECTION_ID);
 
+                if (position != Constant.ABOUT) {
+                    ContentFragment f = new ContentFragment();
+
+                    f.setArguments(cityChangingBundle);
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.content_frame, f)
+                            .commitAllowingStateLoss();
+
+                    activity.setTitle(activity.getResources().getStringArray(R.array.drawer_list)[position]);
+                } else {
+                    AboutFragment fragment = new AboutFragment();
+                    fragment.setArguments(cityChangingBundle);
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.content_frame, fragment)
+                            .commitAllowingStateLoss();
+                }
+                requestNewInterstitial();
+            }
+        });
+    }
+
+
+
+
+    public void requestNewInterstitial() {
+        AdRequest citiesAdRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice("AFF0741D3C184BA727BE5B28EAA86E3E")
+                .build();
+        interstitialAd.loadAd(citiesAdRequest);
     }
 
 
@@ -134,7 +174,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
         return items.size();
     }
 
-    private void selectItem(int position, boolean closeDrawer) {
+/*    private void selectItem(int position, boolean closeDrawer) {
         if (position != Constant.ABOUT) {
             ContentFragment f = new ContentFragment();
             Bundle bundle = new Bundle();
@@ -155,6 +195,37 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, fragment)
                     .commit();
+        }
+        if (closeDrawer) {
+            drawerLayout.closeDrawers();
+        }
+    }*/
+
+    private void selectItem(int position, boolean closeDrawer, boolean isPremium) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constant.FRAG_SECTION_ID, position);
+//        bundle.putBoolean(Constant.CITY_CHANGING, true);
+        cityChangingBundle = bundle;
+        if (isPremium || !interstitialAd.isLoaded()) {
+            if (position != Constant.ABOUT) {
+                ContentFragment f = new ContentFragment();
+
+                f.setArguments(bundle);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame, f)
+                        .commit();
+
+                activity.setTitle(context.getResources().getStringArray(R.array.drawer_list)[position]);
+            } else {
+                AboutFragment fragment = new AboutFragment();
+                fragment.setArguments(bundle);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame, fragment)
+                        .commit();
+            }
+        } else {
+            interstitialAd.show();
+
         }
         if (closeDrawer) {
             drawerLayout.closeDrawers();
@@ -209,7 +280,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CitiesView
                 recyclerView.invalidate();
                 drawer.setCustomersShown(false);
                 int defaultView = Integer.parseInt(sp.getString(Constant.KEY_USER_DEFAULT_START_VIEW, "0"));
-                selectItem(defaultView, true);
+                selectItem(defaultView, true, city.isPremium());
             }/* else if (v.getId() == R.id.notification_button) {
                 DialogFragment selectionDialog = new CityNotificationDialog();
                 Bundle bundle = new Bundle();

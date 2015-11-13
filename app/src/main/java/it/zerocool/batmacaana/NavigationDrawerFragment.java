@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -302,6 +303,11 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 
     public DrawerAdapter getAdapter() {
         return adapter;
+    }
+
+    public InterstitialAd getChangingCityAd() {
+        HomeActivity homeActivity = (HomeActivity)getActivity();
+        return homeActivity.getCitiesInterstitial();
     }
 
     @Override

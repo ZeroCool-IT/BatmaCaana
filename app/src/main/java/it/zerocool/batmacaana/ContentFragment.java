@@ -52,7 +52,6 @@ public class ContentFragment extends Fragment {
     private ProgressBarCircularIndeterminate progressBar;
     private Location currentLocation;
     private ImageButton refresh;
-    private InterstitialAd interstitialAd;
 
 
 //    private ImageView ivContent;
@@ -85,8 +84,6 @@ public class ContentFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         readCurrentLocationFromPreferences();
-        HomeActivity homeActivity = (HomeActivity)getActivity();
-        interstitialAd = homeActivity.getCitiesInterstitial();
 
         View layout;
         SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
@@ -396,12 +393,6 @@ public class ContentFragment extends Fragment {
                 rvContent.setAdapter(adapter);
             }
             SharedPreferences sp = getActivity().getSharedPreferences(Constant.PREF_FILE_NAME, Context.MODE_PRIVATE);
-            boolean isPremium = sp.getBoolean(Constant.CITY_PREMIUM, false);
-            boolean cityChanging = getArguments().getBoolean(Constant.CITY_CHANGING);
-            boolean isLoaded = interstitialAd.isLoaded();
-            if (cityChanging && !isPremium && isLoaded) {
-                interstitialAd.show();
-            }
         }
 
         /**
