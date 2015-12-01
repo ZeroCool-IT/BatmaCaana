@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/fragment_details_top_margin">
+
+    <com.nirhart.parallaxscroll.views.ParallaxScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="50dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/logo_fs"
+                android:layout_width="match_parent"
+                android:layout_height="213dp"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/im_train"
+                android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:id="@+id/departure_station_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:layout_below="@id/logo_fs"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@color/cardview_light_background">
+
+                <ImageView
+                    android:id="@+id/start_station_icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/address_icon"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_map_marker_circle_grey600_24dp" />
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/departure_station_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16sp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:hint="@string/start_station_hint"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:nextFocusForward="@+id/arrival_station_tv"
+                    android:inputType="textNoSuggestions|textAutoComplete"
+                    android:imeOptions="actionNext"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/arrival_station_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/departure_station_layout"
+                android:orientation="horizontal"
+                android:background="@color/cardview_light_background"
+                android:paddingTop="8dp">
+
+                <ImageView
+                    android:id="@+id/arrival_station_icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/address_icon"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_flag_checkered_grey600_24dp" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/arrival_station_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16sp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:hint="@string/arrival_station_hint"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:textAlignment="center"
+                    android:nextFocusForward="@+id/departure_date_tv"
+                    android:imeOptions="actionDone"
+                    android:inputType="textNoSuggestions|textAutoComplete"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/departure_date_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/arrival_station_layout"
+                android:orientation="horizontal"
+                android:background="@color/cardview_light_background"
+                android:paddingTop="8dp">
+
+                <ImageView
+                    android:id="@+id/departure_date_icon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="@string/address_icon"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_event_note_grey600_24dp" />
+
+                <EditText
+                    android:id="@+id/departure_date_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16sp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:hint="@string/departure_date_hint"
+                    android:inputType="date"
+                    android:lines="1"
+                    android:maxLines="1" />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="8dp"
+                android:layout_below="@id/departure_date_layout"/>
+
+
+        </RelativeLayout>
+
+    </com.nirhart.parallaxscroll.views.ParallaxScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_above="@+id/details_banner"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/fab"
+        android:layout_margin="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_search_white_24dp"
+        android:elevation="6dp"
+        android:translationZ="12dp" />
+
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/details_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-8223853865998693/6542701561"
+        android:background="@color/transparent_bg">
+    </com.google.android.gms.ads.AdView>
+
+
+
+</RelativeLayout>

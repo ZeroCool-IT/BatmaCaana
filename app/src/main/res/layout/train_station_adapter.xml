@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/train_station_tv"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:layout_gravity="center"
+    android:textSize="13sp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    android:paddingLeft="8dp"
+    android:paddingStart="8dp">
+
+</TextView>

@@ -18,8 +18,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 import it.zerocool.batmacaana.model.Cardable;
@@ -36,6 +42,9 @@ import it.zerocool.batmacaana.model.Shop;
 import it.zerocool.batmacaana.model.Sleep;
 import it.zerocool.batmacaana.model.TimeCard;
 import it.zerocool.batmacaana.model.ToSee;
+import it.zerocool.batmacaana.model.transport.TrainStation;
+import it.zerocool.batmacaana.model.transport.Train;
+import it.zerocool.batmacaana.model.transport.TrainTravelSolution;
 
 /**
  * Utility class for data parsing
@@ -719,6 +728,74 @@ public class ParsingUtilities {
             Log.e("JSON Exception", e.getMessage());
         }
         return result;
+    }
+
+    public static ArrayList<TrainStation> parseTrainStationFromJSON(String json) {
+        ArrayList<TrainStation> result = new ArrayList<>();
+        try {
+            JSONArray reader = new JSONArray(json);
+            for (int i = 0; i < reader.length(); i++) {
+                JSONObject toBuild = reader.getJSONObject(i);
+                String id = toBuild.getString("id");
+                String shortName = toBuild.optString("nomeLungo");
+                String extendedName = toBuild.optString("nomeBreve");
+                String label = toBuild.optString("label");
+                TrainStation t = new TrainStation(id, extendedName, shortName, label);
+                result.add(t);
+            }
+
+        }  catch (JSONException e) {
+            Log.e("JSON Exception", e.getMessage());
+        }
+        return result;
+    }
+
+    public static ArrayList<TrainTravelSolution> parseTrainTravelSolutionFromJSON(String json) {
+        ArrayList<TrainTravelSolution> results = new ArrayList<>();
+        try {
+            JSONObject reader = new JSONObject(json);
+            JSONArray data = reader.getJSONArray("soluzioni");
+            for (int i = 0; i < data.length(); i++) {
+                JSONObject solution = data.getJSONObject(i);
+                String duration = solution.getString("durata");
+                JSONArray vehicles = solution.getJSONArray("vehicles");
+                TrainTravelSolution tts = new TrainTravelSolution(duration);
+                for (int j = 0; j < vehicles.length(); j++) {
+                    JSONObject trainToBuild = vehicles.getJSONObject(j);
+                    String departureStation = trainToBuild.getString("origine");
+                    String finalDestination = trainToBuild.getString("destinazione");
+                    GregorianCalendar departureTime = parseTrainTime(trainToBuild.getString("orarioPartenza"));
+                    GregorianCalendar arrivalTime = parseTrainTime(trainToBuild.getString("orarioArrivo"));
+                    String category = trainToBuild.getString("categoria");
+                    String categoryDescription = trainToBuild.getString("categoriaDescrizione");
+                    String trainNumber = trainToBuild.getString("numeroTreno");
+                    Train t = new Train(arrivalTime, departureStation, finalDestination,
+                            departureTime, category, categoryDescription, trainNumber);
+                    tts.addTrainToSolution(t);
+                }
+                results.add(tts);
+            }
+        } catch (JSONException e) {
+            Log.e("JSON Exception", e.getMessage());
+        }
+        return results;
+    }
+
+    private static GregorianCalendar parseTrainTime(String t) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        Date date;
+        try {
+            date = format.parse(t);
+            Calendar calendar = new GregorianCalendar();
+            calendar.setTime(date);
+        } catch (ParseException e) {
+            Log.e("Time parse Exception", e.getMessage());
+        }
+
+
+
+        return new GregorianCalendar();
+
     }
 
 }

@@ -173,4 +173,11 @@
     <string name="letsgo">Iniziamo!</string>
     <string name="cookies_picture">C\'è una simpatica immagine di un barattolo di biscotti.</string>
     <string name="premium_service">Questo è un Servizio Premium che può essere acquistato dagli Enti Locali per comunicare con i propri cittadini su notizie o eventi, direttamente sul loro smartphone.</string>
+    <string name="public_transport">Mezzi Pubblici</string>
+    <string name="start_station_icon">Icona stazione di partenza</string>
+    <string name="end_station_icon">Icona stazione di arrivo</string>
+    <string name="start_station_hint">Stazione di partenza</string>
+    <string name="arrival_station_hint">Stazione di arrivo</string>
+    <string name="departure_date_hint">Data di partenza</string>
+
 </resources>

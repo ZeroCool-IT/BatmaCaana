@@ -15,6 +15,7 @@
         <item>@string/trekking_routes</item>
         <item>@string/other</item>
         <item>@string/nearby_cities</item>
+        <item>@string/public_transport</item>
         <item>@string/favorite</item>
         <item>@string/notifications</item>
         <item>@string/settings</item>
@@ -23,6 +24,7 @@
         <!-- <item>Update offline content</item> -->
     </string-array>
 
+    <!--Settings array-->
     <string-array name="drawer_default_view">
         <item>@string/about</item>
         <item>@string/to_see</item>
@@ -50,6 +52,7 @@
         <item>@string/event</item>
     </string-array>
 
+    <!--Route difficulty values-->
     <string-array name="route_level">
         <item>@string/underscore</item>
         <item>@string/easy</item>

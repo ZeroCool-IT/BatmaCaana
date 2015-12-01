@@ -53,12 +53,13 @@ public class Constant {
     public static final int ROUTES = 7;
     public static final int SUBHEADER = 8;
     public static final int CITY = 9;
-    public static final int FAVORITE = 10;
-    public static final int NOTIFICATIONS = 11;
-    public static final int SETTINGS = 12;
-    public static final int CREDITS = 13;
-    public static final int OFFLINE = 14;
-    public static final int UPDATE = 15;
+    public static final int PUBLIC_TRANSPORT = 10;
+    public static final int FAVORITE = 11;
+    public static final int NOTIFICATIONS = 12;
+    public static final int SETTINGS = 13;
+    public static final int CREDITS = 14;
+    public static final int OFFLINE = 15;
+    public static final int UPDATE = 16;
 
     //Place
     public static final int PLACE = 8;
@@ -83,6 +84,10 @@ public class Constant {
     public static final String URI_CITY = "http://www.exploracity.it/app/json/comune.php?user=";
     public static final String URI_CUSTOMERS = "http://www.exploracity.it/app/json/utenti.php";
     public static final String URI_LANGUAGE = "&language=";
+
+    //Transport URI
+    public static final String URI_TRAIN_STATION = "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/cercaStazione/";
+
 
 /*    //TEST URI=========================================================================================
     public static final String URI_TOSEE = "http://www.ilmiositodemo.altervista.org/app/json/vedere.php?user=";
