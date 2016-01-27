@@ -3,7 +3,6 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -366,7 +365,8 @@
 
     </com.nirhart.parallaxscroll.views.ParallaxScrollView>
 
-    <com.shamanland.fab.FloatingActionButton
+
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -377,10 +377,6 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:baselineAlignBottom="false"
-        android:src="@drawable/ic_event_white_24dp"
-        app:floatingActionButtonColor="@color/accentColor"
-        app:floatingActionButtonSize="normal">
-
-    </com.shamanland.fab.FloatingActionButton>
+        android:src="@drawable/ic_event_white_24dp" />
 
 </RelativeLayout>

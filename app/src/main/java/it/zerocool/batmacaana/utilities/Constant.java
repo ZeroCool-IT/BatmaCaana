@@ -87,6 +87,8 @@ public class Constant {
 
     //Transport URI
     public static final String URI_TRAIN_STATION = "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/cercaStazione/";
+    public static final String URI_COTRALSPA = "http://travel.mob.cotralspa.it:7777/network/ricercaPercorsi.do";
+    public static final String URI_VIAGGIATRENO = "http://mobile.viaggiatreno.it/vt_pax_internet/mobile/programmato";
 
 
 /*    //TEST URI=========================================================================================
@@ -140,6 +142,7 @@ public class Constant {
     public static final String MESSAGE_ARG = "message";
     public static final String LANDSCAPE_ORIENTATION = "orientation";
     public static final String USER_ID_ARG = "uid";
+    public static final String URI = "uri";
 //    public static final String CITY_CHANGING = "city_changing";
 
     //Shared Preferences

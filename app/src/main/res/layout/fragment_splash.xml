@@ -21,11 +21,20 @@
         android:contentDescription="@string/app_logo"
         android:src="@drawable/im_splash_logo" />
 
-    <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
+    <ProgressBar
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/progressBar2"
+        android:layout_below="@+id/splash_image"
+        android:layout_centerHorizontal="true"/>
+
+    <!--<com.gc.materialdesign.views.ProgressBarCircularIndeterminate
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_below="@+id/splash_image"
         android:layout_centerHorizontal="true"
-        android:background="@color/accentColor" />
+        android:background="@color/accentColor" />-->
+
 
 </RelativeLayout>

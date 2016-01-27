@@ -19,11 +19,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
-import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -49,7 +48,7 @@ public class ContentFragment extends Fragment {
     private RecyclerView rvContent;
     private RetrieveDataAsyncTask task;
     private List<Cardable> searchResults;
-    private ProgressBarCircularIndeterminate progressBar;
+    private ProgressBar progressBar;
     private Location currentLocation;
     private ImageButton refresh;
 
@@ -94,11 +93,11 @@ public class ContentFragment extends Fragment {
             layout = inflater.inflate(R.layout.fragment_content_ads, container, false);
             AdView mAdView = (AdView) layout.findViewById(R.id.details_banner);
             AdRequest adRequest = new AdRequest.Builder()
-                    .addTestDevice("AFF0741D3C184BA727BE5B28EAA86E3E")
+                    .addTestDevice("F308938BB94F7B0A3D47AE5BDF1E791D")
                     .build();
             mAdView.loadAd(adRequest);
         }
-        progressBar = (ProgressBarCircularIndeterminate) layout.findViewById(R.id.progressBar);
+        progressBar = (ProgressBar) layout.findViewById(R.id.progressBar);
         refresh = (ImageButton) layout.findViewById(R.id.bt_refresh);
         rvContent = (RecyclerView) layout.findViewById(R.id.content_recycler_view);
         rvContent.setLayoutManager(new LinearLayoutManager(getActivity()));

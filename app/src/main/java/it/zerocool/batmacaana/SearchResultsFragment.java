@@ -19,8 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
+import android.widget.ProgressBar;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -40,7 +39,7 @@ public class SearchResultsFragment extends Fragment {
 
 
     private RecyclerView rvResults;
-    private ProgressBarCircularIndeterminate progressBar;
+    private ProgressBar progressBar;
     private String query;
     private Context context;
 
@@ -61,7 +60,7 @@ public class SearchResultsFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvResults.setLayoutManager(layoutManager);
         rvResults.addItemDecoration(new DividerItemDecoration(getActivity(), null));
-        progressBar = (ProgressBarCircularIndeterminate) layout.findViewById(R.id.search_result_progressbar);
+        progressBar = (ProgressBar) layout.findViewById(R.id.search_result_progressbar);
         query = getArguments().getString(Constant.QUERY);
         getData(query);
 

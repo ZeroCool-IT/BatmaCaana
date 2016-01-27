@@ -6,4 +6,4 @@
 
 
 
-include ':app', ':backend', ':MaterialDesign'
+include ':app', ':backend'

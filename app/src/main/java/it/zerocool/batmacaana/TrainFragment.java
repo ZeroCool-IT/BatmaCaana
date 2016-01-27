@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -27,7 +28,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 
 import it.zerocool.batmacaana.model.transport.TrainStation;
 import it.zerocool.batmacaana.utilities.Constant;
@@ -81,6 +81,15 @@ public class TrainFragment extends Fragment {
         departureTv.addTextChangedListener(new DepartureStationTextWatcher());
         arrivalTv.addTextChangedListener(new ArrivalStationTextWatcher());
 
+        FloatingActionButton button = (FloatingActionButton)layout.findViewById(R.id.fab);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int[] array = new int[3];
+                array[100] = 1;
+            }
+        });
+
         //Initialize the date editText
         departureDate = new GregorianCalendar();
         java.text.DateFormat dateFormat = SimpleDateFormat
@@ -92,7 +101,7 @@ public class TrainFragment extends Fragment {
         //Banner initialize
         AdView mAdView = (AdView) layout.findViewById(R.id.details_banner);
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice("AFF0741D3C184BA727BE5B28EAA86E3E")
+                .addTestDevice("F308938BB94F7B0A3D47AE5BDF1E791D")
                 .build();
         mAdView.loadAd(adRequest);
         return layout;

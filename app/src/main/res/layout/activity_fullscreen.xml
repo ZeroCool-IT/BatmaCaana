@@ -39,11 +39,16 @@
             android:visibility="gone"
             tools:ignore="UselessParent">
 
-            <com.gc.materialdesign.views.ButtonFlat
+            <Button
                 android:id="@+id/dummy_button"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/back" />
+                android:text="@string/back"/>
+            <!--<com.gc.materialdesign.views.ButtonFlat-->
+                <!--android:id="@+id/dummy_button"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/back" />-->
 
         </LinearLayout>
     </FrameLayout>

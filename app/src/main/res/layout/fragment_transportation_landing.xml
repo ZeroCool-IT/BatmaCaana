@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/content_recycler_top_margin">
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/train_card"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/card_height"
+            android:layout_margin="8dp"
+            android:elevation="12dp"
+            android:padding="8dp"
+            card_view:cardCornerRadius="6dp">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/train_imagery"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/iv_card_imagery"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/im_train" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true">
+
+                    <TextView
+                        android:id="@+id/train_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@id/content_subheader"
+                        android:background="@color/transparent_black"
+                        android:ellipsize="end"
+                        android:fontFamily="sans-serif"
+                        android:maxLines="2"
+                        android:paddingBottom="4dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="4dp"
+                        android:text="@string/train_title"
+
+                        android:textColor="@color/white"
+
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/bus_card"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/card_height"
+            android:layout_margin="8dp"
+            android:elevation="12dp"
+            android:padding="8dp"
+            card_view:cardCornerRadius="6dp"
+            android:layout_below="@+id/train_card">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/content_imagery"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/iv_card_imagery"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/im_bus" />
+
+                <RelativeLayout
+                    android:id="@+id/text_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true">
+
+                    <TextView
+                        android:id="@+id/content_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@id/content_subheader"
+                        android:background="@color/transparent_black"
+                        android:ellipsize="end"
+                        android:fontFamily="sans-serif"
+                        android:maxLines="2"
+                        android:paddingBottom="4dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="4dp"
+                        android:text="@string/bus_name"
+
+                        android:textColor="@color/white"
+
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+        <ImageButton
+            android:id="@+id/button_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_refresh_grey600_48dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:contentDescription="@string/button_refresh"/>
+
+    </RelativeLayout>
+
+
+</FrameLayout>

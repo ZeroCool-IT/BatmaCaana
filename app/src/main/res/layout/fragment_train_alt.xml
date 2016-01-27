@@ -1,26 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/fragment_details_top_margin">
+    tools:context=".TimeTableFragment"
+    tools:showIn="@layout/activity_train">
 
     <WebView
+        android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/webview"/>
+        android:layout_alignParentTop="true"/>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/details_banner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-8223853865998693/6542701561"
-        android:background="@color/transparent_bg">
+        android:layout_alignParentBottom="true"
+        ads:adUnitId="ca-app-pub-8223853865998693/6542701561">
     </com.google.android.gms.ads.AdView>
-
 
 
 </RelativeLayout>

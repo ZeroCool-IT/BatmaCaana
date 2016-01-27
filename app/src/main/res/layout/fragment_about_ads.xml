@@ -379,14 +379,22 @@
         android:background="@color/transparent_bg">
     </com.google.android.gms.ads.AdView>
 
-    <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
+<!--    <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
         android:id="@+id/progressBar"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="@color/primaryColor"
-        android:visibility="gone" />
+        android:visibility="gone" />-->
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
 
     <ImageButton
         android:id="@+id/bt_refresh"

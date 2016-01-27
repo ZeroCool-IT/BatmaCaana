@@ -179,5 +179,9 @@
     <string name="start_station_hint">Stazione di partenza</string>
     <string name="arrival_station_hint">Stazione di arrivo</string>
     <string name="departure_date_hint">Data di partenza</string>
+    <string name="train_title">Treni</string>
+    <string name="title_activity_train">Orari</string>
+    <string name="title_activity_transport">Mezzi Pubblici</string>
+    <string name="bus_name">Autobus Locali</string>
 
 </resources>

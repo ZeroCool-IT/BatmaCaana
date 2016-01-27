@@ -23,10 +23,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
@@ -56,7 +56,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
 
 
     private static final String DESCRIPTION_TTS = "description";
-    private ProgressBarCircularIndeterminate progressBarCircularIndeterminate;
+    private ProgressBar progressBarCircularIndeterminate;
     private ParallaxScrollView parallaxScrollView;
     private ImageView mainPicture;
     private int current;
@@ -124,7 +124,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
             layout = inflater.inflate(R.layout.fragment_about_ads, container, false);
             AdView mAdView = (AdView) layout.findViewById(R.id.details_banner);
             AdRequest adRequest = new AdRequest.Builder()
-                    .addTestDevice("AFF0741D3C184BA727BE5B28EAA86E3E")
+                    .addTestDevice("F308938BB94F7B0A3D47AE5BDF1E791D")
                     .build();
             mAdView.loadAd(adRequest);
         }
@@ -132,7 +132,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener, Tex
 
         //Bind widget
         parallaxScrollView = (ParallaxScrollView) layout.findViewById(R.id.general_scrollview);
-        progressBarCircularIndeterminate = (ProgressBarCircularIndeterminate) layout.findViewById(R.id.progressBar);
+        progressBarCircularIndeterminate = (ProgressBar) layout.findViewById(R.id.progressBar);
         mainPicture = (ImageView) layout.findViewById(R.id.main_image);
         descriptionText = (ExpandableTextView) layout.findViewById(R.id.description_tv);
         infoText = (ExpandableTextView) layout.findViewById(R.id.info_tv);

@@ -15,8 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-
-import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
+import android.widget.ProgressBar;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -171,7 +170,7 @@ public class DetailsActivity extends AppCompatActivity {
     private class RequestObjectTask extends AsyncTask<String, Void, String> {
 
         private int type;
-        private ProgressBarCircularIndeterminate bar;
+        private ProgressBar bar;
 
         /**
          * Runs on the UI thread before {@link #doInBackground}.
@@ -181,7 +180,7 @@ public class DetailsActivity extends AppCompatActivity {
          */
         @Override
         protected void onPreExecute() {
-            bar = (ProgressBarCircularIndeterminate) findViewById(R.id.details_progressbar);
+            bar = (ProgressBar) findViewById(R.id.details_progressbar);
             bar.setVisibility(View.VISIBLE);
             super.onPreExecute();
         }

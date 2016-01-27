@@ -19,5 +19,6 @@
     <dimen name="card_corner_radius">0dp</dimen>
     <dimen name="card_height">203dp</dimen>
     <dimen name="cookies_text">24sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

@@ -40,7 +40,8 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
-import com.shamanland.fab.FloatingActionButton;
+import android.support.design.widget.FloatingActionButton;
+
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -137,7 +138,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Tex
             layout = inflater.inflate(R.layout.fragment_event_ads, container, false);
             AdView mAdView = (AdView) layout.findViewById(R.id.details_banner);
             AdRequest adRequest = new AdRequest.Builder()
-                    .addTestDevice("AFF0741D3C184BA727BE5B28EAA86E3E")
+                    .addTestDevice("F308938BB94F7B0A3D47AE5BDF1E791D")
                     .build();
             mAdView.loadAd(adRequest);
 

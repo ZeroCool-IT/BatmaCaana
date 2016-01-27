@@ -148,12 +148,12 @@ public class HomeActivity extends AppCompatActivity implements DialogReturnListe
     private void requestNewInterstitial() {
         AdRequest quitAdRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("AFF0741D3C184BA727BE5B28EAA86E3E")
+                .addTestDevice("F308938BB94F7B0A3D47AE5BDF1E791D")
                 .build();
         quitInterstitial.loadAd(quitAdRequest);
         AdRequest citiesAdRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("AFF0741D3C184BA727BE5B28EAA86E3E")
+                .addTestDevice("F308938BB94F7B0A3D47AE5BDF1E791D")
                 .build();
         citiesInterstitial.loadAd(citiesAdRequest);
     }

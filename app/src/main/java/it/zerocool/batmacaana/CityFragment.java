@@ -17,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -36,7 +37,6 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
-import com.shamanland.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -122,7 +122,7 @@ public class CityFragment extends Fragment implements View.OnClickListener, Text
             layout = inflater.inflate(R.layout.fragment_city_ads, container, false);
             AdView mAdView = (AdView) layout.findViewById(R.id.details_banner);
             AdRequest adRequest = new AdRequest.Builder()
-                    .addTestDevice("AFF0741D3C184BA727BE5B28EAA86E3E")
+                    .addTestDevice("F308938BB94F7B0A3D47AE5BDF1E791D")
                     .build();
             mAdView.loadAd(adRequest);
         }

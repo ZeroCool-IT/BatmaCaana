@@ -219,12 +219,14 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerView
                     alertsFragment.show(fragmentManager, "notifications_disable");
                     break;
                 case Constant.PUBLIC_TRANSPORT:
-                    TrainFragment trainFragment = new TrainFragment();
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.content_frame, trainFragment)
-                            .commit();
-                    ((AppCompatActivity) context).setTitle(context.getResources().getStringArray(R.array.drawer_list)[position]);
-                    drawerLayout.closeDrawers();
+//                    TrainFragment trainFragment = new TrainFragment();
+//                    fragmentManager.beginTransaction()
+//                            .replace(R.id.content_frame, trainFragment)
+//                            .commit();
+//                    ((AppCompatActivity) context).setTitle(context.getResources().getStringArray(R.array.drawer_list)[position]);
+//                    drawerLayout.closeDrawers();
+                    Intent transportIntent = new Intent(context, TransportActivity.class);
+                    context.startActivity(transportIntent);
                     break;
                 default:
                     ContentFragment f = new ContentFragment();

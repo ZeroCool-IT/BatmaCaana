@@ -17,9 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -42,7 +41,7 @@ import it.zerocool.batmacaana.model.Place;
 @SuppressWarnings("ConstantConditions")
 public class FavoriteFragment extends Fragment {
     private RecyclerView rvResults;
-    private ProgressBarCircularIndeterminate progressBar;
+    private ProgressBar progressBar;
     private Context context;
     private RetrieveFavoriteTask task;
     private TextView noResult;
@@ -103,7 +102,7 @@ public class FavoriteFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvResults.setLayoutManager(layoutManager);
         rvResults.addItemDecoration(new DividerItemDecoration(getActivity(), null));
-        progressBar = (ProgressBarCircularIndeterminate) layout.findViewById(R.id.favorite_progressBar);
+        progressBar = (ProgressBar) layout.findViewById(R.id.favorite_progressBar);
         getData();
 
         return layout;

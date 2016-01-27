@@ -25,14 +25,22 @@
             android:paddingBottom="8dp"
             android:paddingTop="8dp" />
 
-        <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
+<!--        <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
             android:id="@+id/search_result_progressbar"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:background="@color/primaryColor"
-            android:visibility="gone" />
+            android:visibility="gone" />-->
+
+            <ProgressBar
+                android:id="@+id/search_result_progressbar"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:visibility="gone"/>
     </RelativeLayout>
 
 </FrameLayout>
