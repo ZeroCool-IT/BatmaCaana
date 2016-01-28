@@ -1,5 +1,6 @@
 package it.zerocool.batmacaana;
 
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -37,6 +38,11 @@ public class TimeTableFragment extends Fragment {
         WebView wv = (WebView)layout.findViewById(R.id.webview);
         WebSettings webSettings = wv.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        if (getActivity().getIntent().getBooleanExtra(Constant.BUS, false)) {
+            webSettings.setLoadWithOverviewMode(true);
+            webSettings.setBuiltInZoomControls(true);
+        }
+
         wv.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

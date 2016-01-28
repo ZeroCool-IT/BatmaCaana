@@ -12,7 +12,9 @@
 
     <com.nirhart.parallaxscroll.views.ParallaxScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:id="@+id/parallax">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -495,13 +497,10 @@
         android:id="@+id/floatingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:baselineAlignBottom="false"
+        android:layout_alignBottom="@+id/parallax"
+        android:layout_alignEnd="@+id/parallax"
+        android:layout_alignRight="@+id/parallax"
+        android:layout_margin="16dp"
         android:src="@drawable/ic_navigation_white_24dp" />
 
 </RelativeLayout>

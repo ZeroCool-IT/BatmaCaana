@@ -39,9 +39,11 @@ public class TransportActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         String uri = null;
         boolean landscape = false;
+        boolean bus = false;
 
         if (v.getId() == R.id.bus_card) {
             landscape = true;
+            bus = true;
             uri = Constant.URI_COTRALSPA;
         }
         else if (v.getId() == R.id.train_card) {
@@ -51,6 +53,7 @@ public class TransportActivity extends AppCompatActivity implements View.OnClick
             Intent intent = new Intent(this, TimeTableActivity.class);
             intent.putExtra(Constant.URI, uri);
             intent.putExtra(Constant.LANDSCAPE_ORIENTATION, landscape);
+            intent.putExtra(Constant.BUS, bus);
             this.startActivity(intent);
         } else {
             String message = getResources().getString(

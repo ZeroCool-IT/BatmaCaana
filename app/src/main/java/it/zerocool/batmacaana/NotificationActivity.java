@@ -67,13 +67,30 @@ public class NotificationActivity extends AppCompatActivity {
             DBHelper helper = DBHelper.getInstance(getActivity());
             SQLiteDatabase db = helper.getWritabelDB();
             assert db != null;
-            ArrayList<City> cities = DBManager.getCustomers(db);
+            ArrayList<City> cities = premiumCity(DBManager.getCustomers(db));
+
 
             CityNotificationAdapter adapter = new CityNotificationAdapter(getActivity(), cities);
             recyclerView.setAdapter(adapter);
 
 
             return layout;
+        }
+
+        /**
+         * Given a group of cities, it returns an array of premium cities
+         * @param customers An ArrayList of cities
+         * @return An ArrayList of premium cities
+         */
+        private ArrayList<City> premiumCity(ArrayList<City> customers) {
+            ArrayList<City> result = new ArrayList<>();
+            for (City c: customers) {
+                if (c.isPremium())
+                    result.add(c);
+
+            }
+            return result;
+
         }
 
     }

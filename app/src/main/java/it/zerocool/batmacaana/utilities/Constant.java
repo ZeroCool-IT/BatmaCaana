@@ -143,6 +143,7 @@ public class Constant {
     public static final String LANDSCAPE_ORIENTATION = "orientation";
     public static final String USER_ID_ARG = "uid";
     public static final String URI = "uri";
+    public static final String BUS = "bus";
 //    public static final String CITY_CHANGING = "city_changing";
 
     //Shared Preferences
